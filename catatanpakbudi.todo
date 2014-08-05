@@ -1,0 +1,33 @@
+ Selasa, 15 juli 2014 :
+
+   ✔ Merubah pilihan contact menjadi pop up berisi kontak detail. yang muncul di awal contact bagian. @done (14-07-23 08:47)
+   ✔ Contact bisa ada contact lain selain bagian teknis dan billing. @done (14-07-23 08:48)
+   ✔ Contact Billing dan teknis wajib diisi pada saat create customer baru. @done (14-07-23 08:48)
+   ☐ Circuit ID Lastmile diganti jadi Circuit ID Vendor
+   ☐ Circuit CUstomer: tambah field currency, Vendor, 
+     status jadi warna aktif putih, terminate merah, suspend orange.
+     ☐ di sort dengan urutan putih, orange, merah.
+   ✔ delete dan edit jadiin icon. jadi 1. @done (14-07-25 10:22)
+   ☐ tambahkan kawasan di contact vendor, nullable dan diisi manual.
+   ☐ Data Nama Vendor dan Circuit ID-nya kalo di click akan muncul detailnya
+   ☐ NRC MRC harus ada di per Circuit
+   ✔ NPWP di table customer @done (14-07-25 10:31)
+   ☐ tabel circuit Customer tidak boleh unique karena bisa ada lebih dari 2 circuit id dalam 1
+   ☐ tambah kolom activated_at
+   ☐ 
+   ☐ Cek OTRS apakah bisa menampilkan riwayat complain customer
+   ☐ Apakah OTRS bisa input data customer dalam bentuk gambar dsb. seperti topologi, dsb.
+   ☐ Menyediakan stop clock untuk OTRS.
+
+
+Bussiness Proses Penjelasan Pak Budi
+
+CIR ID | Nama | Alamat | Layanan | Bandwidth | MRC Circuit | CID Backhaul | CID Vendor | Nama Vendor | MRC Vendor
+
+CIR ID ~ : 1 Customer ID
+
+CIR ID 1 : ~ CID Vendor
+
+CID Vendor ~ : 1 Vendor ID
+
+CID backhaul ~ : 1 Perangkat

@@ -1,0 +1,872 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/views/layouts/partials/navbar.blade.php",
+			"settings":
+			{
+				"buffer_size": 1177,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Acme/helpers.php",
+			"settings":
+			{
+				"buffer_size": 511,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/profiles/create.blade.php",
+			"settings":
+			{
+				"buffer_size": 1232,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/Acme/Forms/RegistrationForm.php",
+			"settings":
+			{
+				"buffer_size": 272,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/routes.php",
+			"settings":
+			{
+				"buffer_size": 952,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/ProfilesController.php",
+			"settings":
+			{
+				"buffer_size": 2077,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/RegistrationController.php",
+			"settings":
+			{
+				"buffer_size": 816,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/registration/create.blade.php",
+			"settings":
+			{
+				"buffer_size": 1735,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/profiles/edit.blade.php",
+			"settings":
+			{
+				"buffer_size": 1268,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/start/global.php",
+			"settings":
+			{
+				"buffer_size": 2882,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"g",
+				"Gist: Open Gist"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"cs",
+				"PHP Code Sniffer: Sniff this file"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"copy",
+				"File: Copy as Tag script"
+			],
+			[
+				"tas",
+				"Tasks: Open Link"
+			],
+			[
+				"cop",
+				"File: Copy as Tag script"
+			],
+			[
+				"gis",
+				"Gist: Create Public Gist"
+			],
+			[
+				"copy tas",
+				"File: Copy as Tag style"
+			],
+			[
+				"n",
+				"Tasks: New document"
+			],
+			[
+				"todo",
+				"Set Syntax: ToDone"
+			],
+			[
+				"gist",
+				"Gist: Open Gist"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/sbp/xampp/htdocs/lccode/userprofile/vendor/monolog/monolog/tests/Monolog/Handler/GelfHandlerLegacyTest.php",
+		"/D/sbp/xampp/htdocs/lccode/userprofile/app/start/global.php",
+		"/D/Video Tutorial/Laravel/Laracasts Bayar/Source Code/Building-User-Profiles-master/app/routes.php",
+		"/D/Video Tutorial/Laravel/Laracasts Bayar/Source Code/Building-User-Profiles-master/app/controllers/ProfilesController.php",
+		"/D/sbp/xampp/htdocs/lccode/userprofile/app/views/layouts/layout.blade.php",
+		"/D/sbp/xampp/htdocs/lccode/userprofile/composer.json",
+		"/D/sbp/xampp/htdocs/sbpcrm/vendor/predis/predis/lib/Predis/ResponseObjectInterface.php",
+		"/D/sbp/xampp/htdocs/sbpcrm/readme.md",
+		"/D/sbp/xampp/htdocs/sbpcrm/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php",
+		"/D/sbp/xampp/htdocs/sbpcrm/vendor/laravel/framework/src/Illuminate/Database/Migrations/MigrationCreator.php",
+		"/D/sbp/xampp/htdocs/sbpcrm/vendor/way/generators/tests/features/migrations.feature",
+		"/D/sbp/xampp/htdocs/sbpcrm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/MailInvoker.php",
+		"/D/sbp/xampp/htdocs/sbpcrm/app/config/mail.php",
+		"/D/sbp/xampp/htdocs/sbpcrm/vendor/nikic/php-parser/lib/PHPParser/Comment.php",
+		"/D/sbp/xampp/htdocs/sbpcrm/composer.json",
+		"/D/sbp/xampp/htdocs/sbpcrm/vendor/predis/predis/lib/Predis/CommunicationException.php",
+		"/D/sbp/xampp/htdocs/sbpcrm/app/models/Lesson.php",
+		"/D/sbp/xampp/htdocs/sbpcrm/vendor/monolog/monolog/src/Monolog/Handler/LogEntriesHandler.php",
+		"/D/sbp/xampp/htdocs/sbpcrm/app/config/app.php",
+		"/D/sbp/xampp/htdocs/sapasli/assi.php",
+		"/D/sbp/xampp/htdocs/sapasli/index.php",
+		"/D/sbp/xampp/htdocs/sapasli/ckeditor/_samples/readonly.html",
+		"/D/sbp/xampp/htdocs/sapasli/ckeditor/_source/skins/kama/reset.css",
+		"/D/sbp/xampp/htdocs/sapasli/kerjaan.todo",
+		"/D/sbp/xampp/htdocs/sapasli/koneksi.php",
+		"/D/sbp/xampp/htdocs/sapasli/js/sbp.js",
+		"/D/sbp/xampp/htdocs/sapasli/po/Surat Terminasi tdk Perlu.docx",
+		"/D/Software Terbaru Jan 2014/Dreamweaver 8/Dreamweaver8_SN.txt",
+		"/D/sbp/xampp/htdocs/sapasli/foto/signal blackbery cantre.bmp",
+		"/D/sbp/xampp/htdocs/sapasli/sapdatabase.tgz",
+		"/D/sbp/xampp/htdocs/sapasli/cabutim.php",
+		"/D/sbp/xampp/htdocs/sapasli/cek-sesion.php",
+		"/D/sbp/xampp/htdocs/sapasli/catatanSAPdaripakbudi.todo",
+		"/D/sbp/xampp/htdocs/sapasli/detailim.php",
+		"/D/sbp/xampp/htdocs/sapasli/detailiso.php",
+		"/D/sbp/xampp/htdocs/sapasli/detailpel.php",
+		"/D/sbp/xampp/htdocs/sapasli/detailreqbr.php",
+		"/D/sbp/xampp/htdocs/sapasli/editbod.php",
+		"/D/sbp/xampp/htdocs/sapasli/editeng.php",
+		"/D/sbp/xampp/htdocs/sapasli/editengarea.php",
+		"/D/sbp/xampp/htdocs/sapasli/editim.php",
+		"/D/sbp/xampp/htdocs/sapasli/editpas.php",
+		"/D/sbp/xampp/htdocs/sapasli/editpel.php",
+		"/D/sbp/xampp/htdocs/sapasli/editpelaksana.php",
+		"/D/sbp/xampp/htdocs/sapasli/editreqbr.php",
+		"/D/sbp/xampp/htdocs/sapasli/editstock.php",
+		"/D/sbp/xampp/htdocs/sapasli/editum.php",
+		"/D/sbp/xampp/htdocs/sapasli/finpro.php",
+		"/D/sbp/xampp/htdocs/sapasli/finpro2.php",
+		"/D/sbp/xampp/htdocs/sapasli/folfpa.php",
+		"/D/sbp/xampp/htdocs/sapasli/folfpac.php",
+		"/D/sbp/xampp/htdocs/sapasli/folim.php",
+		"/D/sbp/xampp/htdocs/sapasli/folims.php",
+		"/D/sbp/xampp/htdocs/sapasli/folprov.php",
+		"/D/sbp/xampp/htdocs/sapasli/folreqbr.php",
+		"/D/sbp/xampp/htdocs/sapasli/folreqbrin.php",
+		"/D/sbp/xampp/htdocs/sapasli/.print-baokosong.php.swp",
+		"/D/sbp/xampp/htdocs/sapasli/allrejpro.php",
+		"/D/sbp/xampp/htdocs/sapasli/appsur.php",
+		"/D/sbp/xampp/htdocs/sapasli/assi-inven.php",
+		"/D/sbp/xampp/htdocs/sapasli/assi-mantab.php",
+		"/D/sbp/xampp/htdocs/sapasli/assi07022014.php",
+		"/D/sbp/xampp/htdocs/sapasli/assi29112013.php",
+		"/D/sbp/xampp/htdocs/sapasli/assiasli.php",
+		"/D/sbp/xampp/htdocs/sapasli/assibr.php",
+		"/D/sbp/xampp/htdocs/sapasli/assipalingok.php",
+		"/D/sbp/xampp/htdocs/sapasli/assiurut.php",
+		"/D/sbp/xampp/htdocs/sapasli/belanjabarang.php",
+		"/D/sbp/xampp/htdocs/sapasli/billpro.php",
+		"/D/sbp/xampp/htdocs/sapasli/bodpro.php",
+		"/D/sbp/xampp/htdocs/sapasli/createba.php",
+		"/D/sbp/xampp/htdocs/sapasli/createbod.php",
+		"/D/sbp/xampp/htdocs/sapasli/createim.php",
+		"/D/sbp/xampp/htdocs/sapasli/createimiso.php",
+		"/D/sbp/xampp/htdocs/sapasli/createsurvey.php",
+		"/D/sbp/xampp/htdocs/sapasli/dapel.php",
+		"/D/sbp/xampp/htdocs/sapasli/data-barang.php",
+		"/D/sbp/xampp/htdocs/sapasli/data-belanja.php",
+		"/D/sbp/xampp/htdocs/sapasli/data-belanjabln.php",
+		"/D/sbp/xampp/htdocs/sapasli/data-brkeluar.php",
+		"/D/sbp/xampp/htdocs/sapasli/datarevisi.php",
+		"/D/sbp/xampp/htdocs/sapasli/datavendor.php",
+		"/D/sbp/xampp/htdocs/sapasli/folreqbrin2.php",
+		"/D/sbp/xampp/htdocs/sapasli/formexbarang.php",
+		"/D/sbp/xampp/htdocs/sapasli/formfpa.php",
+		"/D/sbp/xampp/htdocs/sapasli/formfpac.php",
+		"/D/sbp/xampp/htdocs/sapasli/formreqbr.php",
+		"/D/sbp/xampp/htdocs/sapasli/formreqbr2.php",
+		"/D/sbp/xampp/htdocs/sapasli/formreqbreng.php",
+		"/D/sbp/xampp/htdocs/sapasli/formrevisi.php",
+		"/D/sbp/xampp/htdocs/sapasli/formum.php",
+		"/D/sbp/xampp/htdocs/sapasli/formvendor.php",
+		"/D/sbp/xampp/htdocs/sapasli/hapus-barang.php",
+		"/D/sbp/xampp/htdocs/sapasli/hapusum.php",
+		"/D/sbp/xampp/htdocs/sapasli/hapusvendor.php",
+		"/D/sbp/xampp/htdocs/sapasli/inputbarang.php",
+		"/D/sbp/xampp/htdocs/sapasli/isi-admin.php",
+		"/D/sbp/xampp/htdocs/sapasli/isi-admin2.php",
+		"/D/sbp/xampp/htdocs/sapasli/isi-ip.php",
+		"/D/sbp/xampp/htdocs/sapasli/isi-ipreq.php",
+		"/D/sbp/xampp/htdocs/sapasli/isopro.php",
+		"/D/sbp/xampp/htdocs/sapasli/mutasi.php",
+		"/D/sbp/xampp/htdocs/sapasli/mutpro.php",
+		"/D/sbp/xampp/htdocs/sapasli/pilih-survey.php",
+		"/D/sbp/xampp/htdocs/sapasli/pilih-term.php",
+		"/D/sbp/xampp/htdocs/sapasli/datapelanggan.php",
+		"/D/sbp/xampp/htdocs/sapasli/media/css/bootstrap.min.css",
+		"/D/sbp/xampp/htdocs/sapasli/media/css/dataTables.bootstrap.css",
+		"/D/sbp/xampp/htdocs/sapasli/js/notifikasi.js",
+		"/D/sbp/xampp/htdocs/sapasli/style.css",
+		"/C/Users/hp/Downloads/customer_ndra (1).sql",
+		"/D/sbp/query_datapelanggan.sql",
+		"/C/Program Files/Sublime Text 3/SAP_SBPdariserver.sublime-project",
+		"/D/sbp/xampp/htdocs/sapasli/header.php",
+		"/D/sbp/xampp/htdocs/sapasli/logout.php",
+		"/D/sbp/xampp/htdocs/sapasli/menu.php",
+		"/D/sbp/xampp/htdocs/sapasli/sap01102013/sap/.htaccess",
+		"/D/sbp/xampp/htdocs/sapasli/print-baokosong.php",
+		"/D/sbp/xampp/htdocs/sapasli/print-fpa.php",
+		"/D/sbp/xampp/htdocs/sapasli/print-spk.php",
+		"/D/sbp/xampp/htdocs/sapasli/print-spkterm.php",
+		"/D/sbp/xampp/htdocs/sapasli/proreqbrin2.php",
+		"/D/sbp/xampp/htdocs/sapasli/proses-condev.php",
+		"/D/sbp/xampp/htdocs/sapasli/prosesappsur.php",
+		"/D/sbp/xampp/htdocs/sapasli/prosesbljbr.php",
+		"/D/sbp/xampp/htdocs/sapasli/prosesbod.php",
+		"/D/sbp/xampp/htdocs/sapasli/prosesbrst.php",
+		"/D/sbp/xampp/htdocs/sapasli/prosescari.php"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"",
+			"*.css",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"index.php",
+			"ek",
+			"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">",
+			"ek\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">",
+			"ek",
+			"<script type=\"text/javascript\" src=\"java/jquery.watermark.min.js\"></script>",
+			"<script type=\"text/javascript\" src=\"java/nivo.js\"></script>",
+			"<script type=\"text/javascript\" src=\"js/notifikasi.js\"></script>",
+			"notifikasi.js",
+			"cekpesan.php",
+			"footer",
+			"dapel.php",
+			"dapel",
+			"limit",
+			"customer_new",
+			" width=\"350px\"",
+			" class=\"tdisi\"",
+			"class=\"tdisi\"",
+			"td",
+			"width=\"350px\"",
+			"td class=\"tdhead\"",
+			"javascript",
+			"email",
+			"select *",
+			"sele",
+			"cacert",
+			"<<<",
+			"print.png",
+			"print"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"datapelanggan.php",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/views/layouts/partials/navbar.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1006,
+								1006
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/Acme/helpers.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 511,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								381,
+								381
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/profiles/create.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1232,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								129,
+								129
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/Acme/Forms/RegistrationForm.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 272,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/routes.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 952,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								951,
+								951
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/controllers/ProfilesController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2077,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								488,
+								488
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 450.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/controllers/RegistrationController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 816,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 135.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/views/registration/create.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/views/profiles/edit.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1268,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								71,
+								71
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/start/global.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2882,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								564,
+								564
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 81.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "userprofile.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"glob",
+				"app\\start\\global.php"
+			],
+			[
+				"rou",
+				"app\\routes.php"
+			],
+			[
+				"e",
+				"app\\models\\Episode.php"
+			],
+			[
+				"l",
+				"app\\models\\Lesson.php"
+			],
+			[
+				"migratcomme",
+				"app\\database\\migrations\\2014_06_19_152350_create_comments_table.php"
+			],
+			[
+				"commen",
+				"vendor\\nikic\\php-parser\\lib\\PHPParser\\Comment.php"
+			],
+			[
+				"cek",
+				"cek-sesion.php"
+			],
+			[
+				"inde",
+				"index.php"
+			],
+			[
+				"white",
+				"css\\skins\\white.css"
+			],
+			[
+				"gaya",
+				"js\\gaya.css"
+			],
+			[
+				"sty",
+				"style.css"
+			],
+			[
+				"sbp",
+				"js\\sbp.js"
+			],
+			[
+				"ti",
+				"title.php"
+			],
+			[
+				"menu",
+				"menu.php"
+			],
+			[
+				"hea",
+				"header.php"
+			],
+			[
+				"assi",
+				"assi.php"
+			],
+			[
+				"ass",
+				"assi.php"
+			],
+			[
+				"dapel",
+				"dapel.php"
+			],
+			[
+				"folreqbrin2.php",
+				"folreqbrin2.php"
+			],
+			[
+				"ce",
+				"cek-sesion.php"
+			],
+			[
+				"deta",
+				"detailim.php"
+			],
+			[
+				"lo",
+				"logout.php"
+			],
+			[
+				"head",
+				"header.php"
+			],
+			[
+				"kon",
+				"koneksi.php"
+			],
+			[
+				"cabu",
+				"cabutim.php"
+			],
+			[
+				"reqp",
+				"reqpro.php"
+			],
+			[
+				"prosescar",
+				"prosescari.php"
+			],
+			[
+				"cari",
+				"carikotak.php"
+			],
+			[
+				"proseslogin",
+				"proses-login.php"
+			],
+			[
+				"tit",
+				"title.php"
+			],
+			[
+				"konek",
+				"koneksi.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Program Files\\Sublime Text 3\\SAP_SBPdariserver.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 269.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
