@@ -7,12 +7,11 @@ class Costumercircuitperangkat extends Eloquent {
 		'namaperangkat' => 'required',
 		'serialnumber' => 'required',
 		'tipe' => 'required',
-		'jenis' => 'required',
-		'costumercircuit_id' => 'required'
+		'jenis' => 'required'
 	);
 
-	public function circuits()
+	public function costumercircuits()
 	{
-		return $this->belongsTo('Costumercircuit');
+		return $this->belongsTo('Costumercircuit', 'costumercircuit_id', 'id');
 	}
 }

@@ -33,7 +33,9 @@ class BackhaulsController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('backhauls.create');
+		$namaswitch = Backhaulswitch::lists('nama', 'nama');
+		$namavendor = Vendor::lists('nama', 'nama');
+		return View::make('backhauls.create', ['namaswitch' => $namaswitch, 'namavendor' => $namavendor]);
 	}
 
 	/**
@@ -44,11 +46,17 @@ class BackhaulsController extends BaseController {
 	public function store()
 	{
 		$input = Input::all();
+		$inputbiaya = Input::only('nrc', 'mrc', 'currency');		
+		$inputbackhaul = Input::only('namavendor', 'nama', 'circuitidbackhaul', 'activated_at', 'switchterkoneksi', 'portterkoneksi', 'bandwidth', 'satuan');
 		$validation = Validator::make($input, Backhaul::$rules);
 
 		if ($validation->passes())
 		{
-			$this->backhaul->create($input);
+			$this->backhaul->create($inputbackhaul);
+			$circuitidbackhaul = Input::get('circuitidbackhaul');
+
+			$backhaulini = Backhaul::where('circuitidbackhaul', $circuitidbackhaul)->first();
+			$backhaulini->biayas()->create($inputbiaya);
 
 			return Redirect::route('backhauls.index');
 		}
@@ -82,12 +90,15 @@ class BackhaulsController extends BaseController {
 	{
 		$backhaul = $this->backhaul->find($id);
 
+		$namaswitch = Backhaulswitch::lists('nama', 'nama');
+		$namavendor = Vendor::lists('nama', 'nama');
+
 		if (is_null($backhaul))
 		{
 			return Redirect::route('backhauls.index');
 		}
 
-		return View::make('backhauls.edit', compact('backhaul'));
+		return View::make('backhauls.edit', ['backhaul' => $backhaul, 'namaswitch' => $namaswitch, 'namavendor' => $namavendor]);
 	}
 
 	/**
@@ -98,13 +109,19 @@ class BackhaulsController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, Backhaul::$rules);
+		$inputbiayas = Input::only('nrc', 'mrc', 'currency');		
+		$inputbackhauls = Input::only('namavendor', 'nama', 'circuitidbackhaul', 'activated_at', 'switchterkoneksi', 'portterkoneksi', 'bandwidth', 'satuan');
+
+		$inputbackhaul = array_except($inputbackhauls, '_method');
+		$inputbiaya = array_except($inputbiayas, '_method');
+		
+		$validation = Validator::make($inputbackhaul, Backhaul::$rules);
 
 		if ($validation->passes())
 		{
 			$backhaul = $this->backhaul->find($id);
-			$backhaul->update($input);
+			$backhaul->update($inputbackhaul);
+			$backhaul->biayas()->update($inputbiaya);
 
 			return Redirect::route('backhauls.show', $id);
 		}
@@ -123,7 +140,9 @@ class BackhaulsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->backhaul->find($id)->delete();
+		$backhaulini = $this->backhaul->find($id);
+		$backhaulini->biayas()->delete();
+		$backhaulini->delete();
 
 		return Redirect::route('backhauls.index');
 	}

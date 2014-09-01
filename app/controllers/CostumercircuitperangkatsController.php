@@ -3,6 +3,13 @@
 class CostumercircuitperangkatsController extends BaseController {
 
 	/**
+	 * Costumercircuit Repository
+	 *
+	 * @var Costumercircuit
+	 */
+	
+
+	/**
 	 * Costumercircuitperangkat Repository
 	 *
 	 * @var Costumercircuitperangkat
@@ -33,7 +40,8 @@ class CostumercircuitperangkatsController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('costumercircuitperangkats.create');
+		$customercircuits = Costumercircuit::lists('namasite', 'id');
+		return View::make('costumercircuitperangkats.create', ['customercircuits' => $customercircuits]);
 	}
 
 	/**
@@ -81,13 +89,14 @@ class CostumercircuitperangkatsController extends BaseController {
 	public function edit($id)
 	{
 		$costumercircuitperangkat = $this->costumercircuitperangkat->find($id);
-
+		$customercircuits = Costumercircuit::lists('namasite', 'id');
+		
 		if (is_null($costumercircuitperangkat))
 		{
 			return Redirect::route('costumercircuitperangkats.index');
 		}
 
-		return View::make('costumercircuitperangkats.edit', compact('costumercircuitperangkat'));
+		return View::make('costumercircuitperangkats.edit', ['customercircuits' => $customercircuits, 'costumercircuitperangkat' => $costumercircuitperangkat]);
 	}
 
 	/**
@@ -106,7 +115,7 @@ class CostumercircuitperangkatsController extends BaseController {
 			$costumercircuitperangkat = $this->costumercircuitperangkat->find($id);
 			$costumercircuitperangkat->update($input);
 
-			return Redirect::route('costumercircuitperangkats.show', $id);
+			return Redirect::route('costumercircuits.show', $costumercircuitperangkat->costumercircuits->id);
 		}
 
 		return Redirect::route('costumercircuitperangkats.edit', $id)
@@ -123,9 +132,12 @@ class CostumercircuitperangkatsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->costumercircuitperangkat->find($id)->delete();
+		$perangkats = $this->costumercircuitperangkat->find($id);
 
-		return Redirect::route('costumercircuitperangkats.index');
+		$id = $perangkats->costumercircuits->id;
+		$perangkats->delete();
+
+		return Redirect::route('costumercircuits.show', $id);
 	}
 
 }

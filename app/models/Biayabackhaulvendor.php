@@ -5,12 +5,11 @@ class Biayabackhaulvendor extends Eloquent {
 
 	public static $rules = array(
 		'nrc' => 'required',
-		'mrc' => 'required',
-		'circuitidbackhaul' => 'required'
+		'mrc' => 'required'
 	);
 
 	public function backhauls()
 	{
-		return $this->belongsTo('Backhaul');
+		return $this->belongsTo('Backhaul', 'circuitidbackhaul', 'circuitidbackhaul');
 	}
 }

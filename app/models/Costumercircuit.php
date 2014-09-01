@@ -24,16 +24,6 @@ class Costumercircuit extends Eloquent {
 		return $this->morphMany('Customercontact', 'contactable');
 	}
 
-	public function customers()
-	{
-		return $this->belongsTo('Customer');
-	}
-
-	public function vendors()
-	{
-		return $this->belongsTo('Vendor');
-	}
-
 	public function adsls()
 	{
 		return $this->hasOne('Adsl');
@@ -41,26 +31,37 @@ class Costumercircuit extends Eloquent {
 
 	public function biayas()
 	{
-		return $this->hasOne('Biayacostumercircuit');
+		return $this->hasOne('Biayacostumercircuit', 'costumercircuit_id', 'id');
 	}
 
 	public function perangkats()
 	{
-		return $this->hasMany('Costumercircuitperangkat');
-	}
-
-	public function lastmiles()
-	{
-		return $this->hasOne('Lastmile');
+		return $this->hasMany('Costumercircuitperangkat', 'costumercircuit_id', 'id');
 	}
 
 	public function biayavendors()
 	{
-		return $this->hasManyThrough('Biayalastmilevendor', 'Lastmile', 'costumercircuit_id', 'circuitidlastmile');
+		return $this->hasOne('Biayalastmilevendor', 'circuitidlastmile', 'circuitidlastmile');
+	}
+
+
+	public function customers()
+	{
+		return $this->belongsTo('Customer', 'customer_id', 'id');
+	}
+
+	public function vendors()
+	{
+		return $this->belongsTo('Vendor', 'namavendor', 'nama');
+	}
+
+	public function lastmiles()
+	{
+		return $this->belongsTo('Lastmile', 'circuitidlastmile', 'circuitidlastmile');
 	}
 
 	public function backhauls()
 	{
-		return $this->belongsTo('Backhaul');
+		return $this->belongsTo('Backhaul', 'namabackhaul', 'nama');
 	}
 }

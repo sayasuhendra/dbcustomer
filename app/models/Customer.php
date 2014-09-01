@@ -1,13 +1,16 @@
 <?php
 
+use Laracasts\Presenter\PresentableTrait;
+
 class Customer extends Eloquent {
+
+	use PresentableTrait;
+
+	protected $presenter = 'Acme\Presenters\CostumersPresenter';
+
 	protected $guarded = array();
 
 	public static $rules = array(
-		'customerid' => 'required',
-		'nama' => 'required',
-		'alamat' => 'required',
-		'level' => 'required'
 	);
 
 	public function getDates()
@@ -22,6 +25,6 @@ class Customer extends Eloquent {
 
 	public function circuits()
 	{
-		return $this->hasMany('Costumercircuit');
+		return $this->hasMany('Costumercircuit', 'customer_id', 'id');
 	}
 }

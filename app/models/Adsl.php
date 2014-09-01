@@ -9,6 +9,11 @@ class Adsl extends Eloquent {
 
 	public function circuits()
 	{
-		return $this->belongsTo('Costumercircuit');
+		return $this->belongsTo('Costumercircuit', 'costumercircuit_id', 'id');
+	}
+
+	public function lastmiles()
+	{
+		return $this->belongsTo('Lastmile', 'lastmile_id', 'id');
 	}
 }

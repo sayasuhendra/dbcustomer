@@ -2,19 +2,24 @@
 
 @section('main')
 
-<h1 align="center">Daftar Data Customers</h1>
+<h2 align="center">Daftar Data Customers</h2>
 
-<p>{{ link_to_route('customers.create', 'Add new customer') }}</p>
+<p>{{ link_to_route('customers.create', 'Add Customer', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 
 @if ($customers->count())
-	<table id="datasbp" class="table table-striped table-bordered">
+	<table id="customertable" class="table table-striped table-bordered">
 		<thead>
 			<tr>
 				<th>Cust ID</th>
 				<th>Nama Customer</th>
+				<th>Register Date</th>
 				<th>Alamat</th>
 				<th>Level</th>
-				<th width="150px">Action</th>
+				<th>NPWP</th>
+				<th>Alamat NPWP</th>
+				<th>Keterangan</th>
+
+				<th width="100px">Action</th>
 			</tr>
 		</thead>
 
@@ -22,15 +27,20 @@
 			@foreach ($customers as $customer)
 				<tr>
 					<td>{{{ $customer->customerid }}}</td>
+					
 					<td>{{{ $customer->nama }}}</td>
+					<td>{{{ $customer->present()->registerdate }}}</td>
 					<td>{{{ $customer->alamat }}}</td>
 					<td>{{{ $customer->level }}}</td>
+					<td>{{{ $customer->npwp }}}</td>
+					<td>{{{ $customer->alamatnpwp }}}</td>
+					<td>{{{ $customer->keterangan }}}</td>
 					
                     <td class="ac">
-                    <a href="{{ URL::route('customers.show', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn')) }} </a>
-	                    <a href="{{ URL::route('customers.edit', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn')) }} </a>
+                    <a href="{{ URL::route('customers.show', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
+	                    <a href="{{ URL::route('customers.edit', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
 	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('customers.destroy', $customer->id), 'style'=>'display:inline-block')) }}
-	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger')) }}
+	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'data-confirm' => 'Yakin mau dihapus?')) }}
 	                    {{ Form::close() }}
 		            </td>
 				</tr>
@@ -41,74 +51,38 @@
 	</table>
 
 
-	<!-- Modal -->
-	{{ Form::model($customer, array('method' => 'PUT', 'route' => array('customerstambahkontak', $customer->id))) }} 
-		<div class="modal fade" id="sbpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Buat Contact Baru</h4>
-		      </div>	    
-		      <div class="modal-body">
-				{{{ $customer->id }}}
-				        <div class="form-group">
-				            {{ Form::label('cp', 'Nama:') }}
-				            {{ Form::text('cp', null, ['class' => 'form-control']) }}
-				        </div>
-				        <div class="form-group">
-				            {{ Form::label('bagian', 'Bagian:') }}
-				            {{ Form::select('bagian', ['Teknis' => 'Teknis', 'Billing' => 'Billing'], null, ['class' => 'form-control']) }}
-				        </div>
-				        <div class="form-group">
-				            {{ Form::label('telepon', 'Telepon:') }}
-				            {{ Form::text('telepon', null, ['class' => 'form-control']) }}
-				        </div>
-				        <div class="form-group">
-				            {{ Form::label('email', 'Email:') }}
-				            {{ Form::text('email', null, ['class' => 'form-control']) }}
-				        </div>
-							
 
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
-		      </div>
-		    </div>
-		  </div>
-		</div>
-	{{ Form::close() }}
 
 @else
 	Belum ada data customers
 @endif
 
+@stop
+
+@section('script-bawah')
+
 <script type="text/javascript" language="javascript" class="init">
     $(document).ready(function() {
-    	$('#datasbp').DataTable( {
-    		"columnDefs": [
-    		    { "width": "20%", "targets": 9 }
-    		  ]
+    	$('#customertable').DataTable( {
         	"dom": 'T<"clear">lfrtip',
         	"oTableTools": {
         	            "aButtons": [
         	                {
         	                    "sExtends": "pdf",
         	                    "sPdfOrientation": "landscape",
-                                "mColumns": [ 0, 1, 2, 3 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
         	                },
         	                {
         	                    "sExtends": "xls",
-                                "mColumns": [ 0, 1, 2, 3 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
         	                },
         	                {
         	                    "sExtends": "csv",
-                                "mColumns": [ 0, 1, 2, 3 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
         	                },
         	                {
         	                    "sExtends": "copy",
-                                "mColumns": [ 0, 1, 2, 3 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
         	                },
         	                "print"
 

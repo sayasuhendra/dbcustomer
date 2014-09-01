@@ -36,6 +36,15 @@ class VendorsController extends BaseController {
 		return View::make('vendors.create');
 	}
 
+	public function tambahkontak($id)
+	{
+			$inputcontact = Input::only('bagian', 'cp', 'jabatan', 'kawasan', 'telepon', 'email', 'keterangan');
+			$vendor = $this->vendor->find($id);
+			$vendor->contactvendors()->create($inputcontact);	
+
+			return Redirect::route('vendors.show', $id);
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -43,12 +52,38 @@ class VendorsController extends BaseController {
 	 */
 	public function store()
 	{
+		$inputvendor = Input::only('nama', 'alamat', 'npwp', 'alamatnpwp', 'keterangan');
+
+		$inputcontactteknis = array(		
+			'cp' => Input::get('cpteknis'),
+			'bagian' => Input::get('bagianteknis'),
+			'jabatan' => Input::get('jabatanteknis'),
+			'kawasan' => Input::get('kawasanteknis'),
+			'telepon' => Input::get('teleponteknis'),
+			'email' => Input::get('emailteknis'),
+			'keterangan' => Input::get('keteranganteknis')
+		);
+
+		$inputcontactbilling = array(				
+			'cp' => Input::get('cp'),
+			'bagian' => Input::get('bagian'),
+			'jabatan' => Input::get('jabatan'),
+			'kawasan' => Input::get('kawasan'),
+			'telepon' => Input::get('telepon'),
+			'email' => Input::get('email'),
+			'keterangan' => Input::get('keterangan')
+		);
+
 		$input = Input::all();
 		$validation = Validator::make($input, Vendor::$rules);
 
 		if ($validation->passes())
 		{
-			$this->vendor->create($input);
+			$this->vendor->create($inputvendor);
+			$namavendor = Input::get('nama');
+			$vendorini = Vendor::where('nama', '=', $namavendor)->first();
+			$vendorini->contactvendors()->create($inputcontactteknis);
+			$vendorini->contactvendors()->create($inputcontactbilling);
 
 			return Redirect::route('vendors.index');
 		}
@@ -67,7 +102,7 @@ class VendorsController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$vendor = $this->vendor->findOrFail($id);
+		$vendor = $this->vendor->with('contactvendors', 'backhauls', 'lastmiles')->findOrFail($id);
 
 		return View::make('vendors.show', compact('vendor'));
 	}
@@ -123,9 +158,12 @@ class VendorsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->vendor->find($id)->delete();
+		$vendor = $this->vendor->find($id);
+		$vendor->contactvendors()->delete();
+		$vendor->delete();
 
 		return Redirect::route('vendors.index');
 	}
+	
 
 }

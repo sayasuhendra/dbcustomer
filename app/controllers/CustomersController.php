@@ -90,11 +90,7 @@ class CustomersController extends BaseController {
 			$customer = $this->customer->find($id);
 			$customer->customercontacts()->create($inputcontact);	
 
-			$customer = $this->customer->with('customercontacts', 'circuits')->findOrFail($id);
-			$contacts = $customer->customercontacts;
-			$circuits = $customer->circuits;
-
-			return View::make('customers.show', ['customer' => $customer, 'contacts' => $contacts, 'circuits' => $circuits]);
+			return Redirect::route('customers.show', $id);
 	}
 	/**
 	 * Display the specified resource.
@@ -107,9 +103,10 @@ class CustomersController extends BaseController {
 		$customer = $this->customer->with('customercontacts', 'circuits')->findOrFail($id);
 
 		$contacts = $customer->customercontacts;
-		$circuits = $customer->circuits;
-
-		return View::make('customers.show', ['customer' => $customer, 'contacts' => $contacts, 'circuits' => $circuits]);
+		$costumercircuits = $customer->circuits;
+		$biayas = $costumercircuits->lists('biayas');
+				
+		return View::make('customers.show', ['customer' => $customer, 'contacts' => $contacts, 'costumercircuits' => $costumercircuits, 'biayas' => $biayas]);
 	}
 
 	/**
@@ -155,6 +152,7 @@ class CustomersController extends BaseController {
 			->with('message', 'There were validation errors.');
 	}
 
+	
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -163,7 +161,9 @@ class CustomersController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->customer->find($id)->delete();
+		$customer = $this->customer->find($id);
+		$customer->customercontacts()->delete();
+		$customer->delete();
 
 		return Redirect::route('customers.index');
 	}

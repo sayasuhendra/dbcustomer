@@ -1,43 +1,104 @@
 @extends('layouts.scaffold')
 
+<style>
+    a:hover {
+     cursor:pointer;
+    }
+
+    th { font-size: 12px; }
+    td { font-size: 12px; }
+
+</style>
+
 @section('main')
 
-<h1>Show Lastmile</h1>
+<h2 align="center">Detail Lastmile</h2>
 
 <p>{{ link_to_route('lastmiles.index', 'Return to all lastmiles') }}</p>
 
-<table id="datasbp" class="table table-striped table-bordered">
-	<thead>
-		<tr>
-			<th>Circuitidlastmile</th>
-				<th>Vlanid</th>
-				<th>Vlanname</th>
-				<th>IP Address PTP</th>
-				<th>Block IP Public Customer</th>
-				<th>Backhaul ID</th>
-				<th>Customer Circuit ID</th>
-				<th>Edit</th>
-				<th>Delete</th>
-		</tr>
-	</thead>
+<div class="col-md-6">
+	            <div class="panel panel-primary">
+	              <div class="panel-heading">
+	                <h3 class="panel-title">Data Lastmile Circuit Vendor</h3>
+	              </div>
+	              <div class="panel-body">
+					    <dl class="dl-horizontal">
+						    <dt>Circuit ID Vendor</dt>
+						    <dd>{{{ $lastmile->circuitidlastmile }}}</dd>
+							<dt>Start Date</dt>
+							<dd>{{{ $lastmile->activated_at }}}</dd>
+							<dt>VLAN ID</dt>
+							<dd>{{{ $lastmile->vlanid }}}</dd>
+							<dt>VLAN ID Name</dt>
+							<dd>{{{ $lastmile->vlanname }}}</dd>
+							<dt>IP Address PTP</dt>
+							<dd>{{{ $lastmile->ipaddressptp }}}</dd>
+							<dt>IP Public Cust</dt>
+							<dd>{{{ $lastmile->blockippubliccustomer }}}</dd>
+							<dt>Layanan</dt>
+							<dd>{{{ $lastmile->layanan }}}</dd>
+							<dt>Bandwidth</dt>
+							<dd>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</dd>
+							<dt>Status</dt>
+							<dd>{{{ $lastmile->status }}}</dd>
+							<dt>Kawasan</dt>
+							<dd>{{{ $lastmile->kawasan }}}</dd>	
+							<dt>Keterangan</dt>
+							<dd>{{{ $lastmile->keterangan }}}</dd>
+							<dt>NRC</dt>
+							<dd>{{{ $lastmile->biayas->nrc }}} {{{ $lastmile->biayas->currency }}}</dd>
+							<dt>MRC</dt>
+							<dd>{{{ $lastmile->biayas->mrc }}} {{{ $lastmile->biayas->currency }}}</dd>	
+	                    </dl>
+	              </div>
+	            </div>
+	        </div>
 
-	<tbody>
-		<tr>
-			<td>{{{ $lastmile->circuitidlastmile }}}</td>
-					<td>{{{ $lastmile->vlanid }}}</td>
-					<td>{{{ $lastmile->vlanname }}}</td>
-					<td>{{{ $lastmile->ipaddressptp }}}</td>
-					<td>{{{ $lastmile->blockippubliccustomer }}}</td>
-					<td>{{{ $lastmile->backhaul_id }}}</td>
-					<td>{{{ $lastmile->costumercircuit_id }}}</td>
-                    <td>{{ link_to_route('lastmiles.edit', 'Edit', array($lastmile->id), array('class' => 'btn btn-info')) }}</td>
-                    <td>
-                        {{ Form::open(array('method' => 'DELETE', 'route' => array('lastmiles.destroy', $lastmile->id))) }}
-                            {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                        {{ Form::close() }}
-                    </td>
-		</tr>
-	</tbody>
-</table>
+	        <div class="col-md-6">
+	            <div class="panel panel-success">
+	              <div class="panel-heading">
+	                <h3 class="panel-title">Data Vendor {{{ $vendor->nama }}}</h3>
+	              </div>
+	              <div class="panel-body">
+					    <dl class="dl-horizontal">
+							<dt>Nama</dt>
+        					<dd>{{{ $vendor->nama }}}</dd>
+        					<dt>Alamat</dt>
+        					<dd>{{{ $vendor->alamat }}}</dd>
+                            <dt>NPWP</dt>
+                            <dd>{{{ $vendor->npwp }}}</dd>
+                            <dt>Alamat NPWP</dt>
+                            <dd>{{{ $vendor->alamatnpwp }}}</dd>
+                            <dt>Keterangan</dt>
+                            <dd>{{{ $vendor->keterangan }}}</dd>
+	                    </dl>
+	              </div>
+	            </div>
+	        </div>
+
+
+        <div class="col-md-6">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Daftar Contact Vendor </h3>
+              </div>
+              <div class="panel-body">
+				    <dl class="dl-horizontal">
+						@foreach ($vendor->contactvendors as $contact)
+							<dt>Contact Bagian {{{ $contact->bagian }}}</dt>
+							<dd><a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->kawasan }}} | {{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a></dd>
+						@endforeach
+                    </dl>
+              </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+        	
+        	@foreach ($vendor->contactvendors as $contactcustomer)
+        	$('#contactButtonVendor{{{ $contactcustomer->id }}}').popover();
+        	@endforeach        	
+        	
+        </script>
 
 @stop

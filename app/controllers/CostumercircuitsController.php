@@ -21,8 +21,8 @@ class CostumercircuitsController extends BaseController {
 	 */
 	public function index()
 	{
-		$costumercircuits = $this->costumercircuit->with('contacts', 'customers', 'biayas', 'adsls', 'lastmiles', 'vendors', 'biayavendors')->get();
-
+		$costumercircuits = $this->costumercircuit->with('biayas')->get();
+		
 		return View::make('costumercircuits.index', ['costumercircuits' => $costumercircuits]);
 	}
 
@@ -34,12 +34,32 @@ class CostumercircuitsController extends BaseController {
 	public function create()
 	{
 		$customer = Customer::lists('nama', 'id');
-		$circuitidbackhaul = Backhaul::lists('circuitidbackhaul', 'id');
-		$circuitidlastmile = Lastmile::lists('circuitidlastmile', 'id');
-		$vendor = Vendor::lists('nama', 'id');
+		
+		$circuitidlastmile = Lastmiletmp::lists('circuitidlastmile', 'circuitidlastmile');
+		
 
-		return View::make('costumercircuits.create', ['customer' => $customer, 'circuitidbackhaul' => $circuitidbackhaul, 'circuitidlastmile' => $circuitidlastmile, 'vendor' => $vendor]);
+		return View::make('costumercircuits.create', ['customer' => $customer, 'circuitidlastmile' => $circuitidlastmile]);
 	}
+
+	public function tambahkontak($id)
+	{
+			$inputcontact = Input::only('bagian', 'cp', 'jabatan', 'telepon', 'email', 'keterangan');
+			$costumercircuit = $this->costumercircuit->find($id);
+			$costumercircuit->contacts()->create($inputcontact);	
+
+			return Redirect::route('costumercircuits.show', $id);
+	}
+
+	public function tambahperangkat($id)
+	{
+			$inputperangkat = Input::only('namaperangkat', 'serialnumber', 'tipe', 'jenis', 'pemilik');
+			$costumercircuit = $this->costumercircuit->find($id);
+			$costumercircuit->perangkats()->create($inputperangkat);	
+
+			return Redirect::route('costumercircuits.show', $id);
+	}
+
+	
 
 	/**
 	 * Store a newly created resource in storage.
@@ -48,8 +68,9 @@ class CostumercircuitsController extends BaseController {
 	 */
 	public function store()
 	{
-		$inputcircuit = Input::only('circuitid', 'activated_at', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'circuitidlastmile', 'area', 'status', 'customer_id', 'backhaul_id', 'vendor_id');
+		$inputcircuit = Input::only('circuitid', 'activated_at', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'customer_id', 'circuitidlastmile');
 		$inputbiaya = Input::only('nrc', 'mrc', 'currency');
+		$inputperangkat = Input::only('namaperangkat', 'serialnumber', 'tipe', 'jenis', 'pemilik');
 
 		$inputcontactteknis = array(		
 			'cp' => Input::get('cpteknis'),
@@ -67,7 +88,7 @@ class CostumercircuitsController extends BaseController {
 			'telepon' => Input::get('telepon'),
 			'email' => Input::get('email'),
 			'keterangan' => Input::get('keterangan')
-		);		
+		);
 
 		$input = Input::all();
 		$validation = Validator::make($input, Costumercircuit::$rules);
@@ -77,9 +98,31 @@ class CostumercircuitsController extends BaseController {
 			$this->costumercircuit->create($inputcircuit);
 			$circuitid = Input::get('circuitid');
 			$circuitini = Costumercircuit::where('circuitid', '=', $circuitid)->first();
+
+			$circuitidlastmile = Input::get('circuitidlastmile');
+
+			$lastmileini = Lastmile::where('circuitidlastmile', $circuitidlastmile)->first();
+
+			$circuitini->namabackhaul = $lastmileini->namabackhaul;
+			$circuitini->namavendor = $lastmileini->namavendor;
+			$circuitini->save();
+
+
+			$biayavendor = Biayalastmilevendor::where('circuitidlastmile', '=', $circuitidlastmile)->first();
+
 			$circuitini->biayas()->create($inputbiaya);
 			$circuitini->contacts()->create($inputcontactteknis);
 			$circuitini->contacts()->create($inputcontactbilling);
+			$circuitini->perangkats()->create($inputperangkat);
+
+			$tmpini = Lastmiletmp::where('circuitidlastmile', $circuitidlastmile);
+			$tmpini->delete();
+			
+			// $circuitini->mrcvendor = $biayavendor->mrc;
+			// $circuitini->currency = $biayavendor->currency;
+			// $circuitini->save();
+
+			
 			if (Input::has('username') and Input::has('password')) 
 				{	
 					$inputadsl = Input::only('username', 'password');
@@ -90,7 +133,6 @@ class CostumercircuitsController extends BaseController {
 		}
 
 		return Redirect::route('costumercircuits.create')
-			->withInput()
 			->withErrors($validation)
 			->with('message', 'There were validation errors.');
 	}
@@ -103,9 +145,16 @@ class CostumercircuitsController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$costumercircuit = $this->costumercircuit->findOrFail($id);
+		
+		$costumercircuit = $this->costumercircuit->with('contacts', 'adsls', 'biayas', 'perangkats', 'biayavendors')->findOrFail($id);
+		
+		$customer = Customer::with('customercontacts')->where('id', $costumercircuit->customer_id)->first();
+		$vendor = Vendor::with('contactvendors')->where('nama', $costumercircuit->namavendor)->first();
+		$lastmile = Lastmile::with('biayas')->where('circuitidlastmile', $costumercircuit->circuitidlastmile)->first();
+		$backhaul = Backhaul::with('biayas')->where('nama', $costumercircuit->namabackhaul)->first();
+		$backhaulswitch = Backhaulswitch::where('nama', $backhaul->switchterkoneksi)->first();
 
-		return View::make('costumercircuits.show', compact('costumercircuit'));
+		return View::make('costumercircuits.show', ['backhaulswitch' => $backhaulswitch, 'costumercircuit' => $costumercircuit, 'costumercircuit' => $costumercircuit, 'customer' => $customer, 'vendor' => $vendor, 'lastmile' => $lastmile, 'backhaul' => $backhaul]);
 	}
 
 	/**
@@ -117,13 +166,17 @@ class CostumercircuitsController extends BaseController {
 	public function edit($id)
 	{
 		$costumercircuit = $this->costumercircuit->find($id);
+		$customer = Customer::lists('nama', 'id');
+		$namabackhaul = Backhaul::lists('nama', 'nama');
+		$circuitidlastmile = Lastmile::lists('circuitidlastmile', 'circuitidlastmile');
+		$vendor = Backhaul::lists('namavendor', 'namavendor');		
 
 		if (is_null($costumercircuit))
 		{
 			return Redirect::route('costumercircuits.index');
 		}
 
-		return View::make('costumercircuits.edit', compact('costumercircuit'));
+		return View::make('costumercircuits.edit', ['costumercircuit' => $costumercircuit, 'customer' => $customer, 'namabackhaul' => $namabackhaul, 'circuitidlastmile' => $circuitidlastmile, 'vendor' => $vendor]);
 	}
 
 	/**
@@ -159,7 +212,14 @@ class CostumercircuitsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->costumercircuit->find($id)->delete();
+		$circuit = $this->costumercircuit->find($id);
+
+		$circuit->contacts()->delete();
+		$circuit->adsls()->delete();
+		$circuit->biayas()->delete();
+		$circuit->perangkats()->delete();
+		
+		$circuit->delete();
 
 		return Redirect::route('costumercircuits.index');
 	}

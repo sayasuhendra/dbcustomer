@@ -2,22 +2,21 @@
 
 @section('main')
 
-<h1>Daftar Data Backhaulswitches</h1>
+<h2 align="center">Daftar Data Switches SBP</h2>
 
-<p>{{ link_to_route('backhaulswitches.create', 'Add new backhaulswitch') }}</p>
+<p>{{ link_to_route('backhaulswitches.create', 'Add Switch', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 
 @if ($backhaulswitches->count())
-	<table id="datasbp" class="table table-striped table-bordered">
+	<table id="tabelswitch" class="table table-striped table-bordered">
 		<thead>
 			<tr>
 				<th>Nama</th>
-				<th> Jenis</th>
-				<th>Jumlahportfo</th>
-				<th>Jumlahportrj</th>
+				<th>Jenis</th>
+				<th>Jumlah Port FO</th>
+				<th>Jumlah Port RJ</th>
 				<th>Area</th>
 				<th>Lokasi</th>
-				<th>Edit</th>
-				<th>Delete</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 
@@ -25,17 +24,18 @@
 			@foreach ($backhaulswitches as $backhaulswitch)
 				<tr>
 					<td>{{{ $backhaulswitch->nama }}}</td>
-					<td>{{{ $backhaulswitch-> jenis }}}</td>
+					<td>{{{ $backhaulswitch->jenis }}}</td>
 					<td>{{{ $backhaulswitch->jumlahportfo }}}</td>
 					<td>{{{ $backhaulswitch->jumlahportrj }}}</td>
 					<td>{{{ $backhaulswitch->area }}}</td>
 					<td>{{{ $backhaulswitch->lokasi }}}</td>
-                    <td>{{ link_to_route('backhaulswitches.edit', 'Edit', array($backhaulswitch->id), array('class' => 'btn btn-info')) }}</td>
-                    <td>
-                        {{ Form::open(array('method' => 'DELETE', 'route' => array('backhaulswitches.destroy', $backhaulswitch->id))) }}
-                            {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                        {{ Form::close() }}
-                    </td>
+                    <td class="ac">
+                    <a href="{{ URL::route('backhaulswitches.show', array($backhaulswitch->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
+	                    <a href="{{ URL::route('backhaulswitches.edit', array($backhaulswitch->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
+	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('backhaulswitches.destroy', $backhaulswitch->id), 'style'=>'display:inline-block')) }}
+	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'data-confirm' => 'Yakin mau dihapus?')) }}
+	                    {{ Form::close() }}
+		            </td>
 				</tr>
 			@endforeach
 		</tbody>
@@ -43,5 +43,40 @@
 @else
 	Belum ada data backhaulswitches
 @endif
+
+@stop
+
+@section('script-bawah')
+
+<script type="text/javascript" language="javascript" class="init">
+    $(document).ready(function() {
+    	$('#tabelswitch').DataTable( {
+        	"dom": 'T<"clear">lfrtip',
+        	"oTableTools": {
+        	            "aButtons": [
+        	                {
+        	                    "sExtends": "pdf",
+        	                    "sPdfOrientation": "landscape",
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+        	                },
+        	                {
+        	                    "sExtends": "xls",
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+        	                },
+        	                {
+        	                    "sExtends": "csv",
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+        	                },
+        	                {
+        	                    "sExtends": "copy",
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+        	                },
+        	                "print"
+
+        	            ]
+        	        }
+        } );
+    } );
+</script>
 
 @stop

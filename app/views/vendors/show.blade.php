@@ -1,33 +1,252 @@
 @extends('layouts.scaffold')
 
+@section('style-atas')
+
+<style>
+    a:hover {
+     cursor:pointer;
+    }
+
+    th { font-size: 12px; }
+    td { font-size: 12px; }
+
+</style>
+
+@stop
+
 @section('main')
 
-<h1>Show Vendor</h1>
+<h2 align="center">Detail Vendor</h2>
 
 <p>{{ link_to_route('vendors.index', 'Return to all vendors') }}</p>
 
-<table id="datasbp" class="table table-striped table-bordered">
-	<thead>
-		<tr>
-			<th>Nama</th>
-			<th>Alamat</th>
-			<th>Edit</th>
-			<th>Delete</th>
-		</tr>
-	</thead>
+	        <div class="col-md-6">
+	            <div class="panel panel-primary">
+	              <div class="panel-heading">
+	                <h3 class="panel-title pull-left">Data Vendor {{{ $vendor->nama }}}</h3>
+	                <div class="btn-group pull-right">
 
-	<tbody>
-		<tr>
-			<td>{{{ $vendor->nama }}}</td>
-			<td>{{{ $vendor->alamat }}}</td>
-            <td>{{ link_to_route('vendors.edit', 'Edit', array($vendor->id), array('class' => 'btn btn-info')) }}</td>
-            <td>
-                {{ Form::open(array('method' => 'DELETE', 'route' => array('vendors.destroy', $vendor->id))) }}
-                    {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
+	                    <a href="{{ URL::route('vendors.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>	
+	                    <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i>
+	                    </a> 
+	                </div>
+	                <div class="clearfix"></div>
+	              </div>
+	              <div class="panel-body">
+					    <dl class="dl-horizontal">
+							<dt>Nama</dt>
+        					<dd>{{{ $vendor->nama }}}</dd>
+        					<dt>Alamat</dt>
+        					<dd>{{{ $vendor->alamat }}}</dd>
+                            <dt>NPWP</dt>
+                            <dd>{{{ $vendor->npwp }}}</dd>
+                            <dt>Alamat NPWP</dt>
+                            <dd>{{{ $vendor->alamatnpwp }}}</dd>
+                            <dt>Keterangan</dt>
+                            <dd>{{{ $vendor->keterangan }}}</dd>
+	                    </dl>
+	              </div>
+	            </div>
+	        </div>
+
+
+<!-- Modal Create Contact -->
+{{ $vendor->keterangan = '' }}
+
+                {{ Form::model($vendor, array('method' => 'PUT', 'route' => array('vendorstambahkontak', $vendor->id))) }} 
+                    <div class="modal fade" id="TambahCustomerContact" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Buat Contact Baru</h4>
+                          </div>        
+                          <div class="modal-body">
+                                      <div class="form-group">
+                                          {{ Form::label('bagian', 'Bagian:') }}
+                                          {{ Form::text('bagian', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('cp', 'Nama:') }}
+                                          {{ Form::text('cp', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('jabatan', 'Level Jabatan:') }}
+                                          {{ Form::text('jabatan', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('kawasan', 'Kawasan:') }}
+                                          {{ Form::text('kawasan', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('telepon', 'Telepon:') }}
+                                          {{ Form::text('telepon', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('email', 'Email:') }}
+                                          {{ Form::text('email', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('keterangan', 'Keterangan:') }}
+                                          {{ Form::textarea('keterangan', null, ['class' => 'form-control', 'rows' => '3']) }}
+                                      </div>
+                                                        
+                            {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 {{ Form::close() }}
-            </td>
-		</tr>
-	</tbody>
-</table>
+
+<!-- Modal Create Contact End -->
+
+
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title pull-left">Daftar Contact Vendor </h3>
+                <div class="btn-group pull-right">
+                	<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#TambahCustomerContact"><i class="glyphicon glyphicon-plus"></i></button>	                    
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+				    <dl class="dl-horizontal">
+						@foreach ($vendor->contactvendors as $contact)
+							<dt>Bagian {{{ $contact->bagian }}}</dt>
+							<dd>
+							
+								<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->kawasan }}} | {{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a>
+			                    <a href="{{ URL::route('contactvendors.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+			                    {{ Form::open(array('method' => 'DELETE', 'route' => array('contactvendors.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+		                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+				                    {{ Form::close() }}
+							</dd>
+						@endforeach
+                    </dl>
+              </div>
+            </div>
+        </div>
+
+
+
+<div class="col-md-12">
+        
+	    <div class="panel panel-success">
+	      <div class="panel-heading">Data Backhaul Circuit Vendor</div>
+	    @if ($vendor->backhauls->count())
+	    	<table id="tabelbackhaul" class="table table-striped table-bordered">
+	    		<thead>
+	    			<tr>
+	    				<th>Nama Vendor</th>
+	    				<th>Circuit ID Backhaul</th>
+	    				<th>Nama Backhaul</th>
+	    				<th>Lokasi XConnect</th>
+	    				<th>Switch Terkoneksi</th>
+	    				<th>Port Terkoneksi</th>
+	    				<th>Bandwidth</th>
+	    				<th>NRC</th>
+	    				<th>MRC</th>
+	    				<th>Start Date</th>
+	    				<th width="100px">Action</th>
+	    			</tr>
+	    		</thead>
+
+	    		<tbody>
+	    			@foreach ($vendor->backhauls as $backhaul)
+	    				<tr>
+	    					<td>{{{ $backhaul->namavendor }}}</td>
+	    					<td>{{{ $backhaul->circuitidbackhaul }}}</td>
+	    					<td>{{{ $backhaul->nama }}}</td>
+	    					<td>{{{ $backhaul->switches->lokasi }}}</td>
+	    					<td>{{{ $backhaul->switchterkoneksi }}}</td>
+	    					<td>{{{ $backhaul->portterkoneksi }}}</td>
+	    					<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
+	    					<td>{{{ $backhaul->biayas->nrc }}} {{{ $backhaul->biayas->currency }}}</td>
+	    					<td>{{{ $backhaul->biayas->mrc }}} {{{ $backhaul->biayas->currency }}}</td>
+	    					<td>{{{ $backhaul->activated_at }}}</td>
+	                        
+	                        <td width="60px" class="ac">
+	                        <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+	    	                    <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
+	    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('backhauls.destroy', $backhaul->id), 'style'=>'display:inline-block')) }}
+	    	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+	    	                    {{ Form::close() }}
+	    		            </td>
+	    				</tr>
+	    			@endforeach
+	    		</tbody>
+	    	</table>
+	    @else
+	    	Belum ada data backhauls
+	    @endif
+
+</div>
+
+	    <div class="panel panel-info">
+	      <div class="panel-heading">Data Lastmile Circuit Vendor</div>
+	    @if ($vendor->lastmiles->count())
+
+	    	<table id="lastmiletable" class="table table-striped table-bordered">
+	    		<thead>
+	    			<tr>
+	    				<th>Circuit ID Vendor</th>
+	    				<th>Start Date</th>
+	    				<th>VLAN ID</th>
+	    				<th>VLAN ID Name</th>
+	    				<th>IP Address PTP</th>
+	    				<th>IP Public Cust</th>
+	    				<th>Layanan</th>
+	    				<th>Bandwidth</th>
+	    				<th>Status</th>
+	    				<th>Kawasan</th>
+	    				<th>Nama Vendor</th>
+	    				<th>Cir ID Backhaul</th>
+	    				<th width="100px">Action</th>
+	    			</tr>
+	    		</thead>
+
+	    		<tbody>
+	    			@foreach ($vendor->lastmiles as $lastmile)
+	    				<tr>
+	    					<td>{{{ $lastmile->circuitidlastmile }}}</td>
+	    					<td>{{{ $lastmile->activated_at }}}</td>
+	    					<td>{{{ $lastmile->vlanid }}}</td>
+	    					<td>{{{ $lastmile->vlanname }}}</td>
+	    					<td>{{{ $lastmile->ipaddressptp }}}</td>
+	    					<td>{{{ $lastmile->blockippubliccustomer }}}</td>
+	    					<td>{{{ $lastmile->layanan }}}</td>
+	    					<td>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</td>
+	    					<td>{{{ $lastmile->status }}}</td>
+	    					<td>{{{ $lastmile->kawasan }}}</td>
+	    					<td>{{{ $lastmile->namavendor }}}</td>
+	    					<td>{{{ $lastmile->namabackhaul }}}</td>
+	                       
+	                        <td class="ac">
+	                        <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+	    	                    <a href="{{ URL::route('lastmiles.edit', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
+	    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('lastmiles.destroy', $lastmile->id), 'style'=>'display:inline-block')) }}
+	    	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+	    	                    {{ Form::close() }}
+	    		            </td>
+	    				</tr>
+	    			@endforeach
+	    		</tbody>
+	    	</table>
+	    @else
+	    	Belum ada data lastmiles
+	    @endif
+	    </div>
+	    </div>
+
+
+        <script type="text/javascript">
+        	
+        	@foreach ($vendor->contactvendors as $contactcustomer)
+        	$('#contactButtonVendor{{{ $contactcustomer->id }}}').popover();
+        	@endforeach        	
+        	
+        </script>
 
 @stop

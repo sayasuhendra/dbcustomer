@@ -13,6 +13,9 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('assets/css/navbar-fixed-top.css')}}" rel="stylesheet">
     <link href="{{asset('assets/fontawesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/select2/select2.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/select2/select2-bootstrap.css')}}"/>
+
     <style type="text/css">
         dl dd {
                   border-bottom: 1px dashed #eeeeee;
@@ -26,6 +29,10 @@
           text-decoration: none;
         }
 
+        .navbar-brand {
+          padding: 5px;
+        }
+
         div.DTTT { margin-bottom: 0.5em; float: right; margin-left: 5px; }
         div.dataTables_wrapper { clear: both; }
     </style>
@@ -37,6 +44,7 @@
     <script src="{{asset('assets/datatables/dataTables.bootstrap.js')}}"></script>
     
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/select2/select2.min.js')}}"></script>
 
     <!--[if lt IE 9]>
         <script src="/assets/plugins/html5shiv.js"></script>
@@ -47,13 +55,22 @@
 <body>
     @include('layouts/partials/navbar')
 
-    <div class="container">
+    <div class="container"> {{-- -fluid --}}
         <div class="row">
                 @yield('main')
         </div>
         </div>
     </div>
     @yield('script-bawah')
+
+    <script type="text/javascript" src="{{asset('assets/js/utils.js')}}"></script>
+    <script src="{{asset('assets/js/jquerymask.min.js')}}"></script>
+    <script>
+    $(document).ready(function(){
+      $('.money').mask("#.##0,00", {reverse: true, maxlength: false});
+      
+    });
+    </script>
 
     
 

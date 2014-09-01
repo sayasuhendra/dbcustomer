@@ -19,6 +19,26 @@
    ☐ Apakah OTRS bisa input data customer dalam bentuk gambar dsb. seperti topologi, dsb.
    ☐ Menyediakan stop clock untuk OTRS.
 
+Tambahan Rabu, 6 Agustus 2014 :
+  ☐ tambilan dibuat lebih simpel dan mudah
+  ☐ export pdf, excel dan csv. print dan copy ga usah
+  ☐ kalo bisa bisa di sort berdasarkan yang kita mau. sebenarnya dah bisa sih.
+
+Tambahan Permintaan Firman:
+  ☐ Tabel dan form create Backhauls Ditambahkan kolom "nama" untuk indentifikasi. isinya seperti Telkom metro.
+  ☐ Kalo bisa di menu Create Lastmile, ketika orang milih vendornya telkom maka backhaul yang muncul hanya punya telkom aja.
+
+  ☐ Umumnya Vendor hanya punya 1 Backhaul, tapi terkadang ada yang punya lebih dari 2 atau lebih.
+
+Catatan Meeting dengan Pak Budi dan Bu Wena:
+  ☐ Senin Presentasi
+  ☐ Apapun yang dibutuhkan untuk 
+
+Tujuan Utama Dibuatnya Aplikasi ini:
+  1. Cross check terminasi seminimal mungkin jarak antara terminasi customer dan terminasi vendor. karena selisih sehari aja mahal.
+  2. 
+
+
 
 Bussiness Proses Penjelasan Pak Budi
 
@@ -31,3 +51,19 @@ CIR ID 1 : ~ CID Vendor
 CID Vendor ~ : 1 Vendor ID
 
 CID backhaul ~ : 1 Perangkat
+
+Senin :
+  ☐ Menambahkan upload download untuk Layanan VSAT.
+  ☐ Circuit ID Vendor- ke detail.  Nama Vendor-ke semua yang pake vendor ini.
+
+Jumat, 16 Agustus, Firman:
+  ☐ Tambahin status di backhaul. tambahin tanggal status di setiap circuit.
+  ✔ backhaulswitches.lokasi = backhauls.lokasixconnect @done (14-08-19 10:37)
+
+Senin, 27 Agust 2014. Firman:
+  ☐ Tambah field nama di tabel backbone.
+
+Senin, 27 Agust 2014. Pak Budi:
+  ☐ Tambahkan confirm ketika click delete.    
+  ☐ NRC dan MRC ada koma (,) ketika view.
+  ☐ Create Circuit antara Vendor dan Circuit ID Backhaul harus link.

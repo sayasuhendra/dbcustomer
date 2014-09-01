@@ -1,10 +1,24 @@
 @extends('layouts.scaffold')
 
+@section('script-atas')
+
+    <script>
+        $(document).ready(function() { 
+
+            $("#namavendor").select2();
+            $("#namabackhaul").select2();
+            
+
+        });
+    </script>
+
+@stop
+
 @section('main')
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-    <h1 class="panel-title" align="center">Form Data Circuit Vendor</h1></div>
+    <h1 class="panel-title" align="center">Tambah Circuit Vendor Baru</h1></div>
 </div>
 
 {{ Form::open(array('route' => 'lastmiles.store')) }}
@@ -15,10 +29,10 @@
                 <div class="form-horizontal">
                     <div class="form-group">
                         <div class="col-sm-3">
-                            {{ Form::label('circuitidlastmile', 'Circuit ID Vendor :') }}
+                        {{ Form::label('circuitidlastmile', 'Circuit ID Vendor :') }}
                         </div>
                         <div class="col-sm-9">
-                        {{ Form::input('number', 'circuitidlastmile', null, ['class' => 'form-control']) }}
+                        {{ Form::text('circuitidlastmile', null, ['class' => 'form-control', 'id' => 'circuitidlastmile']) }}
                         </div>
                     </div>
                     <div class="form-group">
@@ -42,7 +56,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        {{ Form::label('ipaddressptp', 'IP Address PTP :', ['class' => 'col-sm-3']) }}
+                        {{ Form::label('ipaddressptp', 'IP Address PTP:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
                         {{ Form::text('ipaddressptp', null, ['class' => 'form-control']) }}
                         </div>
@@ -87,20 +101,30 @@
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('circuitidbackhaul', 'Circuit ID Backhaul:', ['class' => 'col-sm-3']) }}
+                        {{ Form::label('kawasan', 'Kawasan :', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('circuitidbackhaul', $circuitidbackhaul, null, ['class' => 'form-control']) }}
-                    </div></div>
+                        {{ Form::text('kawasan', null, ['class' => 'form-control']) }}
+                        </div>
+                    </div>
+
                     <div class="form-group">
-                        {{ Form::label('vendor_id', 'Nama Vendor:', ['class' => 'col-sm-3']) }}
+                        {{ Form::label('keterangan', 'Keterangan :', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('vendor_id', $vendor, null, ['class' => 'form-control']) }}
-                    </div></div>
+                        {{ Form::text('keterangan', null, ['class' => 'form-control']) }}
+                        </div>
+                    </div>
                     <div class="form-group">
-                        {{ Form::label('costumercircuit_id', 'Nama Site Circuit Customer :', ['class' => 'col-sm-3']) }}
+                        {{ Form::label('namavendor', 'Nama Vendor:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('costumercircuit_id', $costumercircuit, null, ['class' => 'form-control']) }}
+                        {{ Form::select('namavendor', $vendor, null, ['class' => 'form-control select2']) }}
                     </div></div>
+
+                    <div class="form-group">
+                        {{ Form::label('namabackhaul', 'Nama Backhaul:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('namabackhaul', $namabackhaul, null, ['class' => 'form-control select2']) }}
+                    </div></div>
+                    
                     <div class="form-group">
                         {{ Form::label('status', 'Status:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
@@ -131,7 +155,8 @@
 
     <div class="form-group">
         <div align="center">
-            {{ Form::submit('Submit', array('class' => 'btn btn-lg btn-primary')) }}
+            {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
+            {{ link_to_route('lastmiles.index', 'Cancel', null, array('class' => 'btn btn-default')) }}
         </div>
     </div>
 
@@ -148,6 +173,8 @@
 @section('script-bawah')
 
 <script>
+    
+
     $('#layanan').change(function() {
         if ($(this).val() === 'ADSL') {
             $("#username").removeAttr( "type" );
@@ -158,6 +185,16 @@
             $("#password").attr( "type", "hidden" );
         }
     });
+
+    $('#namavendor').change(function() {
+        var pilihan = $('#namabackhaul');
+        var vendor = $(this).val();
+        $("#namabackhaul option:not(option[value='"+vendor+"'])").remove();
+        var backhaul = $("#namabackhaul option:selected").text();
+        $("#namabackhaul option:selected").attr('value', backhaul);
+       
+    });
+
 </script>
 
 @stop

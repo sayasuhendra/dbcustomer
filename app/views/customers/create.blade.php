@@ -128,7 +128,8 @@
     </div>
     <div class="form-group">
         <div align="center">
-            {{ Form::submit('Submit', array('class' => 'btn btn-lg btn-primary')) }}
+            {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
+            {{ link_to_route('customers.index', 'Cancel', null, array('class' => 'btn btn-default')) }}
         </div>
     </div>      
 {{ Form::close() }}

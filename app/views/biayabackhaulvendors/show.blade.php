@@ -2,7 +2,7 @@
 
 @section('main')
 
-<h1>Show Biayabackhaulvendor</h1>
+<h1>Detail Biayabackhaulvendor</h1>
 
 <p>{{ link_to_route('biayabackhaulvendors.index', 'Return to all biayabackhaulvendors') }}</p>
 

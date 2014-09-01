@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('circuitidbackhaul', 'Circuit ID Backhaul:') }}
-            {{ Form::input('number', 'circuitidbackhaul', null, ['class' => 'form-control']) }}
+            {{ Form::text('circuitidbackhaul', null, ['class' => 'form-control', 'id' => 'circuitidbackhaul']) }}
         </div>
 		<li>
 			{{ Form::submit('Update', array('class' => 'btn btn-info')) }}

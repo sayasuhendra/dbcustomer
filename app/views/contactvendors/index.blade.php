@@ -23,7 +23,7 @@
 		<tbody>
 			@foreach ($contactvendors as $contactvendor)
 				<tr>
-					<td>{{{ $contactvendor->nama }}}</td>
+					<td>{{{ $contactvendor->cp }}}</td>
 					<td>{{{ $contactvendor->bagian }}}</td>
 					<td>{{{ $contactvendor->telepon }}}</td>
 					<td>{{{ $contactvendor->email }}}</td>

@@ -4,13 +4,20 @@
 Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
 
 # Vendor
+Route::put('vendors/contacts/{vendors}', ['as' => 'vendorstambahkontak', 'uses' => 'VendorsController@tambahkontak']);
+
 Route::resource('vendors', 'VendorsController');
 
 Route::resource('customers', 'CustomersController');
 
+
 Route::put('customers/contacts/{customers}', ['as' => 'customerstambahkontak', 'uses' => 'CustomersController@tambahkontak']);
 
+
 Route::resource('costumercircuits', 'CostumercircuitsController');
+Route::put('costumercircuits/contacts/{costumercircuits}', ['as' => 'circuittambahkontak', 'uses' => 'CostumercircuitsController@tambahkontak']);
+Route::put('costumercircuits/perangkats/{costumercircuits}', ['as' => 'circuittambahperangkat', 'uses' => 'CostumercircuitsController@tambahperangkat']);
+
 
 Route::resource('customercontacts', 'CustomercontactsController');
 
@@ -36,8 +43,10 @@ Route::resource('biayalastmilevendors', 'BiayalastmilevendorsController');
 
 Route::resource('biayabackhaulvendors', 'BiayabackhaulvendorsController');
 
-Route::resource('asals', 'AsalsController');
-
+Route::get('/ujicoba', function()
+{
+	return View::make('test');
+});
 # Registration
 Route::get('/register', 'RegistrationController@create')->before('guest');
 Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationController@store']);

@@ -14,22 +14,48 @@ class CircuitsPresenter extends Presenter {
         }
     }
 
-    public function mrcVendor()
+    public function nrcCircuit()
     {
-        $jadi = number_format($this->biayavendors['0']->mrc ,2,',','.') . " " . $this->biayavendors['0']->currency ;         
+        if ( $this->biayas->nrc !== '' ) {
+        $jadi = number_format($this->biayas->nrc ,2,',','.') . " " . $this->biayas->currency ;
         return $jadi;
+        } else {
+            return 'kosong';
+        }
     }
 
-    public function lamaBerlangganan()
+    public function mrclastmile()
     {
-        setlocale (LC_TIME, 'id_ID');
-        return $this->activated_at->formatLocalized('%d %B %Y');
+        // $biayalastmile = Biayalastmilevendor::where('circuitidlastmile', $costumercircuit->circuitidlastmile)->first();
+        // $jadi = number_format($biayalastmile->mrc ,2,',','.') . " " . $biayalastmile->currency ;
+
+        // return $jadi;
+
+
+        if ( $this->biayavendors->mrc !== '' ) {
+        $jadi = number_format($this->biayavendors->mrc ,2,',','.') . " " . $this->biayavendors->currency ;
+        return $jadi;
+        } else {
+            return 'kosong';
+        }
     }
 
-    public function namavendor()
+    public function untung()
     {
-        $namavendor = \DB::table('vendors')->where('id', $this->lastmiles->vendor_id)->pluck('nama');
-        return $namavendor ;
+        if ( $this->mrcvendor !== '' and $this->biayas->mrc !== '') {
+        $untung = $this->biayas->mrc - $this->biayavendors->mrc;
+        $jadi = number_format($untung ,2,',','.') . " " . $this->biayavendors->currency ;     
+        return $jadi;
+        } else {
+            return 'kosong';
+        }
+    }
+
+    public function startDate()
+    {
+        // setlocale (LC_TIME, 'id_ID');
+        // return $this->activated_at->formatLocalized('%d %B %Y');
+        return $this->activated_at->format('d/m/y');
     }
 
 }

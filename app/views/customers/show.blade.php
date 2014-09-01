@@ -3,9 +3,12 @@
 @section('style-atas')
 
 <style>
-a:hover {
- cursor:pointer;
-}
+    a:hover {
+     cursor:pointer;
+    }
+
+    th { font-size: 12px; }
+    td { font-size: 12px; }
 
 </style>
 
@@ -13,44 +16,26 @@ a:hover {
 
 @section('script-atas')
 
-<!-- google chart -->
-
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Customer', 'Margin per Circuit'],
-          ['Site 1',     11],
-          ['Site 2', 2],
-          ['Site 3',    7]
-        ]);
-
-        var options = {
-          title: 'Data Margin Customer Ini',
-          is3D: true,
-
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
-      }
-    </script>
 
 @stop
 
 @section('main')
 
 <h1 align="center">Data Customer Detail</h1>
+
 <p>{{ link_to_route('customers.index', 'Kembali Ke Daftar Customer') }}</p>
-    <div class="box">
-        <div class="container">
 
 	        <div class="col-md-7">
-	            <div class="panel panel-default">
+	            <div class="panel panel-primary">
 	              <div class="panel-heading">
-	                <h3 class="panel-title">Data Customer {{{ $customer->nama }}}</h3>
+	                <h3 class="panel-title pull-left">Data Customer {{{ $customer->nama }}}</h3>
+                    <div class="btn-group pull-right">
+
+                        <a href="{{ URL::route('customers.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>    
+                        <a href="{{ URL::route('customers.edit', array($customer->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i>
+                        </a> 
+                    </div>
+                    <div class="clearfix"></div>
 	              </div>
 	              <div class="panel-body">
 					    <dl class="dl-horizontal">
@@ -58,87 +43,167 @@ a:hover {
 						<dd>{{{ $customer->customerid }}}</dd>
 						<dt>Nama Perusahaan</dt>
 						<dd>{{{ $customer->nama }}}</dd>
+                        <dt>Register Date</dt>
+                        <dd>{{{ $customer->present()->registerdate }}}
 						<dt>Alamat Perusahaan</dt>
 						<dd>{{{ $customer->alamat }}}</dd>
 						<dt>Level Customer</dt>
 						<dd>{{{ $customer->level }}}</dd>
+                        <dt>NPWP</dt>
+                        <dd>{{{ $customer->npwp }}}</dd>
+                        <dt>Alamat NPWP</dt>
+                        <dd>{{{ $customer->alamatnpwp }}}</dd>
+                        <dt>Keterangan</dt>
+                        <dd>{{{ $customer->keterangan }}}</dd>
 	                    </dl>
 	              </div>
 	            </div>
 	        </div>
 
-	        <div class="col-md-5">
-	            <div class="panel panel-default">
+{{---------------- Kontak ------------------------------------------------}}
+
+<!-- Modal Create COntact -->
+{{ $customer->keterangan = '' }}
+
+                {{ Form::model($customer, array('method' => 'PUT', 'route' => array('customerstambahkontak', $customer->id))) }} 
+                    <div class="modal fade" id="TambahCustomerContact" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Buat Contact Baru</h4>
+                          </div>        
+                          <div class="modal-body">
+                                      <div class="form-group">
+                                          {{ Form::label('bagian', 'Bagian:') }}
+                                          {{ Form::text('bagian', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('cp', 'Nama:') }}
+                                          {{ Form::text('cp', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('jabatan', 'Level Jabatan:') }}
+                                          {{ Form::text('jabatan', null, ['class' => 'form-control']) }}
+                                      </div>                                      
+                                      <div class="form-group">
+                                          {{ Form::label('telepon', 'Telepon:') }}
+                                          {{ Form::text('telepon', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('email', 'Email:') }}
+                                          {{ Form::text('email', null, ['class' => 'form-control']) }}
+                                      </div>
+                                      <div class="form-group">
+                                          {{ Form::label('keterangan', 'Keterangan:') }}
+                                          {{ Form::textarea('keterangan', null, ['class' => 'form-control', 'rows' => '3']) }}
+                                      </div>
+                                                        
+                            {{ Form::submit('Create', array('class' => 'btn btn-primary')) }}
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                {{ Form::close() }}
+
+<!-- Modal Create Contact End -->
+
+
+
+            <div class="col-md-5">
+	            <div class="panel panel-primary">
 	              <div class="panel-heading">
-	                <h3 class="panel-title">Daftar Contact Customer {{{ $customer->nama }}}</h3>
+	                <h3 class="panel-title pull-left">Daftar Contact Customer {{{ $customer->nama }}}</h3>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#TambahCustomerContact"><i class="glyphicon glyphicon-plus"></i></button>
+                    </div>
+                    <div class="clearfix"></div>
 	              </div>
 	              <div class="panel-body">
 					    <dl class="dl-horizontal">
 							@foreach ($contacts as $contact)
-								<dt>Contact Bagian {{{ $contact->bagian }}}</dt>
-								<dd><a id="contactButton{{{ $contact->id }}}" data-toggle="tooltip" data-placement="right" title="{{{ $contact->telepon }}}" data-content="{{{ $contact->email }}}"> {{{ $contact->cp }}} </a></dd>
+								<dt>Bagian {{{ $contact->bagian }}}</dt>
+								<dd>
+                                    <a id="contactButton{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a>
+                                    <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+                                {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+                                    {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+                                    {{ Form::close() }}
+
+
+                                </dd>
 							@endforeach
 	                    </dl>
 	              </div>
 	            </div>
 	        </div>
 
-	        <div class="col-md-12">
+            
+{{---------------- Kontak  End------------------------------------------------}}
+
+    
+
+	        
 	        	<table id="datasbp" class="table table-striped table-bordered">
 	        		<thead>
 	        			<tr>
-	        				<th>Circuitid</th>
-	        				<th>Namasite</th>
-	        				<th>Alamat</th>
-	        				<th>Layanan</th>
-	        				<th>Bandwidth</th>
-	        				<th>Circuit ID Backhaul</th>
-	        				<th>Circuit ID Vendor</th>
-	        				<th>Area</th>
-	        				<th>Status</th>
-	        				<th width="70px">Pilih Action</th>
+	        				<th>Circuit ID</th>
+                            <th>Namasite</th>
+                            <th>Alamat</th>
+                            <th>Layanan</th>
+                            <th>BW</th>
+                            <th>MRC Circuit</th>
+                            <th>Nama Backhaul</th>
+                            <th>Cir ID Vendor</th>
+                            <th>Nama Vendor</th>
+                            <th>MRC Vendor</th>
+                            <th>Untung</th>
+                            <th>Status</th>
+                            <th>Start Date</th>
+                            <th width="60px">Action</th>
 	        			</tr>
 	        		</thead>
-            @foreach ($circuits as $circuit)
 
 
             		<tbody>
-            				<tr>
-            					<td>{{{ $circuit->circuitid }}}</td>
-            					<td> <a id="myButton" data-toggle="tooltip" data-placement="right" title="" data-original-title="Isinya ini bukan"> {{{ $circuit->namasite }}} </a></td>
-            					<td>{{{ $circuit->alamat }}}</td>
-            					<td>{{{ $circuit->layanan }}}</td>
-            					<td>{{{ $circuit->bandwidth }}}</td>
-            					<td>{{{ $circuit->circuitidbackhaul }}}</td>
-            					<td>{{{ $circuit->circuitidlastmile }}}</td>
-            					<td>{{{ $circuit->area }}}</td>
-            					<td>
-                                    @if ( $circuit->status == 'Aktif' )
-                                        <span class="label label-success">{{{ $circuit->status }}}</span>
-                                    @elseif ( $circuit->status == 'Terminate' )
-                                        <span class="label label-important">{{{ $circuit->status }}}</span>
-                                    @elseif ( $circuit->status == 'Suspend' )
-                                        <span class="label label-warning">{{{ $circuit->status }}}</span>
+			            @foreach ($costumercircuits as $costumercircuit)
+                            <tr>
+                                <td>{{{ $costumercircuit->circuitid }}}</td>
+                                <td>{{{ $costumercircuit->namasite }}}</td>
+                                <td>{{{ $costumercircuit->alamat }}}</td>
+                                <td>{{{ $costumercircuit->layanan }}}</td>
+                                <td>{{{ $costumercircuit->bandwidth }}} {{{ $costumercircuit->satuan }}}</td>
+                                <td>{{{ $costumercircuit->present()->mrcCircuit }}}</td>
+                                <td>{{{ $costumercircuit->namabackhaul }}}</td>
+                                <td>{{{ $costumercircuit->circuitidlastmile }}}</td>
+                                <td> {{{ $costumercircuit->namavendor }}} </td>
+                                <td> {{{ $costumercircuit->present()->mrclastmile }}} </td>
+                                <td> {{{ $costumercircuit->present()->untung }}} </td>
+                                <td>
+                                    @if ( $costumercircuit->status == 'Aktif' )
+                                        <span class="label label-success">{{{ $costumercircuit->status }}}</span>
+                                    @elseif ( $costumercircuit->status == 'Terminate' )
+                                        <span class="label label-important">{{{ $costumercircuit->status }}}</span>
+                                    @elseif ( $costumercircuit->status == 'Suspend' )
+                                        <span class="label label-warning">{{{ $costumercircuit->status }}}</span>
                                     @endif
                                 </td>
-			                    <td class="ac">
-				                    <a href="{{ URL::route('costumercircuits.edit', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
-				                    {{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuits.destroy', $customer->id), 'style'=>'display:inline-block')) }}
-				                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm')) }}
-				                    {{ Form::close() }}
-					            </td>
-            				</tr>
+                                <td>{{{ $costumercircuit->present()->startDate }}}</td>
+                                <td width="60px" class="ac">
+                                <a href="{{ URL::route('costumercircuits.show', array($costumercircuit->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+                                    <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
+                                    {{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuits.destroy', $costumercircuit->id), 'style'=>'display:inline-block')) }}
+                                            {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+                                    {{ Form::close() }}
+                                </td>
+                            </tr>
+                        @endforeach                            
             		</tbody>
-            		 @endforeach
+                    
+            		 
             	</table>
-
-           
-
-</div>
-</div>
-
-
-
+          
     <div id="piechart" style="width: 900px; height: 500px;"></div>
 
 @stop
@@ -172,7 +237,7 @@ a:hover {
         	                "print"
 
         	            ]
-        	        }
+        	        },            
         } );
     } );
 </script>
@@ -182,6 +247,9 @@ a:hover {
 	$('#contactButton{{{ $contact->id }}}').popover();
 	@endforeach
 	$('#myButton').popover();
+    
 </script>
+
+    
 
 @stop

@@ -63,17 +63,6 @@
                             </div>            
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        {{ Form::label('backhaul_id', 'Circuit ID Backhaul:', ['class' => 'col-sm-3']) }}
-                        <div class="col-sm-9">
-                        {{ Form::select('backhaul_id', $circuitidbackhaul, null, ['class' => 'form-control']) }}
-                    </div></div>
-                    <div class="form-group">
-                        {{ Form::label('vendor_id', 'Nama Vendor:', ['class' => 'col-sm-3']) }}
-                        <div class="col-sm-9">
-                        {{ Form::select('vendor_id', $vendor, null, ['class' => 'form-control']) }}
-                    </div></div>
                     <div class="form-group">
                         {{ Form::label('circuitidlastmile', 'Circuit ID Vendor:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
@@ -112,6 +101,35 @@
                         <div class="col-sm-9">
                         {{ Form::select('currency', ['IDR' => 'IDR', 'USD' => 'USD'], null, ['class' => 'form-control']) }}
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">                                
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        {{ Form::label('namaperangkat', 'Nama Perangkat:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">{{ Form::text('namaperangkat', null, ['class' => 'form-control']) }}</div>
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('serialnumber', 'Serial Number:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">{{ Form::text('serialnumber', null, ['class' => 'form-control']) }}</div>
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('tipe', 'Tipe:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">{{ Form::text('tipe', null, ['class' => 'form-control']) }}</div>
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('jenis', 'Jenis:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">{{ Form::select('jenis', ['switch' => 'Switch', 'modem' => 'Modem', 'router' => 'Router', 'wireless' => 'Wireless'], null, ['class' => 'form-control']) }}</div>
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('pemilik', 'Pemilik:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">{{ Form::select('pemilik', ['SBP' => 'SBP', 'Customer' => 'Customer', 'Vendor' => 'Vendor'], null, ['class' => 'form-control']) }}</div>
                     </div>
             </div>
         </div>
@@ -184,7 +202,9 @@
     </div>
     <div class="form-group">
         <div align="center">
-            {{ Form::submit('Submit', array('class' => 'btn btn-lg btn-primary')) }}
+            {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }} 
+            <input type="button" value="Cancel" onclick="history.back(-1)" class="btn btn-default"/>
+            </div>
         </div>
     </div>      
 {{ Form::close() }}

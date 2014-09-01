@@ -3,6 +3,8 @@
 @section('meta-title', 'Login')
 
 @section('main')
+
+<div class="col-md-4 col-md-offset-4">
     <h1>Log In</h1>
 
     {{ Form::open(['route' => 'sessions.store']) }}
@@ -31,5 +33,5 @@
             </div>
         @endif
     {{ Form::close() }}
-    
+</div>
 @stop

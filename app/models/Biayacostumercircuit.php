@@ -10,6 +10,6 @@ class Biayacostumercircuit extends Eloquent {
 
 	public function circuits()
 	{
-		return $this->belongsTo('Costumercircuit');
+		return $this->belongsTo('Costumercircuit', 'costumercircuit_id', 'id');
 	}
 }

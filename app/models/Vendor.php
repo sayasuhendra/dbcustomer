@@ -10,21 +10,21 @@ class Vendor extends Eloquent {
 
 	public function backhauls()
 	{
-		return $this->hasMany('Backhaul');
+		return $this->hasMany('Backhaul', 'namavendor', 'nama');
 	}
 
 	public function lastmiles()
 	{
-		return $this->hasMany('Lastmile');
+		return $this->hasMany('Lastmile', 'namavendor', 'nama');
 	}
 
-	public function contacts()
+	public function contactvendors()
 	{
 		return $this->hasMany('Contactvendor');
 	}
 
-	public function circuits()
+	public function costumercircuits()
 	{
-		return $this->hasMany('Costumercircuit');
+		return $this->hasMany('Costumercircuit', 'namavendor', 'nama');
 	}
 }

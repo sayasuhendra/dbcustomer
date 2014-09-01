@@ -108,7 +108,15 @@ class CustomercontactsController extends BaseController {
 			$customercontact = $this->customercontact->find($id);
 			$customercontact->update($input);
 
-			return Redirect::route('customercontacts.show', $id);
+			if ( $customercontact->contactable_type == 'Customer')
+				{
+
+					return Redirect::route('customers.show', $customercontact->contactable_id);
+				}
+			elseif ( $customercontact->contactable_type == 'Costumercircuit') 
+				{
+					return Redirect::route('costumercircuits.show', $customercontact->contactable_id);
+				}
 		}
 
 		return Redirect::route('customercontacts.edit', $id)
@@ -125,9 +133,26 @@ class CustomercontactsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->customercontact->find($id)->delete();
+		$contact = $this->customercontact->find($id);
+			
 
-		return Redirect::route('customercontacts.index');
+		if ( $contact->contactable_type == 'Customer')
+			{
+
+				$id = $contact->contactable_id;
+
+				$contact->delete();
+
+				return Redirect::route('customers.show', $id);
+			}
+		elseif ( $contact->contactable_type == 'Costumercircuit') 
+			{
+				$id = $contact->contactable_id;
+
+				$contact->delete();
+
+				return Redirect::route('costumercircuits.show', $id);
+			}
 	}
 
 }

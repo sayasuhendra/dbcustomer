@@ -1,0 +1,8 @@
+Costumer Circuit :
+  ☐ Nama Vendor, Circuit ID Vendor dan Circuit ID Backhaul disimpan bukan idnya, tapi datanya. Kemudian Relationshipnya di rubah, bukan idnya juga. tapi datanya.
+    ☐ Memudahkan menampilkan di tabel
+    ☐ Menghindari Eager Loading.
+
+  ☐ Membuat Tabel Lastmile_tmp, isinya Nama Lastmile untuk menyimpan sementara, agar mudah ketika input di Circuit Customer. Setelah di Input Hilang Datanya.
+
+  ☐ 

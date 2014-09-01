@@ -33,11 +33,10 @@ class LastmilesController extends BaseController {
 	 */
 	public function create()
 	{
-		$costumercircuit = Costumercircuit::lists('namasite', 'id');
-		$vendor = Vendor::lists('nama', 'id');
-		$circuitidbackhaul = Backhaul::lists('id', 'id');
+		$vendor = Backhaul::lists('namavendor', 'namavendor');
+		$namabackhaul = Backhaul::lists('nama', 'namavendor');
 
-		return View::make('lastmiles.create', ['costumercircuit' => $costumercircuit, 'vendor' => $vendor, 'circuitidbackhaul' => $circuitidbackhaul]);
+		return View::make('lastmiles.create', ['vendor' => $vendor, 'namabackhaul' => $namabackhaul]);
 	}
 
 	/**
@@ -47,12 +46,29 @@ class LastmilesController extends BaseController {
 	 */
 	public function store()
 	{
+		$inputlastmile = Input::only('circuitidlastmile', 'activated_at', 'vlanid', 'vlanname', 'ipaddressptp', 'blockippubliccustomer', 'layanan', 'bandwidth', 'satuan', 'kawasan', 'keterangan', 'namabackhaul', 'namavendor', 'status');
+		$inputbiaya = Input::only('nrc', 'mrc', 'currency');
 		$input = Input::all();
+
 		$validation = Validator::make($input, Lastmile::$rules);
 
 		if ($validation->passes())
 		{
-			$this->lastmile->create($input);
+			$this->lastmile->create($inputlastmile);
+			$circuitidlastmile = Input::get('circuitidlastmile');
+			$lastmileini = Lastmile::where('circuitidlastmile', '=', $circuitidlastmile)->first();
+
+			$lastmileini->biayas()->create($inputbiaya);
+
+			$tmp = new Lastmiletmp;
+			$tmp->circuitidlastmile = $circuitidlastmile;
+			$tmp->save();
+
+			if (Input::has('username') and Input::has('password')) 
+				{	
+					$inputadsl = Input::only('username', 'password');
+					$lastmileini->adsls()->create($inputadsl);
+				}
 
 			return Redirect::route('lastmiles.index');
 		}
@@ -72,8 +88,9 @@ class LastmilesController extends BaseController {
 	public function show($id)
 	{
 		$lastmile = $this->lastmile->findOrFail($id);
+		$vendor = Vendor::with('contactvendors')->where('nama', $lastmile->namavendor)->first();
 
-		return View::make('lastmiles.show', compact('lastmile'));
+		return View::make('lastmiles.show', compact('lastmile', 'vendor'));
 	}
 
 	/**
@@ -86,12 +103,15 @@ class LastmilesController extends BaseController {
 	{
 		$lastmile = $this->lastmile->find($id);
 
+		$vendor = Backhaul::lists('namavendor', 'namavendor');
+		$namabackhaul = Backhaul::lists('nama', 'nama');
+
 		if (is_null($lastmile))
 		{
 			return Redirect::route('lastmiles.index');
 		}
 
-		return View::make('lastmiles.edit', compact('lastmile'));
+		return View::make('lastmiles.edit', ['lastmile' => $lastmile, 'vendor' => $vendor, 'namabackhaul' => $namabackhaul]);
 	}
 
 	/**
@@ -102,13 +122,19 @@ class LastmilesController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, Lastmile::$rules);
+		$inputbiayas = Input::only('nrc', 'mrc', 'currency');
+		$inputlastmiles = Input::only('circuitidlastmile', 'activated_at', 'vlanid', 'vlanname', 'ipaddressptp', 'blockippubliccustomer', 'layanan', 'bandwidth', 'satuan', 'kawasan', 'keterangan', 'namabackhaul', 'namavendor', 'status');
+
+		$inputlastmile = array_except($inputlastmiles, '_method');
+		$inputbiaya = array_except($inputbiayas, '_method');
+
+		$validation = Validator::make($inputlastmile, Lastmile::$rules);
 
 		if ($validation->passes())
 		{
 			$lastmile = $this->lastmile->find($id);
-			$lastmile->update($input);
+			$lastmile->update($inputlastmile);
+			$lastmile->biayas()->update($inputbiaya);
 
 			return Redirect::route('lastmiles.show', $id);
 		}
@@ -127,7 +153,10 @@ class LastmilesController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->lastmile->find($id)->delete();
+		
+		$lastmile = $this->lastmile->find($id);
+		$lastmile->biayas()->delete();
+		$lastmile->delete();
 
 		return Redirect::route('lastmiles.index');
 	}

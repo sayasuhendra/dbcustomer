@@ -14,6 +14,6 @@ class Backhaulswitch extends Eloquent {
 
 	public function backhauls()
 	{
-		return $this->hasMany('Backhaul');
+		return $this->hasMany('Backhaul', 'switchterkoneksi', 'nama'); // 
 	}
 }

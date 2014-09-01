@@ -1,16 +1,27 @@
 <?php
 
+use Laracasts\Presenter\PresentableTrait;
+
 class Biayalastmilevendor extends Eloquent {
+
+	use PresentableTrait;
+
+	protected $presenter = 'Acme\Presenters\BiayalastmilevendorPresenter';
+
 	protected $guarded = array();
 
 	public static $rules = array(
 		'nrc' => 'required',
-		'mrc' => 'required',
-		'circuitidlastmile' => 'required'
+		'mrc' => 'required'
 	);
 
 	public function lastmiles()
 	{
-		return $this->belongsTo('Lastmile', 'circuitidlastmile');
+		return $this->belongsTo('Lastmile', 'circuitidlastmile', 'circuitidlastmile');
+	}
+
+	public function circuits()
+	{
+		return $this->belongsTo('Lastmile', 'circuitidlastmile', 'circuitidlastmile');
 	}
 }

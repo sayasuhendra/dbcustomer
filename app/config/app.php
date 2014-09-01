@@ -122,7 +122,7 @@ return array(
         'Way\Generators\GeneratorsServiceProvider',
         'Laracasts\Validation\ValidationServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
-        'Clockwork\Support\Laravel\ClockworkServiceProvider',
+        'Clockwork\Support\Laravel\ClockworkServiceProvider'
 	),
 
 	/*

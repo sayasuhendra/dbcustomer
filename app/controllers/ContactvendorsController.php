@@ -50,7 +50,7 @@ class ContactvendorsController extends BaseController {
 		{
 			$this->contactvendor->create($input);
 
-			return Redirect::route('contactvendors.index');
+			return Redirect::route('vendors.show', Input::only('vendor_id'));
 		}
 
 		return Redirect::route('contactvendors.create')
@@ -106,7 +106,7 @@ class ContactvendorsController extends BaseController {
 			$contactvendor = $this->contactvendor->find($id);
 			$contactvendor->update($input);
 
-			return Redirect::route('contactvendors.show', $id);
+			return Redirect::route('vendors.show', $contactvendor->vendor_id);
 		}
 
 		return Redirect::route('contactvendors.edit', $id)
@@ -123,9 +123,13 @@ class ContactvendorsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->contactvendor->find($id)->delete();
+		$contact = $this->contactvendor->find($id);
 
-		return Redirect::route('contactvendors.index');
+		$id = $contact->vendor_id;
+
+		$contact->delete();
+
+		return Redirect::route('vendors.show', $id);
 	}
 
 }

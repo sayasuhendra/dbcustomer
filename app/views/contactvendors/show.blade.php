@@ -2,7 +2,7 @@
 
 @section('main')
 
-<h1>Show Contactvendor</h1>
+<h1>Detail Contactvendor</h1>
 
 <p>{{ link_to_route('contactvendors.index', 'Return to all contactvendors') }}</p>
 

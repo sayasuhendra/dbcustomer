@@ -2,7 +2,7 @@
 
 @section('main')
 
-<h1>Show ADSL</h1>
+<h1>Detail ADSL</h1>
 
 <p>{{ link_to_route('adsls.index', 'Return to all adsls') }}</p>
 
