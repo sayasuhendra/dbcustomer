@@ -4,7 +4,11 @@
 
 <h2 align="center">Daftar Data Backhauls</h2>
 
+@if(Auth::user()->hasRole('admin'))
+
 <p>{{ link_to_route('backhauls.create', 'Add Backhaul', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
+
+@endif
 
 @if ($backhauls->count())
 	<table id="tabelbackhaul" class="table table-striped table-bordered">
@@ -39,10 +43,16 @@
                     
                     <td width="60px" class="ac">
                     <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+
+                    @if(Auth::user()->hasRole('admin'))
+
 	                    <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
 	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('backhauls.destroy', $backhaul->id), 'style'=>'display:inline-block')) }}
 	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
 	                    {{ Form::close() }}
+
+	                @endif
+	                
 		            </td>
 				</tr>
 			@endforeach

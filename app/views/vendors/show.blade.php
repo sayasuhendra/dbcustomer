@@ -24,11 +24,17 @@
 	            <div class="panel panel-primary">
 	              <div class="panel-heading">
 	                <h3 class="panel-title pull-left">Data Vendor {{{ $vendor->nama }}}</h3>
+
+                    @if(Auth::user()->hasRole('admin'))
+
 	                <div class="btn-group pull-right">
 	                    <a href="{{ URL::route('vendors.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>	
 	                    <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i>
 	                    </a> 
 	                </div>
+
+	                @endif
+
 	                <div class="clearfix"></div>
 	              </div>
 	              <div class="panel-body">
@@ -105,9 +111,15 @@
             <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title pull-left">Daftar Contact Vendor </h3>
+
+                @if(Auth::user()->hasRole('admin'))
+
                 <div class="btn-group pull-right">
-                	<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#TambahCustomerContact"><i class="glyphicon glyphicon-plus"></i></button>	                    
+                	<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#TambahCustomerContact"><i class="glyphicon glyphicon-plus"></i></button>
                 </div>
+
+                @endif
+
                 <div class="clearfix"></div>
               </div>
               <div class="panel-body">
@@ -117,10 +129,16 @@
 							<dd>
 							
 								<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
+
+				                @if(Auth::user()->hasRole('admin'))
+
 			                    <a href="{{ URL::route('contactvendors.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
 			                    {{ Form::open(array('method' => 'DELETE', 'route' => array('contactvendors.destroy', $contact->id), 'style'=>'display:inline-block')) }}
 		                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
 				                    {{ Form::close() }}
+
+				                @endif
+
 							</dd>
 						@endforeach
                     </dl>
@@ -135,9 +153,15 @@
 	    <div class="panel panel-success">
 	      <div class="panel-heading">
 	      <h3 class="panel-title pull-left">Data Backhaul</h3>
+
+          @if(Auth::user()->hasRole('admin'))
+
 	      <div class="btn-group pull-right">
 	          <a href="{{ URL::route('backhauls.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
 	      </div>
+
+	      @endif
+
 	      <div class="clearfix"></div>
 	      </div>
 
@@ -176,10 +200,16 @@
 	                        
 	                        <td width="60px" class="ac">
 	                        <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+
+	                        @if(Auth::user()->hasRole('admin'))
+
 	    	                    <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
 	    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('backhauls.destroy', $backhaul->id), 'style'=>'display:inline-block')) }}
 	    	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
 	    	                    {{ Form::close() }}
+
+	    	                @endif
+
 	    		            </td>
 	    				</tr>
 	    			@endforeach
@@ -198,9 +228,15 @@
 	    <div class="panel panel-info">
 		   <div class="panel-heading">
 			   <h3 class="panel-title pull-left">Data Layanan Lain</h3>
+
+			   @if(Auth::user()->hasRole('admin'))
+
 			   <div class="btn-group pull-right">
 			       <a href="{{ URL::route('layanans.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
 			   </div>
+
+			   @endif
+
 			   <div class="clearfix"></div>
 		   </div>
 	    @if ($vendor->layanans->count())
@@ -246,10 +282,16 @@
 	                        
 	                        <td width="60px" class="ac">
 	                        <a href="{{ URL::route('layanans.show', array($layanan->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
-	    	                    <a href="{{ URL::route('layanans.edit', array($layanan->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
+
+	                        @if(Auth::user()->hasRole('admin'))
+
+	    	                <a href="{{ URL::route('layanans.edit', array($layanan->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
 	    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('layanans.destroy', $layanan->id), 'style'=>'display:inline-block')) }}
 	    	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
 	    	                    {{ Form::close() }}
+
+	    	                @endif
+
 	    		            </td>
 	    				</tr>
 	    			@endforeach
@@ -265,9 +307,15 @@
 	    <div class="panel panel-warning">
 		   <div class="panel-heading">
 			   <h3 class="panel-title pull-left">Data Circuit Vendor Lastmile</h3>
+
+			   @if(Auth::user()->hasRole('admin'))
+
 			   <div class="btn-group pull-right">
 			       <a href="{{ URL::route('lastmiles.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
 			   </div>
+
+			   @endif
+
 			   <div class="clearfix"></div>
 		   </div>
 
@@ -319,10 +367,16 @@
 	                       
 	                        <td class="ac">
 	                        <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+
+	                        @if(Auth::user()->hasRole('admin'))
+
 	    	                    <a href="{{ URL::route('lastmiles.edit', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
 	    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('lastmiles.destroy', $lastmile->id), 'style'=>'display:inline-block')) }}
 	    	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
 	    	                    {{ Form::close() }}
+	    	                    
+	    	                @endif
+
 	    		            </td>
 	    				</tr>
 	    			@endforeach

@@ -43,8 +43,14 @@
 	            <div class="panel panel-primary">
 	              <div class="panel-heading">
 		                <h3 class="panel-title">Data Customer Circuit 
+
+                    @if(Auth::user()->hasRole('admin'))
+
                         <a href="{{ URL::route('costumercircuits.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>	
                         <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a> 
+
+                    @endif
+
                     </h3>
 	              </div>
 
@@ -128,7 +134,13 @@
 	            <div class="panel panel-primary">
                   <div class="panel-heading">
                     <h3 class="panel-title">Daftar Perangkat di Site
+
+                    @if(Auth::user()->hasRole('admin'))
+
   	                	<button class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahPerangkatCircuit"></button>
+
+                    @endif
+
                     </h3>
                   </div>
                   <div class="panel-body">
@@ -136,12 +148,18 @@
     						@foreach ($costumercircuit->perangkats as $perangkat)
     							<dt>{{{ $perangkat->namaperangkat }}} Milik {{{ $perangkat->pemilik }}} </dt>
     							<dd>Type: {{{ $perangkat->tipe }}}, Serial: {{{ $perangkat->serialnumber }}}, Jenis: {{{ $perangkat->jenis }}}
+
+                  @if(Auth::user()->hasRole('admin'))
+
                   <a href="{{ URL::route('costumercircuitperangkats.edit', array($perangkat->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
     							
     							{{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuitperangkats.destroy', $perangkat->id), 'style'=>'display:inline-block')) }}
 	                        	<button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
-			                    {{ Form::close() }}
-			                    </dd>
+			            {{ Form::close() }}
+
+                  @endif
+
+                  </dd>
 
     						@endforeach
                         </dl>
@@ -156,39 +174,45 @@
 	            <div class="panel panel-info">
 	              <div class="panel-heading">
 	                <h3 class="panel-title">Data Lastmile Circuit Vendor
+
+                  @if(Auth::user()->hasRole('admin'))
+
                     <a href="{{ URL::route('lastmiles.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                     <a href="{{ URL::route('lastmiles.edit', array($lastmile->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+
+                  @endif
+
                     <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
+                  
                   </h3>
 	              </div>
 	              <div class="panel-body">
-					    <dl class="dl-horizontal">
-						    <dt>Circuit ID Vendor</dt>
-						    <dd>{{{ $lastmile->circuitidlastmile }}}</dd>
-							<dt>Start Date</dt>
-							<dd>{{{ $lastmile->present()->startdateshow }}}</dd>
-							<dt>VLAN ID</dt>
-							<dd>{{{ $lastmile->vlanid }}}</dd>
-							<dt>VLAN ID Name</dt>
-							<dd>{{{ $lastmile->vlanname }}}</dd>
-							<dt>IP Address PTP</dt>
-							<dd>{{{ $lastmile->ipaddressptp }}}</dd>
-							<dt>IP Public Cust</dt>
-							<dd>{{{ $lastmile->blockippubliccustomer }}}</dd>
-							<dt>Layanan</dt>
-							<dd>{{{ $lastmile->layanan }}}</dd>
-							<dt>Bandwidth</dt>
-							<dd>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</dd>
-							<dt>Status</dt>
-							<dd>{{{ $lastmile->status }}}</dd>
-							<dt>Kawasan</dt>
-							<dd>{{{ $lastmile->kawasan }}}</dd>	
-							<dt>NRC</dt>
-							<dd>{{{ $lastmile->present()->nrc }}}</dd>
-							<dt>MRC</dt>
-							<dd>{{{ $lastmile->present()->mrc }}}</dd>	
-												
-	                    </dl>
+    					    <dl class="dl-horizontal">
+    						    <dt>Circuit ID Vendor</dt>
+    						    <dd>{{{ $lastmile->circuitidlastmile }}}</dd>
+      							<dt>Start Date</dt>
+      							<dd>{{{ $lastmile->present()->startdateshow }}}</dd>
+      							<dt>VLAN ID</dt>
+      							<dd>{{{ $lastmile->vlanid }}}</dd>
+      							<dt>VLAN ID Name</dt>
+      							<dd>{{{ $lastmile->vlanname }}}</dd>
+      							<dt>IP Address PTP</dt>
+      							<dd>{{{ $lastmile->ipaddressptp }}}</dd>
+      							<dt>IP Public Cust</dt>
+      							<dd>{{{ $lastmile->blockippubliccustomer }}}</dd>
+      							<dt>Layanan</dt>
+      							<dd>{{{ $lastmile->layanan }}}</dd>
+      							<dt>Bandwidth</dt>
+      							<dd>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</dd>
+      							<dt>Status</dt>
+      							<dd>{{{ $lastmile->status }}}</dd>
+      							<dt>Kawasan</dt>
+      							<dd>{{{ $lastmile->kawasan }}}</dd>	
+      							<dt>NRC</dt>
+      							<dd>{{{ $lastmile->present()->nrc }}}</dd>
+      							<dt>MRC</dt>
+      							<dd>{{{ $lastmile->present()->mrc }}}</dd>
+                  </dl>
 	              </div>
 	            </div>
 
@@ -253,10 +277,16 @@
                               <div class="panel panel-primary">
                                 <div class="panel-heading">
                                   <h3 class="panel-title">Data ADSL
+
+                                  @if(Auth::user()->hasRole('admin'))
+
                                   {{ Form::open(array('data-remote', 'method' => 'DELETE', 'route' => array('adsls.destroy', $costumercircuit->adsls->id)))}}
                                     <button class="pull-right btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
                                   {{ Form::close() }}
-                                    <button class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit" data-toggle="modal" data-target="#EditADSL"></button>                                    
+                                    <button class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit" data-toggle="modal" data-target="#EditADSL"></button>
+
+                                  @endif
+
                                   </h3>
                                 </div>
                                 <div class="panel-body">
@@ -330,7 +360,13 @@
 	            <div class="panel panel-primary">
 	              <div class="panel-heading">
 	                <h3 class="panel-title">Daftar Contact Circuit Customer
+
+                  @if(Auth::user()->hasRole('admin'))
+
                     <button class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahContactCircuit"></button>
+
+                  @endif
+
                   </h3>
 	              </div>
 	              <div class="panel-body">
@@ -339,11 +375,16 @@
 								<dt>{{{ $contact->bagian }}}</dt>
 								<dd>
 									<a id="contactButton{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a>
-									<a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
 
+                  @if(Auth::user()->hasRole('admin'))
+
+  									<a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
 	    							{{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
 		                        	<button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
-				                    {{ Form::close() }}
+				            {{ Form::close() }}
+
+                  @endif
+
 								</dd>
 							@endforeach
 	                    </dl>
@@ -386,8 +427,14 @@
                 <div class="panel panel-success">
                   <div class="panel-heading">
                     <h3 class="panel-title">Data Customer
+
+                    @if(Auth::user()->hasRole('admin'))
+
                       <a href="{{ URL::route('customers.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                       <a href="{{ URL::route('customers.edit', array($customer->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+
+                    @endif
+
                       <a href="{{ URL::route('customers.show', array($customer->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
                     </h3>
                   </div>
@@ -430,8 +477,14 @@
                 <div class="panel panel-info">
                   <div class="panel-heading">
                     <h3 class="panel-title">Data Vendor
+
+                    @if(Auth::user()->hasRole('admin'))
+
                       <a href="{{ URL::route('vendors.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                       <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+
+                    @endif
+
                       <a href="{{ URL::route('vendors.show', array($vendor->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
                     </h3>
                   </div>
@@ -456,8 +509,14 @@
                 <div class="panel panel-info">
                 <div class="panel-heading">
                   <h3 class="panel-title">Data Backhaul Circuit Vendor
+
+                  @if(Auth::user()->hasRole('admin'))
+
                     <a href="{{ URL::route('backhauls.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                     <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+
+                  @endif
+                  
                     <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
                   </h3>
                 </div>

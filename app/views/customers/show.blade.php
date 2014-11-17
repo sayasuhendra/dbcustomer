@@ -27,12 +27,17 @@
 	            <div class="panel panel-primary">
 	              <div class="panel-heading">
 	                <h3 class="panel-title pull-left">Data Customer {{{ $customer->nama }}}</h3>
-                    <div class="btn-group pull-right">
 
+                  @if(Auth::user()->hasRole('admin'))
+
+                    <div class="btn-group pull-right">
                         <a href="{{ URL::route('customers.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>    
                         <a href="{{ URL::route('customers.edit', array($customer->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i>
                         </a> 
                     </div>
+
+                  @endif
+
                     <div class="clearfix"></div>
 	              </div>
 	              <div class="panel-body">
@@ -125,9 +130,15 @@
 	            <div class="panel panel-primary">
 	              <div class="panel-heading">
 	                <h3 class="panel-title pull-left">Daftar Contact Customer</h3>
+
+                  @if(Auth::user()->hasRole('admin'))
+
                     <div class="btn-group pull-right">
                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#TambahCustomerContact"><i class="glyphicon glyphicon-plus"></i></button>
                     </div>
+
+                  @endif
+
                     <div class="clearfix"></div>
 	              </div>
 	              <div class="panel-body">
@@ -135,14 +146,18 @@
 							@foreach ($contacts as $contact)
 								<dt>Bagian {{{ $contact->bagian }}}</dt>
 								<dd>
-                                    <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
-                                    <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
-                                {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
-                                    {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
-                                    {{ Form::close() }}
+                    <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
 
+                    @if(Auth::user()->hasRole('admin'))
 
-                                </dd>
+                      <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+                      {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+                        {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+                      {{ Form::close() }}
+
+                    @endif
+
+                </dd>
 							@endforeach
 	                    </dl>
 	              </div>
@@ -155,9 +170,15 @@
     <div class="panel panel-success">
      <div class="panel-heading">
        <h3 class="panel-title pull-left">Data Layanan SBP</h3>
+
+       @if(Auth::user()->hasRole('admin'))
+
        <div class="btn-group pull-right">
            <a href="{{ URL::route('layanansbps.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
        </div>
+
+       @endif
+
        <div class="clearfix"></div>
      </div>
             
@@ -211,10 +232,16 @@
                                 <td>{{{ $layanansbp->present()->startDate }}}</td>
                                 <td width="60px" class="ac">
                                 <a href="{{ URL::route('layanansbps.show', array($layanansbp->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+
+                                @if(Auth::user()->hasRole('admin'))
+
                                   <a href="{{ URL::route('layanansbps.edit', array($layanansbp->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
                                   {{ Form::open(array('method' => 'DELETE', 'route' => array('layanansbps.destroy', $layanansbp->id), 'style'=>'display:inline-block')) }}
                                         {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?', 'data-confirm' => 'Yakin mau dihapus?')) }}
                                   {{ Form::close() }}
+
+                                @endif
+
                             </td>
 
                     </tr>
@@ -229,9 +256,15 @@
         <div class="panel panel-info">
          <div class="panel-heading">
            <h3 class="panel-title pull-left">Data Customer Circuits</h3>
+
+           @if(Auth::user()->hasRole('admin'))
+
            <div class="btn-group pull-right">
                <a href="{{ URL::route('costumercircuits.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
            </div>
+
+           @endif
+
            <div class="clearfix"></div>
          </div>
         </div>
@@ -288,10 +321,16 @@
                                 <td>{{{ $costumercircuit->present()->startDate }}}</td>
                                 <td width="60px" class="ac">
                                 <a href="{{ URL::route('costumercircuits.show', array($costumercircuit->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+
+                                @if(Auth::user()->hasRole('admin'))
+
                                     <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
                                     {{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuits.destroy', $costumercircuit->id), 'style'=>'display:inline-block')) }}
                                             {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
                                     {{ Form::close() }}
+                                    
+                                @endif
+
                                 </td>
                             </tr>
                         @endforeach                            

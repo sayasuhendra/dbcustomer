@@ -13,7 +13,11 @@ td { font-size: 12px; }
 
 <h2 align="center">Daftar Data Circuits Vendor</h2>
 
+@if(Auth::user()->hasRole('admin'))
+
 <p>{{ link_to_route('lastmiles.create', 'Add Circuit', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
+
+@endif
 
 @if ($lastmiles->count())
 
@@ -68,10 +72,16 @@ td { font-size: 12px; }
                    
                     <td class="ac">
                     <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+
+                    @if(Auth::user()->hasRole('admin'))
+
 	                    <a href="{{ URL::route('lastmiles.edit', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
 	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('lastmiles.destroy', $lastmile->id), 'style'=>'display:inline-block')) }}
 	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
 	                    {{ Form::close() }}
+
+	                @endif
+	                
 		            </td>
 				</tr>
 			@endforeach

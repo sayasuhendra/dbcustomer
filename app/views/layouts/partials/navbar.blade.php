@@ -19,37 +19,46 @@
                 <li><a href="/register">Mendaftar</a></li>
                     <li><a href="/login">Login</a></li>
                 @else
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master Data <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                  <li><a href="/vendors">Vendors</a></li>
-                  <li><a href="/customers">Customers</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data Circuit<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                  <li><a href="/lastmiles">Vendor Circuits</a></li>
-                  <li><a href="/costumercircuits">Costumer Circuits</a></li>  
-                  <li><a href="/backhauls">Circuits Backhaul</a></li>                  
-                  </ul>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layanan Lain<b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                  <li><a href="/layanans">Layanan Vendor</a></li>
-                  <li><a href="/layanansbps">Layanan SBP</a></li>
-                  </ul>
-                </li>
-                <li><a href="/backhaulswitches">Perangkat SBP</a></li>
-                  @if(Auth::user()->hasRole('admin'))
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage User<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    <li><a href="/register">Create User</a></li>
-                  </ul>
-                  </li>
+
+                  @if(Auth::user()->hasRole('user'))
+
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master Data <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                      <li><a href="/vendors">Vendors</a></li>
+                      <li><a href="/customers">Customers</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data Circuit<b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                      <li><a href="/lastmiles">Vendor Circuits</a></li>
+                      <li><a href="/costumercircuits">Costumer Circuits</a></li>  
+                      <li><a href="/backhauls">Circuits Backhaul</a></li>                  
+                      </ul>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layanan Lain<b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                      <li><a href="/layanans">Layanan Vendor</a></li>
+                      <li><a href="/layanansbps">Layanan SBP</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/backhaulswitches">Perangkat SBP</a></li>
+
                   @endif
+
+                  @if(Auth::user()->hasRole('master'))
+
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage User<b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                      <li><a href="/register">Create User</a></li>
+                    </ul>
+                    </li>
+
+                  @endif
+
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                       <li class="dropdown">
@@ -62,6 +71,7 @@
                         </ul>
                       </li>
                   </ul>
+                  
                 @endif
             
         </div><!--/.nav-collapse -->

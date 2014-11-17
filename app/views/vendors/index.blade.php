@@ -4,7 +4,9 @@
 
 <h2 align="center">Daftar Data Vendors</h2>
 
-<p>{{ link_to_route('vendors.create', 'Add Vendor', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
+@if(Auth::user()->hasRole('admin'))
+    <p>{{ link_to_route('vendors.create', 'Add Vendor', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
+@endif
 
 @if ($vendors->count())
 	<table id="vendortable" class="table table-striped table-bordered">
@@ -27,13 +29,21 @@
                     <td>{{{ $vendor->npwp }}}</td>
                     <td>{{{ $vendor->alamatnpwp }}}</td>
                     <td>{{{ $vendor->keterangan }}}</td>
+
+
                     <td class="ac">
                     <a href="{{ URL::route('vendors.show', array($vendor->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
-	                    <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
-	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('vendors.destroy', $vendor->id), 'style'=>'display:inline-block')) }}
-	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'data-confirm' => 'Yakin mau dihapus?')) }}
-	                    {{ Form::close() }}
-		            </td>
+
+                        @if(Auth::user()->hasRole('admin'))
+
+    	                    <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
+    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('vendors.destroy', $vendor->id), 'style'=>'display:inline-block')) }}
+    	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'data-confirm' => 'Yakin mau dihapus?')) }}
+    	                    {{ Form::close() }}
+
+                        @endif
+
+                    </td>
 				</tr>
 			@endforeach
 		</tbody>

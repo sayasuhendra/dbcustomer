@@ -20,7 +20,7 @@ Route::get('latihan/image', function()
 
 
 # Filter
-Route::when('*', ['csrf'], ['post', 'put', 'patch']);
+Route::when('*', ['csrf', 'role:admin'], ['put', 'patch', 'delete']);
 
 # Home
 Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);

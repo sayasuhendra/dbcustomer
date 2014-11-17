@@ -21,7 +21,13 @@
 @section('main')
 
 <h3 align="center">Daftar Data Circuits Customer</h3>
+
+@if(Auth::user()->hasRole('admin'))
+
 <p>{{ link_to_route('costumercircuits.create', 'Add Circuit', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
+
+@endif
+
 @if ($costumercircuits->count())
 	<table id="costumercircuits" class="table table-striped table-bordered">
 		<thead>
@@ -71,12 +77,18 @@
                     <a href="{{ URL::route('costumercircuits.show', array($costumercircuit->id)) }}">
 				            <button class="btn btn-xs btn-default btn-fab btn-raised glyphicon glyphicon-list" title="Detail Circuit Ini" ></button>
                     	</a>
+
+                    @if(Auth::user()->hasRole('admin'))
+
 	                    <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}">
 				            <button class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="Edit Circuit Ini"></button>
 	                    </a>
 	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuits.destroy', $costumercircuit->id), 'style'=>'display:inline-block')) }}
 	                    		<button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" title="Delete Circuit Ini" data-confirm="Yakin mau dihapus?"></button>
 	                    {{ Form::close() }}
+
+	                @endif
+	                
 		            </td>
 				</tr>
 			@endforeach

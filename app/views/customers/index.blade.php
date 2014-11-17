@@ -4,7 +4,11 @@
 
 <h2 align="center">Daftar Data Customers</h2>
 
-<p>{{ link_to_route('customers.create', 'Add Customer', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
+@if(Auth::user()->hasRole('admin'))
+
+	<p>{{ link_to_route('customers.create', 'Add Customer', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
+
+@endif
 
 @if ($customers->count())
 	<table id="customertable" class="table table-striped table-bordered">
@@ -49,12 +53,18 @@
 					<td>{{{ $customer->present()->registerdate }}}</td>
 					<td>{{{ $customer->keterangan }}}</td>
 					
-                    <td class="ac">
+                    <td class="ac" width="100px">
                     <a href="{{ URL::route('customers.show', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
+
+                    @if(Auth::user()->hasRole('admin'))
+
 	                    <a href="{{ URL::route('customers.edit', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
 	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('customers.destroy', $customer->id), 'style'=>'display:inline-block')) }}
 	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'data-confirm' => 'Yakin mau dihapus?')) }}
 	                    {{ Form::close() }}
+
+	                @endif
+
 		            </td>
 				</tr>
 	
