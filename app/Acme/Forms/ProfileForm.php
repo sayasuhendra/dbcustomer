@@ -5,10 +5,14 @@ use Laracasts\Validation\FormValidator;
 class ProfileForm extends FormValidator {
 
 	protected $rules = [
-		'location'         => 'required',
-		'bio'              => 'required',
-		'twitter_username' => 'required',
-		'github_username'  => 'required'
+		'extention' => 'required',
+		'hp' => 'required',
+		'hp2' => 'required',
+		'wa' => 'required',
+		'bbm' => 'required',
+		'email_kantor' => 'required',
+		'email_lain' => 'required',
+		'ym' => 'required'
 	];
 
 } 

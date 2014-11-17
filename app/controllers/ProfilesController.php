@@ -20,6 +20,19 @@ class ProfilesController extends BaseController {
 	}
 
 	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		$users = User::with('profile')->get();
+		
+		return View::make('profiles.index', ['users' => $users]);
+	}
+
+
+	/**
 	 * /username
 	 *
 	 * @param $username
@@ -62,12 +75,21 @@ class ProfilesController extends BaseController {
 	public function store($username)
 	{
 		$user = $this->getUserByUsername($username);
-		$input = Input::only('location', 'bio', 'twitter_username', 'github_username');
+		$input = Input::except('_token', 'foto');
+		if(Input::has('foto'))
+		{
 
+			$foto = Input::file('foto');
+			$namafoto = $username . '.' . $foto->getClientOriginalExtension();
+			$input = array_merge($input, ['foto' => $namafoto]);
+			$foto->move(public_path() .'/foto/', $namafoto);	
+
+		}
+		
 		$this->profileForm->validate($input);
 		$user->profile()->create($input);
 
-		return Redirect::route('profile.show', $user->username);
+		return Redirect::route('user.profile.show', $user->username);
 	}
 
 	/**
@@ -80,13 +102,11 @@ class ProfilesController extends BaseController {
 	public function update($username)
 	{
 		$user = $this->getUserByUsername($username);
-		$input = Input::only('location', 'bio', 'twitter_username', 'github_username');
+		$input = Input::only('panggilan', 'alamat', 'extention', 'hp', 'hp2', 'wa', 'bbm', 'email_kantor', 'email_lain', 'ym', 'twitter', 'facebook', 'skype', 'foto', 'keterangan');
 
-		$this->profileForm->validate($input);
+		$user->profile()->update($input);
 
-		$user->profile->fill($input)->save();
-
-		return Redirect::route('profile.edit', $user->username);
+		return Redirect::route('user.profile.show', $user->username);
 	}
 
 	/**

@@ -12,11 +12,13 @@
 			<tr>
 				<th>Cust ID</th>
 				<th>Nama Customer</th>
-				<th>Register Date</th>
 				<th>Alamat</th>
 				<th>Level</th>
+				<th>Area</th>
+				<th>Status</th>
 				<th>NPWP</th>
 				<th>Alamat NPWP</th>
+				<th>Register Date</th>
 				<th>Keterangan</th>
 
 				<th width="100px">Action</th>
@@ -29,11 +31,22 @@
 					<td>{{{ $customer->customerid }}}</td>
 					
 					<td>{{{ $customer->nama }}}</td>
-					<td>{{{ $customer->present()->registerdate }}}</td>
+					
 					<td>{{{ $customer->alamat }}}</td>
 					<td>{{{ $customer->level }}}</td>
+					<td>{{{ $customer->area }}}</td>
+					<td>
+						@if ( $customer->status == 'Aktif' )
+							<span class="label label-success">{{{ $customer->status }}}</span>
+						@elseif ( $customer->status == 'Terminate' )
+							<span class="label label-danger">{{{ $customer->status }}}</span>
+						@elseif ( $customer->status == 'Suspend' )
+							<span class="label label-warning">{{{ $customer->status }}}</span>
+						@endif
+					</td>
 					<td>{{{ $customer->npwp }}}</td>
 					<td>{{{ $customer->alamatnpwp }}}</td>
+					<td>{{{ $customer->present()->registerdate }}}</td>
 					<td>{{{ $customer->keterangan }}}</td>
 					
                     <td class="ac">

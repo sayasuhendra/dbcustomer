@@ -27,4 +27,9 @@ class Vendor extends Eloquent {
 	{
 		return $this->hasMany('Costumercircuit', 'namavendor', 'nama');
 	}
+
+	public function layanans()
+	{
+		return $this->hasMany('Layanan', 'namavendor', 'nama');
+	}
 }

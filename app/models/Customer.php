@@ -27,4 +27,9 @@ class Customer extends Eloquent {
 	{
 		return $this->hasMany('Costumercircuit', 'customer_id', 'id');
 	}
+
+	public function layanansbps()
+	{
+		return $this->hasMany('Layanansbp', 'customer_id', 'id');
+	}
 }

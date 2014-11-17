@@ -26,12 +26,24 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3"> {{ Form::label('register_at', 'register_at:') }} </div>
-                        <div class="col-sm-9"> {{ Form::text('register_at', null, ['class' => 'form-control', 'data-datepicker' => 'datepicker']) }} </div>
+                        <div class="col-sm-9"> {{ Form::text('register_at', null, ['class' => 'form-control', 'id' => 'pilih']) }}</div>
+
                     </div>
                     <div class="form-group">
                         {{ Form::label('alamat', 'Alamat:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
                         {{ Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => '3']) }}
+                    </div></div>
+
+                    <div class="form-group">
+                        {{ Form::label('area', 'Area:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('area', ['Batam' => 'Batam', 'TPI' => 'TPI', 'TBK' => 'TBK', 'Global' => 'Global', 'Bali' => 'Bali', 'Jakarta' => 'Jakarta'], null, ['class' => 'form-control']) }}
+                    </div></div>
+                    <div class="form-group">
+                        {{ Form::label('status', 'Status:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('status', ['Aktif' => 'Aktif', 'Terminate' => 'Terminate', 'Suspend' => 'Suspend'], null, ['class' => 'form-control']) }}
                     </div></div>
 
                     <div class="form-group">
@@ -72,3 +84,4 @@
 @endif
 
 @stop
+

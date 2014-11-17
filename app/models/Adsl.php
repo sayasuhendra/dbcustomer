@@ -15,5 +15,6 @@ class Adsl extends Eloquent {
 	public function lastmiles()
 	{
 		return $this->belongsTo('Lastmile', 'lastmile_id', 'id');
+		
 	}
 }

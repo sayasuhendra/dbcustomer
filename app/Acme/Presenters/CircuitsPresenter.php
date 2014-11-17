@@ -6,21 +6,25 @@ class CircuitsPresenter extends Presenter {
 
     public function mrcCircuit()
     {
-        if ( $this->biayas->mrc !== '' ) {
-        $jadi = number_format($this->biayas->mrc ,2,',','.') . " " . $this->biayas->currency ;
-        return $jadi;
-        } else {
+        
+        if ( ! isset($this->biayas->mrc) || $this->biayas->mrc == '') {
             return 'kosong';
+        } else {
+            
+            $jadi = number_format($this->biayas->mrc ,2,',','.') . " " . $this->biayas->currency ;
+            return $jadi;
         }
     }
 
     public function nrcCircuit()
     {
-        if ( $this->biayas->nrc !== '' ) {
-        $jadi = number_format($this->biayas->nrc ,2,',','.') . " " . $this->biayas->currency ;
-        return $jadi;
-        } else {
+        
+        if ( ! isset($this->biayas->nrc) || $this->biayas->nrc == '') {
             return 'kosong';
+        } else {
+            
+            $jadi = number_format($this->biayas->nrc ,2,',','.') . " " . $this->biayas->currency ;
+            return $jadi;
         }
     }
 
@@ -32,30 +36,55 @@ class CircuitsPresenter extends Presenter {
         // return $jadi;
 
 
-        if ( $this->biayavendors->mrc !== '' ) {
-        $jadi = number_format($this->biayavendors->mrc ,2,',','.') . " " . $this->biayavendors->currency ;
-        return $jadi;
-        } else {
+        if ( ! isset($this->biayavendors->mrc) || $this->biayavendors->mrc == '' ) {
+
             return 'kosong';
+
+        
+        } else {
+
+            $jadi = number_format($this->biayavendors->mrc ,2,',','.') . " " . $this->biayavendors->currency ;
+            return $jadi;
+
         }
     }
 
     public function untung()
     {
-        if ( $this->mrcvendor !== '' and $this->biayas->mrc !== '') {
         $untung = $this->biayas->mrc - $this->biayavendors->mrc;
         $jadi = number_format($untung ,2,',','.') . " " . $this->biayavendors->currency ;     
         return $jadi;
-        } else {
-            return 'kosong';
-        }
     }
 
     public function startDate()
     {
-        // setlocale (LC_TIME, 'id_ID');
-        // return $this->activated_at->formatLocalized('%d %B %Y');
-        return $this->activated_at->format('d/m/y');
+        
+        if (isset($this->activated_at) || $this->activated_at === null) {
+
+            return 'Kosong';
+
+        } else {
+            
+            return $this->activated_at->format('d/m/y');
+                        
+        }
+        
+    }
+
+    public function startDateShow()
+    {
+        
+        if (isset($this->activated_at) || $this->activated_at === null) {
+
+            return 'Kosong';
+
+        } else {
+
+            setlocale (LC_TIME, 'id_ID');
+            return $this->activated_at->formatLocalized('%d %B %Y');
+                        
+        }
+        
     }
 
 }

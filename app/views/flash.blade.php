@@ -1,0 +1,1 @@
+<div class="alert alert-info flash"></div>

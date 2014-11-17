@@ -29,7 +29,7 @@
                         {{ Form::label('activated_at', 'Start Date :') }}
                         </div>
                         <div class="col-sm-9">
-                        {{ Form::input('date', 'activated_at', null, ['class' => 'form-control']) }}
+                        {{ Form::input('datetime', 'activated_at', null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">

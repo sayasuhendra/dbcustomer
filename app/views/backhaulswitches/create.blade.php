@@ -30,8 +30,9 @@
             </div>
             <div class="form-group">
                 {{ Form::label('area', 'Area:') }}
-                {{ Form::text('area', null, ['class' => 'form-control']) }}
+                {{ Form::select('area', ['Batam' => 'Batam', 'TPI' => 'TPI', 'TBK' => 'TBK', 'Global' => 'Global', 'Bali' => 'Bali', 'Jakarta' => 'Jakarta'], null, ['class' => 'form-control']) }}
             </div>
+
             <div class="form-group">
                 {{ Form::label('lokasi', 'Lokasi:') }}
                 {{ Form::text('lokasi', null, ['class' => 'form-control']) }}

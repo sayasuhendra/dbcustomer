@@ -3,18 +3,17 @@
    ✔ Merubah pilihan contact menjadi pop up berisi kontak detail. yang muncul di awal contact bagian. @done (14-07-23 08:47)
    ✔ Contact bisa ada contact lain selain bagian teknis dan billing. @done (14-07-23 08:48)
    ✔ Contact Billing dan teknis wajib diisi pada saat create customer baru. @done (14-07-23 08:48)
-   ☐ Circuit ID Lastmile diganti jadi Circuit ID Vendor
-   ☐ Circuit CUstomer: tambah field currency, Vendor, 
+   ✔ Circuit ID Lastmile diganti jadi Circuit ID Vendor @done (14-10-02 15:22)
+   ✔ Circuit CUstomer: tambah field currency, Vendor,  @done (14-10-02 15:23)
      status jadi warna aktif putih, terminate merah, suspend orange.
-     ☐ di sort dengan urutan putih, orange, merah.
+     ✔ di sort dengan urutan putih, orange, merah. @done (14-10-02 15:23)
    ✔ delete dan edit jadiin icon. jadi 1. @done (14-07-25 10:22)
-   ☐ tambahkan kawasan di contact vendor, nullable dan diisi manual.
-   ☐ Data Nama Vendor dan Circuit ID-nya kalo di click akan muncul detailnya
-   ☐ NRC MRC harus ada di per Circuit
+   ✔ tambahkan kawasan di contact vendor, nullable dan diisi manual. @done (14-10-02 15:23)
+   ✔ Data Nama Vendor dan Circuit ID-nya kalo di click akan muncul detailnya @done (14-10-02 15:23)
+   ✔ NRC MRC harus ada di per Circuit @done (14-10-02 15:23)
    ✔ NPWP di table customer @done (14-07-25 10:31)
-   ☐ tabel circuit Customer tidak boleh unique karena bisa ada lebih dari 2 circuit id dalam 1
-   ☐ tambah kolom activated_at
-   ☐ 
+   ✔ tabel circuit Customer tidak boleh unique karena bisa ada lebih dari 2 circuit id dalam 1 @done (14-10-02 15:22)
+   ✔ tambah kolom activated_at @done (14-10-02 15:23)
    ☐ Cek OTRS apakah bisa menampilkan riwayat complain customer
    ☐ Apakah OTRS bisa input data customer dalam bentuk gambar dsb. seperti topologi, dsb.
    ☐ Menyediakan stop clock untuk OTRS.
@@ -22,17 +21,17 @@
 Tambahan Rabu, 6 Agustus 2014 :
   ☐ tambilan dibuat lebih simpel dan mudah
   ☐ export pdf, excel dan csv. print dan copy ga usah
-  ☐ kalo bisa bisa di sort berdasarkan yang kita mau. sebenarnya dah bisa sih.
+  ✔ kalo bisa bisa di sort berdasarkan yang kita mau. sebenarnya dah bisa sih. @done (14-10-02 15:21)
 
 Tambahan Permintaan Firman:
-  ☐ Tabel dan form create Backhauls Ditambahkan kolom "nama" untuk indentifikasi. isinya seperti Telkom metro.
-  ☐ Kalo bisa di menu Create Lastmile, ketika orang milih vendornya telkom maka backhaul yang muncul hanya punya telkom aja.
+  ✔ Tabel dan form create Backhauls Ditambahkan kolom "nama" untuk indentifikasi. isinya seperti Telkom metro. @done (14-10-02 15:19)
+  ✔ Kalo bisa di menu Create Lastmile, ketika orang milih vendornya telkom maka backhaul yang muncul hanya punya telkom aja. @done (14-10-02 15:21)
 
-  ☐ Umumnya Vendor hanya punya 1 Backhaul, tapi terkadang ada yang punya lebih dari 2 atau lebih.
+  ✔ Umumnya Vendor hanya punya 1 Backhaul, tapi terkadang ada yang punya lebih dari 2 atau lebih. @done (14-10-02 15:21)
 
 Catatan Meeting dengan Pak Budi dan Bu Wena:
-  ☐ Senin Presentasi
-  ☐ Apapun yang dibutuhkan untuk 
+  ✔ Senin Presentasi @done (14-10-02 15:20)
+  ✔ Apapun yang dibutuhkan untuk  @done (14-10-02 15:20)
 
 Tujuan Utama Dibuatnya Aplikasi ini:
   1. Cross check terminasi seminimal mungkin jarak antara terminasi customer dan terminasi vendor. karena selisih sehari aja mahal.
@@ -61,9 +60,24 @@ Jumat, 16 Agustus, Firman:
   ✔ backhaulswitches.lokasi = backhauls.lokasixconnect @done (14-08-19 10:37)
 
 Senin, 27 Agust 2014. Firman:
-  ☐ Tambah field nama di tabel backbone.
+  ✔ Tambah field nama di tabel backbone. @done (14-10-02 14:52)
 
 Senin, 27 Agust 2014. Pak Budi:
-  ☐ Tambahkan confirm ketika click delete.    
-  ☐ NRC dan MRC ada koma (,) ketika view.
-  ☐ Create Circuit antara Vendor dan Circuit ID Backhaul harus link.
+  ✔ Tambahkan confirm ketika click delete.     @done (14-10-02 14:51)
+  ✔ NRC dan MRC ada koma (,) ketika view. @done (14-10-02 14:51)
+  ✔ Create Circuit antara Vendor dan Circuit ID Backhaul harus link. @done (14-10-02 14:51)
+  ☐ NRC MRC kok ga ikut di form edit? :D
+
+Jumat, 5 September 2014. Firman:
+  ☐ semua circuit dan customer pake status dan tanggal terminate. kalo customer statusnya aktif dan terminate aja.
+
+Senin:
+  ✔ ADSl tambahin No ADSL dan No Tumpangan @done (14-10-02 14:51)
+ ☐ IP Address PTP dan Blok IP Public Customer dipindah viewnya aja Lastmile ke Circuit Customer.
+
+Import:
+  ☐ yang colo aja.
+
+Selasa, 14 November 2014, Pak Budi:
+  ✔ setelah edit kembali ke halaman tempat editnya. @done (14-11-14 16:39)
+  ☐ ada form untuk memasukkan kurs hari ini. di menu customer.

@@ -70,21 +70,13 @@
                     <div class="form-group">
                         {{ Form::label('layanan', 'Layanan:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('layanan', ['VSAT' => 'VSAT', 'ADSL' => 'ADSL', 'Dedicated' => 'Dedicated', 'Layer 2' => 'Layer 2', 'IP Transit' => 'IP Transit', 'Hosting' => 'Hosting', 'Collocation' => 'Collocation'], null, ['class' => 'form-control']) }}
+                        {{ Form::select('layanan', ['VSAT' => 'VSAT', 'ADSL' => 'ADSL', 'Wireline Broadband' => 'Wireline Broadband', 'Wireline Dedicated' => 'Wireline Dedicated', 'Layer 2' => 'Layer 2', 'IP Transit' => 'IP Transit', 'Hosting' => 'Hosting', 'Collocation' => 'Collocation', 'Wireless Broadband' => 'Wireless Broadband', 'Wireless Dedicated' => 'Wireless Dedicated', 'VPN IP' => 'VPN IP'], null, ['class' => 'form-control']) }}
                     </div></div>
-                    <div class="form-group">
-                        <div class="col-sm-9 pull-right">
-                        {{ Form::hidden('username', null, ['class' => 'form-control', 'placeholder' => 'username', 'id' => 'username']) }}
-                    </div></div>
-                    <div class="form-group">
-                        <div class="col-sm-9 pull-right">
-                        {{ Form::hidden('password', null, ['class' => 'form-control', 'placeholder' => 'password', 'id' => 'password']) }}
-                    </div></div>
+                    
                      </div>
         </div>
     </div>
     </div>
-
                     
 <div class="col-md-6">
         <div class="panel panel-default">
@@ -116,13 +108,19 @@
                     <div class="form-group">
                         {{ Form::label('namavendor', 'Nama Vendor:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('namavendor', $vendor, null, ['class' => 'form-control select2']) }}
+                        {{ Form::select('namavendor', ['Belum Dipilih di Saat Create' => 'Pilih Vendor'] + $vendor, null, ['class' => 'form-control select2']) }}
                     </div></div>
 
                     <div class="form-group">
                         {{ Form::label('namabackhaul', 'Nama Backhaul:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('namabackhaul', $namabackhaul, null, ['class' => 'form-control select2']) }}
+                        {{ Form::select('namabackhaul', ['Belum Dipilih di Saat Create' => 'Pilih Backhaul'], null, ['class' => 'form-control select2']) }}
+                    </div></div>
+
+                    <div class="form-group">
+                        {{ Form::label('am', 'Account Manager:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('am', ['Belum Dipilih di Saat Create' => 'Pilih Account Manager'], null, ['class' => 'form-control select2']) }}
                     </div></div>
                     
                     <div class="form-group">
@@ -173,27 +171,15 @@
 @section('script-bawah')
 
 <script>
-    
 
-    $('#layanan').change(function() {
-        if ($(this).val() === 'ADSL') {
-            $("#username").removeAttr( "type" );
-            $("#password").removeAttr( "type" );
-        }
-        if ($(this).val() !== 'ADSL') {
-            $("#username").attr( "type", "hidden" );
-            $("#password").attr( "type", "hidden" );
-        }
-    });
-
-    $('#namavendor').change(function() {
-        var pilihan = $('#namabackhaul');
-        var vendor = $(this).val();
-        $("#namabackhaul option:not(option[value='"+vendor+"'])").remove();
-        var backhaul = $("#namabackhaul option:selected").text();
-        $("#namabackhaul option:selected").attr('value', backhaul);
-       
-    });
+        $('#namavendor').on('change', function(){
+            $.post('{{ URL::to('lastmiles/create/formbackhaul') }}', {namavendor: $('#namavendor').val()}, function(e){
+                $('#namabackhaul').html(e);
+            });
+            $.post('{{ URL::to('lastmiles/create/formam') }}', {namavendor: $('#namavendor').val()}, function(e){
+                $('#am').html(e);
+            });
+        });
 
 </script>
 

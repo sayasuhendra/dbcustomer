@@ -117,6 +117,10 @@ class CustomercontactsController extends BaseController {
 				{
 					return Redirect::route('costumercircuits.show', $customercontact->contactable_id);
 				}
+			elseif ( $customercontact->contactable_type == 'Layanansbp') 
+				{
+					return Redirect::route('layanansbps.show', $customercontact->contactable_id);
+				}
 		}
 
 		return Redirect::route('customercontacts.edit', $id)
@@ -152,6 +156,14 @@ class CustomercontactsController extends BaseController {
 				$contact->delete();
 
 				return Redirect::route('costumercircuits.show', $id);
+			}
+		elseif ( $contact->contactable_type == 'Layanansbp') 
+			{
+				$id = $contact->contactable_id;
+
+				$contact->delete();
+
+				return Redirect::route('layanansbps.show', $id);
 			}
 	}
 

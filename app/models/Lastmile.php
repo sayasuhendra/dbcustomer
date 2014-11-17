@@ -1,11 +1,23 @@
 <?php
 
+use Laracasts\Presenter\PresentableTrait;
+
 class Lastmile extends Eloquent {
+
 	protected $guarded = array();
+
+	use PresentableTrait;
+
+	protected $presenter = 'Acme\Presenters\LastmilesPresenter';
 
 	public static $rules = array(
 		'circuitidlastmile' => 'required'
 	);
+
+	public function getDates()
+	{
+	    return array('created_at', 'activated_at', 'updated_at');
+	}
 
 	public function circuits()
 	{
@@ -20,6 +32,11 @@ class Lastmile extends Eloquent {
 	public function vendors()
 	{
 		return $this->belongsTo('Vendor', 'namavendor', 'nama');
+	}
+
+	public function am()
+	{
+		return $this->belongsTo('Contactvendor', 'cp', 'am');
 	}
 
 	public function namavendors()

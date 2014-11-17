@@ -12,6 +12,7 @@
 		<tr>
 			<th>Nama Vendor</th>
 			<th>Nama Backhaul</th>
+			<th>CirID Backhaul</th>
 			<th>Lokasi XConnect</th>
 			<th>Switch Terkoneksi</th>
 			<th>Port Terkoneksi</th>
@@ -27,13 +28,14 @@
 		<tr>
 			<td>{{{ $backhaul->namavendor }}}</td>
 			<td>{{{ $backhaul->nama }}}</td>
+			<td>{{{ $backhaul->circuitidbackhaul }}}</td>
 			<td>{{{ $backhaul->switches->lokasi }}}</td>
 			<td>{{{ $backhaul->switchterkoneksi }}}</td>
 			<td>{{{ $backhaul->portterkoneksi }}}</td>
 			<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
-			<td>{{{ $backhaul->biayas->nrc }}} {{{ $backhaul->biayas->currency }}}</td>
-			<td>{{{ $backhaul->biayas->mrc }}} {{{ $backhaul->biayas->currency }}}</td>
-			<td>{{{ $backhaul->activated_at }}}</td>
+			<td>{{{ $backhaul->present()->nrc }}}</td>
+			<td>{{{ $backhaul->present()->mrc }}}</td>
+			<td>{{{ $backhaul->present()->startDateShow }}}</td>
             
             <td width="60px" class="ac">
             <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>

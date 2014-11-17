@@ -101,18 +101,8 @@ class AdslsController extends BaseController {
 		$input = array_except(Input::all(), '_method');
 		$validation = Validator::make($input, Adsl::$rules);
 
-		if ($validation->passes())
-		{
-			$adsl = $this->adsl->find($id);
-			$adsl->update($input);
-
-			return Redirect::route('adsls.show', $id);
-		}
-
-		return Redirect::route('adsls.edit', $id)
-			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+		$adsl = $this->adsl->find($id);
+		$adsl->update($input);
 	}
 
 	/**
@@ -123,9 +113,11 @@ class AdslsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->adsl->find($id)->delete();
+		$adsls = $this->adsl->find($id);
+		$adsls->circuits->layanan = "";
+		$adsls->circuits->save();
+		$adsls->delete();
 
-		return Redirect::route('adsls.index');
 	}
 
 }

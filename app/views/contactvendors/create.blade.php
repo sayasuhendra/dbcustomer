@@ -16,7 +16,7 @@
             <div class="panel-body">
                 <div class="form-group">
                     {{ Form::label('bagian', 'Bagian :') }}
-                    {{ Form::text('bagian', null, ['class' => 'form-control']) }}
+                    {{ Form::select('bagian', ['Account Manager' => 'Account Manager', 'Teknis' => 'Teknis', 'Billing' => 'Billing'], null, ['class' => 'form-control']) }}
                 </div>
 
                 <div class="form-group">

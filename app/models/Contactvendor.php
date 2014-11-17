@@ -11,4 +11,9 @@ class Contactvendor extends Eloquent {
 	{
 		return $this->belongsTo('Vendor');
 	}
+
+	public function lastmiles()
+	{
+		return $this->hasMany('Lastmile', 'cp', 'am');
+	}
 }

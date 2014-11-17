@@ -15,8 +15,10 @@
             type: method,
             url: form.prop('action'),
             data: form.serialize(),
-            success: function() {
+            success: function(data) {
                 $.publish('ajax.request.success', form);
+                $( ".result" ).html( data );
+
             }
         });
 

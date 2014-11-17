@@ -34,9 +34,28 @@ class LastmilesController extends BaseController {
 	public function create()
 	{
 		$vendor = Backhaul::lists('namavendor', 'namavendor');
-		$namabackhaul = Backhaul::lists('nama', 'namavendor');
+		$namabackhaul = Backhaul::lists('nama', 'nama');
+		$am = Contactvendor::where('bagian', 'Account Manager')->lists('cp', 'cp');
 
-		return View::make('lastmiles.create', ['vendor' => $vendor, 'namabackhaul' => $namabackhaul]);
+		return View::make('lastmiles.create', ['am' => $am, 'vendor' => $vendor, 'namabackhaul' => $namabackhaul]);
+	}
+
+	public function formbackhaul()
+	{
+        $return = '<option value=""></option>';
+        foreach(Backhaul::where('namavendor', Input::get('namavendor'))->get() as $namabackhaul) 
+            $return .= "<option value='$namabackhaul->nama'>$namabackhaul->nama</option>";
+        return $return;
+	}
+
+	public function formam()
+	{
+        $return = '<option value="No AM">No AM</option>';
+        $vendorid = Vendor::where('nama', Input::get('namavendor'))->first()->id;
+        foreach(Contactvendor::where('vendor_id', $vendorid)->where('jabatan', 'Account Manager')->get() as $am) 
+            $return .= "<option value='$am->cp' selected>$am->cp</option>";
+        return $return;
+
 	}
 
 	/**
@@ -46,7 +65,7 @@ class LastmilesController extends BaseController {
 	 */
 	public function store()
 	{
-		$inputlastmile = Input::only('circuitidlastmile', 'activated_at', 'vlanid', 'vlanname', 'ipaddressptp', 'blockippubliccustomer', 'layanan', 'bandwidth', 'satuan', 'kawasan', 'keterangan', 'namabackhaul', 'namavendor', 'status');
+		$inputlastmile = Input::except('nrc', 'mrc', 'currency'); // Input::only('circuitidlastmile', 'activated_at', 'vlanid', 'vlanname', 'ipaddressptp', 'blockippubliccustomer', 'layanan', 'bandwidth', 'satuan', 'kawasan', 'keterangan', 'namabackhaul', 'namavendor', 'status');
 		$inputbiaya = Input::only('nrc', 'mrc', 'currency');
 		$input = Input::all();
 
@@ -105,13 +124,14 @@ class LastmilesController extends BaseController {
 
 		$vendor = Backhaul::lists('namavendor', 'namavendor');
 		$namabackhaul = Backhaul::lists('nama', 'nama');
+		$am = Contactvendor::where('bagian', 'Account Manager')->lists('cp', 'cp');
 
 		if (is_null($lastmile))
 		{
 			return Redirect::route('lastmiles.index');
 		}
 
-		return View::make('lastmiles.edit', ['lastmile' => $lastmile, 'vendor' => $vendor, 'namabackhaul' => $namabackhaul]);
+		return View::make('lastmiles.edit', ['am' => $am, 'lastmile' => $lastmile, 'vendor' => $vendor, 'namabackhaul' => $namabackhaul]);
 	}
 
 	/**
@@ -123,7 +143,7 @@ class LastmilesController extends BaseController {
 	public function update($id)
 	{
 		$inputbiayas = Input::only('nrc', 'mrc', 'currency');
-		$inputlastmiles = Input::only('circuitidlastmile', 'activated_at', 'vlanid', 'vlanname', 'ipaddressptp', 'blockippubliccustomer', 'layanan', 'bandwidth', 'satuan', 'kawasan', 'keterangan', 'namabackhaul', 'namavendor', 'status');
+		$inputlastmiles = Input::except('nrc', 'mrc', 'currency'); // Input::only('circuitidlastmile', 'activated_at', 'vlanid', 'vlanname', 'ipaddressptp', 'blockippubliccustomer', 'layanan', 'bandwidth', 'satuan', 'kawasan', 'keterangan', 'namabackhaul', 'namavendor', 'status');
 
 		$inputlastmile = array_except($inputlastmiles, '_method');
 		$inputbiaya = array_except($inputbiayas, '_method');
@@ -135,14 +155,18 @@ class LastmilesController extends BaseController {
 			$lastmile = $this->lastmile->find($id);
 			$lastmile->update($inputlastmile);
 			$lastmile->biayas()->update($inputbiaya);
+			// return Redirect::to(Input::get('referer'));
+			echo '<script type="text/javascript">'
+			   , 'history.go(-2);'
+			   , '</script>';
+			// return 'javascript://history.go(-2)';
 
-			return Redirect::route('lastmiles.show', $id);
 		}
 
-		return Redirect::route('lastmiles.edit', $id)
-			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+		// return Redirect::route('lastmiles.edit', $id)
+		// 	->withInput()
+		// 	->withErrors($validation)
+		// 	->with('message', 'There were validation errors.');
 	}
 
 	/**

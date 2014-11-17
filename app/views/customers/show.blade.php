@@ -2,6 +2,9 @@
 
 @section('style-atas')
 
+
+
+
 <style>
     a:hover {
      cursor:pointer;
@@ -11,11 +14,6 @@
     td { font-size: 12px; }
 
 </style>
-
-@stop
-
-@section('script-atas')
-
 
 @stop
 
@@ -38,21 +36,33 @@
                     <div class="clearfix"></div>
 	              </div>
 	              <div class="panel-body">
-					    <dl class="dl-horizontal">
-						<dt>Customer ID</dt>
-						<dd>{{{ $customer->customerid }}}</dd>
-						<dt>Nama Perusahaan</dt>
-						<dd>{{{ $customer->nama }}}</dd>
-                        <dt>Register Date</dt>
-                        <dd>{{{ $customer->present()->registerdate }}}
-						<dt>Alamat Perusahaan</dt>
-						<dd>{{{ $customer->alamat }}}</dd>
-						<dt>Level Customer</dt>
-						<dd>{{{ $customer->level }}}</dd>
+        					    <dl class="dl-horizontal">
+            						<dt>Customer ID</dt>
+            						<dd>{{{ $customer->customerid }}}</dd>
+            						<dt>Nama Perusahaan</dt>
+            						<dd>{{{ $customer->nama }}}</dd>                        
+            						<dt>Alamat Perusahaan</dt>
+            						<dd>{{{ $customer->alamat }}}</dd>
+            						<dt>Level Customer</dt>
+            						<dd>{{{ $customer->level }}}</dd>
                         <dt>NPWP</dt>
                         <dd>{{{ $customer->npwp }}}</dd>
                         <dt>Alamat NPWP</dt>
                         <dd>{{{ $customer->alamatnpwp }}}</dd>
+                        <dt>Area</dt>
+                        <dd>{{{ $customer->area }}}</dd>
+                        <dt>Status</dt>
+                        <dd>
+                            @if ( $customer->status == 'Aktif' )
+                              <span class="label label-success">{{{ $customer->status }}}</span>
+                            @elseif ( $customer->status == 'Terminate' )
+                              <span class="label label-danger">{{{ $customer->status }}}</span>
+                            @elseif ( $customer->status == 'Suspend' )
+                              <span class="label label-warning">{{{ $customer->status }}}</span>
+                            @endif
+                        </dd>
+                        <dt>Register Date</dt>
+                        <dd>{{{ $customer->present()->registerdate }}}
                         <dt>Keterangan</dt>
                         <dd>{{{ $customer->keterangan }}}</dd>
 	                    </dl>
@@ -114,7 +124,7 @@
             <div class="col-md-5">
 	            <div class="panel panel-primary">
 	              <div class="panel-heading">
-	                <h3 class="panel-title pull-left">Daftar Contact Customer {{{ $customer->nama }}}</h3>
+	                <h3 class="panel-title pull-left">Daftar Contact Customer</h3>
                     <div class="btn-group pull-right">
                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#TambahCustomerContact"><i class="glyphicon glyphicon-plus"></i></button>
                     </div>
@@ -125,7 +135,7 @@
 							@foreach ($contacts as $contact)
 								<dt>Bagian {{{ $contact->bagian }}}</dt>
 								<dd>
-                                    <a id="contactButton{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a>
+                                    <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
                                     <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
                                 {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
                                     {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
@@ -138,13 +148,95 @@
 	              </div>
 	            </div>
 	        </div>
-
+</div>
             
 {{---------------- Kontak  End------------------------------------------------}}
 
-    
+    <div class="panel panel-success">
+     <div class="panel-heading">
+       <h3 class="panel-title pull-left">Data Layanan SBP</h3>
+       <div class="btn-group pull-right">
+           <a href="{{ URL::route('layanansbps.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+       </div>
+       <div class="clearfix"></div>
+     </div>
+            
+            @if ($layanansbps->count())
+              <table id="layanansbps" class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Circuit ID</th>
+                    <th>Namasite</th>
+                    <th>Alamat</th>
+                    <th>Layanan</th>
+                    <th>Perangkat</th>
+                    <th>Serial No.</th>
+                    <th>Tipe</th>
+                    <th>Jenis</th>
+                    <th>Pemilik</th>
+                    <th>NRC</th>
+                    <th>MRC</th>
+                    <th>Area</th>
+                    <th>Status</th>
+                    <th>Start Date</th>
+                    <th width="100px">Action</th>
+                  </tr>
+                </thead>
 
-	        
+                <tbody>
+                  @foreach ($layanansbps as $layanansbp)
+                    <tr>
+                      <td>{{{ $layanansbp->circuitid }}}</td>
+                      <td>{{{ $layanansbp->namasite }}}</td>
+                      <td>{{{ $layanansbp->alamat }}}</td>
+                      <td>{{{ $layanansbp->layanan }}}</td>
+                      <td>{{{ $layanansbp->namaperangkat }}}</td>
+                      <td>{{{ $layanansbp->serialnumber }}}</td>
+                      <td>{{{ $layanansbp->tipe }}}</td>
+                      <td>{{{ $layanansbp->jenis }}}</td>
+                      <td>{{{ $layanansbp->pemilik }}}</td>
+                      <td>{{{ $layanansbp->nrc }}} {{{ $layanansbp->currency }}}</td>
+                      <td>{{{ $layanansbp->mrc }}} {{{ $layanansbp->currency }}}</td>
+                      <!-- <td>{{{ $layanansbp->present()->mrcCircuit }}}</td> -->
+                      <td>{{{ $layanansbp->area }}}</td>
+                      <td>
+                        @if ( $layanansbp->status == 'Aktif' )
+                          <span class="label label-success">{{{ $layanansbp->status }}}</span>
+                        @elseif ( $layanansbp->status == 'Terminate' )
+                          <span class="label label-important">{{{ $layanansbp->status }}}</span>
+                        @elseif ( $layanansbp->status == 'Suspend' )
+                          <span class="label label-warning">{{{ $layanansbp->status }}}</span>
+                        @endif
+                      </td>
+                                <td>{{{ $layanansbp->present()->startDate }}}</td>
+                                <td width="60px" class="ac">
+                                <a href="{{ URL::route('layanansbps.show', array($layanansbp->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+                                  <a href="{{ URL::route('layanansbps.edit', array($layanansbp->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
+                                  {{ Form::open(array('method' => 'DELETE', 'route' => array('layanansbps.destroy', $layanansbp->id), 'style'=>'display:inline-block')) }}
+                                        {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?', 'data-confirm' => 'Yakin mau dihapus?')) }}
+                                  {{ Form::close() }}
+                            </td>
+
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            @else
+              Belum ada data layanansbps
+            @endif
+        </div>
+
+        <div class="panel panel-info">
+         <div class="panel-heading">
+           <h3 class="panel-title pull-left">Data Customer Circuits</h3>
+           <div class="btn-group pull-right">
+               <a href="{{ URL::route('costumercircuits.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+           </div>
+           <div class="clearfix"></div>
+         </div>
+        </div>
+
+	         @if ($costumercircuits->count())
 	        	<table id="datasbp" class="table table-striped table-bordered">
 	        		<thead>
 	        			<tr>
@@ -161,13 +253,17 @@
                             <th>Untung</th>
                             <th>Status</th>
                             <th>Start Date</th>
-                            <th width="60px">Action</th>
+                            <th width="100px">Action</th>
 	        			</tr>
 	        		</thead>
 
 
             		<tbody>
 			            @foreach ($costumercircuits as $costumercircuit)
+                  <?php
+                  $totalmrcvendor += $costumercircuit->biayavendors->mrc;
+                  $totalmrccircuit += $costumercircuit->biayas->mrc;
+                   ?>
                             <tr>
                                 <td>{{{ $costumercircuit->circuitid }}}</td>
                                 <td>{{{ $costumercircuit->namasite }}}</td>
@@ -200,11 +296,23 @@
                             </tr>
                         @endforeach                            
             		</tbody>
+                <tfoot>
+                <?php $totaluntung = $totalmrccircuit - $totalmrcvendor ?>
+                  <tr>
+                    <td colspan="5" style="text-align: right;">Total MRC Circuit</td>
+                    <td>{{{ $totalmrccircuit }}}</td>
+                    <td colspan="3" style="text-align: right;">Total MRC Vendor</td>
+                    <td>{{{ $totalmrcvendor }}}</td>
+                    <td colspan="4"><b>{{{ $totaluntung }}} Total Untung</b></td>
+                  </tr>
+                </tfoot>
                     
             		 
             	</table>
-          
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+
+            @else
+              Belum ada data costumercircuits
+            @endif
 
 @stop
 
@@ -212,6 +320,7 @@
 @section('script-bawah')
 
 <script type="text/javascript" language="javascript" class="init">
+
     $(document).ready(function() {
     	$('#datasbp').DataTable( {
         	"dom": 'T<"clear">lfrtip',

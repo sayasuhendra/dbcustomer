@@ -122,7 +122,9 @@ return array(
         'Way\Generators\GeneratorsServiceProvider',
         'Laracasts\Validation\ValidationServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
-        'Clockwork\Support\Laravel\ClockworkServiceProvider'
+        'Clockwork\Support\Laravel\ClockworkServiceProvider',
+		'Khill\Lavacharts\LavachartsServiceProvider',
+		'Intervention\Image\ImageServiceProvider'
 	),
 
 	/*
@@ -188,8 +190,9 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
-		'Clockwork' => 'Clockwork\Support\Laravel\Facade',
+		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel',
+		'Clockwork' 	  => 'Clockwork\Support\Laravel\Facade',
+		'Image' 		  => 'Intervention\Image\Facades\Image',
 
 	),
 

@@ -35,13 +35,14 @@ class SessionsController extends BaseController {
 	public function store()
 	{
 		$this->loginForm->validate($input = Input::only('email', 'password'));
+		$uji = array_merge($input, ['active' => 1]);
 
-		if (Auth::attempt($input))
+		if (Auth::attempt($uji))
 		{
 			return Redirect::intended('/');
 		}
 
-		return Redirect::back()->withInput()->withFlashMessage('Invalid credentials provided');
+		return Redirect::back()->withInput()->withFlashMessage('Data yang Anda masukan salah atau belum terdaftar atau belum diaktifkan oleh Admin.');
 	}
 
 	/**

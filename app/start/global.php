@@ -62,6 +62,12 @@ App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $excepti
     return Redirect::home();
 });
 
+App::error(function(Symfony\Component\HttpKernel\Exception\HttpException $exception)
+{
+    // do whatever here. 404, flash message, etc.
+    return Redirect::home();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

@@ -39,6 +39,22 @@
                     </div></div>
 
                     <div class="form-group">
+                        {{ Form::label('area', 'Area:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('area', ['Batam' => 'Batam', 'TPI' => 'TPI', 'TBK' => 'TBK', 'Global' => 'Global', 'Bali' => 'Bali', 'Jakarta' => 'Jakarta'], null, ['class' => 'form-control']) }}
+                    </div></div>
+                    <div class="form-group">
+                        {{ Form::label('status', 'Status:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('status', ['Aktif' => 'Aktif', 'Terminate' => 'Terminate'], null, ['class' => 'form-control']) }}
+                    </div></div>
+                    <div class="form-group">
+                        {{ Form::label('terminated_at', 'Tanggal :', ['class' => 'col-sm-3', 'id' => 'labelterm']) }}
+                        <div class="col-sm-9 pull-right">
+                        {{ Form::hidden('terminated_at', null, ['class' => 'form-control', 'placeholder' => 'tanggal terminasi', 'id' => 'terminated_at']) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-3">
                             {{ Form::label('level', 'Level:') }}
                         </div>
@@ -144,3 +160,20 @@
 @stop
 
 
+@section('script-bawah')
+
+<script>
+    $("#labelterm").hide();
+    $('#status').change(function() {
+        if ($(this).val() === 'Terminate') {
+            $("#terminated_at").attr( "type", "date" );
+            $("#labelterm").show();
+        }
+        if ($(this).val() !== 'Terminate') {
+            $("#terminated_at").attr( "type", "hidden" );
+            $("#labelterm").hide();
+        }
+    });
+</script>
+
+@stop

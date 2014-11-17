@@ -4,6 +4,16 @@
 <style>
 	th { font-size: 12px; }
 	td { font-size: 12px; }
+	.btn-fab {
+	margin: 0;
+	padding: 5px;
+	font-size: 10px;
+	width: 20px;
+	height: 20px;
+	}
+	.btn-fab, .btn-fab .ripple-wrapper {
+	border-radius: 10%;
+	}
 </style>
 
 @stop
@@ -20,7 +30,7 @@
 				<th>Namasite</th>
 				<th>Alamat</th>
 				<th>Layanan</th>
-				<th>Bandwidth</th>
+				<th>BW</th>
 				<th>MRC Circuit</th>
 				<th>Nama Backhaul</th>
 				<th>Cir ID Vendor</th>
@@ -29,7 +39,7 @@
 				<th>Area</th>
 				<th>Status</th>
 				<th>Start Date</th>
-				<th width="60px">Action</th>
+				<th width="80px">Action</th>
 			</tr>
 		</thead>
 
@@ -57,11 +67,15 @@
 						@endif
 					</td>
                     <td>{{{ $costumercircuit->present()->startDate }}}</td>
-                    <td width="60px" class="ac">
-                    <a href="{{ URL::route('costumercircuits.show', array($costumercircuit->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
-	                    <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
+                    <td width="80px" class="ac">
+                    <a href="{{ URL::route('costumercircuits.show', array($costumercircuit->id)) }}">
+				            <button class="btn btn-xs btn-default btn-fab btn-raised glyphicon glyphicon-list" title="Detail Circuit Ini" ></button>
+                    	</a>
+	                    <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}">
+				            <button class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="Edit Circuit Ini"></button>
+	                    </a>
 	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuits.destroy', $costumercircuit->id), 'style'=>'display:inline-block')) }}
-	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?', 'data-confirm' => 'Yakin mau dihapus?')) }}
+	                    		<button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" title="Delete Circuit Ini" data-confirm="Yakin mau dihapus?"></button>
 	                    {{ Form::close() }}
 		            </td>
 				</tr>

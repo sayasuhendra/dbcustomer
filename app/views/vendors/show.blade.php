@@ -25,7 +25,6 @@
 	              <div class="panel-heading">
 	                <h3 class="panel-title pull-left">Data Vendor {{{ $vendor->nama }}}</h3>
 	                <div class="btn-group pull-right">
-
 	                    <a href="{{ URL::route('vendors.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>	
 	                    <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i>
 	                    </a> 
@@ -63,8 +62,8 @@
                           </div>        
                           <div class="modal-body">
                                       <div class="form-group">
-                                          {{ Form::label('bagian', 'Bagian:') }}
-                                          {{ Form::text('bagian', null, ['class' => 'form-control']) }}
+                                          {{ Form::label('bagian', 'Bagian :') }}
+                                          {{ Form::select('bagian', ['Account Manager' => 'Account Manager', 'Teknis' => 'Teknis', 'Billing' => 'Billing'], null, ['class' => 'form-control']) }}
                                       </div>
                                       <div class="form-group">
                                           {{ Form::label('cp', 'Nama:') }}
@@ -114,10 +113,10 @@
               <div class="panel-body">
 				    <dl class="dl-horizontal">
 						@foreach ($vendor->contactvendors as $contact)
-							<dt>Bagian {{{ $contact->bagian }}}</dt>
+							<dt>{{{ $contact->bagian }}}</dt>
 							<dd>
 							
-								<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->kawasan }}} | {{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a>
+								<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
 			                    <a href="{{ URL::route('contactvendors.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
 			                    {{ Form::open(array('method' => 'DELETE', 'route' => array('contactvendors.destroy', $contact->id), 'style'=>'display:inline-block')) }}
 		                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
@@ -134,7 +133,15 @@
 <div class="col-md-12">
         
 	    <div class="panel panel-success">
-	      <div class="panel-heading">Data Backhaul Circuit Vendor</div>
+	      <div class="panel-heading">
+	      <h3 class="panel-title pull-left">Data Backhaul</h3>
+	      <div class="btn-group pull-right">
+	          <a href="{{ URL::route('backhauls.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+	      </div>
+	      <div class="clearfix"></div>
+	      </div>
+
+
 	    @if ($vendor->backhauls->count())
 	    	<table id="tabelbackhaul" class="table table-striped table-bordered">
 	    		<thead>
@@ -182,10 +189,89 @@
 	    	Belum ada data backhauls
 	    @endif
 
-</div>
+	    </div>
+
+
+
+
 
 	    <div class="panel panel-info">
-	      <div class="panel-heading">Data Lastmile Circuit Vendor</div>
+		   <div class="panel-heading">
+			   <h3 class="panel-title pull-left">Data Layanan Lain</h3>
+			   <div class="btn-group pull-right">
+			       <a href="{{ URL::route('layanans.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+			   </div>
+			   <div class="clearfix"></div>
+		   </div>
+	    @if ($vendor->layanans->count())
+	    	<table id="tabellayanan" class="table table-striped table-bordered">
+	    		<thead>
+	    			<tr>
+	    				<th>Nama Vendor</th>
+	    				<th>Nama Layanan</th>
+	    				<th>Start Date</th>
+	    				<th>Keterangan</th>
+	    				<th>NRC</th>
+	    				<th>MRC</th>
+
+	    				<th>Status</th>
+	    				
+	    				<th width="100px">Action</th>
+	    			</tr>
+	    		</thead>
+
+	    		<tbody>
+	    			@foreach ($vendor->layanans as $layanan)
+	    				<tr>
+	    					<td>{{{ $layanan->namavendor }}}</td>
+	    					<td>{{{ $layanan->nama }}}</td>
+	    					<td>{{{ $layanan->activated_at }}}</td>
+	    					
+	    					<td>{{{ $layanan->keterangan }}}</td>
+	    					<td>{{{ $layanan->nrc  }}} 
+	    					{{{ $layanan->currency }}}
+	    					</td>
+	    					<td>{{{ $layanan->mrc  }}} 
+	    					{{{ $layanan->currency }}}</td>
+	    					<td>
+	    						@if ( $layanan->status == 'Aktif' )
+	    							<span class="label label-success">{{{ $layanan->status }}}</span>
+	    						@elseif ( $layanan->status == 'Terminate' )
+	    							<span class="label label-danger">{{{ $layanan->status }}}</span>
+	    						@elseif ( $layanan->status == 'Suspend' )
+	    							<span class="label label-warning">{{{ $layanan->status }}}</span>
+	    						@endif
+	    					</td>
+	    					
+	                        
+	                        <td width="60px" class="ac">
+	                        <a href="{{ URL::route('layanans.show', array($layanan->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
+	    	                    <a href="{{ URL::route('layanans.edit', array($layanan->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
+	    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('layanans.destroy', $layanan->id), 'style'=>'display:inline-block')) }}
+	    	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+	    	                    {{ Form::close() }}
+	    		            </td>
+	    				</tr>
+	    			@endforeach
+	    		</tbody>
+	    	</table>
+	    @else
+	    	Belum ada data layanans
+	    @endif
+
+	    </div>
+	
+
+	    <div class="panel panel-warning">
+		   <div class="panel-heading">
+			   <h3 class="panel-title pull-left">Data Circuit Vendor Lastmile</h3>
+			   <div class="btn-group pull-right">
+			       <a href="{{ URL::route('lastmiles.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+			   </div>
+			   <div class="clearfix"></div>
+		   </div>
+
+
 	    @if ($vendor->lastmiles->count())
 
 	    	<table id="lastmiletable" class="table table-striped table-bordered">
@@ -218,7 +304,15 @@
 	    					<td>{{{ $lastmile->blockippubliccustomer }}}</td>
 	    					<td>{{{ $lastmile->layanan }}}</td>
 	    					<td>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</td>
-	    					<td>{{{ $lastmile->status }}}</td>
+	    					<td>
+	    						@if ( $lastmile->status == 'Aktif' )
+	    							<span class="label label-success">{{{ $lastmile->status }}}</span>
+	    						@elseif ( $lastmile->status == 'Terminate' )
+	    							<span class="label label-important">{{{ $lastmile->status }}}</span>
+	    						@elseif ( $lastmile->status == 'Suspend' )
+	    							<span class="label label-warning">{{{ $lastmile->status }}}</span>
+	    						@endif
+	    					</td>
 	    					<td>{{{ $lastmile->kawasan }}}</td>
 	    					<td>{{{ $lastmile->namavendor }}}</td>
 	    					<td>{{{ $lastmile->namabackhaul }}}</td>
@@ -239,7 +333,6 @@
 	    @endif
 	    </div>
 	    </div>
-
 
         <script type="text/javascript">
         	

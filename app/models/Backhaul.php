@@ -1,12 +1,20 @@
 <?php
 
+use Laracasts\Presenter\PresentableTrait;
+
 class Backhaul extends Eloquent {
 	protected $guarded = array();
 
-	public static $rules = array(
-		
-		'circuitidbackhaul' => 'required'
-	);
+	use PresentableTrait;
+
+	protected $presenter = 'Acme\Presenters\BackhaulsPresenter';
+
+	public static $rules = array();
+
+	public function getDates()
+	{
+	    return array('created_at', 'activated_at', 'updated_at');
+	}
 
 	public function vendors()
 	{

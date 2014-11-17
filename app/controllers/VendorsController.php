@@ -102,7 +102,7 @@ class VendorsController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$vendor = $this->vendor->with('contactvendors', 'backhauls', 'lastmiles')->findOrFail($id);
+		$vendor = $this->vendor->with('contactvendors', 'backhauls', 'lastmiles', 'layanans')->findOrFail($id);
 
 		return View::make('vendors.show', compact('vendor'));
 	}

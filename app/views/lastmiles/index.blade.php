@@ -1,6 +1,7 @@
 @extends('layouts.scaffold')
 
 @section('style-atas')
+
 <style>
 th { font-size: 12px; }
 td { font-size: 12px; }
@@ -20,17 +21,19 @@ td { font-size: 12px; }
 		<thead>
 			<tr>
 				<th>Circuit ID Vendor</th>
-				<th>Start Date</th>
 				<th>VLAN ID</th>
-				<th>VLAN ID Name</th>
 				<th>IP Address PTP</th>
-				<th>IP Public Cust</th>
 				<th>Layanan</th>
-				<th>Bandwidth</th>
-				<th>Status</th>
+				<th>B/W</th>
 				<th>Kawasan</th>
 				<th>Nama Vendor</th>
 				<th>Nama Backhaul</th>
+				<th>NRC</th>
+				<th>MRC</th>
+				<th>Start Date</th>
+				<th>Account Manager</th>
+				<th>Status</th>
+
 				<th width="60px">Action</th>
 			</tr>
 		</thead>
@@ -39,17 +42,29 @@ td { font-size: 12px; }
 			@foreach ($lastmiles as $lastmile)
 				<tr>
 					<td>{{{ $lastmile->circuitidlastmile }}}</td>
-					<td>{{{ $lastmile->activated_at }}}</td>
+					
 					<td>{{{ $lastmile->vlanid }}}</td>
-					<td>{{{ $lastmile->vlanname }}}</td>
 					<td>{{{ $lastmile->ipaddressptp }}}</td>
-					<td>{{{ $lastmile->blockippubliccustomer }}}</td>
 					<td>{{{ $lastmile->layanan }}}</td>
 					<td>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</td>
-					<td>{{{ $lastmile->status }}}</td>
+					
 					<td>{{{ $lastmile->kawasan }}}</td>
 					<td>{{{ $lastmile->namavendor }}}</td>
 					<td>{{{ $lastmile->namabackhaul }}}</td>
+					<td>{{{ $lastmile->present()->nrc }}}</td>
+					<td>{{{ $lastmile->present()->mrc }}}</td>
+					<td>{{{ $lastmile->present()->startdate }}}</td>
+
+					<td>{{{ $lastmile->am }}}</td>
+					<td>
+						@if ( $lastmile->status == 'Aktif' )
+							<span class="label label-success">{{{ $lastmile->status }}}</span>
+						@elseif ( $lastmile->status == 'Terminate' )
+							<span class="label label-danger">{{{ $lastmile->status }}}</span>
+						@elseif ( $lastmile->status == 'Suspend' )
+							<span class="label label-warning">{{{ $lastmile->status }}}</span>
+						@endif
+					</td>
                    
                     <td class="ac">
                     <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>

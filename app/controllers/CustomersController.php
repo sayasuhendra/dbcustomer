@@ -43,7 +43,7 @@ class CustomersController extends BaseController {
 	 */
 	public function store()
 	{
-		$inputcustomer = Input::only('customerid', 'nama', 'alamat', 'level', 'register_at', 'npwp', 'alamatnpwp', 'keterangan');
+		$inputcustomer = Input::only('customerid', 'nama', 'alamat', 'level', 'register_at', 'npwp', 'status', 'area', 'alamatnpwp', 'keterangan');
 
 		$inputcontactteknis = array(		
 			'cp' => Input::get('cpteknis'),
@@ -100,13 +100,17 @@ class CustomersController extends BaseController {
 	 */
 	public function show($id)
 	{
-		$customer = $this->customer->with('customercontacts', 'circuits')->findOrFail($id);
+		$customer = $this->customer->with('customercontacts', 'circuits', 'layanansbps')->findOrFail($id);
 
 		$contacts = $customer->customercontacts;
 		$costumercircuits = $customer->circuits;
+		$layanansbps = $customer->layanansbps;
 		$biayas = $costumercircuits->lists('biayas');
+		$totalmrcvendor = 0;
+		$totalmrccircuit = 0;
+		$totaluntung = 0;
 				
-		return View::make('customers.show', ['customer' => $customer, 'contacts' => $contacts, 'costumercircuits' => $costumercircuits, 'biayas' => $biayas]);
+		return View::make('customers.show', ['totaluntung' => $totaluntung, 'totalmrccircuit' => $totalmrccircuit, 'totalmrcvendor' => $totalmrcvendor, 'customer' => $customer, 'contacts' => $contacts, 'costumercircuits' => $costumercircuits, 'layanansbps' => $layanansbps, 'biayas' => $biayas]);
 	}
 
 	/**

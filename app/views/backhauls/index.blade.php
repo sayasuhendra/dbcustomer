@@ -32,12 +32,10 @@
 					<td>{{{ $backhaul->switchterkoneksi }}}</td>
 					<td>{{{ $backhaul->portterkoneksi }}}</td>
 					<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
-					<td>{{{ isset($backhaul->biayas->nrc) ? $backhaul->biayas->nrc : 'Kosong' }}} 
-					{{{ isset($backhaul->biayas->currency) ? $backhaul->biayas->currency : '' }}}
+					<td>{{{ $backhaul->present()->nrc }}}
 					</td>
-					<td>{{{ isset($backhaul->biayas->mrc) ? $backhaul->biayas->mrc : 'Kosong' }}} 
-					{{{ isset($backhaul->biayas->currency) ? $backhaul->biayas->currency : '' }}}</td>
-					<td>{{{ $backhaul->activated_at }}}</td>
+					<td>{{{ $backhaul->present()->mrc }}}</td>
+					<td>{{{ $backhaul->present()->startDate }}}</td>
                     
                     <td width="60px" class="ac">
                     <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>

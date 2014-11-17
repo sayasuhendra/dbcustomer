@@ -12,14 +12,13 @@
             <a class="navbar-brand" href="/"> <img src="\assets\images\logosm.png" alt="logo sbp"></a>
         </div>
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-left">
                 <li><a href="/">Home</a></li>
 
-                @if (Auth::guest())
-                    
+                @if(Auth::guest())                    
+                <li><a href="/register">Mendaftar</a></li>
                     <li><a href="/login">Login</a></li>
                 @else
-
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master Data <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -35,36 +34,36 @@
                   <li><a href="/backhauls">Circuits Backhaul</a></li>                  
                   </ul>
                 </li>
-                  <li><a href="/backhaulswitches">Perangkat SBP</a></li>
-
-                <!-- <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer <b class="caret"></b></a>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layanan Lain<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                  <li><a href="/customers">Customer</a></li>
-                  <li><a href="/costumercircuits">Costumer Circuit</a></li>
-                  <li><a href="/customercontacts">Customer Contact</a></li>
-                  <li><a href="/adsls">ADSL</a></li>
-                  <li><a href="/biayacostumercircuits">Biaya Costumer Circuit</a></li>
-                  <li><a href="/costumercircuitperangkats">Perangkat Costumer Circuit</a></li>
+                  <li><a href="/layanans">Layanan Vendor</a></li>
+                  <li><a href="/layanansbps">Layanan SBP</a></li>
                   </ul>
                 </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vendor <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                  <li><a href="/vendors">Vendor</a></li>
-                  <li><a href="/lastmiles">Lastmile</a></li>
-                  <li><a href="/backhauls">Backhaul</a></li>
-                  <li><a href="/backhaulswitches">Backhaul Switch</a></li>
-                  <li><a href="/contactvendors">Contact Vendor</a></li>
-                  <li><a href="/biayalastmilevendors">Biaya Lastmile Vendor</a></li>
-                  <li><a href="/biayabackhaulvendors">Biaya Backhaul Vendor</a></li>
+                <li><a href="/backhaulswitches">Perangkat SBP</a></li>
+                  @if(Auth::user()->hasRole('admin'))
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage User<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <li><a href="/register">Create User</a></li>
                   </ul>
-                </li> -->
-
-
-                    <li><a href="/logout">Logout</a></li>
+                  </li>
+                  @endif
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{{ Auth::user()->username }}} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li> {{ Auth::user()->profile ? link_to_profile() : link_to_createprofile();}} </li>
+                          <li><a href="{{ route('user.profile.index') }}">Kontak SBP</a></li>
+                          <li class="divider"></li>
+                          <li><a href="/logout">Logout</a></li>
+                        </ul>
+                      </li>
+                  </ul>
                 @endif
-            </ul>
+            
         </div><!--/.nav-collapse -->
     </div>
 </div>

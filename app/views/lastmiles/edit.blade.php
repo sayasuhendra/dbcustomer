@@ -42,7 +42,7 @@
                         {{ Form::label('activated_at', 'Start Date :') }}
                         </div>
                         <div class="col-sm-9">
-                        {{ Form::input('date', 'activated_at', null, ['class' => 'form-control']) }}
+                        {{ Form::input('datetime', 'activated_at', null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">
@@ -72,17 +72,9 @@
                     <div class="form-group">
                         {{ Form::label('layanan', 'Layanan:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('layanan', ['VSAT' => 'VSAT', 'ADSL' => 'ADSL', 'Dedicated' => 'Dedicated', 'Layer 2' => 'Layer 2', 'IP Transit' => 'IP Transit', 'Hosting' => 'Hosting', 'Collocation' => 'Collocation'], null, ['class' => 'form-control']) }}
+                        {{ Form::select('layanan', ['VSAT' => 'VSAT', 'ADSL' => 'ADSL', 'Wireline Broadband' => 'Wireline Broadband', 'Wireline Dedicated' => 'Wireline Dedicated', 'Layer 2' => 'Layer 2', 'IP Transit' => 'IP Transit', 'Hosting' => 'Hosting', 'Collocation' => 'Collocation', 'Wireless Broadband' => 'Wireless Broadband', 'Wireless Dedicated' => 'Wireless Dedicated', 'VPN IP' => 'VPN IP'], null, ['class' => 'form-control']) }}
                     </div></div>
-                    <div class="form-group">
-                        <div class="col-sm-9 pull-right">
-                        {{ Form::hidden('username', null, ['class' => 'form-control', 'placeholder' => 'username', 'id' => 'username']) }}
-                    </div></div>
-                    <div class="form-group">
-                        <div class="col-sm-9 pull-right">
-                        {{ Form::hidden('password', null, ['class' => 'form-control', 'placeholder' => 'password', 'id' => 'password']) }}
-                    </div></div>
-                     </div>
+                 </div>
         </div>
     </div>
     </div>
@@ -127,6 +119,12 @@
                         <div class="col-sm-9">
                         {{ Form::select('namabackhaul', $namabackhaul, null, ['class' => 'form-control select2']) }}
                     </div></div>
+
+                    <div class="form-group">
+                        {{ Form::label('am', 'Account Manager:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('am', $am, null, ['class' => 'form-control select2']) }}
+                    </div></div>
                     
                     <div class="form-group">
                         {{ Form::label('status', 'Status:', ['class' => 'col-sm-3']) }}
@@ -148,7 +146,7 @@
                     <div class="form-group">
                         {{ Form::label('currency', 'Currency :', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('currency', ['IDR' => 'IDR', 'USD' => 'USD'], null, ['class' => 'form-control']) }}
+                        {{ Form::select('currency', ['IDR' => 'IDR', 'USD' => 'USD'], $lastmile->biayas->currency, ['class' => 'form-control']) }}
                         </div>
                     </div>
             </div>

@@ -34,15 +34,16 @@ class RegistrationController extends BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::only('username', 'email', 'password', 'password_confirmation');
-
+		$input = Input::only('username', 'email', 'password', 'password_confirmation', 'nama_lengkap', 'level', 'bagian', 'area');
+		
 		$this->registrationForm->validate($input);
 
 		$user = User::create($input);
 
-		Auth::login($user);
+		$input= (object) $input;
 
-		return Redirect::home();
+		return View::make('registration.show', ['input' => $input]);
+
 	}
 
 }

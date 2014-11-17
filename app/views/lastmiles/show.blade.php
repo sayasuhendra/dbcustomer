@@ -25,8 +25,7 @@
 					    <dl class="dl-horizontal">
 						    <dt>Circuit ID Vendor</dt>
 						    <dd>{{{ $lastmile->circuitidlastmile }}}</dd>
-							<dt>Start Date</dt>
-							<dd>{{{ $lastmile->activated_at }}}</dd>
+						    
 							<dt>VLAN ID</dt>
 							<dd>{{{ $lastmile->vlanid }}}</dd>
 							<dt>VLAN ID Name</dt>
@@ -39,16 +38,21 @@
 							<dd>{{{ $lastmile->layanan }}}</dd>
 							<dt>Bandwidth</dt>
 							<dd>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</dd>
-							<dt>Status</dt>
-							<dd>{{{ $lastmile->status }}}</dd>
 							<dt>Kawasan</dt>
 							<dd>{{{ $lastmile->kawasan }}}</dd>	
 							<dt>Keterangan</dt>
 							<dd>{{{ $lastmile->keterangan }}}</dd>
 							<dt>NRC</dt>
-							<dd>{{{ $lastmile->biayas->nrc }}} {{{ $lastmile->biayas->currency }}}</dd>
+							<dd>{{{ $lastmile->present()->nrc }}}</dd>
 							<dt>MRC</dt>
-							<dd>{{{ $lastmile->biayas->mrc }}} {{{ $lastmile->biayas->currency }}}</dd>	
+							<dd>{{{ $lastmile->present()->mrc }}}</dd>
+							<dt>Start Date</dt>
+							<dd>{{{ $lastmile->present()->startDateShow }}}</dd>
+							<dt>Account Manager</dt>
+						    <dd>{{{ $lastmile->am }}}</dd>
+						    <dt>Status</dt>
+							<dd>{{{ $lastmile->status }}}</dd>
+							
 	                    </dl>
 	              </div>
 	            </div>
@@ -85,8 +89,8 @@
               <div class="panel-body">
 				    <dl class="dl-horizontal">
 						@foreach ($vendor->contactvendors as $contact)
-							<dt>Contact Bagian {{{ $contact->bagian }}}</dt>
-							<dd><a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->kawasan }}} | {{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a></dd>
+							<dt>{{{ $contact->bagian }}}</dt>
+							<dd><a id="contactButtonVendor{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}}" data-content="{{{ $contact->kawasan }}} <br> {{{ $contact->keterangan }}} "> {{{ $contact->cp }}} / {{{ $contact->jabatan }}} / {{{ $contact->telepon }}}</a></dd>
 						@endforeach
                     </dl>
               </div>
