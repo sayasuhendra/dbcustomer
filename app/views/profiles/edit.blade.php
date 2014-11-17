@@ -124,6 +124,7 @@
 		<!-- Update Profile Field -->
 		<div class="form-group">
 			{{ Form::submit('Update Profile', ['class' => 'btn btn-primary']) }}
+			<input type="button" value="Cancel" onclick="history.back(-1)" class="btn btn-default"/>
 		</div>
 	</div>
 	

@@ -54,11 +54,17 @@
 						<td>{{ link_to('http://facebook.com/' . $user->profile->facebook, $user->profile->facebook) }}</td>
 						<td>{{ link_to('http://twitter.com/' . $user->profile->twitter, $user->profile->twitter) }}</td>
 	                    <td class="ac" width="100px">
-	                    <a href="{{ URL::route('user.profile.show', array($user->profile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
-		                    <a href="{{ URL::route('user.profile.edit', array($user->profile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
-		                    {{ Form::open(array('method' => 'DELETE', 'route' => array('user.profile.destroy', $user->profile->id), 'style'=>'display:inline-block')) }}
+	                    <a href="{{ URL::route('profile', array($user->username)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
+
+		                @if(Auth::user()->hasRole('master'))
+
+		                    <a href="{{ URL::route('user.profile.edit', array($user->username)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
+		                    {{ Form::open(array('method' => 'DELETE', 'route' => array('user.profile.destroy', $user->username), 'style'=>'display:inline-block')) }}
 		                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'data-confirm' => 'Yakin mau dihapus?')) }}
 		                    {{ Form::close() }}
+
+		                @endif
+		                
 			            </td>
 					</tr>
 				@endif

@@ -16,7 +16,7 @@ class ProfilesController extends BaseController {
 	{
 		$this->profileForm = $profileForm;
 
-		$this->beforeFilter('currentUser', ['only' => ['edit', 'update']]);
+		// $this->beforeFilter('currentUser', ['only' => ['edit', 'update']]);
 	}
 
 	/**
@@ -119,6 +119,24 @@ class ProfilesController extends BaseController {
 	public function getUserByUsername($username)
 	{
 		return User::with('profile')->whereUsername($username)->firstOrFail();
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($username)
+	{
+		$user = $this->getUserByUsername($username);
+		$user->profile()->delete();
+		$user->delete();
+
+		$users = User::with('profile')->get();
+		
+		return View::make('profiles.index', ['users' => $users]);
+
 	}
 
 }
