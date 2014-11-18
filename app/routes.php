@@ -5,12 +5,13 @@ foreach (File::allFiles(__DIR__.'/routes') as $partial) {
 }
 
 # Post via git
+# Berhasil
 Route::post('git/upload', function($secret)
 {
 	if ($secret == 'c0nd3v') {
 		
 		`git pull`;
-		
+
 	}
 
 });
