@@ -4,6 +4,16 @@ foreach (File::allFiles(__DIR__.'/routes') as $partial) {
 	require_once $partial->getPathname();
 }
 
+# Post via git
+Route::post('git/upload', function($secret)
+{
+	if ($secret == 'c0nd3v') {
+		
+		`git pull`;
+		
+	}
+
+});
 
 # Latihan
 Route::get('latihan/image', function()
