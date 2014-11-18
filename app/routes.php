@@ -95,7 +95,7 @@ Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store',
 
 Route::group(['prefix' => 'user'], function(){
 
-Route::resource('profile', 'ProfilesController', ['only' => ['index', 'edit', 'update', 'destroy']]);
+Route::resource('profile', 'ProfilesController', ['only' => ['show', 'index', 'edit', 'update', 'destroy']]);
 Route::get('/profile/{username}/create', ['as' => 'profile.create', 'uses' => 'ProfilesController@create']);
 Route::post('/profile/{username}/store', ['as' => 'profile.store', 'uses' => 'ProfilesController@store']);
 Route::get('/{username}', ['as' => 'profile', 'uses' => 'ProfilesController@show']);
