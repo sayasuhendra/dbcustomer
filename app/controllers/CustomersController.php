@@ -12,6 +12,7 @@ class CustomersController extends BaseController {
 	public function __construct(Customer $customer)
 	{
 		$this->customer = $customer;
+
 	}
 
 	/**

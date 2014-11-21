@@ -4,37 +4,11 @@ foreach (File::allFiles(__DIR__.'/routes') as $partial) {
 	require_once $partial->getPathname();
 }
 
-# Post via git
-# Berhasil
-Route::post('git/upload', function($secret)
-{
-	if ($secret == 'c0nd3v') {
-		
-		`git pull`;
-
-	}
-
-});
-
-# Latihan
-Route::get('latihan/image', function()
-{
-	$img = Image::make('foto/suhendra.jpg')->resize(20, 20);
-
- //    return $img->response('jpg');
-	// $img = Image::make('http://www.kids-center.org/images/10401836/image001.jpg');
-
-	return $img->response('jpg');
-
-	// return Response::make($image, '200', ['Content-Type' => 'image/jpg']);
-});
+Route::group(['before' => 'auth'], function(){
 
 
 # Filter
 Route::when('*', ['csrf', 'role:admin'], ['put', 'patch', 'delete']);
-
-# Home
-Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
 
 # Vendor
 
@@ -73,8 +47,8 @@ Route::resource('costumercircuitperangkats', 'CostumercircuitperangkatsControlle
 Route::resource('lastmiles', 'LastmilesController');
 
 Route::post('lastmiles/create/formbackhaul', ['uses' => 'LastmilesController@formbackhaul']);
-Route::post('lastmiles/create/formam', ['uses' => 'LastmilesController@formam']);
 
+Route::post('lastmiles/create/formam', ['uses' => 'LastmilesController@formam']);
 
 Route::resource('backhauls', 'BackhaulsController');
 
@@ -91,16 +65,6 @@ Route::resource('biayalastmilevendors', 'BiayalastmilevendorsController');
 
 Route::resource('biayabackhaulvendors', 'BiayabackhaulvendorsController');
 
-# Registration
-Route::get('/register', 'RegistrationController@create');
-Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationController@store']);
-
-Route::resource('user', 'RegistrationController', ['only' => ['edit', 'update']]);
-
-# Authentication
-Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
-Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
-Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
 
 # Profile
 
@@ -115,3 +79,18 @@ Route::get('/{username}', ['as' => 'profile', 'uses' => 'ProfilesController@show
 
 Route::resource('roles', 'RolesController');
 
+});
+
+# Registration
+Route::get('/register', 'RegistrationController@create');
+Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationController@store']);
+
+Route::resource('user', 'RegistrationController', ['only' => ['edit', 'update']]);
+
+# Home
+Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
+
+# Authentication
+Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
+Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
+Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
