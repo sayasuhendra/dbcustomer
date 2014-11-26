@@ -21,7 +21,6 @@
 @section('main')
 
 <h3 align="center">Data Karyawan PT. SBP</h3>
-<p>{{ link_to_route('profile.create', 'Add Circuit', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 	<table id="profiles" class="table table-striped table-bordered">
 		<thead>
 			<tr>

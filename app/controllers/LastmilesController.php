@@ -155,10 +155,13 @@ class LastmilesController extends BaseController {
 			$lastmile = $this->lastmile->find($id);
 			$lastmile->update($inputlastmile);
 			$lastmile->biayas()->update($inputbiaya);
+
+			mundur();
 			// return Redirect::to(Input::get('referer'));
-			echo '<script type="text/javascript">'
-			   , 'history.go(-2);'
-			   , '</script>';
+			// echo '<script type="text/javascript">'
+			// 	   , 'history.go(-2);'
+			// 	   , 'window.location.reload(forceGet);'
+			//    , '</script>';
 			// return 'javascript://history.go(-2)';
 
 		}

@@ -19,3 +19,11 @@ function link_to_editprofile($text = 'Edit Profile')
 {
     return link_to_route('profile.edit', $text, Auth::user()->username);
 }
+
+function mundur($page = 4)
+{
+	echo '<script type="text/javascript">'
+			, 'history.go(-' . $page . ');'
+			, 'window.location.reload(true);'
+	   , '</script>';
+}
