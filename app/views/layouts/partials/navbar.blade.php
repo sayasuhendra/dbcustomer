@@ -62,7 +62,7 @@
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{{ Auth::user()->username }}} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{{ ucwords(Auth::user()->username) }}} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                           <li> {{ Auth::user()->profile ? link_to_profile() : link_to_createprofile();}} </li>
                           <li><a href="{{ route('user.profile.index') }}">Kontak SBP</a></li>

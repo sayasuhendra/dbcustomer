@@ -163,6 +163,27 @@
                 </div>
               </div>
           </div>
+
+
+            <div class="col-md-5">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                  <dl class="dl-horizontal">
+
+                  <dt>Kurs USD hari ini = </dt>
+
+                  <dd>{{{ $kursjual }}}</dd>
+
+                  <dt>Sumber: </dt>
+
+                  <dd><a href="http://www.bca.co.id/id/kurs-sukubunga/kurs_counter_bca/kurs_counter_bca_landing.jsp">www.bca.co.id</a></dd>
+
+                </div>
+                </div>
+          </div>
+
+
+
 </div>
             
 {{---------------- Kontak  End------------------------------------------------}}

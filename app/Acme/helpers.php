@@ -27,3 +27,9 @@ function mundur($page = 4)
 			, 'window.location.reload(true);'
 	   , '</script>';
 }
+
+function rupiah($uang)
+{
+	$jadi = number_format($uang ,2,',','.') . " " . "IDR" ;
+	return $jadi;
+}
