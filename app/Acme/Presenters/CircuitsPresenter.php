@@ -51,9 +51,15 @@ class CircuitsPresenter extends Presenter {
 
     public function untung()
     {
+        if (!empty($this->biayavendors->mrc) && !empty($this->biayas->mrc) && !empty($this->biayavendors->currency)) {
+            
         $untung = $this->biayas->mrc - $this->biayavendors->mrc;
         $jadi = number_format($untung ,2,',','.') . " " . $this->biayavendors->currency ;     
         return $jadi;
+
+        } else {
+            return "Invalid";
+        }
     }
 
     public function startDate()
