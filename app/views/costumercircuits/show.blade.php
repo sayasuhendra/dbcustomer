@@ -11,12 +11,12 @@
     td { font-size: 12px; }
 
     .dl-horizontal dt {
-    	width: 120px;
+      width: 120px;
     }
 
     .dl-horizontal dd {
-		margin-left: 135px;
-	}
+    margin-left: 135px;
+  }
   .panel-body {
     padding: 15px 15px 0px 15px;
   }
@@ -39,39 +39,47 @@
   <div class="clearfix"></div><br>
 </div>
 <div class="row">
-	        <div class="col-md-4">
-	            <div class="panel panel-primary">
-	              <div class="panel-heading">
-		                <h3 class="panel-title">Data Customer Circuit 
+          <div class="col-md-4">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Data Customer Circuit 
 
                     @if(Auth::user()->hasRole('admin'))
 
-                        <a href="{{ URL::route('costumercircuits.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>	
+                        <a href="{{ URL::route('costumercircuits.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                         <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a> 
 
                     @endif
 
                     </h3>
-	              </div>
+                </div>
 
-	              <div class="panel-body">
-					    <dl class="dl-horizontal">
-            						<dt>Circuit ID</dt>
-            						<dd>{{{ $costumercircuit->circuitid }}}</dd>
-            						<dt>Start Date</dt>
+                <div class="panel-body">
+              <dl class="dl-horizontal">
+                        <dt>Circuit ID</dt>
+                        <dd>{{{ $costumercircuit->circuitid }}}</dd>
+                        <dt>Start Date</dt>
                                     <dd>{{{ $costumercircuit->present()->startDateShow }}}</dd>
-            						<dt>Nama Site</dt>
-            						<dd>{{{ $costumercircuit->namasite }}}</dd>
-            						<dt>Alamat Site</dt>
-            						<dd>{{{ $costumercircuit->alamat }}}</dd>
-            						<dt>Layanan</dt>
-            						<dd>{{{ $costumercircuit->layanan }}}</dd>							
+                        <dt>Nama Site</dt>
+                        <dd>{{{ $costumercircuit->namasite }}}</dd>
+                        <dt>Alamat Site</dt>
+                        <dd>{{{ $costumercircuit->alamat }}}</dd>
+                        <dt>Layanan</dt>
+                        <dd>{{{ $costumercircuit->layanan }}}</dd>              
                         <dt>Bandwidth</dt>
                         <dd>{{{ $costumercircuit->bandwidth }}} {{{ $costumercircuit->satuan }}}</dd>
                         <dt>Area</dt>
                         <dd>{{{ $costumercircuit->area }}}</dd>
                         <dt>Status</dt>
-                        <dd>{{{ $costumercircuit->status }}}</dd>
+                        <dd>
+                            @if ( $costumercircuit->status == 'Aktif' )
+                              <span class="label label-success">{{{ $costumercircuit->status }}}</span>
+                            @elseif ( $costumercircuit->status == 'Terminate' )
+                              <span class="label label-danger">{{{ $costumercircuit->status }}}</span>
+                            @elseif ( $costumercircuit->status == 'Suspend' )
+                              <span class="label label-warning">{{{ $costumercircuit->status }}}</span>
+                            @endif
+                        </dd>
                         <dt>Keterangan</dt>
                         <dd>{{{ $costumercircuit->keteranganck }}}</dd>
                         <dt>NRC</dt>
@@ -79,9 +87,9 @@
                         <dt>MRC</dt>
                         <dd>{{{ $costumercircuit->present()->mrcCircuit }}}</dd>
 
-	                    </dl>
-	              </div>
-	            </div>
+                      </dl>
+                </div>
+              </div>
 
 <!-- Modal Create Perangkat -->
 
@@ -131,49 +139,49 @@
 <!-- Modal Create Perangkat End -->
 
 
-	            <div class="panel panel-primary">
+              <div class="panel panel-primary">
                   <div class="panel-heading">
                     <h3 class="panel-title">Daftar Perangkat di Site
 
                     @if(Auth::user()->hasRole('admin'))
 
-  	                	<button class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahPerangkatCircuit"></button>
+                      <button class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahPerangkatCircuit"></button>
 
                     @endif
 
                     </h3>
                   </div>
                   <div class="panel-body">
-    				    <dl class="dl-horizontal">
-    						@foreach ($costumercircuit->perangkats as $perangkat)
-    							<dt>{{{ $perangkat->namaperangkat }}} Milik {{{ $perangkat->pemilik }}} </dt>
-    							<dd>Type: {{{ $perangkat->tipe }}}, Serial: {{{ $perangkat->serialnumber }}}, Jenis: {{{ $perangkat->jenis }}}
+                <dl class="dl-horizontal">
+                @foreach ($costumercircuit->perangkats as $perangkat)
+                  <dt>{{{ $perangkat->namaperangkat }}} Milik {{{ $perangkat->pemilik }}} </dt>
+                  <dd>Type: {{{ $perangkat->tipe }}}, Serial: {{{ $perangkat->serialnumber }}}, Jenis: {{{ $perangkat->jenis }}}
 
                   @if(Auth::user()->hasRole('admin'))
 
                   <a href="{{ URL::route('costumercircuitperangkats.edit', array($perangkat->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
-    							
-    							{{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuitperangkats.destroy', $perangkat->id), 'style'=>'display:inline-block')) }}
-	                        	<button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
-			            {{ Form::close() }}
+                  
+                  {{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuitperangkats.destroy', $perangkat->id), 'style'=>'display:inline-block')) }}
+                            <button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
+                  {{ Form::close() }}
 
                   @endif
 
                   </dd>
 
-    						@endforeach
+                @endforeach
                         </dl>
                   </div>
                 </div>
-	                        
+                          
                 
-	            
+              
             </div>
 
             <div class="col-md-4">
-	            <div class="panel panel-info">
-	              <div class="panel-heading">
-	                <h3 class="panel-title">Data Lastmile Circuit Vendor
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Data Lastmile Circuit Vendor
 
                   @if(Auth::user()->hasRole('admin'))
 
@@ -185,36 +193,44 @@
                     <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
                   
                   </h3>
-	              </div>
-	              <div class="panel-body">
-    					    <dl class="dl-horizontal">
-    						    <dt>Circuit ID Vendor</dt>
-    						    <dd>{{{ $lastmile->circuitidlastmile }}}</dd>
-      							<dt>Start Date</dt>
-      							<dd>{{{ $lastmile->present()->startdateshow }}}</dd>
-      							<dt>VLAN ID</dt>
-      							<dd>{{{ $lastmile->vlanid }}}</dd>
-      							<dt>VLAN ID Name</dt>
-      							<dd>{{{ $lastmile->vlanname }}}</dd>
-      							<dt>IP Address PTP</dt>
-      							<dd>{{{ $lastmile->ipaddressptp }}}</dd>
-      							<dt>IP Public Cust</dt>
-      							<dd>{{{ $lastmile->blockippubliccustomer }}}</dd>
-      							<dt>Layanan</dt>
-      							<dd>{{{ $lastmile->layanan }}}</dd>
-      							<dt>Bandwidth</dt>
-      							<dd>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</dd>
-      							<dt>Status</dt>
-      							<dd>{{{ $lastmile->status }}}</dd>
-      							<dt>Kawasan</dt>
-      							<dd>{{{ $lastmile->kawasan }}}</dd>	
-      							<dt>NRC</dt>
-      							<dd>{{{ $lastmile->present()->nrc }}}</dd>
-      							<dt>MRC</dt>
-      							<dd>{{{ $lastmile->present()->mrc }}}</dd>
+                </div>
+                <div class="panel-body">
+                  <dl class="dl-horizontal">
+                    <dt>Circuit ID Vendor</dt>
+                    <dd>{{{ $lastmile->circuitidlastmile }}}</dd>
+                    <dt>Start Date</dt>
+                    <dd>{{{ $lastmile->present()->startdateshow }}}</dd>
+                    <dt>VLAN ID</dt>
+                    <dd>{{{ $lastmile->vlanid }}}</dd>
+                    <dt>VLAN ID Name</dt>
+                    <dd>{{{ $lastmile->vlanname }}}</dd>
+                    <dt>IP Address PTP</dt>
+                    <dd>{{{ $lastmile->ipaddressptp }}}</dd>
+                    <dt>IP Public Cust</dt>
+                    <dd>{{{ $lastmile->blockippubliccustomer }}}</dd>
+                    <dt>Layanan</dt>
+                    <dd>{{{ $lastmile->layanan }}}</dd>
+                    <dt>Bandwidth</dt>
+                    <dd>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</dd>
+                    <dt>Status</dt>
+                    <dd>
+                        @if ( $lastmile->status == 'Aktif' )
+                          <span class="label label-success">{{{ $lastmile->status }}}</span>
+                        @elseif ( $lastmile->status == 'Terminate' )
+                          <span class="label label-danger">{{{ $lastmile->status }}}</span>
+                        @elseif ( $lastmile->status == 'Suspend' )
+                          <span class="label label-warning">{{{ $lastmile->status }}}</span>
+                        @endif
+                    </dd>
+                    <dt>Kawasan</dt>
+                    <dd>{{{ $lastmile->kawasan }}}</dd> 
+                    <dt>NRC</dt>
+                    <dd>{{{ $lastmile->present()->nrc }}}</dd>
+                    <dt>MRC</dt>
+                    <dd>{{{ $lastmile->present()->mrc }}}</dd>
                   </dl>
-	              </div>
-	            </div>
+                </div>
+              </div>
 
               @if( $costumercircuit->layanan === "ADSL" )
 
@@ -304,10 +320,10 @@
                               </div>
                             @endif
 
-	            
-	        </div>
+              
+          </div>
 
-	        <!-- Modal Create Contact -->
+          <!-- Modal Create Contact -->
 
                 {{ Form::model($costumercircuit, array('method' => 'PUT', 'route' => array('circuittambahkontak', $costumercircuit->id))) }} 
                     <div class="modal fade" id="TambahContactCircuit" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -355,11 +371,11 @@
 
 <!-- Modal Create Contact End -->
 
-	        <div class="col-md-4">
-	        	
-	            <div class="panel panel-primary">
-	              <div class="panel-heading">
-	                <h3 class="panel-title">Daftar Contact Circuit Customer
+          <div class="col-md-4">
+            
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Daftar Contact Circuit Customer
 
                   @if(Auth::user()->hasRole('admin'))
 
@@ -368,39 +384,39 @@
                   @endif
 
                   </h3>
-	              </div>
-	              <div class="panel-body">
-					    <dl class="dl-horizontal">
-							@foreach ($costumercircuit->contacts as $contact)
-								<dt>{{{ $contact->bagian }}}</dt>
-								<dd>
-									<a id="contactButton{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a>
+                </div>
+                <div class="panel-body">
+              <dl class="dl-horizontal">
+              @foreach ($costumercircuit->contacts as $contact)
+                <dt>{{{ $contact->bagian }}}</dt>
+                <dd>
+                  <a id="contactButton{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a>
 
                   @if(Auth::user()->hasRole('admin'))
 
-  									<a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
-	    							{{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
-		                        	<button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
-				            {{ Form::close() }}
+                    <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+                    {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+                              <button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
+                    {{ Form::close() }}
 
                   @endif
 
-								</dd>
-							@endforeach
-	                    </dl>
-	              </div>
-	            </div>
-	   
+                </dd>
+              @endforeach
+                      </dl>
+                </div>
+              </div>
+     
                 <div class="panel panel-success">
                   <div class="panel-heading">
                     <h3 class="panel-title">Daftar Contact Customer </h3>
                   </div>
                   <div class="panel-body">
-    				    <dl class="dl-horizontal">
-    						@foreach ($customer->customercontacts as $contact)
-    							<dt>{{{ $contact->bagian }}}</dt>
-    							<dd><a id="contactButtonCustomer{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a></dd>
-    						@endforeach
+                <dl class="dl-horizontal">
+                @foreach ($customer->customercontacts as $contact)
+                  <dt>{{{ $contact->bagian }}}</dt>
+                  <dd><a id="contactButtonCustomer{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a></dd>
+                @endforeach
                         </dl>
                   </div>
                 </div>
@@ -410,15 +426,15 @@
                     <h3 class="panel-title">Daftar Contact Vendor </h3>
                   </div>
                   <div class="panel-body">
-    				    <dl class="dl-horizontal">
-    						@foreach ($vendor->contactvendors as $contact)
-    							<dt>{{{ $contact->bagian }}}</dt>
-    							<dd><a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->kawasan }}} | {{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a></dd>
-    						@endforeach
+                <dl class="dl-horizontal">
+                @foreach ($vendor->contactvendors as $contact)
+                  <dt>{{{ $contact->bagian }}}</dt>
+                  <dd><a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->kawasan }}} | {{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a></dd>
+                @endforeach
                         </dl>
                   </div>
                 </div>
-	        </div>
+          </div>
         </div>
 
 
@@ -549,19 +565,19 @@
 </div>
 
 <script type="text/javascript">
-	@foreach ($costumercircuit->contacts as $contact)
-	$('#contactButton{{{ $contact->id }}}').popover();
-	@endforeach
+  @foreach ($costumercircuit->contacts as $contact)
+  $('#contactButton{{{ $contact->id }}}').popover();
+  @endforeach
 
-	@foreach ($customer->customercontacts as $contactcustomer)
-	$('#contactButtonCustomer{{{ $contactcustomer->id }}}').popover();
-	@endforeach
+  @foreach ($customer->customercontacts as $contactcustomer)
+  $('#contactButtonCustomer{{{ $contactcustomer->id }}}').popover();
+  @endforeach
 
-	@foreach ($vendor->contactvendors as $contactcustomer)
-	$('#contactButtonVendor{{{ $contactcustomer->id }}}').popover();
-	@endforeach
+  @foreach ($vendor->contactvendors as $contactcustomer)
+  $('#contactButtonVendor{{{ $contactcustomer->id }}}').popover();
+  @endforeach
 
-	$(function(){
+  $(function(){
    $('[data-method]').append(function(){
         return "\n"+
         "<form action='"+$(this).attr('href')+"' method='POST' style='display:none'>\n"+
@@ -572,7 +588,7 @@
    .attr('style','cursor:pointer;')
    .attr('onclick','$(this).find("form").submit();');
 });
-	
+  
 </script>
 
 @stop

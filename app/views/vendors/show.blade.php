@@ -356,7 +356,7 @@
 	    						@if ( $lastmile->status == 'Aktif' )
 	    							<span class="label label-success">{{{ $lastmile->status }}}</span>
 	    						@elseif ( $lastmile->status == 'Terminate' )
-	    							<span class="label label-important">{{{ $lastmile->status }}}</span>
+	    							<span class="label label-danger">{{{ $lastmile->status }}}</span>
 	    						@elseif ( $lastmile->status == 'Suspend' )
 	    							<span class="label label-warning">{{{ $lastmile->status }}}</span>
 	    						@endif

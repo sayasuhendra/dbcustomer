@@ -54,7 +54,7 @@
 						@if ( $layanansbp->status == 'Aktif' )
 							<span class="label label-success">{{{ $layanansbp->status }}}</span>
 						@elseif ( $layanansbp->status == 'Terminate' )
-							<span class="label label-important">{{{ $layanansbp->status }}}</span>
+							<span class="label label-danger">{{{ $layanansbp->status }}}</span>
 						@elseif ( $layanansbp->status == 'Suspend' )
 							<span class="label label-warning">{{{ $layanansbp->status }}}</span>
 						@endif

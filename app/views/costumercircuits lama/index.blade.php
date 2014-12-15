@@ -52,7 +52,7 @@
 						@if ( $costumercircuit->status == 'Aktif' )
 							<span class="label label-success">{{{ $costumercircuit->status }}}</span>
 						@elseif ( $costumercircuit->status == 'Terminate' )
-							<span class="label label-important">{{{ $costumercircuit->status }}}</span>
+							<span class="label label-danger">{{{ $costumercircuit->status }}}</span>
 						@elseif ( $costumercircuit->status == 'Suspend' )
 							<span class="label label-warning">{{{ $costumercircuit->status }}}</span>
 						@endif

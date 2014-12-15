@@ -23,10 +23,10 @@
 
 <p>{{ link_to_route('customers.index', 'Kembali Ke Daftar Customer') }}</p>
 
-	        <div class="col-md-7">
-	            <div class="panel panel-primary">
-	              <div class="panel-heading">
-	                <h3 class="panel-title pull-left">Data Customer {{{ $customer->nama }}}</h3>
+          <div class="col-md-7">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title pull-left">Data Customer {{{ $customer->nama }}}</h3>
 
                   @if(Auth::user()->hasRole('admin'))
 
@@ -39,17 +39,17 @@
                   @endif
 
                     <div class="clearfix"></div>
-	              </div>
-	              <div class="panel-body">
-        					    <dl class="dl-horizontal">
-            						<dt>Customer ID</dt>
-            						<dd>{{{ $customer->customerid }}}</dd>
-            						<dt>Nama Perusahaan</dt>
-            						<dd>{{{ $customer->nama }}}</dd>                        
-            						<dt>Alamat Perusahaan</dt>
-            						<dd>{{{ $customer->alamat }}}</dd>
-            						<dt>Level Customer</dt>
-            						<dd>{{{ $customer->level }}}</dd>
+                </div>
+                <div class="panel-body">
+                      <dl class="dl-horizontal">
+                        <dt>Customer ID</dt>
+                        <dd>{{{ $customer->customerid }}}</dd>
+                        <dt>Nama Perusahaan</dt>
+                        <dd>{{{ $customer->nama }}}</dd>                        
+                        <dt>Alamat Perusahaan</dt>
+                        <dd>{{{ $customer->alamat }}}</dd>
+                        <dt>Level Customer</dt>
+                        <dd>{{{ $customer->level }}}</dd>
                         <dt>NPWP</dt>
                         <dd>{{{ $customer->npwp }}}</dd>
                         <dt>Alamat NPWP</dt>
@@ -70,10 +70,10 @@
                         <dd>{{{ $customer->present()->registerdate }}}
                         <dt>Keterangan</dt>
                         <dd>{{{ $customer->keterangan }}}</dd>
-	                    </dl>
-	              </div>
-	            </div>
-	        </div>
+                      </dl>
+                </div>
+              </div>
+          </div>
 
 {{---------------- Kontak ------------------------------------------------}}
 
@@ -127,9 +127,9 @@
 
 
             <div class="col-md-5">
-	            <div class="panel panel-primary">
-	              <div class="panel-heading">
-	                <h3 class="panel-title pull-left">Daftar Contact Customer</h3>
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title pull-left">Daftar Contact Customer</h3>
 
                   @if(Auth::user()->hasRole('admin'))
 
@@ -140,12 +140,12 @@
                   @endif
 
                     <div class="clearfix"></div>
-	              </div>
-	              <div class="panel-body">
-					    <dl class="dl-horizontal">
-							@foreach ($contacts as $contact)
-								<dt>Bagian {{{ $contact->bagian }}}</dt>
-								<dd>
+                </div>
+                <div class="panel-body">
+              <dl class="dl-horizontal">
+              @foreach ($contacts as $contact)
+                <dt>Bagian {{{ $contact->bagian }}}</dt>
+                <dd>
                     <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
 
                     @if(Auth::user()->hasRole('admin'))
@@ -158,11 +158,11 @@
                     @endif
 
                 </dd>
-							@endforeach
-	                    </dl>
-	              </div>
-	            </div>
-	        </div>
+              @endforeach
+                      </dl>
+                </div>
+              </div>
+          </div>
 </div>
             
 {{---------------- Kontak  End------------------------------------------------}}
@@ -224,7 +224,7 @@
                         @if ( $layanansbp->status == 'Aktif' )
                           <span class="label label-success">{{{ $layanansbp->status }}}</span>
                         @elseif ( $layanansbp->status == 'Terminate' )
-                          <span class="label label-important">{{{ $layanansbp->status }}}</span>
+                          <span class="label label-danger">{{{ $layanansbp->status }}}</span>
                         @elseif ( $layanansbp->status == 'Suspend' )
                           <span class="label label-warning">{{{ $layanansbp->status }}}</span>
                         @endif
@@ -269,11 +269,11 @@
          </div>
         </div>
 
-	         @if ($costumercircuits->count())
-	        	<table id="datasbp" class="table table-striped table-bordered">
-	        		<thead>
-	        			<tr>
-	        				<th>Circuit ID</th>
+           @if ($costumercircuits->count())
+            <table id="datasbp" class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Circuit ID</th>
                             <th>Namasite</th>
                             <th>Alamat</th>
                             <th>Layanan</th>
@@ -283,19 +283,21 @@
                             <th>Cir ID Vendor</th>
                             <th>Nama Vendor</th>
                             <th>MRC Vendor</th>
-                            <th>Untung</th>
+                            <th>Margin</th>
                             <th>Status</th>
                             <th>Start Date</th>
                             <th width="100px">Action</th>
-	        			</tr>
-	        		</thead>
+                </tr>
+              </thead>
 
 
-            		<tbody>
-			            @foreach ($costumercircuits as $costumercircuit)
+                <tbody>
+                  @foreach ($costumercircuits as $costumercircuit)
                   <?php
+                  if (! empty($costumercircuit->biayavendors->mrc)){
                   $totalmrcvendor += $costumercircuit->biayavendors->mrc;
-                  $totalmrccircuit += $costumercircuit->biayas->mrc;
+                  $totalmrccircuit += $costumercircuit->biayas->mrc; 
+                  }
                    ?>
                             <tr>
                                 <td>{{{ $costumercircuit->circuitid }}}</td>
@@ -313,7 +315,7 @@
                                     @if ( $costumercircuit->status == 'Aktif' )
                                         <span class="label label-success">{{{ $costumercircuit->status }}}</span>
                                     @elseif ( $costumercircuit->status == 'Terminate' )
-                                        <span class="label label-important">{{{ $costumercircuit->status }}}</span>
+                                        <span class="label label-danger">{{{ $costumercircuit->status }}}</span>
                                     @elseif ( $costumercircuit->status == 'Suspend' )
                                         <span class="label label-warning">{{{ $costumercircuit->status }}}</span>
                                     @endif
@@ -334,7 +336,7 @@
                                 </td>
                             </tr>
                         @endforeach                            
-            		</tbody>
+                </tbody>
                 <tfoot>
                 <?php $totaluntung = $totalmrccircuit - $totalmrcvendor ?>
                   <tr>
@@ -342,12 +344,12 @@
                     <td>{{{ $totalmrccircuit }}}</td>
                     <td colspan="3" style="text-align: right;">Total MRC Vendor</td>
                     <td>{{{ $totalmrcvendor }}}</td>
-                    <td colspan="4"><b>{{{ $totaluntung }}} Total Untung</b></td>
+                    <td colspan="4"><b>{{{ $totaluntung }}} Total Margin</b></td>
                   </tr>
                 </tfoot>
                     
-            		 
-            	</table>
+                 
+              </table>
 
             @else
               Belum ada data costumercircuits
@@ -361,40 +363,40 @@
 <script type="text/javascript" language="javascript" class="init">
 
     $(document).ready(function() {
-    	$('#datasbp').DataTable( {
-        	"dom": 'T<"clear">lfrtip',
-        	"oTableTools": {
-        	            "aButtons": [
-        	                {
-        	                    "sExtends": "pdf",
-        	                    "sPdfOrientation": "landscape",
+      $('#datasbp').DataTable( {
+          "dom": 'T<"clear">lfrtip',
+          "oTableTools": {
+                      "aButtons": [
+                          {
+                              "sExtends": "pdf",
+                              "sPdfOrientation": "landscape",
                                 "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
-        	                },
-        	                {
-        	                    "sExtends": "xls",
+                          },
+                          {
+                              "sExtends": "xls",
                                 "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
-        	                },
-        	                {
-        	                    "sExtends": "csv",
+                          },
+                          {
+                              "sExtends": "csv",
                                 "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
-        	                },
-        	                {
-        	                    "sExtends": "copy",
+                          },
+                          {
+                              "sExtends": "copy",
                                 "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
-        	                },
-        	                "print"
+                          },
+                          "print"
 
-        	            ]
-        	        },            
+                      ]
+                  },            
         } );
     } );
 </script>
 
 <script type="text/javascript">
-	@foreach ($contacts as $contact)
-	$('#contactButton{{{ $contact->id }}}').popover();
-	@endforeach
-	$('#myButton').popover();
+  @foreach ($contacts as $contact)
+  $('#contactButton{{{ $contact->id }}}').popover();
+  @endforeach
+  $('#myButton').popover();
     
 </script>
 
