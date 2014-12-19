@@ -14,8 +14,11 @@
 				<th>Nama Layanan</th>
 				<th>Start Date</th>
 				<th>Keterangan</th>
-				<th>NRC</th>
-				<th>MRC</th>
+
+				@if ( !Auth::user()->hasRole('noc') )
+					<th>NRC</th>
+					<th>MRC</th>
+				@endif
 				
 				<th width="100px">Action</th>
 			</tr>
@@ -27,12 +30,14 @@
 					<td>{{{ $layanan->nama }}}</td>
 					<td>{{{ $layanan->activated_at }}}</td>
 					<td>{{{ $layanan->keterangan }}}</td>
-					<td>{{{ $layanan->nrc  }}} 
-					{{{ $layanan->currency }}}
-					</td>
-					<td>{{{ $layanan->mrc  }}} 
-					{{{ $layanan->currency }}}</td>
-					
+
+					@if ( !Auth::user()->hasRole('noc') )
+						<td>{{{ $layanan->nrc  }}} 
+						{{{ $layanan->currency }}}
+						</td>
+						<td>{{{ $layanan->mrc  }}} 
+						{{{ $layanan->currency }}}</td>
+					@endif
                     
                     <td width="60px" class="ac">
                     <a href="{{ URL::route('layanans.show', array($layanan->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>

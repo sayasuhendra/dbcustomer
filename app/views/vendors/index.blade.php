@@ -14,8 +14,10 @@
 			<tr>
 				<th>Nama</th>
 				<th>Alamat</th>				
-                <th>NPWP</th>
-                <th>Alamat NPWP</th>
+                @if (! Auth::user()->hasRole('noc'))
+                    <th>NPWP</th>
+                    <th>Alamat NPWP</th>
+                @endif
                 <th>Keterangan</th>
                 <th width="100px">Action</th>
 			</tr>
@@ -26,15 +28,17 @@
 				<tr>
 					<td>{{{ $vendor->nama }}}</td>
 					<td>{{{ $vendor->alamat }}}</td>
-                    <td>{{{ $vendor->npwp }}}</td>
-                    <td>{{{ $vendor->alamatnpwp }}}</td>
+                    @if (! Auth::user()->hasRole('noc'))
+                        <td>{{{ $vendor->npwp }}}</td>
+                        <td>{{{ $vendor->alamatnpwp }}}</td>
+                    @endif
                     <td>{{{ $vendor->keterangan }}}</td>
 
 
                     <td class="ac">
                     <a href="{{ URL::route('vendors.show', array($vendor->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
 
-                        @if(Auth::user()->hasRole('admin'))
+                        @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
 
     	                    <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
     	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('vendors.destroy', $vendor->id), 'style'=>'display:inline-block')) }}

@@ -20,8 +20,12 @@
 				<th>Switch Terkoneksi</th>
 				<th>Port Terkoneksi</th>
 				<th>Bandwidth</th>
-				<th>NRC</th>
-				<th>MRC</th>
+
+				@if ( !Auth::user()->hasRole('noc'))
+					<th>NRC</th>
+					<th>MRC</th>
+				@endif
+
 				<th>Start Date</th>
 				<th width="60px">Action</th>
 			</tr>
@@ -36,9 +40,14 @@
 					<td>{{{ $backhaul->switchterkoneksi }}}</td>
 					<td>{{{ $backhaul->portterkoneksi }}}</td>
 					<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
-					<td>{{{ $backhaul->present()->nrc }}}
-					</td>
-					<td>{{{ $backhaul->present()->mrc }}}</td>
+
+					@if ( !Auth::user()->hasRole('noc') )
+						<td>{{{ $backhaul->present()->nrc }}}
+						</td>
+						<td>{{{ $backhaul->present()->mrc }}}</td>
+					@endif
+
+
 					<td>{{{ $backhaul->present()->startDate }}}</td>
                     
                     <td width="60px" class="ac">

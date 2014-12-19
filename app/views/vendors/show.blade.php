@@ -25,7 +25,7 @@
 	              <div class="panel-heading">
 	                <h3 class="panel-title pull-left">Data Vendor {{{ $vendor->nama }}}</h3>
 
-                    @if(Auth::user()->hasRole('admin'))
+                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor')) 
 
 	                <div class="btn-group pull-right">
 	                    <a href="{{ URL::route('vendors.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>	
@@ -43,10 +43,14 @@
         					<dd>{{{ $vendor->nama }}}</dd>
         					<dt>Alamat</dt>
         					<dd>{{{ $vendor->alamat }}}</dd>
-                            <dt>NPWP</dt>
-                            <dd>{{{ $vendor->npwp }}}</dd>
-                            <dt>Alamat NPWP</dt>
-                            <dd>{{{ $vendor->alamatnpwp }}}</dd>
+
+        					@if (! Auth::user()->hasRole('noc'))
+	                            <dt>NPWP</dt>
+	                            <dd>{{{ $vendor->npwp }}}</dd>
+	                            <dt>Alamat NPWP</dt>
+	                            <dd>{{{ $vendor->alamatnpwp }}}</dd>
+        					@endif
+
                             <dt>Keterangan</dt>
                             <dd>{{{ $vendor->keterangan }}}</dd>
 	                    </dl>
@@ -112,7 +116,7 @@
               <div class="panel-heading">
                 <h3 class="panel-title pull-left">Daftar Contact Vendor </h3>
 
-                @if(Auth::user()->hasRole('admin'))
+                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
 
                 <div class="btn-group pull-right">
                 	<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#TambahCustomerContact"><i class="glyphicon glyphicon-plus"></i></button>
@@ -125,21 +129,69 @@
               <div class="panel-body">
 				    <dl class="dl-horizontal">
 						@foreach ($vendor->contactvendors as $contact)
-							<dt>{{{ $contact->bagian }}}</dt>
-							<dd>
-							
-								<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
 
-				                @if(Auth::user()->hasRole('admin'))
 
-			                    <a href="{{ URL::route('contactvendors.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
-			                    {{ Form::open(array('method' => 'DELETE', 'route' => array('contactvendors.destroy', $contact->id), 'style'=>'display:inline-block')) }}
-		                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
-				                    {{ Form::close() }}
+			                @if ( $contact->bagian === "Billing" && !Auth::user()->hasRole('noc') )
 
-				                @endif
+								<dt>{{{ $contact->bagian }}}</dt>
+								<dd>
+								
+									<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
 
-							</dd>
+					                @if(Auth::user()->hasRole('admin')  || Auth::user()->hasRole('editor'))
+
+				                    <a href="{{ URL::route('contactvendors.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+				                    {{ Form::open(array('method' => 'DELETE', 'route' => array('contactvendors.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+			                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+					                    {{ Form::close() }}
+
+					                @endif
+
+								</dd>
+								
+							@endif
+
+			                @if ( $contact->bagian === "Teknis" && ( !Auth::user()->hasRole('ar') && !Auth::user()->hasRole('ap') ) )
+
+								<dt>{{{ $contact->bagian }}}</dt>
+								<dd>
+								
+									<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
+
+					                @if(Auth::user()->hasRole('admin')  || Auth::user()->hasRole('editor'))
+
+				                    <a href="{{ URL::route('contactvendors.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+				                    {{ Form::open(array('method' => 'DELETE', 'route' => array('contactvendors.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+			                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+					                    {{ Form::close() }}
+
+					                @endif
+
+								</dd>
+								
+							@endif
+
+			                @if ( $contact->bagian !== "Teknis" && $contact->bagian !== "Billing")
+
+								<dt>{{{ $contact->bagian }}}</dt>
+								<dd>
+								
+									<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
+
+					                @if(Auth::user()->hasRole('admin')  || Auth::user()->hasRole('editor'))
+
+				                    <a href="{{ URL::route('contactvendors.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+				                    {{ Form::open(array('method' => 'DELETE', 'route' => array('contactvendors.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+			                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+					                    {{ Form::close() }}
+
+					                @endif
+
+								</dd>
+
+							@endif
+
+
 						@endforeach
                     </dl>
               </div>
@@ -154,7 +206,7 @@
 	      <div class="panel-heading">
 	      <h3 class="panel-title pull-left">Data Backhaul</h3>
 
-          @if(Auth::user()->hasRole('admin'))
+          @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
 
 	      <div class="btn-group pull-right">
 	          <a href="{{ URL::route('backhauls.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
@@ -177,8 +229,12 @@
 	    				<th>Switch Terkoneksi</th>
 	    				<th>Port Terkoneksi</th>
 	    				<th>Bandwidth</th>
-	    				<th>NRC</th>
-	    				<th>MRC</th>
+
+						@if (! Auth::user()->hasRole('noc'))
+		    				<th>NRC</th>
+		    				<th>MRC</th>
+						@endif
+
 	    				<th>Start Date</th>
 	    				<th width="100px">Action</th>
 	    			</tr>
@@ -194,14 +250,18 @@
 	    					<td>{{{ $backhaul->switchterkoneksi }}}</td>
 	    					<td>{{{ $backhaul->portterkoneksi }}}</td>
 	    					<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
-	    					<td>{{{ $backhaul->biayas->nrc }}} {{{ $backhaul->biayas->currency }}}</td>
-	    					<td>{{{ $backhaul->biayas->mrc }}} {{{ $backhaul->biayas->currency }}}</td>
+
+	    					@if (! Auth::user()->hasRole('noc'))
+		    					<td>{{{ $backhaul->biayas->nrc }}} {{{ $backhaul->biayas->currency }}}</td>
+		    					<td>{{{ $backhaul->biayas->mrc }}} {{{ $backhaul->biayas->currency }}}</td>
+	    					@endif
+
 	    					<td>{{{ $backhaul->activated_at }}}</td>
 	                        
 	                        <td width="60px" class="ac">
 	                        <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
 
-	                        @if(Auth::user()->hasRole('admin'))
+	                        @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
 
 	    	                    <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
 	    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('backhauls.destroy', $backhaul->id), 'style'=>'display:inline-block')) }}
@@ -229,7 +289,7 @@
 		   <div class="panel-heading">
 			   <h3 class="panel-title pull-left">Data Layanan Lain</h3>
 
-			   @if(Auth::user()->hasRole('admin'))
+			   @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
 
 			   <div class="btn-group pull-right">
 			       <a href="{{ URL::route('layanans.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
@@ -247,8 +307,11 @@
 	    				<th>Nama Layanan</th>
 	    				<th>Start Date</th>
 	    				<th>Keterangan</th>
-	    				<th>NRC</th>
-	    				<th>MRC</th>
+
+	    				@if (! Auth::user()->hasRole('noc'))
+		    				<th>NRC</th>
+		    				<th>MRC</th>
+	    				@endif
 
 	    				<th>Status</th>
 	    				
@@ -264,11 +327,15 @@
 	    					<td>{{{ $layanan->activated_at }}}</td>
 	    					
 	    					<td>{{{ $layanan->keterangan }}}</td>
-	    					<td>{{{ $layanan->nrc  }}} 
-	    					{{{ $layanan->currency }}}
-	    					</td>
-	    					<td>{{{ $layanan->mrc  }}} 
-	    					{{{ $layanan->currency }}}</td>
+
+	    					@if (! Auth::user()->hasRole('noc'))
+		    					<td>{{{ $layanan->nrc  }}} 
+		    					{{{ $layanan->currency }}}
+		    					</td>
+		    					<td>{{{ $layanan->mrc  }}} 
+		    					{{{ $layanan->currency }}}</td>
+	    					@endif
+
 	    					<td>
 	    						@if ( $layanan->status == 'Aktif' )
 	    							<span class="label label-success">{{{ $layanan->status }}}</span>
@@ -283,7 +350,7 @@
 	                        <td width="60px" class="ac">
 	                        <a href="{{ URL::route('layanans.show', array($layanan->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
 
-	                        @if(Auth::user()->hasRole('admin'))
+	                        @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
 
 	    	                <a href="{{ URL::route('layanans.edit', array($layanan->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
 	    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('layanans.destroy', $layanan->id), 'style'=>'display:inline-block')) }}
@@ -308,7 +375,7 @@
 		   <div class="panel-heading">
 			   <h3 class="panel-title pull-left">Data Circuit Vendor Lastmile</h3>
 
-			   @if(Auth::user()->hasRole('admin'))
+			   @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
 
 			   <div class="btn-group pull-right">
 			       <a href="{{ URL::route('lastmiles.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
@@ -368,7 +435,7 @@
 	                        <td class="ac">
 	                        <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
 
-	                        @if(Auth::user()->hasRole('admin'))
+	                        @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
 
 	    	                    <a href="{{ URL::route('lastmiles.edit', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
 	    	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('lastmiles.destroy', $lastmile->id), 'style'=>'display:inline-block')) }}

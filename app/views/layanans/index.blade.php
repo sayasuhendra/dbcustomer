@@ -14,8 +14,11 @@
 				<th>Nama Layanan</th>
 				<th>Start Date</th>
 				<th>Keterangan</th>
-				<th>NRC</th>
-				<th>MRC</th>
+
+				@if ( !Auth::user()->hasRole('noc') )
+					<th>NRC</th>
+					<th>MRC</th>
+				@endif
 
 				<th>Status</th>
 				
@@ -31,11 +34,15 @@
 					<td>{{{ $layanan->activated_at }}}</td>
 					
 					<td>{{{ $layanan->keterangan }}}</td>
-					<td>{{{ $layanan->nrc  }}} 
-					{{{ $layanan->currency }}}
-					</td>
-					<td>{{{ $layanan->mrc  }}} 
-					{{{ $layanan->currency }}}</td>
+
+					@if ( !Auth::user()->hasRole('noc') )
+						<td>{{{ $layanan->nrc  }}} 
+						{{{ $layanan->currency }}}
+						</td>
+						<td>{{{ $layanan->mrc  }}} 
+						{{{ $layanan->currency }}}</td>
+					@endif
+					
 					<td>
 						@if ( $layanan->status == 'Aktif' )
 							<span class="label label-success">{{{ $layanan->status }}}</span>

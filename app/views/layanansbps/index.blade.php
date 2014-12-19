@@ -25,8 +25,12 @@
 				<th>Tipe</th>
 				<th>Jenis</th>
 				<th>Pemilik</th>
-				<th>NRC</th>
-				<th>MRC</th>
+
+				@if ( !Auth::user()->hasRole('noc') )
+					<th>NRC</th>
+					<th>MRC</th>
+				@endif
+
 				<th>Area</th>
 				<th>Status</th>
 				<th>Start Date</th>
@@ -46,8 +50,12 @@
 					<td>{{{ $layanansbp->tipe }}}</td>
 					<td>{{{ $layanansbp->jenis }}}</td>
 					<td>{{{ $layanansbp->pemilik }}}</td>
-					<td>{{{ $layanansbp->nrc }}} {{{ $layanansbp->currency }}}</td>
-					<td>{{{ $layanansbp->mrc }}} {{{ $layanansbp->currency }}}</td>
+
+					@if ( !Auth::user()->hasRole('noc') )
+						<td>{{{ $layanansbp->nrc }}} {{{ $layanansbp->currency }}}</td>
+						<td>{{{ $layanansbp->mrc }}} {{{ $layanansbp->currency }}}</td>
+					@endif
+					
 					<!-- <td>{{{ $layanansbp->present()->mrcCircuit }}}</td> -->
 					<td>{{{ $layanansbp->area }}}</td>
 					<td>

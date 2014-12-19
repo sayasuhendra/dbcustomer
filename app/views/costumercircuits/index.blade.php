@@ -22,7 +22,7 @@
 
 <h3 align="center">Daftar Data Circuits Customer</h3>
 
-@if(Auth::user()->hasRole('admin'))
+@if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
 <p>{{ link_to_route('costumercircuits.create', 'Add Circuit', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 
@@ -37,11 +37,19 @@
 				<th>Alamat</th>
 				<th>Layanan</th>
 				<th>BW</th>
-				<th>MRC Circuit</th>
+
+				@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
+					<th>MRC Circuit</th>
+				@endif
+
 				<th>Nama Backhaul</th>
 				<th>Cir ID Vendor</th>
 				{{-- <th>Nama Vendor</th> --}}
-				<th>MRC Vendor</th> 
+
+				@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
+					<th>MRC Vendor</th> 
+				@endif
+
 				<th>Area</th>
 				<th>Status</th>
 				<th>Start Date</th>
@@ -57,11 +65,19 @@
 					<td>{{{ $costumercircuit->alamat }}}</td>
 					<td>{{{ $costumercircuit->layanan }}}</td>
 					<td>{{{ $costumercircuit->bandwidth }}} {{{ $costumercircuit->satuan }}}</td>
-					<td>{{{ $costumercircuit->present()->mrcCircuit }}}</td>
+
+					@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
+						<td>{{{ $costumercircuit->present()->mrcCircuit }}}</td>
+					@endif
+
 					<td>{{{ $costumercircuit->namabackhaul }}}</td>
 					<td>{{{ $costumercircuit->circuitidlastmile }}}</td>
 					{{--  <td> $costumercircuit->namavendor </td> --}}
-					<td>{{{ $costumercircuit->present()->mrclastmile }}}</td> 
+
+					@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
+						<td>{{{ $costumercircuit->present()->mrclastmile }}}</td> 
+					@endif
+
 					<td>{{{ $costumercircuit->area }}}</td>
 					<td>
 						@if ( $costumercircuit->status == 'Aktif' )
@@ -78,7 +94,7 @@
 				            <button class="btn btn-xs btn-default btn-fab btn-raised glyphicon glyphicon-list" title="Detail Circuit Ini" ></button>
                     	</a>
 
-                    @if(Auth::user()->hasRole('admin'))
+                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
 	                    <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}">
 				            <button class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="Edit Circuit Ini"></button>

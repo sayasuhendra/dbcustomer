@@ -25,15 +25,23 @@ td { font-size: 12px; }
 		<thead>
 			<tr>
 				<th>Circuit ID Vendor</th>
-				<th>VLAN ID</th>
-				<th>IP Address PTP</th>
+
+				@if ( !Auth::user()->hasRole('ap') && !Auth::user()->hasRole('sales') )
+					<th>VLAN ID</th>
+					<th>IP Address PTP</th>
+				@endif
+
 				<th>Layanan</th>
 				<th>B/W</th>
 				<th>Kawasan</th>
 				<th>Nama Vendor</th>
 				<th>Nama Backhaul</th>
-				<th>NRC</th>
-				<th>MRC</th>
+
+				@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('sales') )
+					<th>NRC</th>
+					<th>MRC</th>
+				@endif
+
 				<th>Start Date</th>
 				<th>Account Manager</th>
 				<th>Status</th>
@@ -47,16 +55,23 @@ td { font-size: 12px; }
 				<tr>
 					<td>{{{ $lastmile->circuitidlastmile }}}</td>
 					
-					<td>{{{ $lastmile->vlanid }}}</td>
-					<td>{{{ $lastmile->ipaddressptp }}}</td>
+					@if ( !Auth::user()->hasRole('ap') && !Auth::user()->hasRole('sales') )
+						<td>{{{ $lastmile->vlanid }}}</td>
+						<td>{{{ $lastmile->ipaddressptp }}}</td>
+					@endif
+
 					<td>{{{ $lastmile->layanan }}}</td>
 					<td>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</td>
 					
 					<td>{{{ $lastmile->kawasan }}}</td>
 					<td>{{{ $lastmile->namavendor }}}</td>
 					<td>{{{ $lastmile->namabackhaul }}}</td>
-					<td>{{{ $lastmile->present()->nrc }}}</td>
-					<td>{{{ $lastmile->present()->mrc }}}</td>
+
+					@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('sales') )
+						<td>{{{ $lastmile->present()->nrc }}}</td>
+						<td>{{{ $lastmile->present()->mrc }}}</td>
+					@endif
+
 					<td>{{{ $lastmile->present()->startdate }}}</td>
 
 					<td>{{{ $lastmile->am }}}</td>

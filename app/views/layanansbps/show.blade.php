@@ -69,10 +69,14 @@
                         </dd>
                         <dt>Keterangan</dt>
                         <dd>{{{ $layanansbp->keterangan }}}</dd>
-                        <dt>NRC</dt>
-                        <dd>{{{ $layanansbp->nrc }}} {{{ $layanansbp->currency }}}</dd>
-                        <dt>MRC</dt>
-                        <dd>{{{ $layanansbp->mrc }}} {{{ $layanansbp->currency }}}</dd>
+
+                        @if ( !Auth::user()->hasRole('noc') )
+                          <dt>NRC</dt>
+                          <dd>{{{ $layanansbp->nrc }}} {{{ $layanansbp->currency }}}</dd>
+                          <dt>MRC</dt>
+                          <dd>{{{ $layanansbp->mrc }}} {{{ $layanansbp->currency }}}</dd>
+                        @endif
+                        
 	                    </dl>
 	              </div>
 	            </div>
@@ -206,10 +210,14 @@
                         <dd>{{{ $customer->alamat }}}</dd>
                         <dt>Level Customer</dt>
                         <dd>{{{ $customer->level }}}</dd>
-                        <dt>NPWP</dt>
-                        <dd>{{{ $customer->npwp }}}</dd>
-                        <dt>Alamat NPWP</dt>
-                        <dd>{{{ $customer->alamatnpwp }}}</dd>
+
+                        @if ( !Auth::user()->hasRole('noc') )
+                          <dt>NPWP</dt>
+                          <dd>{{{ $customer->npwp }}}</dd>
+                          <dt>Alamat NPWP</dt>
+                          <dd>{{{ $customer->alamatnpwp }}}</dd>
+                        @endif
+
                         <dt>Area</dt>
                         <dd>{{{ $customer->area }}}</dd>
                         <dt>Status</dt>

@@ -25,26 +25,48 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master Data <b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                      <li><a href="/vendors">Vendors</a></li>
+
+                      @if(!Auth::user()->hasRole('ar'))
+                        <li><a href="/vendors">Vendors</a></li>
+                      @endif
+
                       <li><a href="/customers">Customers</a></li>
                       </ul>
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data Circuit<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                      <li><a href="/lastmiles">Vendor Circuits</a></li>
+
+                      @if(!Auth::user()->hasRole('ar'))
+                        <li><a href="/lastmiles">Vendor Circuits</a></li>
+                      @endif
+                      
                       <li><a href="/costumercircuits">Costumer Circuits</a></li>  
-                      <li><a href="/backhauls">Circuits Backhaul</a></li>                  
+
+                      @if(Auth::user()->hasRole('noc') || Auth::user()->hasRole('admin'))
+                        <li><a href="/backhauls">Circuits Backhaul</a></li>
+                      @endif
+
                       </ul>
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layanan Lain<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                      <li><a href="/layanans">Layanan Vendor</a></li>
-                      <li><a href="/layanansbps">Layanan SBP</a></li>
+
+                      @if(!Auth::user()->hasRole('sales') && !Auth::user()->hasRole('ar'))
+                        <li><a href="/layanans">Layanan Vendor</a></li>
+                      @endif
+
+                      @if(!Auth::user()->hasRole('ap') && !Auth::user()->hasRole('dco'))
+                        <li><a href="/layanansbps">Layanan SBP</a></li>
+                      @endif
+
                       </ul>
                     </li>
-                    <li><a href="/backhaulswitches">Perangkat SBP</a></li>
+
+                    @if(Auth::user()->hasRole('noc') || Auth::user()->hasRole('admin'))
+                      <li><a href="/backhaulswitches">Perangkat SBP</a></li>
+                    @endif
 
                   @endif
 

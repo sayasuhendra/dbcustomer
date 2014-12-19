@@ -50,10 +50,14 @@
                         <dd>{{{ $customer->alamat }}}</dd>
                         <dt>Level Customer</dt>
                         <dd>{{{ $customer->level }}}</dd>
-                        <dt>NPWP</dt>
-                        <dd>{{{ $customer->npwp }}}</dd>
-                        <dt>Alamat NPWP</dt>
-                        <dd>{{{ $customer->alamatnpwp }}}</dd>
+
+                        @if (! Auth::user()->hasRole('noc'))
+                          <dt>NPWP</dt>
+                          <dd>{{{ $customer->npwp }}}</dd>
+                          <dt>Alamat NPWP</dt>
+                          <dd>{{{ $customer->alamatnpwp }}}</dd>
+                        @endif
+
                         <dt>Area</dt>
                         <dd>{{{ $customer->area }}}</dd>
                         <dt>Status</dt>
@@ -130,34 +134,69 @@
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <h3 class="panel-title pull-left">Daftar Contact Customer</h3>
-
-                  @if(Auth::user()->hasRole('admin'))
-
                     <div class="btn-group pull-right">
                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#TambahCustomerContact"><i class="glyphicon glyphicon-plus"></i></button>
                     </div>
-
-                  @endif
-
                     <div class="clearfix"></div>
                 </div>
                 <div class="panel-body">
               <dl class="dl-horizontal">
               @foreach ($contacts as $contact)
-                <dt>Bagian {{{ $contact->bagian }}}</dt>
-                <dd>
-                    <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
 
-                    @if(Auth::user()->hasRole('admin'))
+                @if ( $contact->bagian === "Billing" && !Auth::user()->hasRole('noc') )
+                  <dt>Bagian {{{ $contact->bagian }}}</dt>
+                  <dd>
+                      <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
 
-                      <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
-                      {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
-                        {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
-                      {{ Form::close() }}
 
-                    @endif
+                      @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
 
-                </dd>
+                        <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+                        {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+                          {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+                        {{ Form::close() }}
+
+                      @endif
+
+                  </dd>
+                @endif
+
+                @if ( $contact->bagian === "Teknis" && ( !Auth::user()->hasRole('ar') && !Auth::user()->hasRole('ap') ) )
+                  <dt>Bagian {{{ $contact->bagian }}}</dt>
+                  <dd>
+                      <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
+
+
+                      @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
+
+                        <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+                        {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+                          {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+                        {{ Form::close() }}
+
+                      @endif
+
+                  </dd>
+                @endif
+
+                @if ( $contact->bagian !== "Teknis" && $contact->bagian !== "Billing")
+                  <dt>Bagian {{{ $contact->bagian }}}</dt>
+                  <dd>
+                      <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
+
+                      @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
+
+                        <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+                        {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
+                          {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+                        {{ Form::close() }}
+
+                      @endif
+
+                  </dd>
+                @endif
+
+
               @endforeach
                       </dl>
                 </div>
@@ -193,11 +232,9 @@
        <h3 class="panel-title pull-left">Data Layanan SBP</h3>
 
        @if(Auth::user()->hasRole('admin'))
-
-       <div class="btn-group pull-right">
-           <a href="{{ URL::route('layanansbps.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
-       </div>
-
+         <div class="btn-group pull-right">
+             <a href="{{ URL::route('layanansbps.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+         </div>
        @endif
 
        <div class="clearfix"></div>
@@ -216,8 +253,12 @@
                     <th>Tipe</th>
                     <th>Jenis</th>
                     <th>Pemilik</th>
-                    <th>NRC</th>
-                    <th>MRC</th>
+
+                    @if (! Auth::user()->hasRole('noc'))
+                      <th>NRC</th>
+                      <th>MRC</th>
+                    @endif
+
                     <th>Area</th>
                     <th>Status</th>
                     <th>Start Date</th>
@@ -237,8 +278,12 @@
                       <td>{{{ $layanansbp->tipe }}}</td>
                       <td>{{{ $layanansbp->jenis }}}</td>
                       <td>{{{ $layanansbp->pemilik }}}</td>
-                      <td>{{{ $layanansbp->nrc }}} {{{ $layanansbp->currency }}}</td>
-                      <td>{{{ $layanansbp->mrc }}} {{{ $layanansbp->currency }}}</td>
+
+                      @if (! Auth::user()->hasRole('noc'))
+                        <td>{{{ $layanansbp->nrc }}} {{{ $layanansbp->currency }}}</td>
+                        <td>{{{ $layanansbp->mrc }}} {{{ $layanansbp->currency }}}</td>
+                      @endif
+
                       <!-- <td>{{{ $layanansbp->present()->mrcCircuit }}}</td> -->
                       <td>{{{ $layanansbp->area }}}</td>
                       <td>
@@ -299,12 +344,20 @@
                             <th>Alamat</th>
                             <th>Layanan</th>
                             <th>BW</th>
-                            <th>MRC Circuit</th>
+
+                            @if (! Auth::user()->hasRole('noc'))
+                              <th>MRC Circuit</th>
+                            @endif
+
                             <th>Nama Backhaul</th>
                             <th>Cir ID Vendor</th>
                             <th>Nama Vendor</th>
-                            <th>MRC Vendor</th>
-                            <th>Margin</th>
+
+                            @if (! Auth::user()->hasRole('noc'))
+                              <th>MRC Vendor</th>
+                              <th>Margin</th>
+                            @endif
+                            
                             <th>Status</th>
                             <th>Start Date</th>
                             <th width="100px">Action</th>
@@ -326,12 +379,20 @@
                                 <td>{{{ $costumercircuit->alamat }}}</td>
                                 <td>{{{ $costumercircuit->layanan }}}</td>
                                 <td>{{{ $costumercircuit->bandwidth }}} {{{ $costumercircuit->satuan }}}</td>
-                                <td>{{{ $costumercircuit->present()->mrcCircuit }}}</td>
+
+                                @if (! Auth::user()->hasRole('noc'))
+                                  <td>{{{ $costumercircuit->present()->mrcCircuit }}}</td>
+                                @endif
+
                                 <td>{{{ $costumercircuit->namabackhaul }}}</td>
                                 <td>{{{ $costumercircuit->circuitidlastmile }}}</td>
                                 <td> {{{ $costumercircuit->namavendor }}} </td>
-                                <td> {{{ $costumercircuit->present()->mrclastmile }}} </td>
-                                <td> {{{ $costumercircuit->present()->untung }}} </td>
+
+                                @if (! Auth::user()->hasRole('noc'))
+                                  <td> {{{ $costumercircuit->present()->mrclastmile }}} </td>
+                                  <td> {{{ $costumercircuit->present()->untung }}} </td>
+                                @endif
+
                                 <td>
                                     @if ( $costumercircuit->status == 'Aktif' )
                                         <span class="label label-success">{{{ $costumercircuit->status }}}</span>
@@ -358,16 +419,19 @@
                             </tr>
                         @endforeach                            
                 </tbody>
-                <tfoot>
-                <?php $totaluntung = $totalmrccircuit - $totalmrcvendor ?>
-                  <tr>
-                    <td colspan="5" style="text-align: right;">Total MRC Circuit</td>
-                    <td>{{{ $totalmrccircuit }}}</td>
-                    <td colspan="3" style="text-align: right;">Total MRC Vendor</td>
-                    <td>{{{ $totalmrcvendor }}}</td>
-                    <td colspan="4"><b>{{{ $totaluntung }}} Total Margin</b></td>
-                  </tr>
-                </tfoot>
+
+                @if (! Auth::user()->hasRole('noc'))
+                  <tfoot>
+                  <?php $totaluntung = $totalmrccircuit - $totalmrcvendor ?>
+                    <tr>
+                      <td colspan="5" style="text-align: right;">Total MRC Circuit</td>
+                      <td>{{{ $totalmrccircuit }}}</td>
+                      <td colspan="3" style="text-align: right;">Total MRC Vendor</td>
+                      <td>{{{ $totalmrcvendor }}}</td>
+                      <td colspan="4"><b>{{{ $totaluntung }}} Total Margin</b></td>
+                    </tr>
+                  </tfoot>
+                @endif
                     
                  
               </table>

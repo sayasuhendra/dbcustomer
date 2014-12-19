@@ -44,7 +44,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Data Customer Circuit 
 
-                    @if(Auth::user()->hasRole('admin'))
+                    @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                         <a href="{{ URL::route('costumercircuits.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                         <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a> 
@@ -82,10 +82,13 @@
                         </dd>
                         <dt>Keterangan</dt>
                         <dd>{{{ $costumercircuit->keteranganck }}}</dd>
-                        <dt>NRC</dt>
-                        <dd>{{{ $costumercircuit->present()->nrcCircuit }}}</dd>
-                        <dt>MRC</dt>
-                        <dd>{{{ $costumercircuit->present()->mrcCircuit }}}</dd>
+
+                        @if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap'))
+                          <dt>NRC</dt>
+                          <dd>{{{ $costumercircuit->present()->nrcCircuit }}}</dd>
+                          <dt>MRC</dt>
+                          <dd>{{{ $costumercircuit->present()->mrcCircuit }}}</dd>
+                        @endif
 
                       </dl>
                 </div>
@@ -139,11 +142,12 @@
 <!-- Modal Create Perangkat End -->
 
 
+            @if ( !Auth::user()->hasRole('ar') && !Auth::user()->hasRole('sales') )
               <div class="panel panel-primary">
                   <div class="panel-heading">
                     <h3 class="panel-title">Daftar Perangkat di Site
 
-                    @if(Auth::user()->hasRole('admin'))
+                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                       <button class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahPerangkatCircuit"></button>
 
@@ -157,7 +161,7 @@
                   <dt>{{{ $perangkat->namaperangkat }}} Milik {{{ $perangkat->pemilik }}} </dt>
                   <dd>Type: {{{ $perangkat->tipe }}}, Serial: {{{ $perangkat->serialnumber }}}, Jenis: {{{ $perangkat->jenis }}}
 
-                  @if(Auth::user()->hasRole('admin'))
+                  @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                   <a href="{{ URL::route('costumercircuitperangkats.edit', array($perangkat->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
                   
@@ -173,6 +177,7 @@
                         </dl>
                   </div>
                 </div>
+            @endif
                           
                 
               
@@ -183,7 +188,7 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">Data Lastmile Circuit Vendor
 
-                  @if(Auth::user()->hasRole('admin'))
+                  @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                     <a href="{{ URL::route('lastmiles.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                     <a href="{{ URL::route('lastmiles.edit', array($lastmile->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
@@ -224,10 +229,14 @@
                     </dd>
                     <dt>Kawasan</dt>
                     <dd>{{{ $lastmile->kawasan }}}</dd> 
-                    <dt>NRC</dt>
-                    <dd>{{{ $lastmile->present()->nrc }}}</dd>
-                    <dt>MRC</dt>
-                    <dd>{{{ $lastmile->present()->mrc }}}</dd>
+
+                    @if ( !Auth::user()->hasRole('noc') )
+                      <dt>NRC</dt>
+                      <dd>{{{ $lastmile->present()->nrc }}}</dd>
+                      <dt>MRC</dt>
+                      <dd>{{{ $lastmile->present()->mrc }}}</dd>
+                    @endif
+
                   </dl>
                 </div>
               </div>
@@ -294,7 +303,7 @@
                                 <div class="panel-heading">
                                   <h3 class="panel-title">Data ADSL
 
-                                  @if(Auth::user()->hasRole('admin'))
+                                  @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                                   {{ Form::open(array('data-remote', 'method' => 'DELETE', 'route' => array('adsls.destroy', $costumercircuit->adsls->id)))}}
                                     <button class="pull-right btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
@@ -377,7 +386,7 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">Daftar Contact Circuit Customer
 
-                  @if(Auth::user()->hasRole('admin'))
+                  @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                     <button class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahContactCircuit"></button>
 
@@ -392,7 +401,7 @@
                 <dd>
                   <a id="contactButton{{{ $contact->id }}}" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}} | {{{ $contact->telepon }}}" data-content="{{{ $contact->keterangan }}} "> {{{ $contact->cp }}} | {{{ $contact->jabatan }}} </a>
 
-                  @if(Auth::user()->hasRole('admin'))
+                  @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                     <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
                     {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
@@ -444,7 +453,7 @@
                   <div class="panel-heading">
                     <h3 class="panel-title">Data Customer
 
-                    @if(Auth::user()->hasRole('admin'))
+                    @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                       <a href="{{ URL::route('customers.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                       <a href="{{ URL::route('customers.edit', array($customer->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
@@ -494,7 +503,7 @@
                   <div class="panel-heading">
                     <h3 class="panel-title">Data Vendor
 
-                    @if(Auth::user()->hasRole('admin'))
+                    @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                       <a href="{{ URL::route('vendors.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                       <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
@@ -526,7 +535,7 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">Data Backhaul Circuit Vendor
 
-                  @if(Auth::user()->hasRole('admin'))
+                  @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                     <a href="{{ URL::route('backhauls.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
                     <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
@@ -554,10 +563,14 @@
                     <dd>{{{ $backhaul->bandwidth }}}</dd>               
                     <dt>Start Date</dt>
                     <dd>{{{ $backhaul->present()->startDateShow }}}</dd>
-                    <dt>NRC</dt>
-                    <dd>{{{ $backhaul->present()->nrc }}}</dd>
-                    <dt>MRC</dt>
-                    <dd>{{{ $backhaul->present()->mrc }}}</dd>
+
+                    @if ( !Auth::user()->hasRole('noc') )
+                      <dt>NRC</dt>
+                      <dd>{{{ $backhaul->present()->nrc }}}</dd>
+                      <dt>MRC</dt>
+                      <dd>{{{ $backhaul->present()->mrc }}}</dd>
+                    @endif
+
                   </dl>
                 </div>
               </div>

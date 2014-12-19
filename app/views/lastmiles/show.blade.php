@@ -25,15 +25,18 @@
 					    <dl class="dl-horizontal">
 						    <dt>Circuit ID Vendor</dt>
 						    <dd>{{{ $lastmile->circuitidlastmile }}}</dd>
+
+						    @if ( !Auth::user()->hasRole('ap') && !Auth::user()->hasRole('sales') )
+								<dt>VLAN ID</dt>
+								<dd>{{{ $lastmile->vlanid }}}</dd>
+								<dt>VLAN ID Name</dt>
+								<dd>{{{ $lastmile->vlanname }}}</dd>
+								<dt>IP Address PTP</dt>
+								<dd>{{{ $lastmile->ipaddressptp }}}</dd>
+								<dt>IP Public Cust</dt>
+								<dd>{{{ $lastmile->blockippubliccustomer }}}</dd>
+						    @endif
 						    
-							<dt>VLAN ID</dt>
-							<dd>{{{ $lastmile->vlanid }}}</dd>
-							<dt>VLAN ID Name</dt>
-							<dd>{{{ $lastmile->vlanname }}}</dd>
-							<dt>IP Address PTP</dt>
-							<dd>{{{ $lastmile->ipaddressptp }}}</dd>
-							<dt>IP Public Cust</dt>
-							<dd>{{{ $lastmile->blockippubliccustomer }}}</dd>
 							<dt>Layanan</dt>
 							<dd>{{{ $lastmile->layanan }}}</dd>
 							<dt>Bandwidth</dt>
@@ -42,10 +45,14 @@
 							<dd>{{{ $lastmile->kawasan }}}</dd>	
 							<dt>Keterangan</dt>
 							<dd>{{{ $lastmile->keterangan }}}</dd>
-							<dt>NRC</dt>
-							<dd>{{{ $lastmile->present()->nrc }}}</dd>
-							<dt>MRC</dt>
-							<dd>{{{ $lastmile->present()->mrc }}}</dd>
+
+							@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('sales') )
+								<dt>NRC</dt>
+								<dd>{{{ $lastmile->present()->nrc }}}</dd>
+								<dt>MRC</dt>
+								<dd>{{{ $lastmile->present()->mrc }}}</dd>
+							@endif
+
 							<dt>Start Date</dt>
 							<dd>{{{ $lastmile->present()->startDateShow }}}</dd>
 							<dt>Account Manager</dt>
