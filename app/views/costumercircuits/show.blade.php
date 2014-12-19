@@ -183,7 +183,11 @@
               
             </div>
 
+          @if(!Auth::user()->hasRole('ar'))
+
             <div class="col-md-4">
+
+
               <div class="panel panel-info">
                 <div class="panel-heading">
                   <h3 class="panel-title">Data Lastmile Circuit Vendor
@@ -240,6 +244,7 @@
                   </dl>
                 </div>
               </div>
+
 
               @if( $costumercircuit->layanan === "ADSL" )
 
@@ -331,6 +336,9 @@
 
               
           </div>
+
+          @endif
+          
 
           <!-- Modal Create Contact -->
 
@@ -530,51 +538,55 @@
                 </div>
               </div>
 
+              @if(Auth::user()->hasRole('noc') || Auth::user()->hasRole('admin'))
+
               <div class="col-md-4">
                 <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Data Backhaul Circuit Vendor
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Data Backhaul Circuit Vendor
 
-                  @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
+                    @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                    <a href="{{ URL::route('backhauls.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
-                    <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+                      <a href="{{ URL::route('backhauls.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
+                      <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
 
-                  @endif
-                  
-                    <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
-                  </h3>
-                </div>
-                <div class="panel-body">
-                  <dl class="dl-horizontal">
-                    <dt>Nama Vendor</dt>
-                    <dd>{{{ $backhaul->namavendor }}}</dd>
-                    <dt>Circuit ID</dt>
-                    <dd>{{{ $backhaul->circuitidbackhaul }}}</dd>
-                    <dt>Nama Backhaul</dt>
-                    <dd>{{{ $backhaul->nama }}}</dd>
-                    <dt>Lokasi XConnect</dt>
-                    <dd>{{{ $backhaul->switches->lokasi }}}</dd>
-                    <dt>Switch SBP</dt>
-                    <dd>{{{ $backhaul->switchterkoneksi }}}</dd>
-                    <dt>Port Terkoneksi</dt>
-                    <dd>{{{ $backhaul->portterkoneksi }}}</dd>
-                    <dt>Bandwidth</dt>
-                    <dd>{{{ $backhaul->bandwidth }}}</dd>               
-                    <dt>Start Date</dt>
-                    <dd>{{{ $backhaul->present()->startDateShow }}}</dd>
-
-                    @if ( !Auth::user()->hasRole('noc') )
-                      <dt>NRC</dt>
-                      <dd>{{{ $backhaul->present()->nrc }}}</dd>
-                      <dt>MRC</dt>
-                      <dd>{{{ $backhaul->present()->mrc }}}</dd>
                     @endif
+                    
+                      <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
+                    </h3>
+                  </div>
+                  <div class="panel-body">
+                    <dl class="dl-horizontal">
+                      <dt>Nama Vendor</dt>
+                      <dd>{{{ $backhaul->namavendor }}}</dd>
+                      <dt>Circuit ID</dt>
+                      <dd>{{{ $backhaul->circuitidbackhaul }}}</dd>
+                      <dt>Nama Backhaul</dt>
+                      <dd>{{{ $backhaul->nama }}}</dd>
+                      <dt>Lokasi XConnect</dt>
+                      <dd>{{{ $backhaul->switches->lokasi }}}</dd>
+                      <dt>Switch SBP</dt>
+                      <dd>{{{ $backhaul->switchterkoneksi }}}</dd>
+                      <dt>Port Terkoneksi</dt>
+                      <dd>{{{ $backhaul->portterkoneksi }}}</dd>
+                      <dt>Bandwidth</dt>
+                      <dd>{{{ $backhaul->bandwidth }}}</dd>               
+                      <dt>Start Date</dt>
+                      <dd>{{{ $backhaul->present()->startDateShow }}}</dd>
 
-                  </dl>
+                      @if ( !Auth::user()->hasRole('noc') )
+                        <dt>NRC</dt>
+                        <dd>{{{ $backhaul->present()->nrc }}}</dd>
+                        <dt>MRC</dt>
+                        <dd>{{{ $backhaul->present()->mrc }}}</dd>
+                      @endif
+
+                    </dl>
+                  </div>
                 </div>
               </div>
-              </div>
+
+              @endif
 </div>
 
 <script type="text/javascript">
