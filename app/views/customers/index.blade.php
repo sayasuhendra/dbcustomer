@@ -4,7 +4,7 @@
 
 <h2 align="center">Daftar Data Customers</h2>
 
-@if(Auth::user()->hasRole('editor'))
+@if(Auth::user()->hasRole('editor') || Auth::user()->hasRole('admin'))
 
 	<p>{{ link_to_route('customers.create', 'Add Customer', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 
