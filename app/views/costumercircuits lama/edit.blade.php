@@ -111,13 +111,13 @@
                     <div class="form-group">
                         {{ Form::label('nrc', 'NRC:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                            {{ Form::input('number', 'nrc', $costumercircuit->biayas->nrc, ['class' => 'form-control']) }}
+                            {{ Form::text('nrc', $costumercircuit->biayas->nrc, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">
                         {{ Form::label('mrc', 'MRC:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                            {{ Form::input('number', 'mrc', $costumercircuit->biayas->mrc, ['class' => 'form-control']) }}
+                            {{ Form::text('mrc', $costumercircuit->biayas->mrc, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">

@@ -53,13 +53,13 @@
                     <div class="form-group">
                         {{ Form::label('nrc', 'NRC:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                            {{ Form::input('number', 'nrc', $backhaul->biayas->nrc, ['class' => 'form-control']) }}
+                            {{ Form::text('nrc', $backhaul->biayas->nrc, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">
                         {{ Form::label('mrc', 'MRC:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                            {{ Form::input('number', 'mrc', $backhaul->biayas->mrc, ['class' => 'form-control']) }}
+                            {{ Form::text('mrc', $backhaul->biayas->mrc, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">

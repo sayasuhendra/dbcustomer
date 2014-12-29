@@ -2,9 +2,6 @@
 
 @section('style-atas')
 
-
-
-
 <style>
     a:hover {
      cursor:pointer;
