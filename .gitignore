@@ -5,6 +5,7 @@
 /vendor
 /catatan
 /app/views/costumercircuits lama/
+_ide_helper.php
 composer.phar
 composer.lock
 .env.*.php
