@@ -8,6 +8,7 @@
             $("#customer_id").select2();
             $("#namavendor").select2();
             $("#namabackhaul").select2();
+            $("#circuitidlastmile").select2();
             
 
         });
