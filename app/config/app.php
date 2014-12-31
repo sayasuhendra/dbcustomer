@@ -122,7 +122,6 @@ return array(
         'Way\Generators\GeneratorsServiceProvider',
         'Laracasts\Validation\ValidationServiceProvider',
         'Clockwork\Support\Laravel\ClockworkServiceProvider',
-		'Khill\Lavacharts\LavachartsServiceProvider',
 		'Intervention\Image\ImageServiceProvider'
 	),
 

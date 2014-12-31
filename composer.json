@@ -9,7 +9,6 @@
 		"thujohn/pdf": "dev-master",
 		"laracasts/presenter": "0.1.*",
 		"itsgoingd/clockwork": "1.*",
-		"khill/lavacharts" : "dev-master",
 		"intervention/image": "~2.0"
 	},
 	"autoload": {
