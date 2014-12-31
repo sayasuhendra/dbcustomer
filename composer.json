@@ -6,7 +6,6 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"laracasts/validation": "1.*",
-		"maatwebsite/excel": "~1.0",
 		"thujohn/pdf": "dev-master",
 		"laracasts/presenter": "0.1.*",
 		"itsgoingd/clockwork": "1.*",

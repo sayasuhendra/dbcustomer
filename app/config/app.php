@@ -121,7 +121,6 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Way\Generators\GeneratorsServiceProvider',
         'Laracasts\Validation\ValidationServiceProvider',
-        'Maatwebsite\Excel\ExcelServiceProvider',
         'Clockwork\Support\Laravel\ClockworkServiceProvider',
 		'Khill\Lavacharts\LavachartsServiceProvider',
 		'Intervention\Image\ImageServiceProvider'
