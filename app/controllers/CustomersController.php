@@ -110,8 +110,18 @@ class CustomersController extends BaseController {
 		$totalmrcvendor = 0;
 		$totalmrccircuit = 0;
 		$totaluntung = 0;
-		$kurs =  json_decode(file_get_contents('http://www.adisurya.net/kurs-bca/get?MataUang=USD'));		
-		$kursjual = rupiah($kurs->Data->USD->Jual);
+		
+		if(@file_get_contents('http://www.adisurya.net/kurs-bca/get?MataUang=USD')){
+
+			$kurs =  json_decode(file_get_contents('http://www.adisurya.net/kurs-bca/get?MataUang=USD'));
+			$kursharini = $kurs->Data->USD->Jual;
+			$kursjual = rupiah($kursharini);
+			
+		} else {
+
+			$kursjual = "Web Sumber Error";
+
+		}
 				
 		return View::make('customers.show', ['kursjual' => $kursjual, 'totaluntung' => $totaluntung, 'totalmrccircuit' => $totalmrccircuit, 'totalmrcvendor' => $totalmrcvendor, 'customer' => $customer, 'contacts' => $contacts, 'costumercircuits' => $costumercircuits, 'layanansbps' => $layanansbps, 'biayas' => $biayas]);
 	}
