@@ -393,17 +393,15 @@
 	    		<thead>
 	    			<tr>
 	    				<th>Circuit ID Vendor</th>
-	    				<th>Start Date</th>
-	    				<th>VLAN ID</th>
-	    				<th>VLAN ID Name</th>
+	    				<th>MRC Vendor</th>
+	    				<th>Circuit ID Customer</th>
+	    				<th>Alamat Circuit Customer</th>
 	    				<th>IP Address PTP</th>
 	    				<th>IP Public Cust</th>
 	    				<th>Layanan</th>
 	    				<th>Bandwidth</th>
 	    				<th>Status</th>
 	    				<th>Kawasan</th>
-	    				<th>Nama Vendor</th>
-	    				<th>Cir ID Backhaul</th>
 	    				<th width="100px">Action</th>
 	    			</tr>
 	    		</thead>
@@ -412,9 +410,9 @@
 	    			@foreach ($vendor->lastmiles as $lastmile)
 	    				<tr>
 	    					<td>{{{ $lastmile->circuitidlastmile }}}</td>
-	    					<td>{{{ $lastmile->activated_at }}}</td>
-	    					<td>{{{ $lastmile->vlanid }}}</td>
-	    					<td>{{{ $lastmile->vlanname }}}</td>
+	    					<td>{{{ $lastmile->biayas->mrc }}}</td>
+	    					<td>{{{ $lastmile->circuits->circuitid }}}</td>
+	    					<td>{{{ $lastmile->circuits->alamat }}}</td>
 	    					<td>{{{ $lastmile->ipaddressptp }}}</td>
 	    					<td>{{{ $lastmile->blockippubliccustomer }}}</td>
 	    					<td>{{{ $lastmile->layanan }}}</td>
@@ -429,8 +427,6 @@
 	    						@endif
 	    					</td>
 	    					<td>{{{ $lastmile->kawasan }}}</td>
-	    					<td>{{{ $lastmile->namavendor }}}</td>
-	    					<td>{{{ $lastmile->namabackhaul }}}</td>
 	                       
 	                        <td class="ac">
 	                        <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>

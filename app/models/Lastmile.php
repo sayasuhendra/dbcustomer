@@ -21,7 +21,7 @@ class Lastmile extends Eloquent {
 
 	public function circuits()
 	{
-		return $this->hasMany('Costumercircuit', 'circuitidlastmile', 'circuitidlastmile');
+		return $this->hasOne('Costumercircuit', 'circuitidlastmile', 'circuitidlastmile');
 	}
 
 	public function backhauls()
