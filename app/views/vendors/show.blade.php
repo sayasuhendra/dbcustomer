@@ -393,6 +393,7 @@
 	    		<thead>
 	    			<tr>
 	    				<th>Circuit ID Vendor</th>
+	    				<th>Nama Site</th>
 	    				<th>Circuit ID Customer</th>
 	    				<th>Alamat Circuit Customer</th>
 	    				<th>IP Address PTP</th>
@@ -400,7 +401,6 @@
 	    				<th>Layanan</th>
 	    				<th>Bandwidth</th>
 	    				<th>Status</th>
-	    				<th>Nama Site</th>
 	    				<th>Kawasan</th>
 	    				<th width="100px">Action</th>
 	    			</tr>
@@ -410,6 +410,7 @@
 	    			@foreach ($vendor->lastmiles as $lastmile)
 	    				<tr>
 	    					<td>{{{ $lastmile->circuitidlastmile }}}</td>
+	    					<td>{{{ $lastmile->circuits->namasite }}}</td>
 	    					<td>{{{ $lastmile->circuits->circuitid }}}</td>
 	    					<td>{{{ $lastmile->circuits->alamat }}}</td>
 	    					<td>{{{ $lastmile->ipaddressptp }}}</td>
@@ -425,7 +426,6 @@
 	    							<span class="label label-warning">{{{ $lastmile->status }}}</span>
 	    						@endif
 	    					</td>
-	    					<td>{{{ $lastmile->circuits->namasite }}}</td>
 	    					<td>{{{ $lastmile->kawasan }}}</td>
 	                       
 	                        <td class="ac">
