@@ -401,6 +401,7 @@
 	    				<th>Layanan</th>
 	    				<th>Bandwidth</th>
 	    				<th>Status</th>
+	    				<th>MRC Lastmile</th>
 	    				<th>Kawasan</th>
 	    				<th width="100px">Action</th>
 	    			</tr>
@@ -426,6 +427,7 @@
 	    							<span class="label label-warning">{{{ $lastmile->status }}}</span>
 	    						@endif
 	    					</td>
+	    					<td>{{{ $lastmile->biayas->mrc }}}</td>
 	    					<td>{{{ $lastmile->kawasan }}}</td>
 	                       
 	                        <td class="ac">
