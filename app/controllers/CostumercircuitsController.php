@@ -200,7 +200,7 @@ class CostumercircuitsController extends BaseController {
 			$costumercircuit->update($input);
 			$costumercircuit->biayas()->update($inputbiaya);
 
-			return Redirect::route('costumercircuits.show', $id);
+			return Redirect::route('costumercircuits.index');
 		}
 
 		return Redirect::route('costumercircuits.edit', $id)

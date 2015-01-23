@@ -155,7 +155,7 @@ class LastmilesController extends BaseController {
 			$lastmile = $this->lastmile->find($id);
 			$lastmile->update($inputlastmile);
 			$lastmile->biayas()->update($inputbiaya);
-			return Redirect::route('lastmiles.show', $id);
+			return Redirect::route('lastmiles.index');
 		}
 
 		return Redirect::route('lastmiles.edit', $id)
