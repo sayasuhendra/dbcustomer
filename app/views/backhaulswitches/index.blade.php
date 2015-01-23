@@ -2,7 +2,7 @@
 
 @section('main')
 
-<h2 align="center">Daftar Data Switches SBP</h2>
+<h2 align="center">Daftar Data Perangkat SBP</h2>
 
 <p>{{ link_to_route('backhaulswitches.create', 'Add Switch', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 

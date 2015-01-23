@@ -17,7 +17,7 @@
 				<th>Nama Vendor</th>
 				<th>Nama Backhaul</th>
 				<th>Lokasi XConnect</th>
-				<th>Switch Terkoneksi</th>
+				<th>Perangkat Terkoneksi</th>
 				<th>Port Terkoneksi</th>
 				<th>Bandwidth</th>
 
