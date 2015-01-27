@@ -217,7 +217,6 @@
 	      <div class="clearfix"></div>
 	      </div>
 
-
 	    @if ($vendor->backhauls->count())
 	    	<table id="tabelbackhaul" class="table table-striped table-bordered">
 	    		<thead>
@@ -279,10 +278,9 @@
 	    	Belum ada data backhauls
 	    @endif
 
+	    <div class="btn" style="margin-bottom: 30px;"></div>
+
 	    </div>
-
-
-
 
 
 	    <div class="panel panel-info">
@@ -410,14 +408,14 @@
 	    		<tbody>
 	    			@foreach ($vendor->lastmiles as $lastmile)
 	    				<tr>
-	    					<td>{{{ $lastmile->circuitidlastmile }}}</td>
-	    					<td>{{{ $lastmile->circuits->namasite }}}</td>
-	    					<td>{{{ $lastmile->circuits->circuitid }}}</td>
-	    					<td>{{{ $lastmile->circuits->alamat }}}</td>
-	    					<td>{{{ $lastmile->ipaddressptp }}}</td>
-	    					<td>{{{ $lastmile->blockippubliccustomer }}}</td>
-	    					<td>{{{ $lastmile->layanan }}}</td>
-	    					<td>{{{ $lastmile->bandwidth }}} {{{ $lastmile->satuan }}}</td>
+	    					<td>{{{ $lastmile->circuitidlastmile or "Kosong" }}}</td>
+	    					<td>{{{ $lastmile->circuits->namasite or "kosong" }}}</td>
+	    					<td>{{{ $lastmile->circuits->circuitid or "Kosong" }}}</td>
+	    					<td>{{{ $lastmile->circuits->alamat or "Kosong" }}}</td>
+	    					<td>{{{ $lastmile->ipaddressptp or "Kosong" }}}</td>
+	    					<td>{{{ $lastmile->blockippubliccustomer or "Kosong" }}}</td>
+	    					<td>{{{ $lastmile->layanan or "Kosong" }}}</td>
+	    					<td>{{{ $lastmile->bandwidth or "Kosong" }}} {{{ $lastmile->satuan or "Kosong" }}}</td>
 	    					<td>
 	    						@if ( $lastmile->status == 'Aktif' )
 	    							<span class="label label-success">{{{ $lastmile->status }}}</span>
@@ -428,7 +426,7 @@
 	    						@endif
 	    					</td>
 	    					<td>{{{ $lastmile->biayas->mrc or "Kosong"}}}</td>
-	    					<td>{{{ $lastmile->kawasan }}}</td>
+	    					<td>{{{ $lastmile->kawasan or "Kosong" }}}</td>
 	                       
 	                        <td class="ac">
 	                        <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
@@ -450,6 +448,8 @@
 	    @else
 	    	Belum ada data lastmiles
 	    @endif
+	    <div class="btn" style="margin-bottom: 30px;"></div>
+	    
 	    </div>
 	    </div>
 
@@ -460,5 +460,71 @@
         	@endforeach        	
         	
         </script>
+
+@stop
+
+
+
+@section('script-bawah')
+
+<script type="text/javascript" language="javascript" class="init">
+    $(document).ready(function() {
+    	$('#tabelbackhaul').DataTable( {
+        	"dom": 'T<"clear">lfrtip',
+        	"oTableTools": {
+        	            "aButtons": [
+        	                {
+        	                    "sExtends": "pdf",
+        	                    "sPdfOrientation": "landscape",
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+        	                },
+        	                {
+        	                    "sExtends": "xls",
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+        	                },
+        	                {
+        	                    "sExtends": "csv",
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+        	                },
+        	                {
+        	                    "sExtends": "copy",
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+        	                },
+        	                "print"
+
+        	            ]
+        	        }
+        } );
+    } );
+
+$(document).ready(function() {
+	$('#lastmiletable').DataTable( {
+    	"dom": 'T<"clear">lfrtip',
+    	"oTableTools": {
+    	            "aButtons": [
+    	                {
+    	                    "sExtends": "pdf",
+    	                    "sPdfOrientation": "landscape",
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+    	                },
+    	                {
+    	                    "sExtends": "xls",
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+    	                },
+    	                {
+    	                    "sExtends": "csv",
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+    	                },
+    	                {
+    	                    "sExtends": "copy",
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+    	                },
+    	                "print"
+
+    	            ]
+    	        }
+    } );
+} );
+</script>
 
 @stop
