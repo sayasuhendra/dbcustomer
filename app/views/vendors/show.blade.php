@@ -329,10 +329,10 @@
 	    					<td>{{{ $layanan->keterangan }}}</td>
 
 	    					@if (! Auth::user()->hasRole('noc'))
-		    					<td>{{{ $layanan->nrc  }}} 
+		    					<td>{{{ $layanan->nrc or "kosong"  }}} 
 		    					{{{ $layanan->currency }}}
 		    					</td>
-		    					<td>{{{ $layanan->mrc  }}} 
+		    					<td>{{{ $layanan->mrc or "kosong"  }}} 
 		    					{{{ $layanan->currency }}}</td>
 	    					@endif
 
@@ -427,7 +427,7 @@
 	    							<span class="label label-warning">{{{ $lastmile->status }}}</span>
 	    						@endif
 	    					</td>
-	    					<td>{{{ $lastmile->biayas->mrc }}}</td>
+	    					<td>{{{ $lastmile->biayas->mrc or "Kosong"}}}</td>
 	    					<td>{{{ $lastmile->kawasan }}}</td>
 	                       
 	                        <td class="ac">
