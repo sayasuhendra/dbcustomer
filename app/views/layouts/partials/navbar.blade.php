@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"> <img src="\assets\images\logosm.png" alt="logo sbp"></a>
+            <a class="navbar-brand" href="/"> <img src="/assets/images/logosm.png" alt="logo sbp"></a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
