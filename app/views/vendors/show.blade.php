@@ -257,8 +257,8 @@
 	    					<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
 
 	    					@if (! Auth::user()->hasRole('noc'))
-		    					<td>{{{ number_format($backhaul->biayas->nrc ,2,',','.') }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
-		    					<td>{{{ number_format($backhaul->biayas->mrc ,2,',','.')  }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
+		    					<td>{{{ $backhaul->biayas->nrc  or "Kosong" }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
+		    					<td>{{{ $backhaul->biayas->mrc  or "Kosong" }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
 	    					@endif
 
 	    					<td>{{{ $backhaul->activated_at }}}</td>
