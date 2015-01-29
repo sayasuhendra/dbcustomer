@@ -257,8 +257,8 @@
 	    					<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
 
 	    					@if (! Auth::user()->hasRole('noc'))
-		    					<td>{{{ $backhaul->biayas->nrc  or "Kosong" }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
-		    					<td>{{{ $backhaul->biayas->mrc  or "Kosong" }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
+		    					<td>{{{ $backhaul->biayas->nrc or "Kosong" }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
+		    					<td>{{{ $backhaul->biayas->mrc or "Kosong" }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
 	    					@endif
 
 	    					<td>{{{ $backhaul->activated_at }}}</td>
@@ -431,7 +431,7 @@
 	    							<span class="label label-warning">{{{ $lastmile->status }}}</span>
 	    						@endif
 	    					</td>
-	    					<td>{{{ number_format($lastmile->biayas->mrc ,2,',','.') . " " . $lastmile->biayas->currency }}}</td>
+	    					<td>{{{ $lastmile->biayas->mrc or "Kosong" }}} {{{ $lastmile->biayas->currency or "Kosong" }}}</td>
 	    					<td>{{{ $lastmile->kawasan or "Kosong" }}}</td>
 	                       
 	                        <td class="ac">
