@@ -1,13 +1,15 @@
 @extends('layouts/scaffold')
 
 @section('main')
+
 	@if ($user->profile)
-<div class="panel panel-primary">
-	<div class="panel-heading">
-	  <h3 class="panel-title pull-left" align="center">Data Lengkap {{ $user->nama_lengkap }}</h3>
-	  <div class="clearfix"></div>
+	
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+		  <h3 class="panel-title pull-left" align="center">Data Lengkap {{ $user->nama_lengkap }}</h3>
+		  <div class="clearfix"></div>
+		</div>
 	</div>
-</div>
 
 	<div class="col-md-3">
 		<img src="{{ asset('foto/' . $user->profile->foto) }}" class="img-responsive img-thumbnail" alt="{{{ $user->profile->foto }}}">

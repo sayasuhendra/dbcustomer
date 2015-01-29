@@ -91,7 +91,7 @@ Route::filter('currentUser', function($route)
 
 Route::filter('role', function($route, $request, $role){
 	if (Auth::guest() or ! Auth::user()->hasRole($role)) {
-		App::abort(403);
+		return View::make('pages/norole');
 	}
 
 });

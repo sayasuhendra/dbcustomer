@@ -42,7 +42,7 @@ class ProfilesController extends BaseController {
 	{
 		$user = $this->getUserByUsername($username);
 
-		return View::make('profiles.show')->withUser($user);
+		return View::make('profiles.show', [ 'user' => $user ]);
 	}
 
 	/**

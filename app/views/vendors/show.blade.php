@@ -14,6 +14,12 @@
 
 @stop
 
+@section('script-atas')
+
+    <script type="text/javascript" src="{{asset('assets/js/angular.min.js')}}"></script>
+
+@stop
+
 @section('main')
 
 <h2 align="center">Detail Vendor</h2>
@@ -251,8 +257,8 @@
 	    					<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
 
 	    					@if (! Auth::user()->hasRole('noc'))
-		    					<td>{{{ $backhaul->biayas->nrc or "Kosong"}}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
-		    					<td>{{{ $backhaul->biayas->mrc or "Kosong" }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
+		    					<td>{{{ number_format($backhaul->biayas->nrc ,2,',','.') }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
+		    					<td>{{{ number_format($backhaul->biayas->mrc ,2,',','.')  }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
 	    					@endif
 
 	    					<td>{{{ $backhaul->activated_at }}}</td>
@@ -327,10 +333,10 @@
 	    					<td>{{{ $layanan->keterangan }}}</td>
 
 	    					@if (! Auth::user()->hasRole('noc'))
-		    					<td>{{{ $layanan->nrc or "kosong"  }}} 
+		    					<td>{{{ $layanan->nrc }}} 
 		    					{{{ $layanan->currency }}}
 		    					</td>
-		    					<td>{{{ $layanan->mrc or "kosong"  }}} 
+		    					<td>{{{ $layanan->mrc }}} 
 		    					{{{ $layanan->currency }}}</td>
 	    					@endif
 
@@ -425,7 +431,7 @@
 	    							<span class="label label-warning">{{{ $lastmile->status }}}</span>
 	    						@endif
 	    					</td>
-	    					<td>{{{ $lastmile->biayas->mrc or "Kosong"}}}</td>
+	    					<td>{{{ number_format($lastmile->biayas->mrc ,2,',','.') . " " . $lastmile->biayas->currency }}}</td>
 	    					<td>{{{ $lastmile->kawasan or "Kosong" }}}</td>
 	                       
 	                        <td class="ac">

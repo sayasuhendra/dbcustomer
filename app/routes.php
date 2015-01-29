@@ -7,7 +7,7 @@ foreach (File::allFiles(__DIR__.'/routes') as $partial) {
 Route::group(['before' => 'auth'], function(){
 
 	# Filter
-	Route::when('*', ['csrf', 'role:editor'], ['put', 'patch', 'delete']);
+	Route::when('*', ['csrf', 'role:editor', 'role:admin'], ['put', 'patch', 'delete']);
 
 	# Vendor
 

@@ -1,8 +1,13 @@
 <?php
 
-
+use Laracasts\Presenter\PresentableTrait;
 
 class Layanan extends Eloquent {
+
+	use PresentableTrait;
+
+	protected $presenter = 'Acme\Presenters\LayananPresenter';
+
 	protected $guarded = array();
 
 	public static $rules = array(
