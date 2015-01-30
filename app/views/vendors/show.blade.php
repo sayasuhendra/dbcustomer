@@ -257,8 +257,8 @@
 	    					<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
 
 	    					@if (! Auth::user()->hasRole('noc'))
-		    					<td>{{{ $backhaul->biayas->nrc or "Kosong" }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
-		    					<td>{{{ $backhaul->biayas->mrc or "Kosong" }}} {{{ $backhaul->biayas->currency or "Kosong" }}}</td>
+		    					<td>@{{ {{{ $backhaul->biayas->nrc or "0" }}} | currency:"" }} {{{ $backhaul->biayas->currency or "" }}}</td>
+		    					<td>@{{ {{{ $backhaul->biayas->mrc or "0" }}} | currency:"" }} {{{ $backhaul->biayas->currency or "" }}}</td>
 	    					@endif
 
 	    					<td>{{{ $backhaul->activated_at }}}</td>
@@ -332,12 +332,10 @@
 	    					
 	    					<td>{{{ $layanan->keterangan }}}</td>
 
-	    					@if (! Auth::user()->hasRole('noc'))
-		    					<td>{{{ $layanan->nrc }}} 
-		    					{{{ $layanan->currency }}}
+	    					@if(!Auth::user()->hasRole('noc'))
+		    					<td> @{{ {{{ $layanan->nrc or "0" }}} | currency:"" }} {{{ $layanan->currency }}}
 		    					</td>
-		    					<td>{{{ $layanan->mrc }}} 
-		    					{{{ $layanan->currency }}}</td>
+		    					<td> @{{ {{{ $layanan->mrc or "0" }}} | currency:"" }} {{{ $layanan->currency }}}</td>
 	    					@endif
 
 	    					<td>
@@ -431,7 +429,7 @@
 	    							<span class="label label-warning">{{{ $lastmile->status }}}</span>
 	    						@endif
 	    					</td>
-	    					<td>{{{ $lastmile->biayas->mrc or "Kosong" }}} {{{ $lastmile->biayas->currency or "Kosong" }}}</td>
+	    					<td>@{{ {{{ $lastmile->biayas->mrc or "0" }}} | currency:"" }} {{{ $lastmile->biayas->currency or "Kosong" }}}</td>
 	    					<td>{{{ $lastmile->kawasan or "Kosong" }}}</td>
 	                       
 	                        <td class="ac">

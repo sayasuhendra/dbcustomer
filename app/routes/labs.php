@@ -36,7 +36,9 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/ujicoba', function()
 {
-	return View::make('test');
+	$user = Auth::user()->username;
+	$uang = "10000000";
+	return View::make('test', ['user' => $user, 'uang' => $uang]);
 });
 
 Route::get('/excel', function()
