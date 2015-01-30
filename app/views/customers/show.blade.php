@@ -330,34 +330,30 @@
 
            <div class="clearfix"></div>
          </div>
-        </div>
 
            @if ($costumercircuits->count())
             <table id="datasbp" class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th>Circuit ID</th>
-                            <th>Namasite</th>
-                            <th>Alamat</th>
-                            <th>Layanan</th>
-                            <th>BW</th>
+                  <th>Namasite</th>
+                  <th>Alamat</th>
+                  <th>Layanan</th>
+                  <th>BW</th>
 
-                            @if (! Auth::user()->hasRole('noc'))
-                              <th>MRC Circuit</th>
-                            @endif
+                  @if (! Auth::user()->hasRole('noc'))
+                    <th>MRC Circuit</th>
+                  @endif
 
-                            <th>Nama Backhaul</th>
-                            <th>Cir ID Vendor</th>
-                            <th>Nama Vendor</th>
+                  <th>Nama Vendor</th>
 
-                            @if (! Auth::user()->hasRole('noc'))
-                              <th>MRC Vendor</th>
-                              <th>Margin</th>
-                            @endif
-                            
-                            <th>Status</th>
-                            <th>Start Date</th>
-                            <th width="100px">Action</th>
+                  @if (! Auth::user()->hasRole('noc'))
+                    <th>MRC Vendor</th>
+                    <th>Margin</th>
+                  @endif
+                  
+                  <th>Status</th>
+                  <th width="100px">Action</th>
                 </tr>
               </thead>
 
@@ -381,8 +377,6 @@
                                   <td>{{{ $costumercircuit->present()->mrcCircuit }}}</td>
                                 @endif
 
-                                <td>{{{ $costumercircuit->namabackhaul }}}</td>
-                                <td>{{{ $costumercircuit->circuitidlastmile }}}</td>
                                 <td> {{{ $costumercircuit->namavendor }}} </td>
 
                                 @if (! Auth::user()->hasRole('noc'))
@@ -399,7 +393,6 @@
                                         <span class="label label-warning">{{{ $costumercircuit->status }}}</span>
                                     @endif
                                 </td>
-                                <td>{{{ $costumercircuit->present()->startDate }}}</td>
                                 <td width="60px" class="ac">
                                 <a href="{{ URL::route('costumercircuits.show', array($costumercircuit->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
 
@@ -437,6 +430,9 @@
               Belum ada data costumercircuits
             @endif
 
+        <div class="btn" style="margin-bottom: 30px;"></div>
+
+        </div>
 @stop
 
 
