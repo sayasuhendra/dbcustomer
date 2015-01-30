@@ -26,9 +26,6 @@
 					<th>Alamat NPWP</th>
 				@endif
 
-				<th>Register Date</th>
-				<th>Keterangan</th>
-
 				<th width="100px">Action</th>
 			</tr>
 		</thead>
@@ -58,9 +55,6 @@
 						<td>{{{ $customer->alamatnpwp }}}</td>
 					@endif
 
-					<td>{{{ $customer->present()->registerdate }}}</td>
-					<td>{{{ $customer->keterangan }}}</td>
-					
                     <td class="ac" width="100px">
                     <a href="{{ URL::route('customers.show', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
 
@@ -101,19 +95,19 @@
         	                {
         	                    "sExtends": "pdf",
         	                    "sPdfOrientation": "landscape",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
         	                },
         	                {
         	                    "sExtends": "xls",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
         	                },
         	                {
         	                    "sExtends": "csv",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
         	                },
         	                {
         	                    "sExtends": "copy",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
         	                },
         	                "print"
 

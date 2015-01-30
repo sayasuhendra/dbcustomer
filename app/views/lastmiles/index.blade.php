@@ -24,10 +24,9 @@ td { font-size: 12px; }
 	<table id="lastmiletable" class="table table-striped table-bordered">
 		<thead>
 			<tr>
-				<th>Circuit ID Vendor</th>
+				<th>CID Vendor</th>
 
 				@if ( !Auth::user()->hasRole('ap') && !Auth::user()->hasRole('sales') )
-					<th>VLAN ID</th>
 					<th>IP Address PTP</th>
 				@endif
 
@@ -35,15 +34,13 @@ td { font-size: 12px; }
 				<th>B/W</th>
 				<th>Kawasan</th>
 				<th>Nama Vendor</th>
-				<th>Nama Backhaul</th>
+				<th>Nama Customer</th>
 
 				@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('sales') )
 					<th>NRC</th>
 					<th>MRC</th>
 				@endif
 
-				<th>Start Date</th>
-				<th>Account Manager</th>
 				<th>Status</th>
 
 				<th width="60px">Action</th>
@@ -56,7 +53,6 @@ td { font-size: 12px; }
 					<td>{{{ $lastmile->circuitidlastmile }}}</td>
 					
 					@if ( !Auth::user()->hasRole('ap') && !Auth::user()->hasRole('sales') )
-						<td>{{{ $lastmile->vlanid }}}</td>
 						<td>{{{ $lastmile->ipaddressptp }}}</td>
 					@endif
 
@@ -65,16 +61,13 @@ td { font-size: 12px; }
 					
 					<td>{{{ $lastmile->kawasan }}}</td>
 					<td>{{{ $lastmile->namavendor }}}</td>
-					<td>{{{ $lastmile->namabackhaul }}}</td>
+					<td>{{{ $lastmile->customer->nama }}}</td>
 
 					@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('sales') )
 						<td>{{{ $lastmile->present()->nrc }}}</td>
 						<td>{{{ $lastmile->present()->mrc }}}</td>
 					@endif
 
-					<td>{{{ $lastmile->present()->startdate }}}</td>
-
-					<td>{{{ $lastmile->am }}}</td>
 					<td>
 						@if ( $lastmile->status == 'Aktif' )
 							<span class="label label-success">{{{ $lastmile->status }}}</span>

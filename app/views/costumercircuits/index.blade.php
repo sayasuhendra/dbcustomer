@@ -37,22 +37,20 @@
 				<th>Alamat</th>
 				<th>Layanan</th>
 				<th>BW</th>
+				<th>Nama Customer</th>
+				<th>Nama Vendor</th>
 
 				@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
 					<th>MRC Circuit</th>
 				@endif
 
-				<th>Nama Backhaul</th>
-				<th>Cir ID Vendor</th>
 				{{-- <th>Nama Vendor</th> --}}
 
 				@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
 					<th>MRC Vendor</th> 
 				@endif
 
-				<th>Area</th>
 				<th>Status</th>
-				<th>Start Date</th>
 				<th width="80px">Action</th>
 			</tr>
 		</thead>
@@ -65,20 +63,19 @@
 					<td>{{{ $costumercircuit->alamat }}}</td>
 					<td>{{{ $costumercircuit->layanan }}}</td>
 					<td>{{{ $costumercircuit->bandwidth }}} {{{ $costumercircuit->satuan }}}</td>
+					<td>{{{ $costumercircuit->customers->nama }}}</td>
+					<td>{{{ $costumercircuit->namavendor }}}</td>
 
 					@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
 						<td>{{{ $costumercircuit->present()->mrcCircuit }}}</td>
 					@endif
 
-					<td>{{{ $costumercircuit->namabackhaul }}}</td>
-					<td>{{{ $costumercircuit->circuitidlastmile }}}</td>
 					{{--  <td> $costumercircuit->namavendor </td> --}}
 
 					@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
 						<td>{{{ $costumercircuit->present()->mrclastmile }}}</td> 
 					@endif
 
-					<td>{{{ $costumercircuit->area }}}</td>
 					<td>
 						@if ( $costumercircuit->status == 'Aktif' )
 							<span class="label label-success">{{{ $costumercircuit->status }}}</span>
@@ -88,7 +85,6 @@
 							<span class="label label-warning">{{{ $costumercircuit->status }}}</span>
 						@endif
 					</td>
-                    <td>{{{ $costumercircuit->present()->startDate }}}</td>
                     <td width="80px" class="ac">
                     <a href="{{ URL::route('costumercircuits.show', array($costumercircuit->id)) }}">
 				            <button class="btn btn-xs btn-default btn-fab btn-raised glyphicon glyphicon-list" title="Detail Circuit Ini" ></button>

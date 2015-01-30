@@ -26,7 +26,6 @@
 					<th>MRC</th>
 				@endif
 
-				<th>Start Date</th>
 				<th width="60px">Action</th>
 			</tr>
 		</thead>
@@ -48,8 +47,6 @@
 					@endif
 
 
-					<td>{{{ $backhaul->present()->startDate }}}</td>
-                    
                     <td width="60px" class="ac">
                     <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
 
