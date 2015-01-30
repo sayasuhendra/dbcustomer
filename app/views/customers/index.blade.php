@@ -20,12 +20,6 @@
 				<th>Level</th>
 				<th>Area</th>
 				<th>Status</th>
-
-				@if (! Auth::user()->hasRole('noc'))
-					<th>NPWP</th>
-					<th>Alamat NPWP</th>
-				@endif
-
 				<th width="100px">Action</th>
 			</tr>
 		</thead>
@@ -49,12 +43,6 @@
 							<span class="label label-warning">{{{ $customer->status }}}</span>
 						@endif
 					</td>
-
-					@if ( !Auth::user()->hasRole('noc'))
-						<td>{{{ $customer->npwp }}}</td>
-						<td>{{{ $customer->alamatnpwp }}}</td>
-					@endif
-
                     <td class="ac" width="100px">
                     <a href="{{ URL::route('customers.show', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
 
