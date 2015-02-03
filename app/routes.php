@@ -82,6 +82,13 @@ Route::group(['before' => 'auth'], function(){
 
 });
 
+# Reminder Password
+
+Route::get('/lupapassword', ['as' => 'lupapassword', 'uses' => 'RemindersController@getRemind']);
+Route::post('/lupapassword', ['as' => 'lupapassword', 'uses' => 'RemindersController@postRemind']);
+Route::get('/password/reset/{token}', 'RemindersController@getReset');
+Route::post('/password/reset', 'RemindersController@postReset');
+
 # Registration
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationController@store']);
