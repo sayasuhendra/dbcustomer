@@ -87,6 +87,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{{ ucwords(Auth::user()->username) }}} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                           <li> {{ Auth::user()->profile ? link_to_profile() : link_to_createprofile();}} </li>
+                          <li> {{ link_to_editpassword() }} </li>
                           <li><a href="{{ route('user.profile.index') }}">Kontak SBP</a></li>
                           <li class="divider"></li>
                           <li><a href="/logout">Logout</a></li>

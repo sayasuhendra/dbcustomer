@@ -1,6 +1,7 @@
 <?php
 
 use Acme\Forms\ProfileForm;
+use Acme\Forms\PasswordForm;
 
 class ProfilesController extends BaseController {
 
@@ -58,6 +59,14 @@ class ProfilesController extends BaseController {
 		return View::make('profiles.edit')->withUser($user);
 	}
 
+	public function editPassword($username)
+	{
+		$user = $this->getUserByUsername($username);
+
+		return View::make('profiles.editpw')->withUser($user);
+	}
+
+
 	public function create($username)
 	{
 		$user = $this->getUserByUsername($username);
@@ -91,6 +100,25 @@ class ProfilesController extends BaseController {
 
 		return Redirect::route('user.profile.show', $user->username);
 	}
+
+	public function updatePassword($username)
+	{
+		if ($passwordbaru !== $passwordconfirm) 
+		{
+			return Redirect::back('Password tidak sama');
+		}
+		
+		$user = $this->getUserByUsername($username);
+		$passwordlama = Input::get('passwordlama');
+		$passwordbaru = Input::get('passwordbaru');
+		$passwordconfirm = Input::get('passwordbaru_confirmation');
+		
+		$user->update($input);
+
+		return Redirect::route('user.profile.show', $user->username);
+	}
+
+
 
 	/**
 	 * Update a user's profile

@@ -54,8 +54,9 @@ class Lastmile extends Eloquent {
 		return $this->hasOne('Adsl', 'lastmile_id', 'id');
 	}
 
-	public function customer()
-	{
-	    return Customer::where('customerid', $this->circuits->customer_id);
-	}
+	// public function customer()
+	// {
+	// 	return Customer::where('customerid', $this->circuits->customer_id);
+	// }
+
 }

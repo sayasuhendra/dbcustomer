@@ -73,6 +73,8 @@ Route::group(['before' => 'auth'], function(){
 		Route::get('/profile/{username}/create', ['as' => 'profile.create', 'uses' => 'ProfilesController@create']);
 		Route::post('/profile/{username}/store', ['as' => 'profile.store', 'uses' => 'ProfilesController@store']);
 		Route::get('/{username}', ['as' => 'profile', 'uses' => 'ProfilesController@show']);
+		Route::get('/{username}/password', ['as' => 'editpassword', 'uses' => 'ProfilesController@editPassword']);
+		Route::post('/{username}/password', ['as' => 'updatepassword', 'uses' => 'ProfilesController@updatePassword']);
 
 	});
 

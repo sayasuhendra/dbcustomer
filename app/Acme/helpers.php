@@ -20,6 +20,11 @@ function link_to_editprofile($text = 'Edit Profile')
     return link_to_route('profile.edit', $text, Auth::user()->username);
 }
 
+function link_to_editpassword($text = 'Edit Password')
+{
+    return link_to_route('editpassword', $text, Auth::user()->username);
+}
+
 function mundur($page = 4)
 {
 	echo '<script type="text/javascript">'

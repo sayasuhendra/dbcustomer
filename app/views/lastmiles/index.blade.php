@@ -61,7 +61,7 @@ td { font-size: 12px; }
 					
 					<td>{{{ $lastmile->kawasan }}}</td>
 					<td>{{{ $lastmile->namavendor }}}</td>
-					<td>{{{ $lastmile->customer->nama }}}</td>
+					<td></td>
 
 					@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('sales') )
 						<td>{{{ $lastmile->present()->nrc }}}</td>
