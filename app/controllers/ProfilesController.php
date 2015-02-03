@@ -9,13 +9,15 @@ class ProfilesController extends BaseController {
 	 * @var ProfileForm
 	 */
 	protected $profileForm;
+	protected $passwordForm;
 
 	/**
 	 * @param ProfileForm $profileForm
 	 */
-	function __construct(ProfileForm $profileForm)
+	function __construct(ProfileForm $profileForm, PasswordForm $passwordForm)
 	{
 		$this->profileForm = $profileForm;
+		$this->passwordForm = $passwordForm;
 
 		// $this->beforeFilter('currentUser', ['only' => ['edit', 'update']]);
 	}
@@ -103,19 +105,24 @@ class ProfilesController extends BaseController {
 
 	public function updatePassword($username)
 	{
-		if ($passwordbaru !== $passwordconfirm) 
-		{
-			return Redirect::back('Password tidak sama');
-		}
-		
+
 		$user = $this->getUserByUsername($username);
 		$passwordlama = Input::get('passwordlama');
 		$passwordbaru = Input::get('passwordbaru');
 		$passwordconfirm = Input::get('passwordbaru_confirmation');
-		
-		$user->update($input);
 
-		return Redirect::route('user.profile.show', $user->username);
+		if (! Hash::check($passwordlama, $user->password)) {
+			
+			return Redirect::back()->withInput()->withFlashMessage('Password lama yang Anda masukkan salah.');
+
+		}
+
+		$this->passwordForm->validate(Input::all());
+
+		$user->password = $passwordbaru;
+		$user->save();
+		return View::make('profiles.pwedited', ['passwordbaru' => $passwordbaru]);
+
 	}
 
 

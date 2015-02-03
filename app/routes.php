@@ -7,7 +7,7 @@ foreach (File::allFiles(__DIR__.'/routes') as $partial) {
 Route::group(['before' => 'auth'], function(){
 
 	# Filter
-	Route::when('*', ['csrf', 'role:editor', 'role:admin'], ['put', 'patch', 'delete']);
+	Route::when('*', ['csrf'], ['put', 'patch', 'delete']);
 
 	# Vendor
 
@@ -74,7 +74,7 @@ Route::group(['before' => 'auth'], function(){
 		Route::post('/profile/{username}/store', ['as' => 'profile.store', 'uses' => 'ProfilesController@store']);
 		Route::get('/{username}', ['as' => 'profile', 'uses' => 'ProfilesController@show']);
 		Route::get('/{username}/password', ['as' => 'editpassword', 'uses' => 'ProfilesController@editPassword']);
-		Route::post('/{username}/password', ['as' => 'updatepassword', 'uses' => 'ProfilesController@updatePassword']);
+		Route::patch('/{username}/password', ['as' => 'updatepassword', 'uses' => 'ProfilesController@updatePassword']);
 
 	});
 

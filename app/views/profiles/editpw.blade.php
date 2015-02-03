@@ -25,7 +25,7 @@
 
 		<!-- Password Baru Confirmation Field -->
 		<div class="form-group">
-			{{ Form::label('passwordbaru_confirmation', 'Password Baru :') }}
+			{{ Form::label('passwordbaru_confirmation', 'Password Baru (sekali lagi):') }}
 			{{ Form::text('passwordbaru_confirmation', null, ['class' => 'form-control']) }}
 			{{ errors_for('passwordbaru_confirmation', $errors) }}
 		</div>
@@ -35,6 +35,12 @@
 			{{ Form::submit('Update Password', ['class' => 'btn btn-primary']) }}
 			<input type="button" value="Cancel" onclick="history.back(-1)" class="btn btn-default"/>
 		</div>
+
+		@if (Session::has('flash_message'))
+		    <div class="form-group">
+		        <p>{{ Session::get('flash_message') }}</p>
+		    </div>
+		@endif
 	</div>
 	
 	{{ Form::close() }}
