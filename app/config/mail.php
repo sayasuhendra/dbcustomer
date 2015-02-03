@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'mail.sbp.net.id',
+	'host' => 'smtp.gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'suhendra@sbp.net.id', 'name' => 'Aplikasi CRM SBP'),
+	'from' => array('address' => 'condev@sbp.net.id', 'name' => 'Aplikasi CRM SBP'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'suhendra',
+	'username' => 'sayasuhendra@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
