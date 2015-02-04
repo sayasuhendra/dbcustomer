@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',
+	'host' => 'mail.sbp.net.id',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'sayasuhendra@gmail.com',
+	'username' => 'suhendra@sbp.net.id',
 
 	/*
 	|--------------------------------------------------------------------------
