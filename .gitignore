@@ -6,6 +6,8 @@
 /vendor
 /catatan
 /app/views/costumercircuits lama/
+/app/views/admin4
+/public/assets/frontend
 _ide_helper.php
 composer.phar
 composer.lock
