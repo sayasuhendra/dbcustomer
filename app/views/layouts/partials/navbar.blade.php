@@ -15,10 +15,10 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="/">Home</a></li>
 
-                @if(Auth::guest())                    
-                <li><a href="/register">Mendaftar</a></li>
-                    <li><a href="/login">Login</a></li>
-                @else
+                  @if(Auth::guest())                    
+                      <li><a href="/register">Mendaftar</a></li>
+                      <li><a href="/login">Login</a></li>
+                  @else
 
                   @if(Auth::user()->hasRole('user'))
 

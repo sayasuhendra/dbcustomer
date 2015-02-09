@@ -90,7 +90,9 @@ Route::filter('currentUser', function($route)
 });
 
 Route::filter('role', function($route, $request, $role){
-	if (Auth::guest() or ! Auth::user()->hasRole($role)) {
+	if ($role == "user" && ! Auth::user()->hasRole($role)) {
+		return View::make('pages/nosee');
+	} elseif (! Auth::user()->hasRole($role)) {
 		return View::make('pages/norole');
 	}
 

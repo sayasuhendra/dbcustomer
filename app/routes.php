@@ -6,64 +6,88 @@ foreach (File::allFiles(__DIR__.'/routes') as $partial) {
 
 Route::group(['before' => 'auth'], function(){
 
-	# Filter
-	Route::when('*', ['csrf'], ['put', 'patch', 'delete']);
+	Route::group(['before' => 'role:user'], function(){
 
-	# Vendor
 
-	// Route::group(['before' => 'role:leader'], function(){
+		# Vendor
 
 		Route::put('vendors/contacts/{vendors}', [
 			'as' => 'vendorstambahkontak', 
+			'before' => 'role:editor',
 			'uses' => 'VendorsController@tambahkontak'
 			]);
 
 		Route::resource('vendors', 'VendorsController');
 
-	// });
+		Route::resource('contactvendors', 'ContactvendorsController');
 
-	// Route::group(['before' => 'role:leader'], function(){
+		# Customer
 
 		Route::resource('customers', 'CustomersController');
 
-		Route::put('customers/contacts/{customers}', ['as' => 'customerstambahkontak', 'uses' => 'CustomersController@tambahkontak']);
+		Route::put('customers/contacts/{customers}', [
+			'as' => 'customerstambahkontak', 
+			'before' => 'role:editor',
+			'uses' => 'CustomersController@tambahkontak'
+			]);
 
-	// });
+		Route::resource('customercontacts', 'CustomercontactsController');
 
 
-	Route::resource('costumercircuits', 'CostumercircuitsController');
-	Route::put('costumercircuits/contacts/{costumercircuits}', ['as' => 'circuittambahkontak', 'uses' => 'CostumercircuitsController@tambahkontak']);
-	Route::put('costumercircuits/perangkats/{costumercircuits}', ['as' => 'circuittambahperangkat', 'uses' => 'CostumercircuitsController@tambahperangkat']);
+		# Customer Circuits
 
-	Route::resource('customercontacts', 'CustomercontactsController');
+		Route::resource('costumercircuits', 'CostumercircuitsController');
+		Route::put('costumercircuits/contacts/{costumercircuits}', [
+			'as' => 'circuittambahkontak', 
+			'before' => 'role:editor',
+			'uses' => 'CostumercircuitsController@tambahkontak'
+			]);
 
-	Route::resource('adsls', 'AdslsController');
+		Route::put('costumercircuits/perangkats/{costumercircuits}', [
+			'as' => 'circuittambahperangkat', 
+			'before' => 'role:editor',
+			'uses' => 'CostumercircuitsController@tambahperangkat'
+			]);
 
-	Route::resource('biayacostumercircuits', 'BiayacostumercircuitsController');
+		Route::resource('biayacostumercircuits', 'BiayacostumercircuitsController');
+		Route::resource('costumercircuitperangkats', 'CostumercircuitperangkatsController');
 
-	Route::resource('costumercircuitperangkats', 'CostumercircuitperangkatsController');
 
-	Route::resource('lastmiles', 'LastmilesController');
+		# Lastmile
 
-	Route::post('lastmiles/create/formbackhaul', ['uses' => 'LastmilesController@formbackhaul']);
+		Route::resource('lastmiles', 'LastmilesController');
+		Route::post('lastmiles/create/formbackhaul', ['uses' => 'LastmilesController@formbackhaul']);
+		Route::post('lastmiles/create/formam', ['uses' => 'LastmilesController@formam']);
+		Route::resource('biayalastmilevendors', 'BiayalastmilevendorsController');
 
-	Route::post('lastmiles/create/formam', ['uses' => 'LastmilesController@formam']);
 
-	Route::resource('backhauls', 'BackhaulsController');
+		# Backhaul
 
-	Route::resource('layanans', 'LayanansController');
+		Route::resource('backhauls', 'BackhaulsController');
+		Route::resource('biayabackhaulvendors', 'BiayabackhaulvendorsController');
 
-	Route::resource('layanansbps', 'LayanansbpsController');
-	Route::put('layanansbps/contacts/{layanansbps}', ['as' => 'layanansbptambahkontak', 'uses' => 'LayanansbpsController@tambahkontak']);
+		# Layanan
+		Route::resource('layanans', 'LayanansController');
 
-	Route::resource('backhaulswitches', 'BackhaulswitchesController');
+		# Switches atau Perangkat
+		Route::resource('backhaulswitches', 'BackhaulswitchesController');
 
-	Route::resource('contactvendors', 'ContactvendorsController');
+		# Layanan SBP
+		Route::resource('layanansbps', 'LayanansbpsController');
+		Route::put('layanansbps/contacts/{layanansbps}', [
+			'as' => 'layanansbptambahkontak', 
+			'before' => 'role:editor',
+			'uses' => 'LayanansbpsController@tambahkontak'
+			]);
 
-	Route::resource('biayalastmilevendors', 'BiayalastmilevendorsController');
 
-	Route::resource('biayabackhaulvendors', 'BiayabackhaulvendorsController');
+		Route::resource('adsls', 'AdslsController');
 
+
+		# Roles
+		Route::resource('roles', 'RolesController');
+
+	});
 
 	# Profile
 
@@ -78,7 +102,6 @@ Route::group(['before' => 'auth'], function(){
 
 	});
 
-	Route::resource('roles', 'RolesController');
 
 });
 
@@ -90,15 +113,33 @@ Route::get('/password/reset/{token}', 'RemindersController@getReset');
 Route::post('/password/reset', 'RemindersController@postReset');
 
 # Registration
+
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationController@store']);
-
 Route::resource('user', 'RegistrationController', ['only' => ['edit', 'update']]);
 
 # Home
 Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
 
 # Authentication
+
 Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
 Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store', 'destroy']]);
+
+
+# Filter
+
+Route::when('*', 'csrf', ['put', 'post', 'patch', 'delete']);
+
+Route::when('vendors/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
+Route::when('customers/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
+
+Route::when('lastmiles/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
+Route::when('backhauls/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
+Route::when('costumercircuits/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
+
+Route::when('layanans/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
+Route::when('layanansbps/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
+
+Route::when('backhaulswitches/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
