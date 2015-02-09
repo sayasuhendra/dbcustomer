@@ -73,6 +73,7 @@
 		</tr>
 	</tbody>
 </table>
+<h3 align="center" style="color: red;">{{ $pesanerror or "" }}</h3>
 
 <h3 align="center">Daftar Circuits Customer yang Menggunakan Backhaul ini:</h3>
 

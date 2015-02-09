@@ -2,7 +2,7 @@
 
 @section('main')
 
-<h3 align="center">{{ $pesanerror or "" }}</h3>
+<h3 align="center" style="color: red;">{{ $pesanerror or "" }}</h3>
 <br>
 
 @if ($backhauls->count())

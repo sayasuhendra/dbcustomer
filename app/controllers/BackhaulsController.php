@@ -142,11 +142,31 @@ class BackhaulsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$backhaulini = $this->backhaul->find($id);
-		$backhaulini->biayas()->delete();
-		$backhaulini->delete();
+		try {
+			
+			$backhaulini = $this->backhaul->find($id);
+			$biayas = $backhaulini->biayas()->first();
+			$mrc = $biayas->mrc;
+			$nrc = $biayas->nrc;
+			$currency = $biayas->currency;
+			$backhaulini->biayas()->delete();
+			$backhaulini->delete();
+			return Redirect::route('backhauls.index');
+			
+		} catch (Exception $e) {
+			Biayabackhaulvendor::create([
+				'mrc' => $mrc,
+				'nrc' => $nrc,
+				'currency' => $currency,
+				'circuitidbackhaul' => $backhaulini->circuitidbackhaul
+				]);
+			$pesanerror = "Maaf, Anda tidak bisa menghapus backhaul ini karena masih digunakan Circuit Customer berikut:";
+			// return Redirect::route('backhauls.show', $id);
 
-		return Redirect::route('backhauls.index');
+			$costumercircuits = Costumercircuit::where('namabackhaul', $backhaulini->nama)->get();
+
+			return View::make('backhauls.show', ['backhaul' => $backhaulini, 'costumercircuits' => $costumercircuits, 'pesanerror' => $pesanerror]);
+		}
 	}
 
 }
