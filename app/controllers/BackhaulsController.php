@@ -77,7 +77,9 @@ class BackhaulsController extends BaseController {
 	{
 		$backhaul = $this->backhaul->findOrFail($id);
 
-		return View::make('backhauls.show', compact('backhaul'));
+		$costumercircuits = Costumercircuit::where('namabackhaul', $backhaul->nama)->get();
+
+		return View::make('backhauls.show', ['backhaul' => $backhaul, 'costumercircuits' => $costumercircuits]);
 	}
 
 	/**

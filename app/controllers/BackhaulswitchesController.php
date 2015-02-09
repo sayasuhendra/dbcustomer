@@ -68,8 +68,9 @@ class BackhaulswitchesController extends BaseController {
 	public function show($id)
 	{
 		$backhaulswitch = $this->backhaulswitch->findOrFail($id);
+		$backhauls = Backhaul::where('switchterkoneksi', $backhaulswitch->nama)->get();
 
-		return View::make('backhaulswitches.show', compact('backhaulswitch'));
+		return View::make('backhaulswitches.show', ['backhauls' => $backhauls, 'backhaulswitch' => $backhaulswitch]);
 	}
 
 	/**
@@ -123,9 +124,18 @@ class BackhaulswitchesController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->backhaulswitch->find($id)->delete();
+		try {
 
-		return Redirect::route('backhaulswitches.index');
+			$this->backhaulswitch->find($id)->delete();
+			return Redirect::route('backhaulswitches.index');
+			
+		} catch (Exception $e) {
+			$pesanerror = "Anda tidak dapat menghapus Switch ini, karena switch ini digunakan oleh beberapa backhaul berikut:";
+			$backhaulswitch = $this->backhaulswitch->find($id);
+			$backhauls = Backhaul::where('switchterkoneksi', $backhaulswitch->nama)->get();
+			return View::make('backhaulswitches.error', ['pesanerror' => $pesanerror, 'backhauls' => $backhauls]);
+		}
+
 	}
 
 }
