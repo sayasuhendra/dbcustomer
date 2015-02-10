@@ -34,6 +34,7 @@ td { font-size: 12px; }
 				<th>B/W</th>
 				<th>Kawasan</th>
 				<th>Nama Vendor</th>
+				<th>Nama Circuit</th>
 				<th>Nama Customer</th>
 
 				@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('sales') )
@@ -61,7 +62,8 @@ td { font-size: 12px; }
 					
 					<td>{{{ $lastmile->kawasan }}}</td>
 					<td>{{{ $lastmile->namavendor }}}</td>
-					<td></td>
+					<td>{{{ $lastmile->circuits->namasite or "No Circuits"}}}</td>
+					<td>{{{ $lastmile->customer() }}}</td>
 
 					@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('sales') )
 						<td>{{{ $lastmile->present()->nrc }}}</td>
