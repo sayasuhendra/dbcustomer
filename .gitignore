@@ -7,7 +7,9 @@
 /catatan
 /app/views/costumercircuits lama/
 /app/views/admin4
+/app/views/admin1
 /public/assets/frontend
+/public/global
 _ide_helper.php
 composer.phar
 composer.lock
