@@ -1,103 +1,121 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js" ng-app>
+<!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>@yield('meta-title', 'PT SBP')</title>
-
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/datatables/dataTables.bootstrap.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/datatables/TableTools/css/dataTables.tableTools.min.css')}}" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="{{asset('assets/css/navbar-fixed-top.css')}}" rel="stylesheet">
-    <!-- <link href="{{asset('assets/css/material.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/ripples.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/material-wfont.min.css')}}" rel="stylesheet"> -->
-    <link href="{{asset('assets/fontawesome/css/font-awesome.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/select2/select2.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/select2/select2-bootstrap.css')}}"/>
-
-    <style type="text/css">
-        dl dd {
-                  border-bottom: 1px dashed #eeeeee;
-                  padding-bottom: 10px;
-                  margin-bottom: 10px;
-                }
-        .ac {
-          text-align: center;
-        }
-        .ac a:hover {
-          text-decoration: none;
-        }
-
-        .navbar-brand {
-          padding: 5px;
-        }
-
-        .flash {
-            display: inline-block;
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 10000;
-        }
-
-        .panel-body {
-          padding: 15px 15px 0px 15px;
-        }
-
-        .btn-fab {
-        margin: 0;
-        margin-left: 3px;
-
-        padding: 2px;
-        font-size: 16px;
-        width: 20px;
-        height: 20px;
-        }
-        .btn-fab, .btn-fab .ripple-wrapper {
-        border-radius: 10%;
-        }
-        .popover-title {
-          background-color: #418bca;
-        }
-
-        div.DTTT { margin-bottom: 0.5em; float: right; margin-left: 5px; }
-        div.dataTables_wrapper { clear: both; }
-    </style>
-    @yield('style-atas')
-
-    <script src="{{asset('assets/js/jquery-1.11.1.min.js')}}"></script>
-    <script src="{{asset('assets/datatables/jquery.dataTables.js')}}"></script>
-    <script src="{{asset('assets/datatables/TableTools/js/dataTables.tableTools.min.js')}}"></script>
-    <script src="{{asset('assets/datatables/dataTables.bootstrap.js')}}"></script>
-    
-    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/select2/select2.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/notify.min.js')}}"></script>
-
-    <!--[if lt IE 9]>
-        <script src="/assets/plugins/html5shiv.js"></script>
-    <![endif]-->
-    @yield('script-atas')
-</head>
-
-<body>
-    @include('layouts/partials/navbar')
-
-    <div class="container"> {{-- -fluid --}}
-        <div class="row">
-                @yield('main')
+<meta charset="utf-8"/>
+<title>@yield('meta-title', 'Aplikasi CRM PT. SBP')</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+@include('layouts/assets')
+<body class="page-header-fixed page-quick-sidebar-over-content page-style-square">
+<div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner">
+        <div class="page-logo">
+            <a href="index.html">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="logo-default"/>
+            </a>
+            <div class="menu-toggler sidebar-toggler hide">
+                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+            </div>
         </div>
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        </a>
+        <div class="top-menu">
+            <ul class="nav navbar-nav pull-right">
+                {{-- @include('layouts/admin/notif') --}}
+                {{-- @include('layouts/admin/inbox') --}}
+                {{-- @include('layouts/admin/todo') --}}
+                @include('layouts/admin/user')
+                {{-- @include('layouts/admin/right') --}}
+            </ul>
         </div>
     </div>
-    @yield('script-bawah')
+</div>
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper">
+        <div class="page-sidebar navbar-collapse collapse">
+            <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="500">
+                <li class="sidebar-toggler-wrapper">
+                    <div class="sidebar-toggler">
+                    </div>
+                </li>
+                {{-- @include('layouts/admin/search') --}}
+                <br>
+                {{-- @include('layouts/admin/menu') --}}
 
-    <script type="text/javascript" src="{{asset('assets/js/utils.js')}}"></script>
-    <!-- // <script type="text/javascript" src="{{asset('assets/js/ripples.min.js')}}"></script> -->
-    <!-- // <script type="text/javascript" src="{{asset('assets/js/material.min.js')}}"></script> -->
+
+            </ul>
+        </div>
+    </div>
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            {{-- @include('layouts/admin/content/config') --}}
+
+            <!-- BEGIN PAGE HEADER-->
+            <h3 class="page-title">
+                @yield('page-title', 'Customer Relationship Management')
+            <small>@yield('subpage-title', 'we give you solutions')</small>
+            </h3>
+            <div class="page-bar">
+                <ul class="page-breadcrumb">
+                    @yield('page-breadcrumb')
+                </ul>
+                {{--
+                <div class="page-toolbar">
+                    <div id="dashboard-report-range" class="pull-right tooltips btn btn-fit-height grey-salt" data-placement="top" data-original-title="Change dashboard date range">
+                        <i class="icon-calendar"></i>&nbsp; <span class="thin uppercase visible-lg-inline-block"></span>&nbsp; <i class="fa fa-angle-down"></i>
+                    </div>
+                </div>
+                 --}}
+            </div>
+            <!-- END PAGE HEADER-->
+            {{-- @include('layouts/admin/content/statistics') --}}
+            <div class="row">
+            <div class="col-md-12 blog-page">
+                @yield('main')
+            </div>
+            </div>
+
+
+            {{-- <div class="clearfix">
+            </div> --}}
+            {{-- @include('layouts/admin/content/graph') --}}
+            {{-- @include('layouts/admin/content/recent') --}}
+            {{-- @include('layouts/admin/content/stats') --}}
+            {{-- @include('layouts/admin/content/graphsm') --}}
+            {{-- <div class="row ">
+                @include('layouts/admin/content/maps')
+                @include('layouts/admin/content/feeds')
+            </div>
+            <div class="clearfix"> 
+            </div> --}}
+
+            {{-- <div class="row ">
+                @include('layouts/admin/content/calendar')
+                @include('layouts/admin/content/chats')
+
+            </div> --}}
+        </div>
+    </div>
+    <!-- END CONTENT -->
+    {{-- @include('layouts/admin/quicksidebar') --}}
+
+</div>
+<!-- END CONTAINER -->
+@include('layouts/footer')
+
+@include('layouts/script')
 
 </body>
+<!-- END BODY -->
 </html>
