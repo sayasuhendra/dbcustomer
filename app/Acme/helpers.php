@@ -5,9 +5,9 @@ function errors_for($attribute, $errors)
 	return $errors->first($attribute, '<span class="error">:message</span>');
 }
 
-function link_to_profile($text = 'Profile')
+function link_to_profile($text = ' Profile')
 {
-    return link_to_route('profile', $text, Auth::user()->username);
+    return link_to_route('profile', $text, Auth::user()->username, ['class' => 'icon-user']);
 }
 
 function link_to_createprofile($text = 'Create Profile')
@@ -23,6 +23,17 @@ function link_to_editprofile($text = 'Edit Profile')
 function link_to_editpassword($text = 'Edit Password')
 {
     return link_to_route('editpassword', $text, Auth::user()->username);
+}
+
+function link_to_pro()
+{
+	echo "<a href=";
+	if(Auth::user()->profile){
+		route('profile');
+	} 
+	route('profile.create');
+	echo "> <i class='icon-user'></i>
+	</i> Profile </a>";
 }
 
 function mundur($page = 4)
