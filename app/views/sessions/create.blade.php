@@ -56,7 +56,7 @@
 <div class="content">
 	
 	<!-- BEGIN LOGIN FORM -->
-    {{ Form::open(['route' => 'sessions.store']) }}
+    {{ Form::open(['route' => 'sessions.store', 'class' => 'login-form']) }}
 		<h3 class="form-title">Sign In</h3>
 		<div class="alert alert-danger display-hide">
 			<button class="close" data-close="alert"></button>
@@ -87,6 +87,7 @@
 			</p>
 		</div>
     {{ Form::close() }}
+	
 	<!-- END LOGIN FORM -->
 
 	<!-- BEGIN FORGOT PASSWORD FORM -->
