@@ -100,13 +100,13 @@
 @yield('style-atas')
 
 <!-- <script src="{{asset('assets/js/jquery-1.11.1.min.js')}}"></script> -->
-<script src="{{asset('assets/datatables/jquery.dataTables.js')}}"></script>
-<script src="{{asset('assets/datatables/TableTools/js/dataTables.tableTools.min.js')}}"></script>
-<script src="{{asset('assets/datatables/dataTables.bootstrap.js')}}"></script>
+<!-- <script src="{{asset('assets/datatables/jquery.dataTables.js')}}"></script> -->
+<!-- <script src="{{asset('assets/datatables/TableTools/js/dataTables.tableTools.min.js')}}"></script> -->
+<!-- <script src="{{asset('assets/datatables/dataTables.bootstrap.js')}}"></script> -->
 
 <!-- <script src="{{asset('assets/js/bootstrap.min.js')}}"></script> -->
-<script type="text/javascript" src="{{asset('assets/select2/select2.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/notify.min.js')}}"></script>
+<!-- <script type="text/javascript" src="{{asset('assets/select2/select2.min.js')}}"></script> -->
+<!-- <script type="text/javascript" src="{{asset('assets/js/notify.min.js')}}"></script> -->
 
 <!--[if lt IE 9]>
     <script src="/assets/plugins/html5shiv.js"></script>

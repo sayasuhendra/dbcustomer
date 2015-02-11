@@ -4,7 +4,7 @@
                 
                 <li class="dropdown dropdown-user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <img alt="" class="img-circle" src="{{asset('foto/suhendra.jpg')}}"/>
+                    <img alt="" class="img-circle" src="/foto/{{ Auth::user()->profile ?  Auth::user()->profile->foto : "noimg.png" }}"/>
                     <span class="username username-hide-on-mobile">
                     {{{ ucwords(Auth::user()->username) }}} </span>
                     <i class="fa fa-angle-down"></i>
@@ -16,27 +16,21 @@
                             </i> {{ Auth::user()->profile ? "Profile" : "Create Profile"; }} </a>
                         </li>
                         <li>
-                            <a href="page_calendar.html">
-                            <i class="icon-calendar"></i> My Calendar </a>
+                            <a href="{{ route('user.profile.index')}}">
+                            <i class="icon-notebook"></i> Internal Kontak </a>
                         </li>
                         <li>
-                            <a href="inbox.html">
-                            <i class="icon-envelope-open"></i> My Inbox <span class="badge badge-danger">
-                            3 </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="page_todo.html">
-                            <i class="icon-rocket"></i> My Tasks <span class="badge badge-success">
-                            7 </span>
-                            </a>
+                            <a href="{{ route('user.profile.edit', Auth::user()->username) }}">
+                            <i class="icon-note"></i> Edit Password</a>
                         </li>
                         <li class="divider">
                         </li>
+                        {{-- 
                         <li>
                             <a href="extra_lock.html">
                             <i class="icon-lock"></i> Lock Screen </a>
                         </li>
+                        --}}
                         <li>
                             <a href="/logout">
                             <i class="icon-key"></i> Log Out </a>

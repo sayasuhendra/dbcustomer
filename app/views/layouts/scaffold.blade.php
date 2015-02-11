@@ -50,7 +50,7 @@
                 </li>
                 {{-- @include('layouts/admin/search') --}}
                 <br>
-                {{-- @include('layouts/admin/menu') --}}
+                @include('layouts/admin/menu')
 
 
             </ul>
@@ -66,10 +66,13 @@
                 @yield('page-title', 'Customer Relationship Management')
             <small>@yield('subpage-title', 'we give you solutions')</small>
             </h3>
+            <hr>
             <div class="page-bar">
+                {{-- 
                 <ul class="page-breadcrumb">
                     @yield('page-breadcrumb')
                 </ul>
+                --}}
                 {{--
                 <div class="page-toolbar">
                     <div id="dashboard-report-range" class="pull-right tooltips btn btn-fit-height grey-salt" data-placement="top" data-original-title="Change dashboard date range">
