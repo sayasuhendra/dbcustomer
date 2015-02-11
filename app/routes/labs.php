@@ -36,7 +36,8 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/ujicoba', function()
 {
-	return View::make('password/remind');
+	$user = User::all();
+	var_dump((array)$user);
 });
 
 Route::get('/excel', function()
