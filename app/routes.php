@@ -102,6 +102,7 @@ Route::group(['before' => 'auth'], function(){
 
 	});
 
+	Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
 
 });
 
@@ -119,7 +120,6 @@ Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationC
 Route::resource('user', 'RegistrationController', ['only' => ['edit', 'update']]);
 
 # Home
-Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
 
 # Authentication
 
@@ -130,7 +130,7 @@ Route::resource('sessions', 'SessionsController', ['only' => ['create', 'store',
 
 # Filter
 
-Route::when('*', 'csrf', ['put', 'post', 'patch', 'delete']);
+// Route::when('*', 'csrf', ['put', 'post', 'patch', 'delete']);
 
 Route::when('vendors/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
 Route::when('customers/*', 'role:editor', ['put', 'post', 'patch', 'delete']);

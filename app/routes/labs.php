@@ -36,8 +36,7 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/ujicoba', function()
 {
-	$token = ['123456789'];
-	return View::make('emails.auth.reminder', ['token' => $token]);
+	return View::make('password/remind');
 });
 
 Route::get('/excel', function()

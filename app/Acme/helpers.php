@@ -36,7 +36,7 @@ function link_to_pro()
 	</i> Profile </a>";
 }
 
-function mundur($page = 4)
+function mundur($page = 1)
 {
 	echo '<script type="text/javascript">'
 			, 'history.go(-' . $page . ');'

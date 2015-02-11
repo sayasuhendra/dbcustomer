@@ -1,12 +1,39 @@
-@extends('layouts/scaffold')
+@extends('sessions/master')
+
+@section('atas')
+
+<style type="text/css">
+    .login .bawah {
+
+        background-color: #eceef1;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        -ms-border-radius: 7px;
+        -o-border-radius: 7px;
+        border-radius: 7px;
+        margin: 40px auto 10px auto;
+        padding: 30px;
+        padding-top: 10px;
+        overflow: hidden;
+        position: relative;
+
+    }
+</style>
+
+@stop
 
 @section('main')
-    <div class="starter-template">
 
+<div class="col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+
+<div class="bawah">
+
+    
         {{ Form::open(['route' => 'registration.store']) }}        
 
-        <div class="col-md-4 col-md-offset-4">
-            <h1>Mendaftar</h1>
+            <h1 align="center">Mendaftar</h1>
+            <div class="row">
+<div class="col-sm-6 col-md-6 col-lg-6">
             <!-- Username Field -->
             <div class="form-group">
                 {{ Form::label('username', 'Username:') }}
@@ -35,6 +62,8 @@
                 {{ $errors->first('bagian', '<span class="error">:message</span>') }}
             </div>
 
+</div>
+<div class="col-sm-6 col-md-6 col-lg-6">
             <!-- area Field -->
             <div class="form-group">
                 {{ Form::label('area', 'Area:') }}
@@ -62,16 +91,14 @@
                 {{ Form::label('password_confirmation', 'Confirm Password:') }}
                 {{ Form::password('password_confirmation', ['class' => 'form-control', 'required' => 'required']) }}
             </div>
-        
-            <!-- Create Account Field -->
-            <div class="form-group">
-                {{ Form::submit('Create Account', ['class' => 'btn btn-primary']) }}
-            <input type="button" value="Cancel" onclick="history.back(-1)" class="btn btn-default"/>
-            </div>
-
+</div>
         </div>
+            <div class="form-actions">
+                <button type="button" id="register-back-btn"onclick="history.back(-1)"  class="btn btn-default">Back</button>
+                <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
+            </div>
         {{ Form::close() }}
-        
-    </div>
-    
+</div>        
+</div>
+
 @stop
