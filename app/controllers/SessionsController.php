@@ -35,9 +35,10 @@ class SessionsController extends BaseController {
 	public function store()
 	{
 		$this->loginForm->validate($input = Input::only('email', 'password'));
+		$remember = (Input::has('remember')) ? true : false;
 		$uji = array_merge($input, ['active' => 1]);
 
-		if (Auth::attempt($uji))
+		if (Auth::attempt($uji, $remember))
 		{
 			return Redirect::intended('/');
 		}

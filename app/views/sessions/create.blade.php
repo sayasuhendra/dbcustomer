@@ -24,6 +24,12 @@
         
         <!-- Log In! Field -->
         <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember">
+                    Keep Me Login
+                </label>
+            </div>
             {{ link_to_route('lupapassword', 'Klik Jika Lupa Password') }} {{ Form::submit('Log In!', ['class' => 'btn btn-primary pull-right']) }}
         </div>
 
