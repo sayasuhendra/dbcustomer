@@ -17,7 +17,7 @@
     <div class="page-header-inner">
         <div class="page-logo">
             <a href="index.html">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="logo-default"/>
+            <img src="{{ asset('assets/images/sbpputih.png') }}" alt="logo" class="logo-default"/>
             </a>
             <div class="menu-toggler sidebar-toggler hide">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
