@@ -23,7 +23,7 @@
     @endif
     
     <div class="form-actions">
-        <button type="button" id="back-btn" class="btn btn-default" onclick="history.go(-1)">Back</button>
+        <a href="{{ route('login') }}"><button type="button" id="back-btn" class="btn btn-default">Back</button></a>
         <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
     </div>
 </form>

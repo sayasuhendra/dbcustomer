@@ -14,5 +14,7 @@
 @stop
 
 @section('dashboard')
+@if (Auth::user()->hasRole('admin'))
     @include('layouts/admin/content/statistics')
+@endif
 @stop

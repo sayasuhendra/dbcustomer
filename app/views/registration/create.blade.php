@@ -94,7 +94,7 @@
 </div>
         </div>
             <div class="form-actions">
-                <button type="button" id="register-back-btn"onclick="history.back(-1)"  class="btn btn-default">Back</button>
+                <a href="{{ route('login') }}"><button type="button" id="register-back-btn" class="btn btn-default">Back</button></a>
                 <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
             </div>
         {{ Form::close() }}

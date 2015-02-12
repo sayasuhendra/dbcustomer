@@ -50,6 +50,10 @@
     .page-header.navbar .page-logo .logo-default {
         margin-top: 0;
     }
+    body {
+        min-height: 200px;
+
+    }
     dl dd {
               border-bottom: 1px dashed #eeeeee;
               padding-bottom: 10px;
