@@ -22,7 +22,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat red-intense">
                         <div class="visual">
-                            <i class="fa fa-bar-chart-o"></i>
+                            <i class="fa fa-server"></i>
                         </div>
                         <div class="details">
                             <div class="number">
@@ -42,14 +42,14 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat green-haze">
                         <div class="visual">
-                            <i class="fa fa-shopping-cart"></i>
+                            <i class="fa fa-dollar"></i>
                         </div>
                         <div class="details">
                             <div class="number">
                                 {{ uang(Biayacostumercircuit::where('currency','USD')->sum('mrc')); }} USD
                             </div>
                             <div class="desc">
-                                 {{ uang(Biayacostumercircuit::where('currency','IDR')->sum('mrc')); }} IDR
+                                dan {{ uang(Biayacostumercircuit::where('currency','IDR')->sum('mrc')); }} IDR
                             </div>
                         </div>
                         <div class="more">
@@ -60,14 +60,14 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat purple-plum">
                         <div class="visual">
-                            <i class="fa fa-shopping-cart"></i>
+                            <i class="fa fa-dollar"></i>
                         </div>
                         <div class="details">
                             <div class="number">
                                  {{ uang(Biayalastmilevendor::where('currency','USD')->sum('mrc')); }} USD
                             </div>
                             <div class="desc">
-                                 {{ uang(Biayalastmilevendor::where('currency','IDR')->sum('mrc')); }} IDR
+                                dan {{ uang(Biayalastmilevendor::where('currency','IDR')->sum('mrc')); }} IDR
                             </div>
                         </div>
                         <div class="more">
