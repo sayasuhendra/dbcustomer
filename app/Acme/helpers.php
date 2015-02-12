@@ -49,3 +49,9 @@ function rupiah($uang)
 	$jadi = number_format($uang ,2,',','.') . " " . "IDR" ;
 	return $jadi;
 }
+
+function uang($uang)
+{
+	$jadi = number_format($uang ,2,',','.');
+	return $jadi;
+}

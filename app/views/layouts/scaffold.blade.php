@@ -82,7 +82,7 @@
                  --}}
             </div>
             <!-- END PAGE HEADER-->
-            {{-- @include('layouts/admin/content/statistics') --}}
+            @yield('dashboard')
             <div class="row">
             <div class="col-md-12 blog-page">
                 @yield('main')

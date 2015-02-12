@@ -13,10 +13,6 @@
 
 @stop
 
-@section('main')
-    <h3>
-        {{ Auth::check() ? "Welcome, " . Auth::user()->username : "Silahkan mendaftar!" }}
-    </h3>
-
-    <p>Selamat Datang di Aplikasi Database PT. Solusindo Bintang Pratama.</p>
+@section('dashboard')
+    @include('layouts/admin/content/statistics')
 @stop

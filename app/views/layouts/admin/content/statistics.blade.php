@@ -3,19 +3,20 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat blue-madison">
                         <div class="visual">
-                            <i class="fa fa-comments"></i>
+                            <i class="fa fa-users"></i>
                         </div>
                         <div class="details">
                             <div class="number">
-                                 1349
+                                 {{ Customer::all()->count() }}
                             </div>
                             <div class="desc">
-                                 New Feedbacks
+                                 Total Customers
                             </div>
                         </div>
-                        <a class="more" href="#">
-                        View more <i class="m-icon-swapright m-icon-white"></i>
-                        </a>
+                        <div class="more">
+                        Aktif {{ Customer::where('status', 'aktif')->count() }}
+                        <div class="pull-right">Terminate {{ Customer::where('status', 'terminate')->count() }}</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -25,15 +26,17 @@
                         </div>
                         <div class="details">
                             <div class="number">
-                                 12,5M$
+                                 {{ Costumercircuit::all()->count() }}
                             </div>
                             <div class="desc">
-                                 Total Profit
+                                 Total Circuits
                             </div>
                         </div>
-                        <a class="more" href="#">
-                        View more <i class="m-icon-swapright m-icon-white"></i>
-                        </a>
+                        <div class="more">
+                            Aktif {{ Costumercircuit::where('status', 'aktif')->count() }}
+                            <div class="pull-right"> Suspend {{ Costumercircuit::where('status', 'suspend')->count() }} | Terminate
+                            {{ Costumercircuit::where('status', 'terminate')->count() }} </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -43,33 +46,33 @@
                         </div>
                         <div class="details">
                             <div class="number">
-                                 549
+                                {{ uang(Biayacostumercircuit::where('currency','USD')->sum('mrc')); }} USD
                             </div>
                             <div class="desc">
-                                 New Orders
+                                 {{ uang(Biayacostumercircuit::where('currency','IDR')->sum('mrc')); }} IDR
                             </div>
                         </div>
-                        <a class="more" href="#">
-                        View more <i class="m-icon-swapright m-icon-white"></i>
-                        </a>
+                        <div class="more">
+                        Total MRC Circuit Customer
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat purple-plum">
                         <div class="visual">
-                            <i class="fa fa-globe"></i>
+                            <i class="fa fa-shopping-cart"></i>
                         </div>
                         <div class="details">
                             <div class="number">
-                                 +89%
+                                 {{ uang(Biayalastmilevendor::where('currency','USD')->sum('mrc')); }} USD
                             </div>
                             <div class="desc">
-                                 Brand Popularity
+                                 {{ uang(Biayalastmilevendor::where('currency','IDR')->sum('mrc')); }} IDR
                             </div>
                         </div>
-                        <a class="more" href="#">
-                        View more <i class="m-icon-swapright m-icon-white"></i>
-                        </a>
+                        <div class="more">
+                        Total MRC Circuit Lastmile Vendor
+                        </div>
                     </div>
                 </div>
             </div>

@@ -77,6 +77,8 @@ jQuery(document).ready(function() {
 
 @yield('script-bawah')
 
+<script type="text/javascript" src=" {{ asset('assets/js/angular.min.js') }}"></script>
+
 <!-- <script type="text/javascript" src="{{asset('assets/js/utils.js')}}"></script> -->
 
     <script type="text/javascript">
