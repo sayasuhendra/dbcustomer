@@ -87,7 +87,7 @@
                         Tj Bl Karimun {{ Customer::where('area', 'tbk')->where('status', 'aktif')->count() }}<br>
                         </div>
                         <div class="details">
-                            <div class="desc">
+                            <div class="sbpdesc">
                                  Global {{ Customer::where('area', 'global')->where('status', 'aktif')->count() }}<br>
                                  Jakarta {{ Customer::where('area', 'jakarta')->where('status', 'aktif')->count() }}<br>
                                  Batam {{ Customer::where('area', 'batam')->where('status', 'aktif')->count() }}<br>
@@ -107,7 +107,7 @@
                         Tj Bl Karimun {{ Costumercircuit::where('area', 'tbk')->where('status', 'aktif')->count() }}<br>
                         </div>
                         <div class="details">
-                            <div class="desc">
+                            <div class="sbpdesc">
                                  Global {{ Costumercircuit::where('area', 'global')->where('status', 'aktif')->count() }}<br>
                                  Jakarta {{ Costumercircuit::where('area', 'jakarta')->where('status', 'aktif')->count() }}<br>
                                  Batam {{ Costumercircuit::where('area', 'batam')->where('status', 'aktif')->count() }}<br>

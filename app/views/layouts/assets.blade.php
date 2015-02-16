@@ -114,13 +114,15 @@
 
     }
 
-    .dashboard-stat .details .desc {
+    .dashboard-stat .details .sbpdesc {
         text-align: right;
         padding-top: 10px;
         font-size: 16px;
         letter-spacing: 0px;
         font-weight: 300;
         line-height: 26px;
+        color: #FFFFFF;
+        
     }
 
     div.DTTT { margin-bottom: 0.5em; float: right; margin-left: 5px; }
