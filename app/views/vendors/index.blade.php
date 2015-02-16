@@ -34,8 +34,7 @@
                     @endif
                     <td>{{{ $vendor->keterangan }}}</td>
 
-
-                    <td class="ac">
+                    <td class="ac"  width="100px">
                     <a href="{{ URL::route('vendors.show', array($vendor->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
 
                         @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
@@ -46,7 +45,6 @@
     	                    {{ Form::close() }}
 
                         @endif
-
                     </td>
 				</tr>
 			@endforeach

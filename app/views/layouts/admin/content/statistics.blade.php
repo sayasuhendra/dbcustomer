@@ -81,40 +81,41 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat yellow-gold">
-                        <div class="visual">
-                            <i class="fa fa-users"></i>
+                        <div class="sbpstat">
+                        Bali {{ Customer::where('area', 'bali')->count() }}<br>
+                        Tj Pinang {{ Customer::where('area', 'tpi')->count() }}<br>
+                        Tj Bl Karimun {{ Customer::where('area', 'tbk')->count() }}<br>
                         </div>
                         <div class="details">
-                            <div class="number">
-                                 {{ Customer::all()->count() }}
-                            </div>
                             <div class="desc">
-                                 Total Customers
+                                 Global {{ Customer::where('area', 'global')->count() }}<br>
+                                 Jakarta {{ Customer::where('area', 'jakarta')->count() }}<br>
+                                 Batam {{ Customer::where('area', 'batam')->count() }}<br>
+
                             </div>
                         </div>
-                        <div class="more">
-                        Aktif {{ Customer::where('status', 'aktif')->count() }}
-                        <div class="pull-right">Terminate {{ Customer::where('status', 'terminate')->count() }}</div>
+                        <div class="more" align="center">
+                            Jumlah Customer Base On Area
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat green">
-                        <div class="visual">
-                            <i class="fa fa-server"></i>
+                        <div class="sbpstat">
+                        Bali {{ Costumercircuit::where('area', 'bali')->count() }}<br>
+                        Tj Pinang {{ Costumercircuit::where('area', 'tpi')->count() }}<br>
+                        Tj Bl Karimun {{ Costumercircuit::where('area', 'tbk')->count() }}<br>
                         </div>
                         <div class="details">
-                            <div class="number">
-                                 {{ Costumercircuit::all()->count() }}
-                            </div>
                             <div class="desc">
-                                 Total Circuits
+                                 Global {{ Costumercircuit::where('area', 'global')->count() }}<br>
+                                 Jakarta {{ Costumercircuit::where('area', 'jakarta')->count() }}<br>
+                                 Batam {{ Costumercircuit::where('area', 'batam')->count() }}<br>
+
                             </div>
                         </div>
-                        <div class="more">
-                            Aktif {{ Costumercircuit::where('status', 'aktif')->count() }}
-                            <div class="pull-right"> Suspend {{ Costumercircuit::where('status', 'suspend')->count() }} | Terminate
-                            {{ Costumercircuit::where('status', 'terminate')->count() }} </div>
+                        <div class="more" align="center">
+                            Jumlah Circuits Customer Base On Area
                         </div>
                     </div>
                 </div>

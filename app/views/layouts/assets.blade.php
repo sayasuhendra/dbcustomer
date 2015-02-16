@@ -98,6 +98,31 @@
       background-color: #418bca;
     }
 
+    .dashboard-stat .sbpstat {
+        height: 80px;
+        display: block;
+        float: left;
+        padding-top: 10px;
+        padding-left: 15px;
+        margin-bottom: 15px;
+        color: #FFFFFF;
+        text-align: right;
+        font-size: 16px;
+        letter-spacing: 0px;
+        font-weight: 300;
+        line-height: 26px;
+
+    }
+
+    .dashboard-stat .details .desc {
+        text-align: right;
+        padding-top: 10px;
+        font-size: 16px;
+        letter-spacing: 0px;
+        font-weight: 300;
+        line-height: 26px;
+    }
+
     div.DTTT { margin-bottom: 0.5em; float: right; margin-left: 5px; }
     div.dataTables_wrapper { clear: both; }
 </style>

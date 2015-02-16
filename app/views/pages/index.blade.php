@@ -13,7 +13,7 @@
 
 @stop
 
-@section('dashboard')
+@section('main')
 @if (Auth::user()->hasRole('admin'))
     @include('layouts/admin/content/statistics')
 @endif

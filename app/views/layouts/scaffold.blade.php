@@ -62,13 +62,14 @@
             {{-- @include('layouts/admin/content/config') --}}
 
             <!-- BEGIN PAGE HEADER-->
+            {{--
             <h3 class="page-title">
                 @yield('page-title', 'Customer Relationship Management')
             <small>@yield('subpage-title', 'we give you solutions')</small>
             </h3>
             <hr>
             <div class="page-bar">
-                {{-- 
+                 
                 <ul class="page-breadcrumb">
                     @yield('page-breadcrumb')
                 </ul>
@@ -79,10 +80,12 @@
                         <i class="icon-calendar"></i>&nbsp; <span class="thin uppercase visible-lg-inline-block"></span>&nbsp; <i class="fa fa-angle-down"></i>
                     </div>
                 </div>
-                 --}}
+                 
             </div>
+
             <!-- END PAGE HEADER-->
             @yield('dashboard')
+            --}}
             <div class="row">
             <div class="col-md-12 blog-page">
                 @yield('main')
