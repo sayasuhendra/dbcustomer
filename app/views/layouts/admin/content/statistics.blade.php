@@ -82,40 +82,40 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat yellow-gold">
                         <div class="sbpstat">
-                        Bali {{ Customer::where('area', 'bali')->count() }}<br>
-                        Tj Pinang {{ Customer::where('area', 'tpi')->count() }}<br>
-                        Tj Bl Karimun {{ Customer::where('area', 'tbk')->count() }}<br>
+                        Bali {{ Customer::where('area', 'bali')->where('status', 'aktif')->count() }}<br>
+                        Tj Pinang {{ Customer::where('area', 'tpi')->where('status', 'aktif')->count() }}<br>
+                        Tj Bl Karimun {{ Customer::where('area', 'tbk')->where('status', 'aktif')->count() }}<br>
                         </div>
                         <div class="details">
                             <div class="desc">
-                                 Global {{ Customer::where('area', 'global')->count() }}<br>
-                                 Jakarta {{ Customer::where('area', 'jakarta')->count() }}<br>
-                                 Batam {{ Customer::where('area', 'batam')->count() }}<br>
+                                 Global {{ Customer::where('area', 'global')->where('status', 'aktif')->count() }}<br>
+                                 Jakarta {{ Customer::where('area', 'jakarta')->where('status', 'aktif')->count() }}<br>
+                                 Batam {{ Customer::where('area', 'batam')->where('status', 'aktif')->count() }}<br>
 
                             </div>
                         </div>
                         <div class="more" align="center">
-                            Jumlah Customer Base On Area
+                            Jumlah Customer Aktif Base On Area
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="dashboard-stat green">
                         <div class="sbpstat">
-                        Bali {{ Costumercircuit::where('area', 'bali')->count() }}<br>
-                        Tj Pinang {{ Costumercircuit::where('area', 'tpi')->count() }}<br>
-                        Tj Bl Karimun {{ Costumercircuit::where('area', 'tbk')->count() }}<br>
+                        Bali {{ Costumercircuit::where('area', 'bali')->where('status', 'aktif')->count() }}<br>
+                        Tj Pinang {{ Costumercircuit::where('area', 'tpi')->where('status', 'aktif')->count() }}<br>
+                        Tj Bl Karimun {{ Costumercircuit::where('area', 'tbk')->where('status', 'aktif')->count() }}<br>
                         </div>
                         <div class="details">
                             <div class="desc">
-                                 Global {{ Costumercircuit::where('area', 'global')->count() }}<br>
-                                 Jakarta {{ Costumercircuit::where('area', 'jakarta')->count() }}<br>
-                                 Batam {{ Costumercircuit::where('area', 'batam')->count() }}<br>
+                                 Global {{ Costumercircuit::where('area', 'global')->where('status', 'aktif')->count() }}<br>
+                                 Jakarta {{ Costumercircuit::where('area', 'jakarta')->where('status', 'aktif')->count() }}<br>
+                                 Batam {{ Costumercircuit::where('area', 'batam')->where('status', 'aktif')->count() }}<br>
 
                             </div>
                         </div>
                         <div class="more" align="center">
-                            Jumlah Circuits Customer Base On Area
+                            Jumlah Circuits Aktif Base On Area
                         </div>
                     </div>
                 </div>
