@@ -1,7 +1,7 @@
             <!-- BEGIN DASHBOARD STATS -->
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat blue-madison">
+                    <div class="dashboard-stat yellow-gold">
                         <div class="visual">
                             <i class="fa fa-users"></i>
                         </div>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat red-intense">
+                    <div class="dashboard-stat green">
                         <div class="visual">
                             <i class="fa fa-server"></i>
                         </div>
