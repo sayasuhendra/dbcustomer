@@ -21,7 +21,7 @@ class LastmilesTerminatedController extends BaseController {
 	 */
 	public function index()
 	{
-		$lastmiles = $this->lastmile->where('status', 'terminate');
+		$lastmiles = $this->lastmile->where('status', 'terminate')->get();
 
 		return View::make('lastmiles.index', compact('lastmiles'));
 	}
