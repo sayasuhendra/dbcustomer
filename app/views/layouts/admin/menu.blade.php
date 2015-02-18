@@ -53,7 +53,7 @@
                     <ul class="sub-menu">
                         <li><a href="/terminatedlastmiles">
                             <i class="icon-share"></i>
-                            Terminated Vendor Circuits</a>
+                            Terminated Lastmiles</a>
                         </li>
                         <li><a href="/terminatedcircuits">
                             <i class="icon-graph"></i>
