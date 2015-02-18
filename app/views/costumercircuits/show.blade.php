@@ -46,8 +46,8 @@
 
                     @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                        <a href="{{ URL::route('costumercircuits.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
-                        <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a> 
+                        <a href="{{ URL::route('costumercircuits.create') }}" class="pull-right btn btn-xs btn-success glyphicon glyphicon-plus" title="buat baru"></a>  
+                        <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}" class="pull-right btn btn-xs btn-info glyphicon glyphicon-pencil" title="edit"></a> 
 
                     @endif
 
@@ -149,7 +149,7 @@
 
                     @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                      <button class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahPerangkatCircuit"></button>
+                      <button class="pull-right btn btn-xs btn-success glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahPerangkatCircuit"></button>
 
                     @endif
 
@@ -163,10 +163,10 @@
 
                   @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                  <a href="{{ URL::route('costumercircuitperangkats.edit', array($perangkat->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+                  <a href="{{ URL::route('costumercircuitperangkats.edit', array($perangkat->id)) }}" class="btn btn-xs btn-info glyphicon glyphicon-pencil" title="edit"></a>
                   
                   {{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuitperangkats.destroy', $perangkat->id), 'style'=>'display:inline-block')) }}
-                            <button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
+                            <button class="btn btn-xs btn-danger glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
                   {{ Form::close() }}
 
                   @endif
@@ -194,12 +194,12 @@
 
                   @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                    <a href="{{ URL::route('lastmiles.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
-                    <a href="{{ URL::route('lastmiles.edit', array($lastmile->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+                    <a href="{{ URL::route('lastmiles.create') }}" class="pull-right btn btn-xs btn-success glyphicon glyphicon-plus" title="buat baru"></a>  
+                    <a href="{{ URL::route('lastmiles.edit', array($lastmile->id)) }}" class="pull-right btn btn-xs btn-info glyphicon glyphicon-pencil" title="edit"></a>
 
                   @endif
 
-                    <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
+                    <a href="{{ URL::route('lastmiles.show', array($lastmile->id)) }}" class="pull-right btn btn-xs btn-primary glyphicon glyphicon-search" title="detail"></a>
                   
                   </h3>
                 </div>
@@ -311,9 +311,9 @@
                                   @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
                                   {{ Form::open(array('data-remote', 'method' => 'DELETE', 'route' => array('adsls.destroy', $costumercircuit->adsls->id)))}}
-                                    <button class="pull-right btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
+                                    <button class="pull-right btn btn-xs btn-danger glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
                                   {{ Form::close() }}
-                                    <button class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit" data-toggle="modal" data-target="#EditADSL"></button>
+                                    <button class="pull-right btn btn-xs btn-info glyphicon glyphicon-pencil" title="edit" data-toggle="modal" data-target="#EditADSL"></button>
 
                                   @endif
 
@@ -396,7 +396,7 @@
 
                   @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                    <button class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahContactCircuit"></button>
+                    <button class="pull-right btn btn-xs btn-success glyphicon glyphicon-plus" title="buat baru" data-toggle="modal" data-target="#TambahContactCircuit"></button>
 
                   @endif
 
@@ -411,9 +411,9 @@
 
                   @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                    <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+                    <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-xs btn-info glyphicon glyphicon-pencil" title="edit"></a>
                     {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
-                              <button class="btn btn-xs btn-danger btn-fab btn-raised glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
+                              <button class="btn btn-xs btn-danger glyphicon glyphicon-trash" data-confirm="Yakin mau dihapus?" title="delete"></button>
                     {{ Form::close() }}
 
                   @endif
@@ -463,12 +463,12 @@
 
                     @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                      <a href="{{ URL::route('customers.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
-                      <a href="{{ URL::route('customers.edit', array($customer->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+                      <a href="{{ URL::route('customers.create') }}" class="pull-right btn btn-xs btn-success glyphicon glyphicon-plus" title="buat baru"></a>  
+                      <a href="{{ URL::route('customers.edit', array($customer->id)) }}" class="pull-right btn btn-xs btn-info glyphicon glyphicon-pencil" title="edit"></a>
 
                     @endif
 
-                      <a href="{{ URL::route('customers.show', array($customer->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
+                      <a href="{{ URL::route('customers.show', array($customer->id)) }}" class="pull-right btn btn-xs btn-primary glyphicon glyphicon-search" title="detail"></a>
                     </h3>
                   </div>
                   <div class="panel-body">
@@ -513,12 +513,12 @@
 
                     @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                      <a href="{{ URL::route('vendors.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
-                      <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+                      <a href="{{ URL::route('vendors.create') }}" class="pull-right btn btn-xs btn-success glyphicon glyphicon-plus" title="buat baru"></a>  
+                      <a href="{{ URL::route('vendors.edit', array($vendor->id)) }}" class="pull-right btn btn-xs btn-info glyphicon glyphicon-pencil" title="edit"></a>
 
                     @endif
 
-                      <a href="{{ URL::route('vendors.show', array($vendor->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
+                      <a href="{{ URL::route('vendors.show', array($vendor->id)) }}" class="pull-right btn btn-xs btn-primary glyphicon glyphicon-search" title="detail"></a>
                     </h3>
                   </div>
                   <div class="panel-body">
@@ -547,12 +547,12 @@
 
                     @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
 
-                      <a href="{{ URL::route('backhauls.create') }}" class="pull-right btn btn-xs btn-success btn-fab btn-raised glyphicon glyphicon-plus" title="buat baru"></a>  
-                      <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="edit"></a>
+                      <a href="{{ URL::route('backhauls.create') }}" class="pull-right btn btn-xs btn-success glyphicon glyphicon-plus" title="buat baru"></a>  
+                      <a href="{{ URL::route('backhauls.edit', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-info glyphicon glyphicon-pencil" title="edit"></a>
 
                     @endif
                     
-                      <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-primary btn-fab btn-raised glyphicon glyphicon-search" title="detail"></a>
+                      <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}" class="pull-right btn btn-xs btn-primary glyphicon glyphicon-search" title="detail"></a>
                     </h3>
                   </div>
                   <div class="panel-body">

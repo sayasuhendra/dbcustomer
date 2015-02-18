@@ -36,8 +36,8 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/ujicoba', function()
 {
-	$user = User::all();
-	var_dump((array)$user);
+	$user = User::find(29);
+	echo $user->email;
 });
 
 Route::get('/excel', function()

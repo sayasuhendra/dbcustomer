@@ -12,6 +12,9 @@
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 @include('layouts/assets')
+@yield('atas')
+</head>
+
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square">
 <div class="page-header navbar navbar-fixed-top">
     <div class="page-header-inner">
@@ -121,6 +124,8 @@
 @include('layouts/footer')
 
 @include('layouts/script')
+
+@yield('script')
 
 </body>
 <!-- END BODY -->

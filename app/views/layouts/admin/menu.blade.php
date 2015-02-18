@@ -46,6 +46,23 @@
 
                 <li>
                     <a href="javascript:;">
+                    <i class="icon-close"></i>
+                    <span class="title">Terminated Circuits</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="/terminatedlastmiles">
+                            <i class="icon-share"></i>
+                            Terminated Vendor Circuits</a>
+                        </li>
+                        <li><a href="/terminatedcircuits">
+                            <i class="icon-graph"></i>
+                            Terminated Circuits</a></li> 
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:;">
                     <i class="icon-briefcase"></i>
                     <span class="title">Layanan Lain</span>
                     <span class="arrow "></span>

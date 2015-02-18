@@ -14,8 +14,6 @@
 
 @section('main')
 
-
-
 <div class="panel panel-primary">
     <div class="panel-heading">
     <h1 class="panel-title" align="center">Form Edit Customer Circuit</h1></div>
@@ -58,7 +56,7 @@
                     <div class="form-group">
                         {{ Form::label('layanan', 'Layanan:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('layanan', ['Sewa atau Beli Perangkat' => 'Sewa atau Beli Perangkat', 'Hosting' => 'Hosting', 'Collocation' => 'Collocation'], null, ['class' => 'form-control']) }}
+                        {{ Form::select('layanan', ['Sewa Perangkat' => 'Sewa Perangkat', 'Beli Perangkat' => 'Beli Perangkat', 'Hosting' => 'Hosting', 'Collocation' => 'Collocation'], null, ['class' => 'form-control']) }}
                     </div></div>                                       
                     <div class="form-group">
                         {{ Form::label('area', 'Area:', ['class' => 'col-sm-3']) }}

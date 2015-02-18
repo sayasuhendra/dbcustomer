@@ -52,6 +52,9 @@ Route::group(['before' => 'auth'], function(){
 		Route::resource('biayacostumercircuits', 'BiayacostumercircuitsController');
 		Route::resource('costumercircuitperangkats', 'CostumercircuitperangkatsController');
 
+		# Terminated Circuits and Lastmile
+		Route::resource('terminatedcircuits', 'CircuitsTerminatedController');
+		Route::resource('terminatedlastmiles', 'LastmilesTerminatedController');
 
 		# Lastmile
 
