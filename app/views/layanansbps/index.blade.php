@@ -10,6 +10,8 @@
 
 @section('main')
 
+<div class="col-md-12">
+
 <h3 align="center">Daftar Data Layanan SBP</h3>
 <p>{{ link_to_route('layanansbps.create', 'Add Circuit', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 @if ($layanansbps->count())
@@ -83,6 +85,8 @@
 @else
 	Belum ada data layanansbps
 @endif
+
+</div>
 
 @stop
 

@@ -588,6 +588,9 @@
 
               @endif
 </div>
+@stop
+
+@section('script-bawah')
 
 <script type="text/javascript">
   @foreach ($costumercircuit->contacts as $contact)

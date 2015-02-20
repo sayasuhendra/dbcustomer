@@ -20,7 +20,7 @@
                             <i class="icon-notebook"></i> Internal Kontak </a>
                         </li>
                         <li>
-                            <a href="{{ route('user.profile.edit', Auth::user()->username) }}">
+                            <a href="{{ route('editpassword', Auth::user()->username) }}">
                             <i class="icon-note"></i> Edit Password</a>
                         </li>
                         <li class="divider">

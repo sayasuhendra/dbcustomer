@@ -244,6 +244,9 @@
 	            </div>
 	        </div>
 
+@stop
+
+@section('script-bawah')
 
 <script type="text/javascript">
 	@foreach ($layanansbp->contacts as $contact)

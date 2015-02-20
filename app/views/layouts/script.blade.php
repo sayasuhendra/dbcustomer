@@ -1,4 +1,3 @@
-
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
@@ -50,7 +49,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="{{asset('global/scripts/metronic.js')}}" type="text/javascript"></script>
 <script src="{{asset('layout/scripts/layout.js')}}" type="text/javascript"></script>
-<!-- <script src="{{asset('layout/scripts/quick-sidebar.js')}}" type="text/javascript"></script> -->
+<script src="{{asset('layout/scripts/quick-sidebar.js')}}" type="text/javascript"></script>
 <!-- <script src="{{asset('layout/scripts/demo.js')}}" type="text/javascript"></script> -->
 <!-- <script src="{{asset('pages/scripts/index.js')}}" type="text/javascript"></script> -->
 <!-- <script src="{{asset('pages/scripts/tasks.js')}}" type="text/javascript"></script> -->
@@ -59,7 +58,7 @@
 jQuery(document).ready(function() {    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
-   // QuickSidebar.init(); // init quick sidebar
+   QuickSidebar.init(); // init quick sidebar
    // Demo.init(); // init demo features 
    // Index.init();   
    // Index.initDashboardDaterange();

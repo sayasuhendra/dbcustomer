@@ -457,19 +457,21 @@
 	    </div>
 	    </div>
 
-        <script type="text/javascript">
-        	
-        	@foreach ($vendor->contactvendors as $contactcustomer)
-        	$('#contactButtonVendor{{{ $contactcustomer->id }}}').popover();
-        	@endforeach        	
-        	
-        </script>
+
 
 @stop
 
 
 
 @section('script-bawah')
+
+<script type="text/javascript">
+	
+	@foreach ($vendor->contactvendors as $contactcustomer)
+	$('#contactButtonVendor{{{ $contactcustomer->id }}}').popover();
+	@endforeach        	
+	
+</script>
 
 <script type="text/javascript" language="javascript" class="init">
     $(document).ready(function() {

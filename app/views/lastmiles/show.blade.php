@@ -104,6 +104,10 @@
             </div>
         </div>
 
+@stop
+
+@section('script-bawah')
+
         <script type="text/javascript">
         	
         	@foreach ($vendor->contactvendors as $contactcustomer)
