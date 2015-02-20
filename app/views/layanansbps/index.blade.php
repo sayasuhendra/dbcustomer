@@ -22,10 +22,6 @@
 				<th>Namasite</th>
 				<th>Alamat</th>
 				<th>Layanan</th>
-				<th>Perangkat</th>
-				<th>Serial No.</th>
-				<th>Tipe</th>
-				<th>Jenis</th>
 				<th>Pemilik</th>
 
 				@if ( !Auth::user()->hasRole('noc') )
@@ -35,7 +31,6 @@
 
 				<th>Area</th>
 				<th>Status</th>
-				<th>Start Date</th>
 				<th width="60px">Action</th>
 			</tr>
 		</thead>
@@ -47,10 +42,6 @@
 					<td>{{{ $layanansbp->namasite }}}</td>
 					<td>{{{ $layanansbp->alamat }}}</td>
 					<td>{{{ $layanansbp->layanan }}}</td>
-					<td>{{{ $layanansbp->namaperangkat }}}</td>
-					<td>{{{ $layanansbp->serialnumber }}}</td>
-					<td>{{{ $layanansbp->tipe }}}</td>
-					<td>{{{ $layanansbp->jenis }}}</td>
 					<td>{{{ $layanansbp->pemilik }}}</td>
 
 					@if ( !Auth::user()->hasRole('noc') )
@@ -69,7 +60,6 @@
 							<span class="label label-warning">{{{ $layanansbp->status }}}</span>
 						@endif
 					</td>
-                    <td>{{{ $layanansbp->present()->startDate }}}</td>
                     <td width="60px" class="ac">
                     <a href="{{ URL::route('layanansbps.show', array($layanansbp->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
 	                    <a href="{{ URL::route('layanansbps.edit', array($layanansbp->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
