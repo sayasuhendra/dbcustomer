@@ -2,8 +2,6 @@
 
 @section('main')
 
-
-
 <div class="panel panel-primary">
     <div class="panel-heading">
     <h1 class="panel-title" align="center">Form Edit Customer Circuit</h1></div>
@@ -25,12 +23,25 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3">
-                        {{ Form::label('activated_at', 'Start Date :') }}
+                        {{ Form::label('activated_at', 'Start Date:') }}
                         </div>
                         <div class="col-sm-9">
-                        {{ Form::text('activated_at', null, ['class' => 'form-control']) }}
+                        {{ Form::input('date', 'activated_at', null, ['class' => 'form-control']) }}
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                        {{ Form::label('doc', 'Date of Contract:') }}
+                        </div>
+                        <div class="col-sm-9">
+                        {{ Form::input('date', 'doc', null, ['class' => 'form-control']) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('toc', 'Term of Contract:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('toc', ['1 Bulan' => '1 Bulan', '3 Bulan' => '3 Bulan', '6 Bulan' => '6 Bulan', '12 Bulan' => '12 Bulan', '24 Bulan' => '24 Bulan', '36 Bulan' => '36 Bulan'], null, ['class' => 'form-control']) }}
+                    </div></div>
                     <div class="form-group">
                         {{ Form::label('namasite', 'Nama Site :', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
@@ -49,22 +60,26 @@
                         {{ Form::select('layanan', ['VSAT' => 'VSAT', 'ADSL' => 'ADSL', 'Wireline Broadband' => 'Wireline Broadband', 'Wireline Dedicated' => 'Wireline Dedicated', 'Layer 2' => 'Layer 2', 'IP Transit' => 'IP Transit', 'Hosting' => 'Hosting', 'Collocation' => 'Collocation', 'Wireless Broadband' => 'Wireless Broadband', 'Wireless Dedicated' => 'Wireless Dedicated', 'VPN IP' => 'VPN IP'], null, ['class' => 'form-control']) }}
                     </div></div>
 
-                    <div class="form-group">
-                        <div class="col-sm-9 pull-right">
-                        {{ Form::hidden('username', null, ['class' => 'form-control', 'placeholder' => 'username', 'id' => 'username']) }}
-                    </div></div>
-                    <div class="form-group">
-                        <div class="col-sm-9 pull-right">
-                        {{ Form::hidden('password', null, ['class' => 'form-control', 'placeholder' => 'password', 'id' => 'password']) }}
-                    </div></div>
-                    <div class="form-group">
-                        <div class="col-sm-9 pull-right">
-                        {{ Form::hidden('nomer', null, ['class' => 'form-control', 'placeholder' => 'nomer ADSL', 'id' => 'nomer']) }}
-                    </div></div>
-                    <div class="form-group">
-                        <div class="col-sm-9 pull-right">
-                        {{ Form::hidden('tumpangan', null, ['class' => 'form-control', 'placeholder' => 'nomer tumpangan', 'id' => 'tumpangan']) }}
-                    </div></div>
+                    <div id="hilang">
+
+                        <div class="form-group">
+                            <div class="col-sm-9 pull-right">
+                            {{ Form::hidden('username', null, ['class' => 'form-control', 'placeholder' => 'username', 'id' => 'username']) }}
+                        </div></div>
+                        <div class="form-group">
+                            <div class="col-sm-9 pull-right">
+                            {{ Form::hidden('password', null, ['class' => 'form-control', 'placeholder' => 'password', 'id' => 'password']) }}
+                        </div></div>
+                        <div class="form-group">
+                            <div class="col-sm-9 pull-right">
+                            {{ Form::hidden('nomer', null, ['class' => 'form-control', 'placeholder' => 'nomer ADSL', 'id' => 'nomer']) }}
+                        </div></div>
+                        <div class="form-group">
+                            <div class="col-sm-9 pull-right">
+                            {{ Form::hidden('tumpangan', null, ['class' => 'form-control', 'placeholder' => 'nomer tumpangan', 'id' => 'tumpangan']) }}
+                        </div></div>
+
+                    </div>
 
                     <div class="form-group row">
                         {{ Form::label('bandwidth', 'Bandwidth:', ['class' => 'col-sm-3']) }}

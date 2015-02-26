@@ -15,7 +15,7 @@ class Customer extends Eloquent {
 
 	public function getDates()
 	{
-	    return array('created_at', 'register_at', 'updated_at');
+	    return array('created_at', 'updated_at');
 	}
 
 	public function customercontacts()

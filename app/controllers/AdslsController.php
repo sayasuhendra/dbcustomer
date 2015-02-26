@@ -114,9 +114,11 @@ class AdslsController extends BaseController {
 	public function destroy($id)
 	{
 		$adsls = $this->adsl->find($id);
+		$circuit = $adsls->circuits;
 		$adsls->circuits->layanan = "";
 		$adsls->circuits->save();
 		$adsls->delete();
+		return Redirect::route('costumercircuits.show', $circuit->id);
 
 	}
 

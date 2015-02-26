@@ -36,6 +36,7 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/ujicoba', function()
 {
+	return View::make('test');
 
 });
 

@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3"> {{ Form::label('register_at', 'register_at:') }} </div>
-                        <div class="col-sm-9"> {{ Form::text('register_at', null, ['class' => 'form-control', 'id' => 'pilih']) }}</div>
+                        <div class="col-sm-9"> {{ Form::input('date', 'register_at', null, ['class' => 'form-control', 'id' => 'pilih']) }}</div>
 
                     </div>
                     <div class="form-group">

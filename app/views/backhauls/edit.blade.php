@@ -29,7 +29,7 @@
                         {{ Form::label('activated_at', 'Start Date :') }}
                         </div>
                         <div class="col-sm-9">
-                        {{ Form::input('datetime', 'activated_at', null, ['class' => 'form-control']) }}
+                        {{ Form::input('date', 'activated_at', null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">
@@ -90,5 +90,20 @@
 		{{ implode('', $errors->all('<li class="error">:message</li>')) }}
 	</ul>
 @endif
+
+@stop
+
+@section('script-bawah')
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $("#namavendor").select2();
+        $("#switchterkoneksi").select2();
+
+    });
+
+</script>
 
 @stop

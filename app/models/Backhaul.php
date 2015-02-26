@@ -13,7 +13,7 @@ class Backhaul extends Eloquent {
 
 	public function getDates()
 	{
-	    return array('created_at', 'activated_at', 'updated_at');
+	    return array('created_at', 'updated_at');
 	}
 
 	public function vendors()

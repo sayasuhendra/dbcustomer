@@ -59,7 +59,11 @@
                         <dt>Circuit ID</dt>
                         <dd>{{{ $costumercircuit->circuitid }}}</dd>
                         <dt>Start Date</dt>
-                                    <dd>{{{ $costumercircuit->present()->startDateShow }}}</dd>
+                        <dd>{{{ $costumercircuit->present()->startDateShow }}}</dd>
+                        <dt>Date of Contract</dt>
+                        <dd>{{{ $costumercircuit->present()->dateOfContract }}}</dd>
+                        <dt>Term of Contract</dt>
+                        <dd>{{{ $costumercircuit->toc }}}</dd>
                         <dt>Nama Site</dt>
                         <dd>{{{ $costumercircuit->namasite }}}</dd>
                         <dt>Alamat Site</dt>

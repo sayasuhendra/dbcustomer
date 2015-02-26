@@ -16,7 +16,7 @@ class Costumercircuit extends Eloquent {
 
 	public function getDates()
 	{
-	    return array('created_at', 'activated_at', 'updated_at');
+	    return array('created_at', 'updated_at');
 	}
 
 	public function contacts()
@@ -64,4 +64,5 @@ class Costumercircuit extends Eloquent {
 	{
 		return $this->belongsTo('Backhaul', 'namabackhaul', 'nama');
 	}
+
 }

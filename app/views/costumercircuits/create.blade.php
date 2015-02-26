@@ -22,12 +22,25 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-3">
-                        {{ Form::label('activated_at', 'Start Date :') }}
+                        {{ Form::label('activated_at', 'Start Date:') }}
                         </div>
                         <div class="col-sm-9">
                         {{ Form::input('date', 'activated_at', null, ['class' => 'form-control']) }}
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                        {{ Form::label('doc', 'Date of Contract:') }}
+                        </div>
+                        <div class="col-sm-9">
+                        {{ Form::input('date', 'doc', null, ['class' => 'form-control']) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('toc', 'Term of Contract:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('toc', ['1 Bulan' => '1 Bulan', '3 Bulan' => '3 Bulan', '6 Bulan' => '6 Bulan', '12 Bulan' => '12 Bulan', '24 Bulan' => '24 Bulan', '36 Bulan' => '36 Bulan'], null, ['class' => 'form-control']) }}
+                    </div></div>
                     <div class="form-group">
                         {{ Form::label('namasite', 'Nama Site :', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">

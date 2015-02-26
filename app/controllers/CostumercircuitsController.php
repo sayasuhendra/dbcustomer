@@ -68,7 +68,7 @@ class CostumercircuitsController extends BaseController {
 	 */
 	public function store()
 	{
-		$inputcircuit = Input::only('circuitid', 'activated_at', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'customer_id', 'circuitidlastmile', 'keteranganck');
+		$inputcircuit = Input::only('circuitid', 'activated_at', 'doc', 'toc', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'customer_id', 'circuitidlastmile', 'keteranganck');
 		$inputbiaya = Input::only('nrc', 'mrc', 'currency');
 		$inputperangkat = Input::only('namaperangkat', 'serialnumber', 'tipe', 'jenis', 'pemilik');
 
@@ -194,20 +194,38 @@ class CostumercircuitsController extends BaseController {
 	public function update($id)
 	{
 		$inputbiayas = Input::only('nrc', 'mrc', 'currency');
-		$inputcircuit = Input::except('nrc', 'mrc', 'currency');
+		$inputcircuit = Input::only('circuitid', 'activated_at', 'doc', 'toc', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'customer_id', 'circuitidlastmile', 'keteranganck');
 
-		$input = array_except($inputcircuit, '_method');
-		$inputbiaya = array_except($inputbiayas, '_method');
+
+		$input = $inputcircuit;
+		$inputbiaya = $inputbiayas;
 		$validation = Validator::make($input, Costumercircuit::$rules);
+		$costumercircuit = $this->costumercircuit->find($id);
+		$layananlama = $costumercircuit->layanan;
 
 		if ($validation->passes())
 		{
-			$costumercircuit = $this->costumercircuit->find($id);
 			$costumercircuit->update($input);
 			$costumercircuit->biayas()->update($inputbiaya);
 
-			return Redirect::route('costumercircuits.index');
-		}
+			if ( $layananlama != 'ADSL')
+				{	
+					if ( Input::get('layanan') == 'ADSL' )
+					{
+						$inputadsl = Input::only('username', 'password', 'nomer', 'tumpangan');
+						$costumercircuit->adsls()->create($inputadsl);
+					}
+				}
+
+			if ($layananlama == 'ADSL')
+				{	
+					if ( Input::get('layanan') != 'ADSL')
+					{
+						$costumercircuit->adsls()->delete();
+					}
+				}
+				return Redirect::route('costumercircuits.show', $id);
+			}
 
 		return Redirect::route('costumercircuits.edit', $id)
 			->withInput()

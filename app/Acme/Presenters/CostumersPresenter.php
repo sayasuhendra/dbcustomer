@@ -7,8 +7,9 @@ class CostumersPresenter extends Presenter {
     
     public function registerdate()
     {
+        $date = date_create($this->register_at);
         setlocale (LC_TIME, 'id_ID');
-        return $this->register_at->formatLocalized('%d %B %Y');
+        return date_format($date, 'd M Y');
     }
 
 }

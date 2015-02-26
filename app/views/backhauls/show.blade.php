@@ -25,7 +25,7 @@
 
 <p>{{ link_to_route('backhauls.index', 'Return to all backhauls') }}</p>
 
-<table id="datasbp" class="table table-striped table-bordered">
+<table id="databackhaul" class="table table-striped table-bordered">
 	<thead>
 		<tr>
 			<th>Nama Vendor</th>
@@ -61,7 +61,7 @@
 				<td>{{{ $backhaul->present()->mrc }}}</td>
 			@endif
 			
-			<td>{{{ $backhaul->present()->startDateShow }}}</td>
+			<td>{{{ $backhaul->present()->startDate }}}</td>
             
             <td width="60px" class="ac">
             <a href="{{ URL::route('backhauls.show', array($backhaul->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>

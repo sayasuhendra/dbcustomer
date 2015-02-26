@@ -90,3 +90,19 @@
 @endif
 
 @stop
+
+
+@section('script-bawah')
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $("#namavendor").select2();
+        $("#switchterkoneksi").select2();
+
+    });
+
+</script>
+
+@stop

@@ -71,7 +71,9 @@ class CircuitsPresenter extends Presenter {
 
         } else {
             
-            return $this->activated_at->format('d/m/y');
+            $date = date_create($this->activated_at);
+            setlocale (LC_TIME, 'id_ID');
+            return date_format($date, 'd/m/y');
                         
         }
         
@@ -85,12 +87,29 @@ class CircuitsPresenter extends Presenter {
             return 'Kosong';
 
         } else {
+            $date = date_create($this->activated_at);
+            setlocale (LC_TIME, 'id_ID');
+            return date_format($date, 'd M Y');
+                        
+        }
+        
+    }    
+
+    public function dateOfContract()
+    {
+        
+        if (isset($this->doc) || $this->doc === null) {
+
+            return 'Kosong';
+
+        } else {
+
+            $date = date_create($this->doc);
 
             setlocale (LC_TIME, 'id_ID');
-            return $this->activated_at->formatLocalized('%d %B %Y');
+            return date_format($date, 'd M Y');
                         
         }
         
     }
-
 }
