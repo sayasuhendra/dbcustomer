@@ -36,9 +36,25 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/ujicoba', function()
 {
-	$user = User::find(29);
-	echo $user->email;
+
 });
+
+Route::filter('cache.fetch', 'Acme\Filters\CacheFilter@fetch');
+Route::filter('cache.put', 'Acme\Filters\CacheFilter@put');
+Route::get('cachelabs', function()
+{
+	// Cache::put('test', "Coba", 5);
+	// Cache::forget('tost');
+	// echo Cache::get('tost', "default");
+	// Cache::remember('tost', 60, function(){
+	return View::make('hello');
+	// });
+})->before('cache.fetch')->after('cache.put');
+
+// Event::listen('illuminate.query', function($query)
+// {
+// 	var_dump($query);
+// });
 
 Route::get('/excel', function()
 {

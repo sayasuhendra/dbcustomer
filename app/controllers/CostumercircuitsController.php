@@ -176,6 +176,12 @@ class CostumercircuitsController extends BaseController {
 			return Redirect::route('costumercircuits.index');
 		}
 
+		if (Input::get('layanan') === "ADSL") {
+
+			return View::make('costumercircuits.edit', ['costumercircuit' => $costumercircuit, 'customer' => $customer, 'namabackhaul' => $namabackhaul, 'circuitidlastmile' => $circuitidlastmile, 'vendor' => $vendor]);
+
+		}
+
 		return View::make('costumercircuits.edit', ['costumercircuit' => $costumercircuit, 'customer' => $customer, 'namabackhaul' => $namabackhaul, 'circuitidlastmile' => $circuitidlastmile, 'vendor' => $vendor]);
 	}
 
@@ -214,7 +220,7 @@ class CostumercircuitsController extends BaseController {
 	 *
 	 * @param  int  $id
 	 * @return Response
-	 */
+	 */	 
 	public function destroy($id)
 	{
 		$circuit = $this->costumercircuit->find($id);

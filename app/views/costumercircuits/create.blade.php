@@ -1,18 +1,5 @@
 @extends('layouts.scaffold')
 
-@section('script-atas')
-
-    <script>
-        $(document).ready(function() { 
-
-            $("#customer_id").select2();
-            
-
-        });
-    </script>
-
-@stop
-
 @section('main')
 
 <div class="panel panel-primary">
@@ -260,6 +247,15 @@
             $("#tumpangan").attr( "type", "hidden" );
         }
     });
+
+    $(document).ready(function() { 
+
+        $("#customer_id").select2();
+        $("#layanan").select2();
+        
+
+    });
+    </script>
 </script>
 
 @stop

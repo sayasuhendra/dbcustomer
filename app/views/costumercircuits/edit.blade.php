@@ -1,21 +1,5 @@
 @extends('layouts.scaffold')
 
-@section('script-atas')
-
-    <script>
-        $(document).ready(function() { 
-
-            $("#customer_id").select2();
-            $("#namavendor").select2();
-            $("#namabackhaul").select2();
-            $("#circuitidlastmile").select2();
-            
-
-        });
-    </script>
-
-@stop
-
 @section('main')
 
 
@@ -64,6 +48,24 @@
                         <div class="col-sm-9">
                         {{ Form::select('layanan', ['VSAT' => 'VSAT', 'ADSL' => 'ADSL', 'Wireline Broadband' => 'Wireline Broadband', 'Wireline Dedicated' => 'Wireline Dedicated', 'Layer 2' => 'Layer 2', 'IP Transit' => 'IP Transit', 'Hosting' => 'Hosting', 'Collocation' => 'Collocation', 'Wireless Broadband' => 'Wireless Broadband', 'Wireless Dedicated' => 'Wireless Dedicated', 'VPN IP' => 'VPN IP'], null, ['class' => 'form-control']) }}
                     </div></div>
+
+                    <div class="form-group">
+                        <div class="col-sm-9 pull-right">
+                        {{ Form::hidden('username', null, ['class' => 'form-control', 'placeholder' => 'username', 'id' => 'username']) }}
+                    </div></div>
+                    <div class="form-group">
+                        <div class="col-sm-9 pull-right">
+                        {{ Form::hidden('password', null, ['class' => 'form-control', 'placeholder' => 'password', 'id' => 'password']) }}
+                    </div></div>
+                    <div class="form-group">
+                        <div class="col-sm-9 pull-right">
+                        {{ Form::hidden('nomer', null, ['class' => 'form-control', 'placeholder' => 'nomer ADSL', 'id' => 'nomer']) }}
+                    </div></div>
+                    <div class="form-group">
+                        <div class="col-sm-9 pull-right">
+                        {{ Form::hidden('tumpangan', null, ['class' => 'form-control', 'placeholder' => 'nomer tumpangan', 'id' => 'tumpangan']) }}
+                    </div></div>
+
                     <div class="form-group row">
                         {{ Form::label('bandwidth', 'Bandwidth:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
@@ -156,5 +158,35 @@
 @if ($errors->any())
 		{{ implode('', $errors->all('<li class="error">:message</li>')) }}
 @endif
+
+@stop
+
+
+@section('script-bawah')
+
+<script>
+    $('#layanan').change(function() {
+        if ($(this).val() === 'ADSL') {
+            $("#username").removeAttr( "type" );
+            $("#password").removeAttr( "type" );
+            $("#nomer").removeAttr( "type" );
+            $("#tumpangan").removeAttr( "type" );
+        }
+        if ($(this).val() !== 'ADSL') {
+            $("#username").attr( "type", "hidden" );
+            $("#password").attr( "type", "hidden" );
+            $("#nomer").attr( "type", "hidden" );
+            $("#tumpangan").attr( "type", "hidden" );
+        }
+    });
+
+    $(document).ready(function() { 
+            $("#customer_id").select2();
+            $("#namavendor").select2();
+            $("#namabackhaul").select2();
+            $("#circuitidlastmile").select2();
+            $("#layanan").select2();
+        });
+</script>
 
 @stop

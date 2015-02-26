@@ -1,19 +1,5 @@
 @extends('layouts.scaffold')
 
-@section('script-atas')
-
-    <script>
-        $(document).ready(function() { 
-
-            $("#namavendor").select2();
-            $("#namabackhaul").select2();
-            
-
-        });
-    </script>
-
-@stop
-
 @section('main')
 
 
@@ -166,5 +152,21 @@
 @if ($errors->any())
 		{{ implode('', $errors->all('<li class="error">:message</li>')) }}
 @endif
+
+@stop
+
+@section('script-bawah')
+
+    <script>
+        $(document).ready(function() { 
+
+            $("#namavendor").select2();
+            $("#namabackhaul").select2();
+            $("#layanan").select2();
+            $("#am").select2();
+            
+
+        });
+    </script>
 
 @stop

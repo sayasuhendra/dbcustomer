@@ -1,17 +1,5 @@
 @extends('layouts.scaffold')
 
-@section('script-atas')
-
-    <script>
-        $(document).ready(function() { 
-
-            $("#customer_id").select2();
-
-        });
-    </script>
-
-@stop
-
 @section('main')
 
 <div class="panel panel-primary">
@@ -153,4 +141,14 @@
 		{{ implode('', $errors->all('<li class="error">:message</li>')) }}
 @endif
 
+@stop
+
+@section('script-bawah')
+    <script type="text/javascript">
+        $(document).ready(function() { 
+
+            $("#customer_id").select2();
+
+        });
+    </script>
 @stop

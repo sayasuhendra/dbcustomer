@@ -11,8 +11,8 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
-@include('layouts/assets')
-@yield('atas')
+    @include('layouts/assets')
+    @yield('atas')
 </head>
 
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square">

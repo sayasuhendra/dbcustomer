@@ -1,19 +1,5 @@
 @extends('layouts.scaffold')
 
-@section('script-atas')
-
-    <script>
-        $(document).ready(function() { 
-
-            $("#namavendor").select2();
-            $("#namabackhaul").select2();
-            
-
-        });
-    </script>
-
-@stop
-
 @section('main')
 
 <div class="panel panel-primary">
@@ -181,8 +167,14 @@
             });
         });
 
+        $(document).ready(function() { 
+
+            $("#namavendor").select2();
+            $("#namabackhaul").select2();
+            $("#layanan").select2();
+            
+
+        });
 </script>
 
 @stop
-
-

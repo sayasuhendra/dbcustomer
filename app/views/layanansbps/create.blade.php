@@ -1,17 +1,5 @@
 @extends('layouts.scaffold')
 
-@section('script-atas')
-
-    <script>
-        $(document).ready(function() { 
-
-            $("#customer_id").select2();
-
-        });
-    </script>
-
-@stop
-
 @section('main')
 
 <div class="panel panel-primary">
@@ -213,3 +201,15 @@
 @stop
 
 
+
+@section('script-bawah')
+
+    <script>
+        $(document).ready(function() { 
+
+            $("#customer_id").select2();
+
+        });
+    </script>
+
+@stop
