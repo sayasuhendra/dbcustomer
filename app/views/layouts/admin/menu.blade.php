@@ -84,6 +84,11 @@
                     <span class="title"> Perangkat SBP</span></a>
                 </li>
 
+                <li><a href="/problems">
+                    <i class="icon-bubbles"></i>
+                    <span class="title"> Problem Tickets</span></a>
+                </li>
+
 
                 {{-- 
                 <li class="heading">
