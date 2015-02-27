@@ -58,6 +58,8 @@
               <dl class="dl-horizontal">
                         <dt>Circuit ID</dt>
                         <dd>{{{ $costumercircuit->circuitid }}}</dd>
+                        <dt>Monitoring Time</dt>
+                        <dd>{{{ $costumercircuit->monitoring }}}</dd>
                         <dt>Start Date</dt>
                         <dd>{{{ $costumercircuit->present()->startDateShow }}}</dd>
                         <dt>Date of Contract</dt>

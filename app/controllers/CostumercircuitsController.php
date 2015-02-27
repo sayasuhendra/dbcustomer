@@ -68,7 +68,7 @@ class CostumercircuitsController extends BaseController {
 	 */
 	public function store()
 	{
-		$inputcircuit = Input::only('circuitid', 'activated_at', 'doc', 'toc', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'customer_id', 'circuitidlastmile', 'keteranganck');
+		$inputcircuit = Input::only('circuitid', 'activated_at', 'monitoring', 'doc', 'toc', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'customer_id', 'circuitidlastmile', 'keteranganck');
 		$inputbiaya = Input::only('nrc', 'mrc', 'currency');
 		$inputperangkat = Input::only('namaperangkat', 'serialnumber', 'tipe', 'jenis', 'pemilik');
 
@@ -194,7 +194,7 @@ class CostumercircuitsController extends BaseController {
 	public function update($id)
 	{
 		$inputbiayas = Input::only('nrc', 'mrc', 'currency');
-		$inputcircuit = Input::only('circuitid', 'activated_at', 'doc', 'toc', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'customer_id', 'circuitidlastmile', 'keteranganck');
+		$inputcircuit = Input::only('circuitid', 'activated_at', 'monitoring', 'doc', 'toc', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'customer_id', 'circuitidlastmile', 'keteranganck');
 
 
 		$input = $inputcircuit;

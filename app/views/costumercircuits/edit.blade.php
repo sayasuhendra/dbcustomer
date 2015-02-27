@@ -22,6 +22,11 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        {{ Form::label('monitoring', 'Monitoring Time:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('monitoring', ['Office Hour' => 'Office Hour', '24/7 Support' => '24/7 Support'], null, ['class' => 'form-control']) }}
+                    </div></div>
+                    <div class="form-group">
                         <div class="col-sm-3">
                         {{ Form::label('activated_at', 'Start Date:') }}
                         </div>
