@@ -146,3 +146,5 @@ Route::when('layanans/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
 Route::when('layanansbps/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
 
 Route::when('backhaulswitches/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
+
+Route::resource('problems', 'ProblemsController');
