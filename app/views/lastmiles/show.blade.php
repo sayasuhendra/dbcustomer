@@ -16,8 +16,8 @@
 
 <p>{{ link_to_route('lastmiles.index', 'Return to all lastmiles') }}</p>
 
-<div class="col-md-6">
-	            <div class="panel panel-primary">
+		<div class="col-md-6">
+            <div class="panel panel-primary">
 	              <div class="panel-heading">
 	                <h3 class="panel-title">Data Lastmile Circuit Vendor</h3>
 	              </div>
