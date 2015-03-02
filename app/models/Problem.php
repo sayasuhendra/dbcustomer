@@ -32,4 +32,6 @@ class Problem extends Eloquent {
 	{
 	    return array('created_at', 'updated_at');
 	}
+
+	
 }

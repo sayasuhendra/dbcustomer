@@ -33,9 +33,19 @@ class ProblemsController extends BaseController {
 	 */
 	public function create()
 	{
-		$customers = Customer::lists('nama', 'nama');
-		
-		return View::make('problems.create', ['customers' => $customers]);
+		$customers = Customer::lists('nama', 'id');
+		$vendors = Vendor::lists('nama', 'nama');
+
+		return View::make('problems.create', ['customers' => $customers, 'vendors' => $vendors]);
+	}
+
+
+	public function option()
+	{
+        $return = '<option value=""></option>';
+        foreach(Costumercircuit::where('customer_id', Input::get('customer_id'))->get() as $circuit) 
+            $return .= "<option value='$circuit->namasite'>$circuit->namasite</option>";
+        return $return;
 	}
 
 	/**
@@ -89,10 +99,10 @@ class ProblemsController extends BaseController {
 			return Redirect::route('problems.index');
 		}
 
-		$customers = Customer::lists('nama', 'nama');
+		$customers = Customer::lists('nama', 'id');
+		$vendors = Vendor::lists('nama', 'nama');
 
-
-		return View::make('problems.edit', ['problem' => $problem, 'customers' => $customers]);
+		return View::make('problems.edit', ['problem' => $problem, 'customers' => $customers, 'vendors' => $vendors]);
 	}
 
 	/**
