@@ -148,4 +148,7 @@ Route::when('layanansbps/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
 Route::when('backhaulswitches/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
 
 Route::resource('problems', 'ProblemsController');
-Route::post('problems/create/option', ['uses' => 'ProblemsController@option']);
+Route::post('problems/create/optcirid', ['uses' => 'ProblemsController@optCirId']);
+Route::post('problems/create/optcat', ['uses' => 'ProblemsController@optCat']);
+Route::post('problems/create/optprob', ['uses' => 'ProblemsController@optProb']);
+Route::post('problems/create/optsub', ['uses' => 'ProblemsController@optSub']);

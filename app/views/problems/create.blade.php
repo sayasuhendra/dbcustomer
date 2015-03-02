@@ -120,10 +120,18 @@
             <div class="panel-body">
                 <div class="form-horizontal">
 
+
+                    <div class="form-group">
+                        {{ Form::label('segment', 'Segment:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                        {{ Form::select('segment', ['Customer' => 'Customer', 'SBP' => 'SBP', 'Vendor' => 'Vendor', 'Upstream' => 'Upstream'], null, ['class' => 'form-control', 'id' => 'segment']) }}
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         {{ Form::label('kategori', 'Kategori:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                            {{ Form::select('kategori', ['Lambat' => 'Lambat', 'Link Down' => 'Link Down', 'Tidak Bisa Akses ke Situs Tertentu' => 'Tidak Bisa Akses ke Situs Tertentu'], null, ['class' => 'form-control']) }}
+                            {{ Form::select('kategori', ['Tidak Dipilih' => 'Silahkan Pilih'], null, ['class' => 'form-control', 'id' => 'kategori']) }}
 
                         </div>
                     </div>
@@ -131,14 +139,7 @@
                     <div class="form-group">
                         {{ Form::label('problem', 'Problem:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                            {{ Form::select('problem', ['Traffic Full' => 'Traffic Full', 'Perangkat Error' => 'Perangkat Error', 'Network Broadcast' => 'Network Broadcast', 'Salah Konfigurasi' => 'Salah Konfigurasi', 'Packet Loss' => 'Packet Loss', 'Bandwidth Tidak Sesuai' => 'Bandwidth Tidak Sesuai', 'Lantency Tinggi' => 'Lantency Tinggi', 'CPE Problem' => 'CPE Problem', 'CE Problem' => 'CE Problem', 'Human Error' => 'Human Error', 'Unknown' => 'Unknown', 'Kelistrikan' => 'Kelistrikan', 'Maintenance' => 'Maintenance', 'Lambat' => 'Lambat', 'Intermitent' => 'Intermitent', 'Device Problem' => 'Device Problem', 'Trunk Error' => 'Trunk Error', 'Konfigurasi Error' => 'Konfigurasi Error', 'Link Intermitent' => 'Link Intermitent', 'Perangkat Problem' => 'Perangkat Problem', 'Interferensi' => 'Interferensi', 'Fibercut' => 'Fibercut', 'Port Problem' => 'Port Problem', 'Signal Blocked' => 'Signal Blocked'], null, ['class' => 'form-control']) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        {{ Form::label('sub_problem', 'Sub Problem:', ['class' => 'col-sm-3']) }}
-                        <div class="col-sm-9">
-                            {{ Form::select('kategori', ['Dimatikan Customer' => 'Dimatikan Customer', 'Mati Listrik' => 'Mati Listrik', 'Short Circuit' => 'Short Circuit', 'Terjadwal' => 'Terjadwal', 'Tidak Terjadwal' => 'Tidak Terjadwal', 'Customer' => 'Customer', 'POP Vendor' => 'POP Vendor'], null, ['class' => 'form-control']) }}
+                            {{ Form::select('problem', ['Tidak Dipilih' => 'Silahkan Pilih'], null, ['class' => 'form-control', 'id' => 'problem']) }}
                         </div>
                     </div>
 
@@ -154,10 +155,11 @@
             <div class="panel-body">
                 <div class="form-horizontal">
 
+
                     <div class="form-group">
-                        {{ Form::label('segment', 'Segment:', ['class' => 'col-sm-3']) }}
+                        {{ Form::label('sub_problem', 'Sub Problem:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('segment', ['Customer' => 'Customer', 'SBP' => 'SBP', 'Upstream' => 'Upstream'], null, ['class' => 'form-control']) }}
+                            {{ Form::select('sub_problem', ['Tidak Dipilih' => 'Silahkan Pilih'], null, ['class' => 'form-control', 'id' => 'sub_problem']) }}
                         </div>
                     </div>
 
@@ -245,8 +247,36 @@
     <script type="text/javascript">
 
         $('#customer_id').on('change', function(){
-            $.post('{{ URL::to('problems/create/option') }}', {customer_id: $('#customer_id').val()}, function(e){
+            $.post('{{ URL::to('problems/create/optcirid') }}', {customer_id: $('#customer_id').val()}, function(e){
                 $('#circuit_id').html(e);
+            });
+        });
+
+        $('#segment').on('change', function(){
+
+            if ( $('#segment').val() != "SBP" ) {
+                $.post('{{ URL::to('problems/create/optcat') }}', {segment: $('#segment').val()}, function(e){
+                    $('#kategori').html(e);
+                });
+            }
+            
+            if ( $('#segment').val() == "SBP" ) {
+                $.post('{{ URL::to('problems/create/optprob') }}', {category: 'kosong'}, function(e){
+                    $('#problem').html(e);
+                });
+            }
+
+        });
+
+        $('#kategori').on('change', function(){
+            $.post('{{ URL::to('problems/create/optprob') }}', {category: $('#kategori').val()}, function(e){
+                $('#problem').html(e);
+            });
+        });
+
+        $('#problem').on('change', function(){
+            $.post('{{ URL::to('problems/create/optsub') }}', {problem: $('#problem').val()}, function(e){
+                $('#sub_problem').html(e);
             });
         });
 

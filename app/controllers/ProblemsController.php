@@ -40,11 +40,35 @@ class ProblemsController extends BaseController {
 	}
 
 
-	public function option()
+	public function optCirId()
 	{
         $return = '<option value=""></option>';
         foreach(Costumercircuit::where('customer_id', Input::get('customer_id'))->get() as $circuit) 
             $return .= "<option value='$circuit->namasite'>$circuit->namasite</option>";
+        return $return;
+	}
+
+	public function optCat()
+	{
+        $return = '<option value=""></option>';
+        foreach(Problemopt::where('segment', Input::get('segment'))->groupBy('category')->get() as $problemopt) 
+            $return .= "<option value='$problemopt->category'>$problemopt->category</option>";
+        return $return;
+	}
+
+	public function optProb()
+	{
+        $return = '<option value=""></option>';
+        foreach(Problemopt::where('category', Input::get('category'))->groupBy('problem')->get() as $problemopt) 
+            $return .= "<option value='$problemopt->problem'>$problemopt->problem</option>";
+        return $return;
+	}
+
+	public function optSub()
+	{
+        $return = '<option value=""></option>';
+        foreach(Problemopt::where('problem', Input::get('problem'))->groupBy('sub')->get() as $problemopt) 
+            $return .= "<option value='$problemopt->sub'>$problemopt->sub</option>";
         return $return;
 	}
 
