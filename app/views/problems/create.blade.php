@@ -255,12 +255,22 @@
         $('#segment').on('change', function(){
 
             if ( $('#segment').val() != "SBP" ) {
+
+                $('#kategori').prop('disabled', false);
+                $('#sub_problem').prop('disabled', false);
+                
+                if ( $('#segment').val() == "Upstream" ) {
+                    $('#sub_problem').prop('disabled', true);
+                }
+
                 $.post('{{ URL::to('problems/create/optcat') }}', {segment: $('#segment').val()}, function(e){
                     $('#kategori').html(e);
                 });
             }
             
             if ( $('#segment').val() == "SBP" ) {
+                $('#kategori').prop('disabled', true);
+                $('#sub_problem').prop('disabled', true);
                 $.post('{{ URL::to('problems/create/optprob') }}', {category: 'kosong'}, function(e){
                     $('#problem').html(e);
                 });
