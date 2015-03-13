@@ -8,7 +8,7 @@
 
 <div class="col-md-6 col-sm-6">
 
-	<div class="portlet box red-sunglo">
+	<div class="portlet box blue-steel">
 		<div class="portlet-title">
 			<div class="caption">
 				<i class="icon-bubbles"></i>Data Problems
@@ -25,7 +25,6 @@
 			</div>
 		</div>
 		<div class="portlet-body">
-			<div class="row">
 				<dl class="dl-horizontal">
 					<dt>Tt</dt> <dd> {{{ $problem->tt }}} </dd>
 					<dt>Csc</dt> <dd> {{{ $problem->csc }}} </dd>
@@ -47,7 +46,6 @@
 					<dt>Level</dt> <dd> {{{ $problem->level }}} </dd>
 					<dt>Keterangan</dt> <dd> {{{ $problem->keterangan }}} </dd>
                 </dl>
-	      	</div>
 	    </div>
 	</div>
 </div>
