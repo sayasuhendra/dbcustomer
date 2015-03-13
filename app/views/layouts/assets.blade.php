@@ -49,6 +49,10 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/select2/select2-bootstrap.css')}}"/>
 
 <style type="text/css">
+
+    .icon-pencil, .icon-plus {
+        color: white;
+    }
     .page-header.navbar .page-logo .logo-default {
         margin-top: 0;
     }

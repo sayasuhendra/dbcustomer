@@ -40,22 +40,32 @@
 </div>
 <div class="row">
           <div class="col-md-4">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Data Customer Circuit 
 
-                    @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
-
-                        <a href="{{ URL::route('costumercircuits.create') }}" class="pull-right btn btn-xs btn-success glyphicon glyphicon-plus" title="buat baru"></a>  
-                        <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}" class="pull-right btn btn-xs btn-info glyphicon glyphicon-pencil" title="edit"></a> 
-
-                    @endif
-
-                    </h3>
+            <div class="portlet box blue-steel">
+              <div class="portlet-title">
+                <div class="caption">
+                  <i class="icon-bubbles"></i>Data Customer Circuit
                 </div>
+                <div class="tools">
 
-                <div class="panel-body">
-              <dl class="dl-horizontal">
+                  @if( Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
+
+                  <a href="{{ URL::route('costumercircuits.create') }}"><i class="icon-plus"></i></a>
+                  <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}"><i class="icon-pencil"></i></a>
+
+                  @endif
+
+                  <a href="" class="collapse">
+                  </a>
+                  <a href="" class="fullscreen">
+                  </a>
+                  <a href="" class="remove">
+                  </a>
+                </div>
+              </div>
+              <div class="portlet-body">
+
+                <dl class="dl-horizontal">
                         <dt>Circuit ID</dt>
                         <dd>{{{ $costumercircuit->circuitid }}}</dd>
                         <dt>Monitoring Time</dt>
