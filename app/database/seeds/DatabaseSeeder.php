@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('BiayabackhaulvendorsTableSeeder');
 		$this->call('RolesTableSeeder');
 		$this->call('ProblemsTableSeeder');
+		$this->call('AmatsTableSeeder');
 	}
 
 }

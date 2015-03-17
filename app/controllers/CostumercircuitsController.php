@@ -194,7 +194,7 @@ class CostumercircuitsController extends BaseController {
 	public function update($id)
 	{
 		$inputbiayas = Input::only('nrc', 'mrc', 'currency');
-		$inputcircuit = Input::only('circuitid', 'activated_at', 'monitoring', 'doc', 'toc', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'customer_id', 'circuitidlastmile', 'keteranganck');
+		$inputcircuit = Input::only('circuitidlastmile', 'circuitid', 'namasite', 'alamat', 'layanan', 'bandwidth', 'satuan', 'area', 'status', 'namavendor', 'namabackhaul', 'keteranganck', 'customer_id', 'activated_at', 'doc', 'toc', 'monitoring');
 
 
 		$input = $inputcircuit;

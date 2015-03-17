@@ -36,8 +36,19 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/ujicoba', function()
 {
-	return View::make('test');
+	$data = [];
 
+	foreach (range(2005, 2015) as $tahun) {
+
+		foreach (range(1,12) as $bln) {
+			$data[$tahun][$bln] = $tahun . " " . $bln;
+			// DB::raw('select month(activated_at) from costumercircuits')
+		}
+
+		echo "<br>";
+	}
+
+	var_dump($data);
 });
 
 Route::filter('cache.fetch', 'Acme\Filters\CacheFilter@fetch');

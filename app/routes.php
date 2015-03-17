@@ -152,3 +152,5 @@ Route::post('problems/create/optcirid', ['uses' => 'ProblemsController@optCirId'
 Route::post('problems/create/optcat', ['uses' => 'ProblemsController@optCat']);
 Route::post('problems/create/optprob', ['uses' => 'ProblemsController@optProb']);
 Route::post('problems/create/optsub', ['uses' => 'ProblemsController@optSub']);
+
+Route::resource('amats', 'AmatsController');

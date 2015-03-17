@@ -1,4 +1,4 @@
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="{{asset('global/plugins/respond.min.js')}}"></script>
@@ -40,7 +40,8 @@
 
 <script type="text/javascript" src="{{asset('global/plugins/select2/select2.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('global/plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/datatables/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+{{-- <script type="text/javascript" src="{{asset('global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script> --}}
 <script type="text/javascript" src="{{asset('global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
@@ -86,4 +87,4 @@ jQuery(document).ready(function() {
         } );
     </script>
 
-<!-- END OLD JAVASCRIPTS -->
+<!-- END OLD JAVASCRIPTS
