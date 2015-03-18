@@ -22,7 +22,6 @@ class AdslsController extends BaseController {
 	public function index()
 	{
 		$adsls = $this->adsl->all();
-
 		return View::make('adsls.index', compact('adsls'));
 	}
 

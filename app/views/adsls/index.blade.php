@@ -7,6 +7,7 @@
 <p>{{ link_to_route('adsls.create', 'Buat Data ADSL Baru') }}</p>
 
 @if ($adsls->count())
+
 	<table id="datasbp" class="table table-striped table-bordered">
 		<thead>
 			<tr>

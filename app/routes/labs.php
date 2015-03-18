@@ -34,21 +34,42 @@ Route::post('ajax/form/lastmile', [
 	'uses' => 'AjaxController@lastmile'
 	]);
 
+Route::get('/test', function() 
+{
+	return View::make('test');
+});
+
 Route::get('/ujicoba', function()
 {
-	$data = [];
+	// $data = DB::table('costumercircuits')
+ //                     ->select(DB::raw('count(*) as jumlah'))
+ //                     ->whereRaw('year(activated_at)=2014 and month(activated_at)=8')
+ //                     ->get();
+	$dataperbulan = [];
 
 	foreach (range(2005, 2015) as $tahun) {
 
 		foreach (range(1,12) as $bln) {
-			$data[$tahun][$bln] = $tahun . " " . $bln;
-			// DB::raw('select month(activated_at) from costumercircuits')
+			$dataperbulan[$tahun][$bln] = DB::table('costumercircuits')
+				                     ->select(DB::raw('count(*) as jumlah'))
+				                     ->whereRaw("year(activated_at)=$tahun and month(activated_at)=$bln")
+				                     ->get();
 		}
 
-		echo "<br>";
 	}
 
-	var_dump($data);
+	$datapertahun = [];
+
+	foreach (range(2005, 2015) as $tahun) {
+
+			$datapertahun[$tahun] = DB::table('costumercircuits')
+				                     ->select(DB::raw('count(*) as jumlah'))
+				                     ->whereRaw("year(activated_at)=$tahun")
+				                     ->get();
+	}
+
+
+	return View::make('test', ['dataperbulan' => $dataperbulan, 'datapertahun' => $datapertahun]);
 });
 
 Route::filter('cache.fetch', 'Acme\Filters\CacheFilter@fetch');
