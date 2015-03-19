@@ -45,31 +45,43 @@ Route::get('/ujicoba', function()
  //                     ->select(DB::raw('count(*) as jumlah'))
  //                     ->whereRaw('year(activated_at)=2014 and month(activated_at)=8')
  //                     ->get();
-	$dataperbulan = [];
+	$cirb = [];
 
 	foreach (range(2005, 2015) as $tahun) {
 
 		foreach (range(1,12) as $bln) {
-			$dataperbulan[$tahun][$bln] = DB::table('costumercircuits')
-				                     ->select(DB::raw('count(*) as jumlah'))
+			$jumlah = Costumercircuit::select(DB::raw('count(*) as jumlah'))
 				                     ->whereRaw("year(activated_at)=$tahun and month(activated_at)=$bln")
 				                     ->get();
+	         $cirb[$tahun][$bln] = $jumlah[0]['jumlah'];
 		}
 
 	}
 
-	$datapertahun = [];
+	$cirt = [];
 
 	foreach (range(2005, 2015) as $tahun) {
 
-			$datapertahun[$tahun] = DB::table('costumercircuits')
-				                     ->select(DB::raw('count(*) as jumlah'))
+			$jml = Costumercircuit::select(DB::raw('count(*) as jumlah'))
 				                     ->whereRaw("year(activated_at)=$tahun")
 				                     ->get();
+			$cirt[$tahun] = $jml[0]['jumlah'];
 	}
 
+	$cir15 = [];
 
-	return View::make('test', ['dataperbulan' => $dataperbulan, 'datapertahun' => $datapertahun]);
+	foreach (range(1,12) as $bln) {
+		$data = Costumercircuit::select(DB::raw('count(*) as jumlah'))
+			                     ->whereRaw("year(activated_at)=2015 and month(activated_at)=$bln")
+			                     ->get()
+			                     ->toArray();
+        $cir15[$bln] = $data[0]['jumlah'];
+	}
+
+	// echo $limabelas['2'][0]['jumlah'];
+	// dd($limabelas);
+
+	return View::make('test', ['cirb' => $cirb, 'cirt' => $cirt, 'cir15' => $cir15]);
 });
 
 Route::filter('cache.fetch', 'Acme\Filters\CacheFilter@fetch');
