@@ -124,7 +124,7 @@
                     <div class="form-group">
                         {{ Form::label('segment', 'Segment:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
-                        {{ Form::select('segment', ['Customer' => 'Customer', 'SBP' => 'SBP', 'Vendor' => 'Vendor', 'Upstream' => 'Upstream'], null, ['class' => 'form-control', 'id' => 'segment']) }}
+                        {{ Form::select('segment', ['Belum Dipilih' => 'Silahkan Pilih', 'Customer' => 'Customer', 'SBP' => 'SBP', 'Vendor' => 'Vendor', 'Upstream' => 'Upstream'], null, ['class' => 'form-control', 'id' => 'segment']) }}
                         </div>
                     </div>
 

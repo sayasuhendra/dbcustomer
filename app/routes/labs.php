@@ -36,27 +36,23 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/test', function() 
 {
-	return View::make('test');
+	$test1 = [1,2,3,4,5,6,7];
+	$test2 = [1,2,3,4,5,6,7];
+	$test = [];
+	array_push($test, $test1);
+	array_push($test, $test2);
+	// echo json_encode($test);
+	$t = '2015';
+	${"data" . $t} = $test;
+	dd($data2015);
 });
 
 Route::get('/ujicoba', function()
 {
-	// $data = DB::table('costumercircuits')
- //                     ->select(DB::raw('count(*) as jumlah'))
- //                     ->whereRaw('year(activated_at)=2014 and month(activated_at)=8')
- //                     ->get();
-	$cirb = [];
+	$header = ['Month', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+	$datalengkap = [];
 
-	foreach (range(2005, 2015) as $tahun) {
-
-		foreach (range(1,12) as $bln) {
-			$jumlah = Costumercircuit::select(DB::raw('count(*) as jumlah'))
-				                     ->whereRaw("year(activated_at)=$tahun and month(activated_at)=$bln")
-				                     ->get();
-	         $cirb[$tahun][$bln] = $jumlah[0]['jumlah'];
-		}
-
-	}
+	array_push($datalengkap, $header);
 
 	$cirt = [];
 
@@ -68,20 +64,39 @@ Route::get('/ujicoba', function()
 			$cirt[$tahun] = $jml[0]['jumlah'];
 	}
 
-	$cir15 = [];
+	foreach (range(2010, 2015) as $tahun) {
 
-	foreach (range(1,12) as $bln) {
-		$data = Costumercircuit::select(DB::raw('count(*) as jumlah'))
-			                     ->whereRaw("year(activated_at)=2015 and month(activated_at)=$bln")
-			                     ->get()
-			                     ->toArray();
-        $cir15[$bln] = $data[0]['jumlah'];
+		${"data".$tahun} = [];
+		${"data" . $tahun}[] = "$tahun - $cirt[$tahun]";
+
+		foreach (range(1,12) as $bln) {
+			$jumlah = Costumercircuit::select(DB::raw('count(*) as jumlah'))
+				                     ->whereRaw("year(activated_at)=$tahun and month(activated_at)=$bln")
+				                     ->get();
+
+	        array_push( ${"data" . $tahun}, $jumlah[0]['jumlah']);
+
+		}
+		    array_push($datalengkap, ${"data".$tahun});
 	}
 
-	// echo $limabelas['2'][0]['jumlah'];
-	// dd($limabelas);
+	$datagraph = json_encode($datalengkap);
 
-	return View::make('test', ['cirb' => $cirb, 'cirt' => $cirt, 'cir15' => $cir15]);
+	
+	// $cir15 = [];
+
+	// foreach (range(1,12) as $bln) {
+	// 	$data = Costumercircuit::select(DB::raw('count(*) as jumlah'))
+	// 		                     ->whereRaw("year(activated_at)=2015 and month(activated_at)=$bln")
+	// 		                     ->get()
+	// 		                     ->toArray();
+ //        $cir15[$bln] = $data[0]['jumlah'];
+	// }
+
+	// echo $limabelas['2'][0]['jumlah'];
+	// echo json_encode($cirb);
+
+	return View::make('test', ['datagraph' => $datagraph]);
 });
 
 Route::filter('cache.fetch', 'Acme\Filters\CacheFilter@fetch');

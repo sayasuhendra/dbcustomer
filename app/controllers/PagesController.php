@@ -15,6 +15,14 @@ class PagesController extends BaseController {
 
 		$cirb = [];
 
+		$cirt = [];
+		
+		$datalengkap = [];
+
+		$header = ['Month', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+		array_push($datalengkap, $header);
+
 		foreach (range(2005, 2015) as $tahun) {
 
 			foreach (range(1,12) as $bln) {
@@ -24,19 +32,32 @@ class PagesController extends BaseController {
 		         $cirb[$tahun][$bln] = $jumlah[0]['jumlah'];
 			}
 
+			$jml = Costumercircuit::select(DB::raw('count(*) as jumlah'))
+				                     ->whereRaw("year(activated_at)=$tahun")
+				                     ->get();
+
+			$cirt[$tahun] = $jml[0]['jumlah'];
+
 		}
 
-		$cirt = [];
+		foreach (range(2010, 2015) as $tahun) {
 
-		foreach (range(2005, 2015) as $tahun) {
+			${"data".$tahun} = [];
+			${"data" . $tahun}[] = "$tahun - $cirt[$tahun]";
 
-				$jml = Costumercircuit::select(DB::raw('count(*) as jumlah'))
-					                     ->whereRaw("year(activated_at)=$tahun")
+			foreach (range(1,12) as $bln) {
+				$jumlah = Costumercircuit::select(DB::raw('count(*) as jumlah'))
+					                     ->whereRaw("year(activated_at)=$tahun and month(activated_at)=$bln")
 					                     ->get();
-				$cirt[$tahun] = $jml[0]['jumlah'];
+
+		        array_push( ${"data" . $tahun}, $jumlah[0]['jumlah']);
+			}
+			    array_push($datalengkap, ${"data".$tahun});
 		}
 
-		return View::make('pages.index', ['marginidr' => $marginidr, 'marginusd' => $marginusd, 'cirb' => $cirb, 'cirt' => $cirt]);
+		$datagraph = json_encode($datalengkap);
+
+		return View::make('pages.index', ['marginidr' => $marginidr, 'marginusd' => $marginusd, 'cirb' => $cirb, 'cirt' => $cirt, 'datagraph' => $datagraph]);
 	}
 
 }
