@@ -4,7 +4,7 @@
 
 <h2 align="center">Daftar Data Problems</h2>
 
-@if(Auth::user()->hasRole('editor'))
+@if(Auth::user()->hasRole('csc'))
     <p>{{ link_to_route('problems.create', 'Add problems', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 @endif
 
