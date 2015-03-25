@@ -16,7 +16,7 @@ class PagesController extends BaseController {
 		$cirb = [];
 
 		$cirt = [];
-		
+
 		$datalengkap = [];
 
 		$header = ['Month', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];

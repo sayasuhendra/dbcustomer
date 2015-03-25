@@ -33,19 +33,13 @@ class ProblemsController extends BaseController {
 	 */
 	public function create()
 	{
-		$customers = Customer::lists('nama', 'id');
-		$vendors = Vendor::lists('nama', 'nama');
+		$circuits = Costumercircuit::lists('namasite', 'id');
+		$pilih = ['Tidak Dipilih' => 'Silahkan Pilih'];
+		$category = array_merge($pilih, Problemopt::lists('category', 'category'));
+		$masalah = array_merge($pilih, Problemopt::lists('problem', 'problem'));
+		$sub = array_merge($pilih, Problemopt::lists('sub', 'sub'));
 
-		return View::make('problems.create', ['customers' => $customers, 'vendors' => $vendors]);
-	}
-
-
-	public function optCirId()
-	{
-        $return = '<option value=""></option>';
-        foreach(Costumercircuit::where('customer_id', Input::get('customer_id'))->get() as $circuit) 
-            $return .= "<option value='$circuit->namasite'>$circuit->namasite</option>";
-        return $return;
+		return View::make('problems.create', ['circuits' => $circuits, 'category' => $category, 'masalah' => $masalah, 'sub' => $sub]);
 	}
 
 	public function optCat()
@@ -59,7 +53,7 @@ class ProblemsController extends BaseController {
 	public function optProb()
 	{
         $return = '<option value=""></option>';
-        foreach(Problemopt::where('category', Input::get('category'))->groupBy('problem')->get() as $problemopt) 
+        foreach(Problemopt::where('category', Input::get('category'))->where('segment', Input::get('segment'))->groupBy('problem')->get() as $problemopt) 
             $return .= "<option value='$problemopt->problem'>$problemopt->problem</option>";
         return $return;
 	}
@@ -67,7 +61,7 @@ class ProblemsController extends BaseController {
 	public function optSub()
 	{
         $return = '<option value=""></option>';
-        foreach(Problemopt::where('problem', Input::get('problem'))->groupBy('sub')->get() as $problemopt) 
+        foreach(Problemopt::where('problem', Input::get('problem'))->where('category', Input::get('category'))->where('segment', Input::get('segment'))->groupBy('sub')->get() as $problemopt) 
             $return .= "<option value='$problemopt->sub'>$problemopt->sub</option>";
         return $return;
 	}
@@ -79,7 +73,23 @@ class ProblemsController extends BaseController {
 	 */
 	public function store()
 	{
+
 		$input = Input::all();
+
+		$circuit = Costumercircuit::find($_POST['circuit']);
+		$customer = Customer::find($circuit->customer_id);
+		$datatambahan = ['circuit' => $circuit->namasite,
+					 	 'area' => $circuit->area,
+					 	 'vendor' => $circuit->namavendor,
+					 	 'customer' => $customer->nama];
+
+		$input = array_merge($input, $datatambahan);
+
+		$start = $_POST['start'];
+		$finish = $_POST['finish'];
+		$waktu = hitungWaktu($start, $finish);
+		$input = array_merge($input, $waktu);
+
 		$validation = Validator::make($input, Problem::$rules);
 
 		if ($validation->passes())
@@ -123,10 +133,14 @@ class ProblemsController extends BaseController {
 			return Redirect::route('problems.index');
 		}
 
-		$customers = Customer::lists('nama', 'id');
-		$vendors = Vendor::lists('nama', 'nama');
+		$circuits = Costumercircuit::lists('namasite', 'id');
 
-		return View::make('problems.edit', ['problem' => $problem, 'customers' => $customers, 'vendors' => $vendors]);
+		$pilih = ['Tidak Dipilih' => 'Silahkan Pilih'];
+		$category = array_merge($pilih, Problemopt::lists('category', 'category'));
+		$masalah = array_merge($pilih, Problemopt::lists('problem', 'problem'));
+		$sub = array_merge($pilih, Problemopt::lists('sub', 'sub'));
+
+		return View::make('problems.edit', ['circuits' => $circuits, 'category' => $category, 'problem' => $problem, 'masalah' => $masalah, 'sub' => $sub]);
 	}
 
 	/**
@@ -138,6 +152,21 @@ class ProblemsController extends BaseController {
 	public function update($id)
 	{
 		$input = array_except(Input::all(), '_method');
+
+		$circuit = Costumercircuit::find($_POST['circuit']);
+		$customer = Customer::find($circuit->customer_id);
+		$datatambahan = ['circuit' => $circuit->namasite,
+					 	 'area' => $circuit->area,
+					 	 'vendor' => $circuit->namavendor,
+					 	 'customer' => $customer->nama];
+
+		$input = array_merge($input, $datatambahan);
+
+		$start = $_POST['start'];
+		$finish = $_POST['finish'];
+		$waktu = hitungWaktu($start, $finish);
+		$input = array_merge($input, $waktu);
+
 		$validation = Validator::make($input, Problem::$rules);
 
 		if ($validation->passes())

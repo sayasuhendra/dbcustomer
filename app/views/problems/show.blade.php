@@ -26,23 +26,22 @@
 		</div>
 		<div class="portlet-body">
 				<dl class="dl-horizontal">
-					<dt>Tt</dt> <dd> {{{ $problem->tt }}} </dd>
-					<dt>Csc</dt> <dd> {{{ $problem->csc }}} </dd>
+					<dt>Trouble Ticket</dt> <dd> {{{ $problem->tt }}} </dd>
+					<dt>CSC Name</dt> <dd> {{{ $problem->csc }}} </dd>
 					<dt>Area</dt> <dd> {{{ $problem->area }}} </dd>
-					<dt>Customer_id</dt> <dd> {{{ $problem->customer_id }}} </dd>
-					<dt>Start</dt> <dd> {{{ $problem->start }}} </dd>
-					<dt>Finish</dt> <dd> {{{ $problem->finish }}} </dd>
-					<dt>Jam</dt> <dd> {{{ $problem->jam }}} </dd>
-					<dt>Menit</dt> <dd> {{{ $problem->menit }}} </dd>
+					<dt>Customer Name</dt> <dd> {{{ $problem->customer }}} </dd>
+					<dt>Name Site</dt> <dd> {{{ $problem->circuit }}} </dd>
+					<dt>Problem Start</dt> <dd> {{{ $problem->start }}} </dd>
+					<dt>Problem Finish</dt> <dd> {{{ $problem->finish }}} </dd>
+					<dt>Solving Time</dt> <dd> {{{ $problem->waktu }}} </dd>
 					<dt>Channel</dt> <dd> {{{ $problem->channel }}} </dd>
 					<dt>Segment</dt> <dd> {{{ $problem->segment }}} </dd>
 					<dt>Kategori</dt> <dd> {{{ $problem->kategori }}} </dd>
 					<dt>Problem</dt> <dd> {{{ $problem->problem }}} </dd>
-					<dt>Sub_problem</dt> <dd> {{{ $problem->sub_problem }}} </dd>
-					<dt>Rfo</dt> <dd> {{{ $problem->rfo }}} </dd>
-					<dt>Real_problem</dt> <dd> {{{ $problem->real_problem }}} </dd>
+					<dt>Sub Problem</dt> <dd> {{{ $problem->sub_problem }}} </dd>
+					<dt>RFO</dt> <dd> {{{ $problem->rfo }}} </dd>
+					<dt>Real Problem</dt> <dd> {{{ $problem->real_problem }}} </dd>
 					<dt>Vendor</dt> <dd> {{{ $problem->vendor }}} </dd>
-					<dt>Status</dt> <dd> {{{ $problem->status }}} </dd>
 					<dt>Level</dt> <dd> {{{ $problem->level }}} </dd>
 					<dt>Keterangan</dt> <dd> {{{ $problem->keterangan }}} </dd>
                 </dl>

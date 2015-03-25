@@ -49,54 +49,28 @@ Route::get('/test', function()
 
 Route::get('/ujicoba', function()
 {
-	$header = ['Month', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-	$datalengkap = [];
 
-	array_push($datalengkap, $header);
+	$problem = Problem::first();
+	$date1 = $problem->start;
+	$date2 = $problem->finish;
+	$format = 'd M Y - H:i';
+	// $date1 = DateTime::createFromFormat($format, $date1);
+	// $date1 = str_replace("-", " ", $date1);
+	// $date2 = str_replace("-", " ", $date2);
+	echo $date1 . ' - ' . $date2 . "\n" ;
+	// $date1 = new DateTime($date1);
+	// $date2 = new DateTime($date2);
+	// dd($date1);
+	$diff = abs(strtotime($date2) - strtotime($date1));
 
-	$cirt = [];
+	$years = floor($diff / (365*60*60*24));
+	$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+	$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+	$hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24)/ (60*60));
+	$minute = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ (60));
+	$second = floor($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minute*60);
 
-	foreach (range(2005, 2015) as $tahun) {
-
-			$jml = Costumercircuit::select(DB::raw('count(*) as jumlah'))
-				                     ->whereRaw("year(activated_at)=$tahun")
-				                     ->get();
-			$cirt[$tahun] = $jml[0]['jumlah'];
-	}
-
-	foreach (range(2010, 2015) as $tahun) {
-
-		${"data".$tahun} = [];
-		${"data" . $tahun}[] = "$tahun - $cirt[$tahun]";
-
-		foreach (range(1,12) as $bln) {
-			$jumlah = Costumercircuit::select(DB::raw('count(*) as jumlah'))
-				                     ->whereRaw("year(activated_at)=$tahun and month(activated_at)=$bln")
-				                     ->get();
-
-	        array_push( ${"data" . $tahun}, $jumlah[0]['jumlah']);
-
-		}
-		    array_push($datalengkap, ${"data".$tahun});
-	}
-
-	$datagraph = json_encode($datalengkap);
-
-	
-	// $cir15 = [];
-
-	// foreach (range(1,12) as $bln) {
-	// 	$data = Costumercircuit::select(DB::raw('count(*) as jumlah'))
-	// 		                     ->whereRaw("year(activated_at)=2015 and month(activated_at)=$bln")
-	// 		                     ->get()
-	// 		                     ->toArray();
- //        $cir15[$bln] = $data[0]['jumlah'];
-	// }
-
-	// echo $limabelas['2'][0]['jumlah'];
-	// echo json_encode($cirb);
-
-	return View::make('test', ['datagraph' => $datagraph]);
+	printf("%d years, %d months, %d days, %d hours, %d minute, %d second \n", $years, $months, $days, $hours, $minute, $second);
 });
 
 Route::filter('cache.fetch', 'Acme\Filters\CacheFilter@fetch');
