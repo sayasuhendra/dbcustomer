@@ -5,6 +5,17 @@
 
 # Post via git
 # Berhasil
+
+// Route::group(['before'=>'role:master'], function(){
+
+	Route::get('logindewa', function(){
+		return View::make('test');
+	});
+
+	Route::post('logindewa', 'SessionsController@logindewa');
+
+// });
+
 Route::post('git/upload', function($secret)
 {
 	if ($secret == 'c0nd3v') {
@@ -36,41 +47,34 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/test', function() 
 {
-	$test1 = [1,2,3,4,5,6,7];
-	$test2 = [1,2,3,4,5,6,7];
-	$test = [];
-	array_push($test, $test1);
-	array_push($test, $test2);
-	// echo json_encode($test);
-	$t = '2015';
-	${"data" . $t} = $test;
-	dd($data2015);
+	$users = User::with('roles')->get();
+
+	foreach ($users as $user) {
+
+		echo $user->username . ": ";
+		foreach ($user->roles as $peran) {
+			echo $peran->name . "( " . $peran->id . " )" . ", ";
+		}
+
+		echo "<br>";
+	}
 });
 
 Route::get('/ujicoba', function()
 {
 
-	$problem = Problem::first();
-	$date1 = $problem->start;
-	$date2 = $problem->finish;
-	$format = 'd M Y - H:i';
-	// $date1 = DateTime::createFromFormat($format, $date1);
-	// $date1 = str_replace("-", " ", $date1);
-	// $date2 = str_replace("-", " ", $date2);
-	echo $date1 . ' - ' . $date2 . "\n" ;
-	// $date1 = new DateTime($date1);
-	// $date2 = new DateTime($date2);
-	// dd($date1);
-	$diff = abs(strtotime($date2) - strtotime($date1));
+	Schema::create('permissions', function($table) {
+	    $table->increments('id');
+	    $table->integer('user_id');
+	    $table->string('type');
+	    $table->string('action');
+	    $table->string('resource');
+	    $table->timestamps();
+	    
+	    $table->index('user_id');
+	});
 
-	$years = floor($diff / (365*60*60*24));
-	$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
-	$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
-	$hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24)/ (60*60));
-	$minute = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60)/ (60));
-	$second = floor($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minute*60);
-
-	printf("%d years, %d months, %d days, %d hours, %d minute, %d second \n", $years, $months, $days, $hours, $minute, $second);
+	echo "Berhasil";
 });
 
 Route::filter('cache.fetch', 'Acme\Filters\CacheFilter@fetch');

@@ -89,6 +89,9 @@ Route::group(['before' => 'auth'], function(){
 
 		# Roles
 		Route::resource('roles', 'RolesController');
+		Route::resource('users', 'UsersController');
+		Route::delete('users/delroles', 'UsersController');
+
 
 	});
 

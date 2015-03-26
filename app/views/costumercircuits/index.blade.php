@@ -40,13 +40,8 @@
 				<th>Nama Customer</th>
 				<th>Nama Vendor</th>
 
-				@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
+				@if ( Auth::user()->hasRole('admin') || Auth::user()->hasRole('ar') || Auth::user()->hasRole('sales') )
 					<th>MRC Circuit</th>
-				@endif
-
-				{{-- <th>Nama Vendor</th> --}}
-
-				@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
 					<th>MRC Vendor</th> 
 				@endif
 
@@ -66,13 +61,9 @@
 					<td>{{{ $costumercircuit->customers->nama }}}</td>
 					<td>{{{ $costumercircuit->namavendor }}}</td>
 
-					@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
+
+					@if ( Auth::user()->hasRole('admin') || Auth::user()->hasRole('ar') || Auth::user()->hasRole('sales') )
 						<td>{{{ $costumercircuit->present()->mrcCircuit }}}</td>
-					@endif
-
-					{{--  <td> $costumercircuit->namavendor </td> --}}
-
-					@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
 						<td>{{{ $costumercircuit->present()->mrclastmile }}}</td> 
 					@endif
 
@@ -90,7 +81,7 @@
 				            <button class="btn btn-xs btn-default glyphicon glyphicon-list" title="Detail Circuit Ini" ></button>
                     	</a>
 
-                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
+                    @if(Auth::user()->hasRole('editor') )
 
 	                    <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}">
 				            <button class="btn btn-xs btn-info glyphicon glyphicon-pencil" title="Edit Circuit Ini"></button>

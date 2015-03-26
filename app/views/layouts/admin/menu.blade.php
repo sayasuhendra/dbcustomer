@@ -89,6 +89,39 @@
                     <span class="title"> Problem Tickets</span></a>
                 </li>
 
+                @if(Auth::user()->hasRole('master'))
+
+                <li class="{{ ( Request::is('users') || Request::is('users/*') || Request::is('roles') || Request::is('roles/*') ) ? 'active' : '' }}">
+                    <a href="javascript:;">
+                    <i class="icon-users"></i>
+                    <span class="title">Users Management</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="{{ ( Request::is('users') || Request::is('users/*') ) ? 'active' : '' }}"><a href="/users">
+                            <i class="icon-grid"></i>
+                            Roles Management</a>
+                        </li>
+                        <li class="{{ ( Request::is('roles') || Request::is('roles/*') ) ? 'active' : '' }}"><a href="/roles">
+                            <i class="icon-calendar"></i>
+                            Roles</a>
+                        </li>
+                        
+                        <li class="{{ ( Request::is('user/profile') || Request::is('user/profile/*') ) ? 'active' : '' }}"><a href="/user/profile">
+                            <i class="icon-calendar"></i>
+                            Users Profile</a>
+                        </li>
+                        <li class="{{ ( Request::is('logindewa') || Request::is('logindewa/*') ) ? 'active' : '' }}"><a href="/logindewa">
+                            <i class="icon-users"></i>Login Dewa</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+                @endif
+
 
                 {{-- 
                 <li class="heading">

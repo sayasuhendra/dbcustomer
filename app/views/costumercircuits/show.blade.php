@@ -98,8 +98,8 @@
                         </dd>
                         <dt>Keterangan</dt>
                         <dd>{{{ $costumercircuit->keteranganck }}}</dd>
-
-                        @if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap'))
+                        
+                        @if ( Auth::user()->hasRole('admin') || Auth::user()->hasRole('ar') || Auth::user()->hasRole('sales') )
                           <dt>NRC</dt>
                           <dd>{{{ $costumercircuit->present()->nrcCircuit }}}</dd>
                           <dt>MRC</dt>
