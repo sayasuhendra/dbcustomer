@@ -47,17 +47,7 @@ Route::post('ajax/form/lastmile', [
 
 Route::get('/test', function() 
 {
-	$users = User::with('roles')->get();
-
-	foreach ($users as $user) {
-
-		echo $user->username . ": ";
-		foreach ($user->roles as $peran) {
-			echo $peran->name . "( " . $peran->id . " )" . ", ";
-		}
-
-		echo "<br>";
-	}
+	return View::make('registration/show');
 });
 
 Route::get('/ujicoba', function()

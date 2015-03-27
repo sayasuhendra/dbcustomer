@@ -33,7 +33,7 @@
 
             <h1 align="center">Mendaftar</h1>
             <div class="row">
-<div class="col-sm-6 col-md-6 col-lg-6">
+<div class="col-sm-4 col-md-4 col-lg-4">
             <!-- Username Field -->
             <div class="form-group">
                 {{ Form::label('username', 'Username:') }}
@@ -63,7 +63,39 @@
             </div>
 
 </div>
-<div class="col-sm-6 col-md-6 col-lg-6">
+
+<div class="col-sm-4 col-md-4 col-lg-4">
+            <!-- Username Field -->
+            <div class="form-group">
+                {{ Form::label('extention', 'Extention:') }}
+                {{ Form::text('extention', null, ['class' => 'form-control', 'required' => 'required']) }}
+                {{ $errors->first('extention', '<span class="error">:message</span>') }}
+            </div>
+
+            <!-- nama_lengkap Field -->
+            <div class="form-group">
+                {{ Form::label('bbm', 'PIN Blackberry:') }}
+                {{ Form::text('bbm', null, ['class' => 'form-control', 'required' => 'required']) }}
+                {{ $errors->first('bbm', '<span class="error">:message</span>') }}
+            </div>
+
+            <!-- level Field -->
+            <div class="form-group">
+                {{ Form::label('hp', 'Handphone:') }}
+                {{ Form::text('hp', null, ['class' => 'form-control', 'required' => 'required'])}}
+                {{ $errors->first('hp', '<span class="error">:message</span>') }}
+            </div>
+
+            <!-- bagian Field -->
+            <div class="form-group">
+                {{ Form::label('wa', 'Whatsapp:') }}
+                {{ Form::text('wa', null, ['class' => 'form-control', 'required' => 'require'])}}
+                {{ $errors->first('wa', '<span class="error">:message</span>') }}
+            </div>
+
+</div>
+
+<div class="col-sm-4 col-md-4 col-lg-4">
             <!-- area Field -->
             <div class="form-group">
                 {{ Form::label('area', 'Area:') }}
@@ -74,7 +106,7 @@
 
             <!-- Email Field -->
             <div class="form-group">
-                {{ Form::label('email', 'Email:') }}
+                {{ Form::label('email', 'Email Kantor:') }}
                 {{ Form::text('email', null, ['class' => 'form-control', 'required' => 'required']) }}
                 {{ $errors->first('email', '<span class="error">:message</span>') }}
             </div>
