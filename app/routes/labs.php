@@ -3,6 +3,12 @@
 # Route Labs
 
 
+Route::get('/ujicoba', function()
+{
+	return View::make('test');
+});
+
+
 # Post via git
 # Berhasil
 
@@ -50,22 +56,6 @@ Route::get('/test', function()
 	return View::make('registration/show');
 });
 
-Route::get('/ujicoba', function()
-{
-
-	Schema::create('permissions', function($table) {
-	    $table->increments('id');
-	    $table->integer('user_id');
-	    $table->string('type');
-	    $table->string('action');
-	    $table->string('resource');
-	    $table->timestamps();
-	    
-	    $table->index('user_id');
-	});
-
-	echo "Berhasil";
-});
 
 Route::filter('cache.fetch', 'Acme\Filters\CacheFilter@fetch');
 Route::filter('cache.put', 'Acme\Filters\CacheFilter@put');

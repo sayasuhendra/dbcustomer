@@ -50,6 +50,7 @@
 <script src="{{asset('global/scripts/metronic.js')}}" type="text/javascript"></script>
 <script src="{{asset('layout/scripts/layout.js')}}" type="text/javascript"></script>
 <script src="{{asset('layout/scripts/quick-sidebar.js')}}" type="text/javascript"></script>
+
 <!-- <script src="{{asset('layout/scripts/demo.js')}}" type="text/javascript"></script> -->
 <!-- <script src="{{asset('pages/scripts/index.js')}}" type="text/javascript"></script> -->
 <!-- <script src="{{asset('pages/scripts/tasks.js')}}" type="text/javascript"></script> -->

@@ -29,11 +29,11 @@
 				<th>Hp</th>
 				<th>Wa</th>
 				<th>Bbm</th>
-				<th>Email_kantor</th>
+				<th>Email Kantor</th>
 				<th>YM</th>
-				<th>Skype</th>
-				<th>Facebook</th>
-				<th>Twitter</th>
+				<th>Level</th>
+				<th>Bagian</th>
+				<th>Area</th>
 				<th width="100px">Action</th>
 			</tr>
 		</thead>
@@ -47,11 +47,11 @@
 						<td>{{{ $user->profile->hp }}}</td>
 						<td>{{{ $user->profile->wa }}}</td>
 						<td>{{{ $user->profile->bbm }}}</td>
-						<td><a href="mailto:{{{ $user->profile->email_kantor }}}" target="_top">{{{ $user->profile->email_kantor }}}</a></td>
+						<td><a href="mailto:{{{ $user->email }}}" target="_top">{{{ $user->email }}}</a></td>
 						<td><a href="ymsgr:sendIM?{{{ $user->profile->ym }}}" target="_top">{{{ $user->profile->ym }}}</a></td>
-						<td><a href="skype:{{{ $user->profile->skype }}}?call" target="_top">{{{ $user->profile->skype }}}</a></td>
-						<td>{{ link_to('http://facebook.com/' . $user->profile->facebook, $user->profile->facebook) }}</td>
-						<td>{{ link_to('http://twitter.com/' . $user->profile->twitter, $user->profile->twitter) }}</td>
+						<td> {{{ $user->level }}} </td>
+						<td> {{{ $user->bagian }}} </td>
+						<td> {{{ $user->area }}} </td>
 	                    <td class="ac" width="100px">
 	                    <a href="{{ URL::route('profile', array($user->username)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
 

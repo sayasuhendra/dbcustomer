@@ -1,9 +1,13 @@
+                
                 <li class="start {{ Request::is('/') ? 'active' : '' }} ">
                     <a href="{{ route('home') }}">
                     <i class="icon-home"></i>
                     <span class="title"> Home</span>
                     </a>
                 </li>
+
+                @if(Auth::user()->hasRole('user'))
+                
                 <li class="{{ ( Request::is('vendors') || Request::is('vendors/*') || Request::is('customers') || Request::is('customers/*') )? 'active' : '' }}">
                     <a href="javascript:;">
                     <i class="icon-book-open"></i>
@@ -88,6 +92,8 @@
                     <i class="icon-bubbles"></i>
                     <span class="title"> Problem Tickets</span></a>
                 </li>
+
+                @endif
 
                 @if(Auth::user()->hasRole('master'))
 
