@@ -1,5 +1,9 @@
 @extends('layouts/scaffold')
 
+@section('atas')
+	<link rel="stylesheet" type="text/css" href="{{ asset('global/plugins/bootstrap-fileinput/bootstrap-fileinput.css') }}"/>
+@stop
+
 @section('main')
 
 	@if ($user->profile)
@@ -12,25 +16,17 @@
 	</div>
 
 	<div class="col-md-2">
-		<img src="{{ asset('foto/' . $user->profile->foto) }}" class="img-responsive img-thumbnail" alt="{{{ $user->profile->foto }}}">
-		<div class="fileinput fileinput-new" data-provides="fileinput">
-			<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-				<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
-			</div>
-			<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 100px; max-height: 100px;">
-			</div>
-			<div>
-				<span class="btn default btn-file">
-				<span class="fileinput-new">
-				Select image </span>
-				<span class="fileinput-exists">
-				Change </span>
-				<input type="file" name="...">
-				</span>
-				<a href="#" class="btn red fileinput-exists" data-dismiss="fileinput">
-				Remove </a>
-			</div>
-		</div>
+		<img src="{{ ($user->profile->foto) ? asset('foto/' . $user->profile->foto) : asset('foto/noimg.png') }}" class="img-responsive img-thumbnail" alt="{{{ $user->profile->foto }}}">
+		<br/>
+		<br/>
+
+	    @if ($user->isCurrent())
+	    	@if (! $user->profile->foto)
+				{{ link_to_route('profile.foto', 'Upload Foto', $user->username, ['class' => 'btn btn-primary pull-right']) }}
+			@elseif ($user->profile->foto)
+				{{ link_to_route('profile.foto', 'Ganti Foto', $user->username, ['class' => 'btn btn-primary  pull-right']) }}
+			@endif
+		@endif
 	</div>
 
 
@@ -99,4 +95,13 @@
 	@else
 		<p>No profile yet.</p>
 	@endif
+@stop
+
+@section('script')
+	<script type="text/javascript" src="{{ asset('global/plugins/bootstrap-fileinput/bootstrap-fileinput.js') }}"></script>
+	<script>
+	        jQuery(document).ready(function() {       
+	           ComponentsFormTools.init();
+	        });   
+	    </script>
 @stop

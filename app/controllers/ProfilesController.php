@@ -76,6 +76,13 @@ class ProfilesController extends BaseController {
 		return View::make('profiles.create')->withUser($user);
 	}
 
+	public function createfoto($username)
+	{
+		$user = $this->getUserByUsername($username);
+
+		return View::make('profiles.foto')->withUser($user);
+	}
+
 	/**
 	 * Create a user's profile
 	 *
@@ -91,7 +98,7 @@ class ProfilesController extends BaseController {
 		{
 
 			$foto = Input::file('foto');
-			$namafoto = $username . '.' . $foto->getClientOriginalExtension();
+			$namafoto = $username . '.png'; // . $foto->getClientOriginalExtension();
 			$input = array_merge($input, ['foto' => $namafoto]);
 			$foto->move(public_path() .'/foto/', $namafoto);	
 
@@ -102,6 +109,28 @@ class ProfilesController extends BaseController {
 
 		return Redirect::route('user.profile.show', $user->username);
 	}
+
+	public function storefoto($username)
+	{
+		$user = $this->getUserByUsername($username);
+
+			$data = Input::get('foto');
+			list($type, $data) = explode(';', $data);
+			list(, $data)      = explode(',', $data);
+			$data = base64_decode($data);
+
+			$namafoto = $user->username . '.png'; // . $foto->getClientOriginalExtension();
+			$lokasifoto = public_path() .'/foto/'. $namafoto;
+			file_put_contents($lokasifoto, $data);
+			// $foto->move(public_path() .'/foto/', $namafoto);	
+			$user->profile->foto = $namafoto;
+			$user->profile->save();
+
+
+			return Redirect::route('user.profile.show', $user->username);
+		
+	}
+
 
 	public function updatePassword($username)
 	{
@@ -137,7 +166,8 @@ class ProfilesController extends BaseController {
 	public function update($username)
 	{
 		$user = $this->getUserByUsername($username);
-		$input = Input::only('panggilan', 'alamat', 'extention', 'hp', 'hp2', 'wa', 'bbm', 'email_kantor', 'email_lain', 'ym', 'twitter', 'facebook', 'skype', 'foto', 'keterangan');
+		$input = Input::except(['_method', '_token']);
+		// Input::only('panggilan', 'alamat', 'extention', 'hp', 'hp2', 'wa', 'bbm', 'email_kantor', 'email_lain', 'ym', 'twitter', 'facebook', 'skype', 'keterangan');
 
 		$user->profile()->update($input);
 

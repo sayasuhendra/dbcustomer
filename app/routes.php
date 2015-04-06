@@ -101,6 +101,10 @@ Route::group(['before' => 'auth'], function(){
 
 		Route::resource('profile', 'ProfilesController', ['only' => ['show', 'index', 'edit', 'update', 'destroy']]);
 		Route::get('/profile/{username}/create', ['as' => 'profile.create', 'uses' => 'ProfilesController@create']);
+
+		Route::get('/profile/{username}/foto', ['as' => 'profile.foto', 'uses' => 'ProfilesController@createfoto']);
+		Route::post('/profile/{username}/foto', ['as' => 'profile.simpan', 'uses' => 'ProfilesController@storefoto']);
+
 		Route::post('/profile/{username}/store', ['as' => 'profile.store', 'uses' => 'ProfilesController@store']);
 		Route::get('/{username}', ['as' => 'profile', 'uses' => 'ProfilesController@show']);
 		Route::get('/{username}/password', ['as' => 'editpassword', 'uses' => 'ProfilesController@editPassword']);

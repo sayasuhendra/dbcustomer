@@ -35,12 +35,13 @@ Route::post('git/upload', function($secret)
 # Latihan
 Route::get('latihan/image', function()
 {
-	$img = Image::make(public_path() . 'foto/suhendra.jpg');
+	$img = Image::make(public_path() . '/foto/suhendra.jpg');
+	dd($img);
 
- //    return $img->response('jpg');
+    // return $img->response('jpg');
 	// $img = Image::make('http://www.kids-center.org/images/10401836/image001.jpg');
 
-	return $img->response('jpg');
+	// return $img->response('jpg');
 
 	// return Response::make($image, '200', ['Content-Type' => 'image/jpg']);
 	// echo "<img src='/foto/suhendra.jpg' alt='foto suhendra'>";

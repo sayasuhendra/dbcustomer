@@ -4,7 +4,7 @@
                 
                 <li class="dropdown dropdown-user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <img alt="" class="img-circle" src="/foto/{{ Auth::user()->profile ?  Auth::user()->profile->foto : "noimg.png" }}"/>
+                    <img alt="" class="img-circle" src="{{ (Auth::user()->profile->foto) ?  asset('foto/' . Auth::user()->profile->foto) : asset('foto/tanpafoto.png') }}"/>
                     <span class="username username-hide-on-mobile">
                     {{{ ucwords(Auth::user()->username) }}} </span>
                     <i class="fa fa-angle-down"></i>

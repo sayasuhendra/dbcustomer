@@ -82,6 +82,12 @@
 			{{ errors_for('skype', $errors) }}
 		</div>
 
+
+	</div>
+
+	<div class="col-md-4">
+
+
 		<!-- Twitter Field -->
 		<div class="form-group">
 			{{ Form::label('twitter', 'Twitter :') }}
@@ -89,22 +95,11 @@
 			{{ errors_for('twitter', $errors) }}
 		</div>
 
-	</div>
-
-	<div class="col-md-4">
-
 		<!-- Facebook Field -->
 		<div class="form-group">
 			{{ Form::label('facebook', 'Facebook :') }}
 			{{ Form::text('facebook', null, ['class' => 'form-control']) }}
 			{{ errors_for('facebook', $errors) }}
-		</div>
-
-		<!-- Foto Field -->
-		<div class="form-group">
-			{{ Form::label('foto', 'Foto :') }}
-			{{ Form::text('foto', null, ['class' => 'form-control']) }}
-			{{ errors_for('Foto', $errors) }}
 		</div>
 
 		<!-- Alamat Field -->

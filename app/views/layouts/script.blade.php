@@ -87,4 +87,4 @@ jQuery(document).ready(function() {
         } );
     </script>
 
-<!-- END OLD JAVASCRIPTS
+<!-- END OLD JAVASCRIPTS -->
