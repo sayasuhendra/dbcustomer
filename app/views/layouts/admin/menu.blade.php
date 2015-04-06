@@ -117,10 +117,6 @@
                             <i class="icon-calendar"></i>
                             Users Profile</a>
                         </li>
-                        <li class="{{ ( Request::is('logindewa') || Request::is('logindewa/*') ) ? 'active' : '' }}"><a href="/logindewa">
-                            <i class="icon-users"></i>Login Dewa</a>
-                        </li>
-
                     </ul>
                 </li>
 

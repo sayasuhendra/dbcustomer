@@ -13,7 +13,7 @@
 				<th>Nama User</th>
 				<th>Bagian</th>
 				<th>Roles / Peran di Aplikasi</th>
-				<th width="100px">Action</th>
+				<th width="200px">Tambah Role/Peran</th>
 			</tr>
 		</thead>
 
@@ -26,17 +26,26 @@
 						@if($user->roles)
 
 							<td>
-								@foreach ($user->roles as $roles)
-									{{{ ucfirst($roles->name) . ", "}}}							
+								{{{ "| "}}}
+								@foreach ($user->roles as $role)
+									{{{ ucfirst($role->name)}}}
+									{{ Form::open(array('method' => 'DELETE', 'route' => array('users.destroy', $user->username), 'style'=>'display:inline-block')) }}
+									<input type="hidden" value="{{ $role->id }}" name="role">
+									    	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+									{{ Form::close() }}
+									{{{ " | "}}}
 								@endforeach
 							</td>
 
-		                    <td class="ac" width="100px">
+		                    <td class="ac" width="200px">
 
 			                @if(Auth::user()->hasRole('master'))
 
-			                    <a href="{{ URL::route('users.edit', array($user->username)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
-			                    
+			                {{ Form::open(array('method' => 'PUT', 'route' => array('users.update', $user->username), 'style'=>'display:inline-block')) }}
+					            {{ Form::select('role', $perans, null, []) }}
+		                    	{{ Form::button('<i class="glyphicon glyphicon-plus"></i>', array('type' => 'submit', 'class' => 'btn btn-primary btn-xs')) }}
+			                {{ Form::close() }}
+
 			                @endif
 		                
 						@endif

@@ -15,7 +15,7 @@ Route::get('/ujicoba', function()
 // Route::group(['before'=>'role:master'], function(){
 
 	Route::get('logindewa', function(){
-		return View::make('test');
+		return View::make('sessions.dewa');
 	});
 
 	Route::post('logindewa', 'SessionsController@logindewa');

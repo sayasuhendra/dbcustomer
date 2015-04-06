@@ -42,7 +42,7 @@
 			@foreach ($users as $user)
 				@if($user->profile)
 					<tr>
-						<td>{{{ $user->nama_lengkap }}}</td>
+						<td>{{{ ucwords($user->nama_lengkap) }}}</td>
 						<td>{{{ $user->profile->extention }}}</td>
 						<td>{{{ $user->profile->hp }}}</td>
 						<td>{{{ $user->profile->wa }}}</td>

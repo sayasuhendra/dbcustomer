@@ -10,7 +10,7 @@
 	
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-		  <h3 class="panel-title pull-left" align="center">Data Lengkap {{ $user->nama_lengkap }}</h3>
+		  <h3 class="panel-title pull-left" align="center">Data Lengkap {{ ucwords($user->nama_lengkap) }}</h3>
 		  <div class="clearfix"></div>
 		</div>
 	</div>

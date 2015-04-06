@@ -4,16 +4,20 @@
                 
                 <li class="dropdown dropdown-user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <img alt="" class="img-circle" src="{{ (Auth::user()->profile->foto) ?  asset('foto/' . Auth::user()->profile->foto) : asset('foto/tanpafoto.png') }}"/>
+                    
+                    @if (Auth::user()->profile)
+                        <img alt="" class="img-circle" src="{{ (Auth::user()->profile->foto) ?  asset('foto/' . Auth::user()->profile->foto) : asset('foto/tanpafoto.png') }}"/>
+                    @endif
+
                     <span class="username username-hide-on-mobile">
                     {{{ ucwords(Auth::user()->username) }}} </span>
                     <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="{{ Auth::user()->profile ? route('profile', Auth::user()->username) : route('profile.create', Auth::user()->username); }}">
+                            <a href="{{ (Auth::user()->profile) ? route('profile', Auth::user()->username) : route('profile.create', Auth::user()->username); }}">
                             <i class="icon-user"></i>
-                            </i> {{ Auth::user()->profile ? "Profile" : "Create Profile"; }} </a>
+                            </i> {{ (Auth::user()->profile) ? "Profile" : "Create Profile"; }} </a>
                         </li>
                         <li>
                             <a href="{{ route('user.profile.index')}}">

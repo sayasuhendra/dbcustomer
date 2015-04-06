@@ -10,7 +10,8 @@ class UsersController extends BaseController {
 	public function index()
 	{
         $users = User::with('roles')->get();
-        return View::make('users.index', compact('users'));
+        $perans = Role::lists('name', 'id');
+        return View::make('users.index', ['users'=>$users, 'perans' => $perans]);
 	}
 
 	/**
@@ -50,11 +51,11 @@ class UsersController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($username)
-	{
-		$user = $this->getUserByUsername($username);
-        return View::make('users.edit', compact('user'));
-	}
+	// public function edit($username)
+	// {
+	// 	$user = $this->getUserByUsername($username);
+ //        return View::make('users.edit', compact('user'));
+	// }
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -73,9 +74,11 @@ class UsersController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($username)
 	{
-		//
+		$user = $this->getUserByUsername($username);
+		$user->roles()->attach(Input::get('role'));
+        return Redirect::to('users');
 	}
 
 	/**
@@ -84,9 +87,11 @@ class UsersController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($username)
 	{
-		//
+		$nama = $this->getUserByUsername($username);
+		$nama->roles()->detach(Input::get('role'));
+        return Redirect::to('users');
 	}
 
 }
