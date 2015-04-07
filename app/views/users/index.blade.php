@@ -26,14 +26,11 @@
 						@if($user->roles)
 
 							<td>
-								{{{ "| "}}}
 								@foreach ($user->roles as $role)
-									{{{ ucfirst($role->name)}}}
 									{{ Form::open(array('method' => 'DELETE', 'route' => array('users.destroy', $user->username), 'style'=>'display:inline-block')) }}
 									<input type="hidden" value="{{ $role->id }}" name="role">
-									    	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
+									    	{{ Form::button(ucfirst($role->name) . '  <i class="fa fa-times"></i>', array('type' => 'submit', 'class' => 'btn btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
 									{{ Form::close() }}
-									{{{ " | "}}}
 								@endforeach
 							</td>
 
