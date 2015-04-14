@@ -1,10 +1,32 @@
-@extends('layouts/scaffold')
+@extends('sessions/master')
 
-@section('meta-title', 'Reset Password')
+@section('atas')
+
+<style type="text/css">
+    .login .bawah {
+
+        background-color: #eceef1;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        -ms-border-radius: 7px;
+        -o-border-radius: 7px;
+        border-radius: 7px;
+        margin: 40px auto 10px auto;
+        padding: 30px;
+        padding-top: 10px;
+        overflow: hidden;
+        position: relative;
+
+    }
+</style>
+
+@stop
 
 @section('main')
 
-<div class="col-md-4 col-md-offset-4">
+<div class="col-sm-4 col-md-4 col-lg-4 col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
+
+<div class="bawah">
     <h1>Reset Password</h1>
 
 	<form action="{{ action('RemindersController@postReset') }}" method="POST">
@@ -43,6 +65,7 @@
             </div>
         @endif
     {{ Form::close() }}
+</div>
 </div>
 
 @stop

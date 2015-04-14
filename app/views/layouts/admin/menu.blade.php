@@ -144,7 +144,7 @@
 
     @endif
 
-    @if(Auth::user()->hasRole('admin'))
+    @if(Auth::user()->hasRole(['bod', 'admin']))
 
         <li class="{{ ( Request::is('users') || Request::is('users/*') || Request::is('roles') || Request::is('roles/*') ) ? 'active' : '' }}">
             <a href="javascript:;">
