@@ -57,7 +57,7 @@ class RegistrationController extends BaseController {
 	{
 		$input = Input::only('username', 'email', 'password', 'password_confirmation', 'nama_lengkap', 'level', 'bagian', 'area');
 		$inputprofil = Input::only('bbm', 'wa', 'hp', 'extention');
-		
+
 		$this->registrationForm->validate($input);
 
 		$user = User::create($input);
@@ -72,6 +72,12 @@ class RegistrationController extends BaseController {
 					->cc('condev@sbp.net.id')
 					->subject('Please Confirm Your Email Address');
 		});
+
+		Mail::send('emails.registernotif', $input, function($message){
+			$message->to('condev@sbp.net.id')
+					->subject(Input::get('nama_lengkap') . ' mendaftar sebagai user CRM. Bagian: ' . Input::get('bagian'));
+		});
+
 
 		$inputsemua = (object) Input::all();
 
