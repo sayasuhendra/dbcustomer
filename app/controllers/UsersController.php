@@ -32,6 +32,14 @@ class UsersController extends BaseController {
 	public function store()
 	{
 		//
+	}	
+
+	public function activated($username)
+	{
+		$nama = $this->getUserByUsername($username);
+		$nama->active = Input::get('active');
+		$nama->save();
+        return Redirect::to('users');
 	}
 
 	/**

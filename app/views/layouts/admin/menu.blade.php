@@ -9,7 +9,7 @@
 
     <li class="{{ ( Request::is('vendors') || Request::is('vendors/*') || Request::is('customers') || Request::is('customers/*') )? 'active' : '' }}">
         <a href="javascript:;">
-        <i class="icon-book-open"></i>
+        <i class="icon-layers"></i>
             <span class="title">Master Data</span>
         <span class="arrow"></span>
         </a>
@@ -124,9 +124,22 @@
 
     @if(Auth::user()->hasRole('bod', 'csc'))
 
-        <li class="{{ ( Request::is('problems') || Request::is('problems/*') ) ? 'active' : '' }}"><a href="/problems">
-            <i class="icon-bubbles"></i>
-            <span class="title"> Problem Tickets</span></a>
+        <li class="{{ ( Request::is('problems') || Request::is('problems/*') || Request::is('problemsopen') ) ? 'active' : '' }}">
+            <a href="javascript:;">
+            <i class="icon-envelope-letter"></i>
+            <span class="title">Problems Report</span>
+            <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="{{ ( Request::is('problems') || Request::is('problems/*') ) ? 'active' : '' }}"><a href="/problems">
+                    <i class="icon-envelope"></i>
+                    <span class="title"> Tickets Close</span></a>
+                </li>
+                <li class="{{ ( Request::is('problemsopen') || Request::is('problems/*') ) ? 'active' : '' }}"><a href="/problemsopen">
+                    <i class="icon-envelope-open"></i>
+                    <span class="title"> Tickets Open</span></a>
+                </li>
+            </ul>
         </li>
 
     @endif
@@ -141,16 +154,16 @@
             </a>
             <ul class="sub-menu">
                 <li class="{{ ( Request::is('users') || Request::is('users/*') ) ? 'active' : '' }}"><a href="/users">
-                    <i class="icon-grid"></i>
+                    <i class="icon-settings"></i>
                     Roles Management</a>
                 </li>
                 <li class="{{ ( Request::is('roles') || Request::is('roles/*') ) ? 'active' : '' }}"><a href="/roles">
-                    <i class="icon-calendar"></i>
+                    <i class="icon-key"></i>
                     Roles</a>
                 </li>
                 
                 <li class="{{ ( Request::is('user/profile') || Request::is('user/profile/*') ) ? 'active' : '' }}"><a href="/user/profile">
-                    <i class="icon-calendar"></i>
+                    <i class="icon-user-follow"></i>
                     Users Profile</a>
                 </li>
             </ul>

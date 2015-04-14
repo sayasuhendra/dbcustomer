@@ -27,6 +27,13 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        {{ Form::label('status', 'Status:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                            {{ Form::select('status',['Open' => 'Open', 'Close' => 'Close'] , null, ['class' => 'form-control', 'id' => 'status']) }}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

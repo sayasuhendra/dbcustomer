@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/selectatas')
+
 
 @section('style-atas')
 
@@ -21,7 +23,7 @@
                     <div class="form-group">
                         <div align="center">
                 			{{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
-                            {{ link_to_route('problems.index', 'Cancel', null, array('class' => 'btn btn-default')) }}
+                            <button class="btn btn-default" onclick="history.go(-1);">Cancel</button>
                         </div>
                     </div>
 
@@ -33,6 +35,8 @@
 
 @stop
 
+
+@include('pages/selectbawah')
 
 @section('script-bawah')
 

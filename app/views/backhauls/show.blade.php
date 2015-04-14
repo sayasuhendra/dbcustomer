@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/dtablesatas')
+
 @section('style-atas')
 <style>
 	th { font-size: 12px; }
@@ -36,7 +38,7 @@
 			<th>Port Terkoneksi</th>
 			<th>Bandwidth</th>
 
-			@if ( !Auth::user()->hasRole('noc') )
+			@if (Auth::user()->hasRole('bod') )
 				<th>NRC</th>
 				<th>MRC</th>
 			@endif
@@ -56,7 +58,7 @@
 			<td>{{{ $backhaul->portterkoneksi }}}</td>
 			<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
 
-			@if ( !Auth::user()->hasRole('noc') )
+			@if (Auth::user()->hasRole('bod') )
 				<td>{{{ $backhaul->present()->nrc }}}</td>
 				<td>{{{ $backhaul->present()->mrc }}}</td>
 			@endif
@@ -89,13 +91,8 @@
 				<th>Nama Customer</th>
 				<th>Nama Vendor</th>
 
-				@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
+				@if(Auth::user()->hasRole(['bod']))
 					<th>MRC Circuit</th>
-				@endif
-
-				{{-- <th>Nama Vendor</th> --}}
-
-				@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
 					<th>MRC Vendor</th> 
 				@endif
 
@@ -115,13 +112,8 @@
 					<td>{{{ $costumercircuit->customers->nama }}}</td>
 					<td>{{{ $costumercircuit->namavendor }}}</td>
 
-					@if ( !Auth::user()->hasRole('noc')  && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
+					@if(Auth::user()->hasRole(['bod']))
 						<td>{{{ $costumercircuit->present()->mrcCircuit }}}</td>
-					@endif
-
-					{{--  <td> $costumercircuit->namavendor </td> --}}
-
-					@if ( !Auth::user()->hasRole('noc') && !Auth::user()->hasRole('dco') && !Auth::user()->hasRole('ap') )
 						<td>{{{ $costumercircuit->present()->mrclastmile }}}</td> 
 					@endif
 
@@ -139,7 +131,7 @@
 				            <button class="btn btn-xs btn-default btn-fab btn-raised glyphicon glyphicon-list" title="Detail Circuit Ini" ></button>
                     	</a>
 
-                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor') )
+                    @if(Auth::user()->hasRole(['bod', 'editor'])
 
 	                    <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}">
 				            <button class="btn btn-xs btn-info btn-fab btn-raised glyphicon glyphicon-pencil" title="Edit Circuit Ini"></button>
@@ -161,6 +153,8 @@
 
 @stop
 
+@include('pages/dtablesbawah')
+
 @section('script-bawah')
 
 <script type="text/javascript" language="javascript" class="init">
@@ -172,19 +166,19 @@
         	                {
         	                    "sExtends": "pdf",
         	                    "sPdfOrientation": "landscape",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                {
         	                    "sExtends": "xls",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                {
         	                    "sExtends": "csv",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                {
         	                    "sExtends": "copy",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                "print"
 

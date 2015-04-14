@@ -23,6 +23,12 @@
 			<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
             {{ errors_for('password', $errors) }}
 		</div>
+		@if(Session::has('message'))
+
+			{{{ Session::get('message') }}}
+			<br>
+
+		@endif
 		<div class="form-actions">
 			<button type="submit" class="btn btn-success uppercase">Login</button>
 			<label class="rememberme check">

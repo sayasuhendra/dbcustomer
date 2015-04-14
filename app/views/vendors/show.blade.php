@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/dtablesatas')
+
 @section('style-atas')
 
 <style>
@@ -16,8 +18,7 @@
 
 @section('script-atas')
 
-    <script type="text/javascript" src="{{asset('assets/js/angular.min.js')}}"></script>
-
+    
 @stop
 
 @section('main')
@@ -142,7 +143,7 @@
 								<dt>{{{ $contact->bagian }}}</dt>
 								<dd>
 								
-									<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
+									<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="left" data-content="{{{ "Email: " . $contact->email . "<br> Jabatan: " . $contact->jabatan . "<br> Kawasan: " . $contact->kawasan . "<br> Keterangan" . $contact->keterangan }}}"> {{{ $contact->cp or ""}}} {{{ " / " . $contact->telepon or ""}}} </a>
 
 					                @if(Auth::user()->hasRole('admin')  || Auth::user()->hasRole('editor'))
 
@@ -162,7 +163,7 @@
 								<dt>{{{ $contact->bagian }}}</dt>
 								<dd>
 								
-									<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
+									<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="left" data-content="{{{ $contact->email . "<br>" . $contact->jabatan . "<br>" . $contact->kawasan . "<br>" . $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
 
 					                @if(Auth::user()->hasRole('admin')  || Auth::user()->hasRole('editor'))
 
@@ -182,7 +183,7 @@
 								<dt>{{{ $contact->bagian }}}</dt>
 								<dd>
 								
-									<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
+									<a id="contactButtonVendor{{{ $contact->id }}}" data-toggle="tooltip" data-html="true" data-placement="left" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->kawasan }}}<br>{{{ $contact->keterangan }}}"> {{{ $contact->cp }}} / {{{ $contact->telepon }}} </a>
 
 					                @if(Auth::user()->hasRole('admin')  || Auth::user()->hasRole('editor'))
 
@@ -207,12 +208,14 @@
 
 
 <div class="col-md-12">
+
+	@if(Auth::user()->hasRole(['bod', 'noc']))
         
 	    <div class="panel panel-success">
 	      <div class="panel-heading">
 	      <h3 class="panel-title pull-left">Data Backhaul</h3>
 
-          @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
+          @if(Auth::user()->hasRole('bod'))
 
 	      <div class="btn-group pull-right">
 	          <a href="{{ URL::route('backhauls.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
@@ -235,7 +238,7 @@
 	    				<th>Port Terkoneksi</th>
 	    				<th>Bandwidth</th>
 
-						@if (! Auth::user()->hasRole('noc'))
+						@if (Auth::user()->hasRole('bod'))
 		    				<th>NRC</th>
 		    				<th>MRC</th>
 						@endif
@@ -256,7 +259,9 @@
 	    					<td>{{{ $backhaul->portterkoneksi }}}</td>
 	    					<td>{{{ $backhaul->bandwidth }}} {{{ $backhaul->satuan }}}</td>
 
-	    					@if (! Auth::user()->hasRole('noc'))
+
+
+	    					@if(Auth::user()->hasRole('bod'))
 		    					<td>@{{ {{{ $backhaul->biayas->nrc or "0" }}} | currency:"" }} {{{ $backhaul->biayas->currency or "" }}}</td>
 		    					<td>@{{ {{{ $backhaul->biayas->mrc or "0" }}} | currency:"" }} {{{ $backhaul->biayas->currency or "" }}}</td>
 	    					@endif
@@ -287,7 +292,7 @@
 	    <div class="btn" style="margin-bottom: 30px;"></div>
 
 	    </div>
-
+	@endif
 
 	    <div class="panel panel-info">
 		   <div class="panel-heading">
@@ -369,6 +374,8 @@
 	    @else
 	    	Belum ada data layanans
 	    @endif
+
+	    <div class="btn" style="margin-bottom: 30px;"></div>
 
 	    </div>
 	
@@ -461,17 +468,20 @@
 
 @stop
 
-
+@include('pages/dtablesbawah')
 
 @section('script-bawah')
 
-<script type="text/javascript">
-	
-	@foreach ($vendor->contactvendors as $contactcustomer)
-	$('#contactButtonVendor{{{ $contactcustomer->id }}}').popover();
-	@endforeach        	
-	
-</script>
+<script type="text/javascript" src="{{ asset('global/scripts/angular.min.js') }}"></script>
+
+
+	<script type="text/javascript">
+		
+		@foreach ($vendor->contactvendors as $contactcustomer)
+		$('#contactButtonVendor{{{ $contactcustomer->id }}}').popover();
+		@endforeach        	
+		
+	</script>
 
 <script type="text/javascript" language="javascript" class="init">
     $(document).ready(function() {
@@ -482,19 +492,19 @@
         	                {
         	                    "sExtends": "pdf",
         	                    "sPdfOrientation": "landscape",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                {
         	                    "sExtends": "xls",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                {
         	                    "sExtends": "csv",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                {
         	                    "sExtends": "copy",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                "print"
 
@@ -504,26 +514,26 @@
     } );
 
 $(document).ready(function() {
-	$('#lastmiletable').DataTable( {
+	$('#tabellayanan').DataTable( {
     	"dom": 'T<"clear">lfrtip',
     	"oTableTools": {
     	            "aButtons": [
     	                {
     	                    "sExtends": "pdf",
     	                    "sPdfOrientation": "landscape",
-                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6]
     	                },
     	                {
     	                    "sExtends": "xls",
-                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6]
     	                },
     	                {
     	                    "sExtends": "csv",
-                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6]
     	                },
     	                {
     	                    "sExtends": "copy",
-                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6]
     	                },
     	                "print"
 
@@ -531,6 +541,35 @@ $(document).ready(function() {
     	        }
     } );
 } );
+$(document).ready(function() {
+	$('#lastmiletable').DataTable( {
+    	"dom": 'T<"clear">lfrtip',
+    	"oTableTools": {
+    	            "aButtons": [
+    	                {
+    	                    "sExtends": "pdf",
+    	                    "sPdfOrientation": "landscape",
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+    	                },
+    	                {
+    	                    "sExtends": "xls",
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+    	                },
+    	                {
+    	                    "sExtends": "csv",
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+    	                },
+    	                {
+    	                    "sExtends": "copy",
+                            "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+    	                },
+    	                "print"
+
+    	            ]
+    	        }
+    } );
+} );
+
 </script>
 
 @stop

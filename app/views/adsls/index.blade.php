@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/dtablesatas')
+
 @section('main')
 
 <h1>Daftar Data ADSL</h1>
@@ -40,3 +42,38 @@
 @endif
 
 @stop
+
+@include('pages/dtablesbawah')
+
+@section('script-bawah')
+
+<script type="text/javascript" language="javascript" class="init">
+    $(document).ready(function() {
+    	$('#datasbp').DataTable( {
+        	"dom": 'T<"clear">lfrtip',
+        	"oTableTools": {
+        	            "aButtons": [
+        	                {
+        	                    "sExtends": "pdf",
+        	                    "sPdfOrientation": "landscape",
+                                "mColumns": [ 0, 1, 2]
+        	                },
+        	                {
+        	                    "sExtends": "xls",
+                                "mColumns": [ 0, 1, 2]
+        	                },
+        	                {
+        	                    "sExtends": "csv",
+                                "mColumns": [ 0, 1, 2]
+        	                },
+        	                {
+        	                    "sExtends": "copy",
+                                "mColumns": [ 0, 1, 2]
+        	                },
+        	                "print"
+
+        	            ]
+        	        }
+        } );
+    } );
+</script>

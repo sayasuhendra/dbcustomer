@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/dtablesatas')
+
 @section('main')
 
 <h1>Daftar Data Costumercircuitperangkats</h1>

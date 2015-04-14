@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/dtablesatas')
+
 @section('style-atas')
 
 <style>
@@ -237,7 +239,7 @@
           <div class="panel-heading">
              <h3 class="panel-title pull-left">Data Customer Circuits</h3>
 
-               @if(Auth::user()->hasRole('admin'))
+               @if(Auth::user()->hasRole(['editor', 'bod']))
 
                  <div class="btn-group pull-right">
                      <a href="{{ URL::route('costumercircuits.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
@@ -255,8 +257,12 @@
 
 @stop
 
+@include('pages/dtablesbawah')
 
 @section('script-bawah')
+
+<script type="text/javascript" src="{{ asset('global/scripts/angular.js') }}"></script>
+
 
 <script type="text/javascript" language="javascript" class="init">
 

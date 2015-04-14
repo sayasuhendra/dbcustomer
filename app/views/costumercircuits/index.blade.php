@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/dtablesatas')
+
 @section('style-atas')
 <style>
 	th { font-size: 12px; }
@@ -103,6 +105,8 @@
 
 @stop
 
+@include('pages/dtablesbawah')
+
 @section('script-bawah')
 
 <script type="text/javascript" language="javascript" class="init">
@@ -114,19 +118,19 @@
         	                {
         	                    "sExtends": "pdf",
         	                    "sPdfOrientation": "landscape",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                {
         	                    "sExtends": "xls",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                {
         	                    "sExtends": "csv",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                {
         	                    "sExtends": "copy",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         	                },
         	                "print"
 

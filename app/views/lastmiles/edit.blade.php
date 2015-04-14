@@ -1,7 +1,8 @@
 @extends('layouts.scaffold')
 
-@section('main')
+@include('pages/selectatas')
 
+@section('main')
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -167,6 +168,8 @@
 @endif
 
 @stop
+
+@include('pages/selectbawah')
 
 @section('script-bawah')
 

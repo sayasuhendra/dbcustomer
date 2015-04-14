@@ -86,11 +86,20 @@ Route::group(['before' => 'auth'], function(){
 
 		Route::resource('adsls', 'AdslsController');
 
+		# Problems Report Ticket
+		Route::resource('problems', 'ProblemsController');
+		Route::get('problemsopen', ['as' => 'problemsopen', 'uses' => 'ProblemsController@indexOpen']);
+		Route::post('problems/create/optcirid', ['uses' => 'ProblemsController@optCirId']);
+		Route::post('problems/create/optcat', ['uses' => 'ProblemsController@optCat']);
+		Route::post('problems/create/optprob', ['uses' => 'ProblemsController@optProb']);
+		Route::post('problems/create/optsub', ['uses' => 'ProblemsController@optSub']);
+
 
 		# Roles
 		Route::resource('roles', 'RolesController');
 		Route::resource('users', 'UsersController');
 		Route::delete('users/delroles', 'UsersController');
+		Route::put('users/{username}/activated', [ 'as' => 'users.active', 'uses' => 'UsersController@activated']);
 
 
 	});
@@ -128,6 +137,7 @@ Route::post('/password/reset', 'RemindersController@postReset');
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationController@store']);
 Route::resource('user', 'RegistrationController', ['only' => ['edit', 'update']]);
+Route::get('user/{username}/{code}', 'RegistrationController@confirm');
 
 # Home
 
@@ -154,10 +164,3 @@ Route::when('layanansbps/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
 
 Route::when('backhaulswitches/*', 'role:editor', ['put', 'post', 'patch', 'delete']);
 
-Route::resource('problems', 'ProblemsController');
-Route::post('problems/create/optcirid', ['uses' => 'ProblemsController@optCirId']);
-Route::post('problems/create/optcat', ['uses' => 'ProblemsController@optCat']);
-Route::post('problems/create/optprob', ['uses' => 'ProblemsController@optProb']);
-Route::post('problems/create/optsub', ['uses' => 'ProblemsController@optSub']);
-
-Route::resource('amats', 'AmatsController');

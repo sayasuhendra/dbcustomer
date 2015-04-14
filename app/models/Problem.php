@@ -7,7 +7,7 @@ class Problem extends Eloquent {
 	
 	public static $rules = array(
 
-		// 'tt' => 'required',
+		'tt' => 'required'
 		// 'csc' => 'required',
 		// 'area' => 'required',
 		// 'customer_id' => 'required',

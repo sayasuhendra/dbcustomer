@@ -13,6 +13,7 @@
 <meta content="" name="author"/>
     @include('layouts/assets')
     @yield('atas')
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square">

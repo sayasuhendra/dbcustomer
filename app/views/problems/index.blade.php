@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/dtablesatas')
+
 @section('main')
 
 <h2 align="center">Daftar Data Problems</h2>
@@ -12,10 +14,9 @@
 	<table id="datasbp" class="table table-striped table-bordered">
 		<thead>
 			<tr>
-				<th>Tt</th>
-				<th>Csc</th>
+				<th>No Tiket</th>
+				<th>Nama CSC</th>
 				<th>Area</th>
-				<th>Customer</th>
 				<th>Nama Site</th>
 				<th>Start</th>
 				<th>Finish</th>
@@ -24,7 +25,7 @@
 				<th>Segment</th>
 				<th>Kategori</th>
 				<th>Problem</th>
-				<th>Sub_problem</th>
+				<th>Sub Problem</th>
 				<th>Vendor</th>
 				<th>Level</th>
 				<th>Action</th>
@@ -37,7 +38,6 @@
 					<td>{{{ $problem->tt }}}</td>
 					<td>{{{ $problem->csc }}}</td>
 					<td>{{{ $problem->area }}}</td>
-					<td>{{{ $problem->customer }}}</td>
 					<td>{{{ $problem->circuit }}}</td>
 					<td>{{{ $problem->start }}}</td>
 					<td>{{{ $problem->finish }}}</td>
@@ -66,6 +66,8 @@
 
 @stop
 
+@include('pages/dtablesbawah')
+
 @section('script-bawah')
 
 <script type="text/javascript" language="javascript" class="init">
@@ -77,19 +79,19 @@
         	                {
         	                    "sExtends": "pdf",
         	                    "sPdfOrientation": "landscape",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
         	                },
         	                {
         	                    "sExtends": "xls",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
         	                },
         	                {
         	                    "sExtends": "csv",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
         	                },
         	                {
         	                    "sExtends": "copy",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
         	                },
         	                "print"
 

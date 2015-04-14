@@ -4,9 +4,11 @@
 
 <h2 align="center">Detail Problem</h2>
 
-<p>{{ link_to_route('problems.index', 'Return to all problems', [], ['class' => 'btn btn-default', 'type' => 'button']) }}</p>
+{{ link_to_route('problems.index', 'Close Tickets', [], ['class' => 'btn btn-default', 'type' => 'button']) }}
+{{ link_to_route('problemsopen', 'Open Tickets', [], ['class' => 'btn btn-default pull-right', 'type' => 'button']) }}
 
-<div class="col-md-6 col-sm-6">
+<br>
+<br>
 
 	<div class="portlet box blue-steel">
 		<div class="portlet-title">
@@ -24,8 +26,9 @@
 				</a>
 			</div>
 		</div>
+
 		<div class="portlet-body">
-				<dl class="dl-horizontal">
+			<dl class="dl-horizontal">
 					<dt>Trouble Ticket</dt> <dd> {{{ $problem->tt }}} </dd>
 					<dt>CSC Name</dt> <dd> {{{ $problem->csc }}} </dd>
 					<dt>Area</dt> <dd> {{{ $problem->area }}} </dd>
@@ -35,6 +38,7 @@
 					<dt>Problem Finish</dt> <dd> {{{ $problem->finish }}} </dd>
 					<dt>Solving Time</dt> <dd> {{{ $problem->waktu }}} </dd>
 					<dt>Channel</dt> <dd> {{{ $problem->channel }}} </dd>
+
 					<dt>Segment</dt> <dd> {{{ $problem->segment }}} </dd>
 					<dt>Kategori</dt> <dd> {{{ $problem->kategori }}} </dd>
 					<dt>Problem</dt> <dd> {{{ $problem->problem }}} </dd>
@@ -44,9 +48,8 @@
 					<dt>Vendor</dt> <dd> {{{ $problem->vendor }}} </dd>
 					<dt>Level</dt> <dd> {{{ $problem->level }}} </dd>
 					<dt>Keterangan</dt> <dd> {{{ $problem->keterangan }}} </dd>
-                </dl>
-	    </div>
+            </dl>
+		</div>
 	</div>
-</div>
 
 @stop

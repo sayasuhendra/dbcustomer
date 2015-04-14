@@ -1,7 +1,13 @@
 <?php
 
+use Laracasts\Presenter\PresentableTrait;
+
 class Vendor extends Eloquent {
 	protected $guarded = array();
+
+	use PresentableTrait;
+
+	protected $presenter = 'Acme\Presenters\VendorsPresenter';
 
 	public static $rules = array(
 		'nama' => 'required',

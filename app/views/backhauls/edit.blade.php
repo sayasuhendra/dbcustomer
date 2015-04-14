@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/selectatas')
+
 @section('main')
 
 <h2 align="center">Edit Data Backhaul</h2>
@@ -92,6 +94,8 @@
 @endif
 
 @stop
+
+@include('pages/selectbawah')
 
 @section('script-bawah')
 

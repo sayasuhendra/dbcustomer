@@ -25,7 +25,7 @@
         <div class="col-md-4 col-md-offset-4 kotak">
             <div class="jarak">
                 <h3 align="center">Selamat ! <br><br> Anda telah berhasil mendaftar.</h3><br>
-                <p>Tunggu account Anda diaktivasi oleh Admin. <br>
+                <p>Silahkan check email Anda untuk mengkonfirmasi dan mengaktifkan account Anda. <br>
                 Setelah aktif Mohon untuk membuat data Anda lebih lengkap di menu "Create Profile". Terima kasih. <br><br>
                 Berikut data yang Anda buat saat ini:
                 </p>

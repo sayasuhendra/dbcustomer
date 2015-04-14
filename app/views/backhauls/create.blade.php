@@ -1,5 +1,7 @@
 @extends('layouts.scaffold')
 
+@include('pages/selectatas')
+
 @section('main')
 
 <div class="col-md-6 col-md-offset-3">
@@ -91,6 +93,8 @@
 
 @stop
 
+
+@include('pages/selectbawah')
 
 @section('script-bawah')
 

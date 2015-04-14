@@ -21,7 +21,14 @@ class ProblemsController extends BaseController {
 	 */
 	public function index()
 	{
-		$problems = $this->problem->all();
+		$problems = $this->problem->where('status', 'Close')->get();
+
+		return View::make('problems.index', compact('problems'));
+	}
+
+	public function indexOpen()
+	{
+		$problems = $this->problem->where('status', 'Open')->get();
 
 		return View::make('problems.index', compact('problems'));
 	}
@@ -87,8 +94,11 @@ class ProblemsController extends BaseController {
 
 		$start = $_POST['start'];
 		$finish = $_POST['finish'];
-		$waktu = hitungWaktu($start, $finish);
-		$input = array_merge($input, $waktu);
+
+		if (Input::get('status') == "Close") {
+			$waktu = hitungWaktu($start, $finish);
+			$input = array_merge($input, $waktu);
+		}
 
 		$validation = Validator::make($input, Problem::$rules);
 
@@ -96,7 +106,8 @@ class ProblemsController extends BaseController {
 		{
 			$this->problem->create($input);
 
-			return Redirect::route('problems.index');
+			$id = $this->problem->where('tt', Input::get('tt'))->first()->id;
+			return Redirect::route('problems.show', $id);
 		}
 
 		return Redirect::route('problems.create')
@@ -191,8 +202,14 @@ class ProblemsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
+		$status = $this->problem->find($id)->status;
+
 		$this->problem->find($id)->delete();
 
+		if ($status == "Open") {
+			return Redirect::route('problemsopen');
+		}
+		
 		return Redirect::route('problems.index');
 	}
 

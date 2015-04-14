@@ -27,6 +27,27 @@ class RegistrationController extends BaseController {
 		return View::make('registration.create');
 	}
 
+	public function confirm($username, $code)
+	{
+		if( ! $code)
+        {
+            throw new InvalidConfirmationCodeException;
+        }
+
+        if( ! $username)
+        {
+            throw new InvalidConfirmationCodeException;
+        }
+
+		$user = User::whereUsername($username)->where('email_confirmation', $code)->first();
+
+		$user->active = "1";
+		$user->email_confirmation = null;
+		$user->save();
+
+		return Redirect::to('login')->with('message', 'Selamat, Account Anda Kini Telah Aktif. Silahkan Login.');
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -42,6 +63,15 @@ class RegistrationController extends BaseController {
 		$user = User::create($input);
 
 		$user->profile()->create($inputprofil);
+
+		$user->email_confirmation = str_random(30);
+		$user->save();
+
+		Mail::send('emails.register', ['username' => Input::get('username'), 'code' => $user->email_confirmation], function($message){
+			$message->to(Input::get('email'), Input::get('nama_lengkap'))
+					->cc('condev@sbp.net.id')
+					->subject('Please Confirm Your Email Address');
+		});
 
 		$inputsemua = (object) Input::all();
 
