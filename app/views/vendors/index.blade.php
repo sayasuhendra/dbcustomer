@@ -6,7 +6,7 @@
 
 <h2 align="center">Daftar Data Vendors</h2>
 
-@if(Auth::user()->hasRole('admin'))
+@if(Auth::user()->hasRole(['noc', 'dco', 'ap', 'ar', 'sales']))
     <p>{{ link_to_route('vendors.create', 'Add Vendor', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 @endif
 
@@ -21,7 +21,7 @@
                     <th>NPWP</th>
                     <th>Alamat NPWP</th>
                 @endif
-                
+
                 <th>Keterangan</th>
                 <th width="100px">Action</th>
 			</tr>
