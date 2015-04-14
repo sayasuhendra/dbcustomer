@@ -4,6 +4,7 @@ use Laracasts\Presenter\PresentableTrait;
 
 class Customer extends Eloquent {
 
+	use \Venturecraft\Revisionable\RevisionableTrait;
 	use PresentableTrait;
 
 	protected $presenter = 'Acme\Presenters\CostumersPresenter';

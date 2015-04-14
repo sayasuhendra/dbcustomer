@@ -5,6 +5,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
+	use \Venturecraft\Revisionable\RevisionableTrait;
 	/**
 	 * The database table used by the model.
 	 *

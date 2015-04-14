@@ -9,7 +9,8 @@
 		"thujohn/pdf": "dev-master",
 		"laracasts/presenter": "0.1.*",
 		"itsgoingd/clockwork": "1.*",
-		"intervention/image": "~2.0"
+		"intervention/image": "~2.0",
+		"venturecraft/revisionable": "1.*"
 	},
 	"autoload": {
 		"classmap": [

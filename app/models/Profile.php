@@ -2,6 +2,7 @@
 
 class Profile extends Eloquent {
 
+	use \Venturecraft\Revisionable\RevisionableTrait;
 	/**
 	 * Fillable fields for a Profile
 	 *

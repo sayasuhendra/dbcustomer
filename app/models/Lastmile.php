@@ -4,6 +4,7 @@ use Laracasts\Presenter\PresentableTrait;
 
 class Lastmile extends Eloquent {
 
+	use \Venturecraft\Revisionable\RevisionableTrait;
 	protected $guarded = array();
 
 	use PresentableTrait;

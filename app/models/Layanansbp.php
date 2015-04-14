@@ -4,6 +4,7 @@ use Laracasts\Presenter\PresentableTrait;
 
 class Layanansbp extends Eloquent {
 
+	use \Venturecraft\Revisionable\RevisionableTrait;
 	use PresentableTrait;
 
 	protected $presenter = 'Acme\Presenters\LayanansbpsPresenter';

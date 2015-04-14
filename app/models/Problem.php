@@ -1,6 +1,7 @@
 <?php
 
 class Problem extends Eloquent {
+	use \Venturecraft\Revisionable\RevisionableTrait;
 	protected $guarded = array();
 
 	protected $table = "tickets_report";

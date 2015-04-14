@@ -3,6 +3,7 @@
 use Laracasts\Presenter\PresentableTrait;
 
 class Backhaul extends Eloquent {
+	use \Venturecraft\Revisionable\RevisionableTrait;
 	protected $guarded = array();
 
 	use PresentableTrait;
