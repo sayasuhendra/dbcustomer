@@ -58,7 +58,7 @@
             <!-- bagian Field -->
             <div class="form-group">
                 {{ Form::label('bagian', 'Bagian:') }}
-                {{ Form::select('bagian', ['Inventory' => 'Inventory', 'Teknikal' => 'Teknikal', 'Sales' => 'Sales', 'Finance' => 'Finance', 'AR' => 'AR', 'AP' => 'AP', 'GA' => 'GA', 'DCO' => 'DCO', 'Umum' => 'Umum'], null, ['class' => 'form-control', 'required' => 'required']) }}
+                {{ Form::select('bagian', ['Inventory' => 'Inventory', 'Teknikal' => 'Teknikal', 'Sales' => 'Sales', 'Finance' => 'Finance', 'AR' => 'AR', 'AP' => 'AP', 'GA' => 'GA', 'DCO' => 'DCO', 'CSC' => 'CSC', 'Umum' => 'Umum'], null, ['class' => 'form-control', 'required' => 'required']) }}
                 {{ $errors->first('bagian', '<span class="error">:message</span>') }}
             </div>
 
