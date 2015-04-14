@@ -70,15 +70,11 @@
 
 		                    <td class="ac" width="200px">
 
-			                @if(Auth::user()->hasRole('master'))
-
 			                {{ Form::open(array('method' => 'PUT', 'route' => array('users.update', $user->username), 'style'=>'display:inline-block')) }}
 					            {{ Form::select('role', $perans, null, []) }}
 		                    	{{ Form::button('<i class="glyphicon glyphicon-plus"></i>', array('type' => 'submit', 'class' => 'btn btn-primary btn-xs')) }}
 			                {{ Form::close() }}
 
-			                @endif
-		                
 						@endif
 
 			            </td>

@@ -11,6 +11,11 @@ class UsersController extends BaseController {
 	{
         $users = User::with('roles')->get();
         $perans = Role::lists('name', 'id');
+
+        if(! Auth::user()->hasRole('bod')){
+        	$perans = array_diff($perans, ['bod']);
+        }
+
         return View::make('users.index', ['users'=>$users, 'perans' => $perans]);
 	}
 

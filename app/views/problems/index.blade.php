@@ -36,7 +36,7 @@
 			@foreach ($problems as $problem)
 				<tr>
 					<td>{{{ $problem->tt }}}</td>
-					<td>{{{ $problem->csc }}}</td>
+					<td>{{{ ucwords($problem->csc) }}}</td>
 					<td>{{{ $problem->area }}}</td>
 					<td>{{{ $problem->circuit }}}</td>
 					<td>{{{ $problem->start }}}</td>

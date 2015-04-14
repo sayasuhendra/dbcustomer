@@ -14,13 +14,6 @@
                     </div>
 
                     <div class="form-group">
-                        {{ Form::label('csc', 'CSC Name:', ['class' => 'col-sm-3']) }}
-                        <div class="col-sm-9">
-                            {{ Form::text('csc', null, ['class' => 'form-control', 'id' => 'csc']) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         {{ Form::label('circuit', 'Nama Site:', ['class' => 'col-sm-3']) }}
                         <div class="col-sm-9">
                             {{ Form::select('circuit', $circuits, null, ['class' => 'form-control', 'id' => 'circuit']) }}

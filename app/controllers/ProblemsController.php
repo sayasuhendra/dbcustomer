@@ -85,10 +85,13 @@ class ProblemsController extends BaseController {
 
 		$circuit = Costumercircuit::find($_POST['circuit']);
 		$customer = Customer::find($circuit->customer_id);
-		$datatambahan = ['circuit' => $circuit->namasite,
+		$datatambahan = [
+						 'circuit' => $circuit->namasite,
 					 	 'area' => $circuit->area,
 					 	 'vendor' => $circuit->namavendor,
-					 	 'customer' => $customer->nama];
+					 	 'customer' => $customer->nama,
+					 	 'csc' => Auth::user()->nama_lengkap
+					 	 ];
 
 		$input = array_merge($input, $datatambahan);
 
@@ -166,10 +169,13 @@ class ProblemsController extends BaseController {
 
 		$circuit = Costumercircuit::find($_POST['circuit']);
 		$customer = Customer::find($circuit->customer_id);
-		$datatambahan = ['circuit' => $circuit->namasite,
+		$datatambahan = [
+						 'circuit' => $circuit->namasite,
 					 	 'area' => $circuit->area,
 					 	 'vendor' => $circuit->namavendor,
-					 	 'customer' => $customer->nama];
+					 	 'customer' => $customer->nama,
+					 	 'csc' => Auth::user()->nama_lengkap
+					 	 ];
 
 		$input = array_merge($input, $datatambahan);
 

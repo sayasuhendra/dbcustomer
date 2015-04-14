@@ -30,7 +30,7 @@
 		<div class="portlet-body">
 			<dl class="dl-horizontal">
 					<dt>Trouble Ticket</dt> <dd> {{{ $problem->tt }}} </dd>
-					<dt>CSC Name</dt> <dd> {{{ $problem->csc }}} </dd>
+					<dt>CSC Name</dt> <dd> {{{ ucwords($problem->csc) }}} </dd>
 					<dt>Area</dt> <dd> {{{ $problem->area }}} </dd>
 					<dt>Customer Name</dt> <dd> {{{ $problem->customer }}} </dd>
 					<dt>Name Site</dt> <dd> {{{ $problem->circuit }}} </dd>

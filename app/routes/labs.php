@@ -5,6 +5,9 @@
 
 Route::get('/ujicoba', function()
 {
+	$perans = Role::lists('name', 'id');
+	dd(array_diff($perans, ['bod']));
+	
 	return View::make('test');
 });
 
