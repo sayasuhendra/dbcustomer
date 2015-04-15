@@ -167,6 +167,8 @@ p {
 						<h3 align="center">Silahkan tentukan Role/Peran User di aplikasi.
 						</h3> <br>
 						<hr>
+						<br>
+						<br>
 						<p>Berikut Datanya :</p>
 						<ul>
 							<li>Username: {{{ $username }}}</li>

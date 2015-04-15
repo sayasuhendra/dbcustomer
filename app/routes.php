@@ -89,6 +89,7 @@ Route::group(['before' => 'auth'], function(){
 		# Problems Report Ticket
 		Route::resource('problems', 'ProblemsController');
 		Route::get('problemsopen', ['as' => 'problemsopen', 'uses' => 'ProblemsController@indexOpen']);
+		Route::get('problemsall', ['as' => 'problemsall', 'uses' => 'ProblemsController@indexAll']);
 		Route::post('problems/create/optcirid', ['uses' => 'ProblemsController@optCirId']);
 		Route::post('problems/create/optcat', ['uses' => 'ProblemsController@optCat']);
 		Route::post('problems/create/optprob', ['uses' => 'ProblemsController@optProb']);

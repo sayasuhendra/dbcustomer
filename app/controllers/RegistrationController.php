@@ -69,7 +69,6 @@ class RegistrationController extends BaseController {
 
 		Mail::send('emails.register', ['username' => Input::get('username'), 'code' => $user->email_confirmation], function($message){
 			$message->to(Input::get('email'), Input::get('nama_lengkap'))
-					->cc('condev@sbp.net.id')
 					->subject('Please Confirm Your Email Address');
 		});
 

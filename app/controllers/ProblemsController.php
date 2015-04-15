@@ -33,6 +33,13 @@ class ProblemsController extends BaseController {
 		return View::make('problems.index', compact('problems'));
 	}
 
+	public function indexAll()
+	{
+		$problems = $this->problem->all();
+
+		return View::make('problems.indexall', compact('problems'));
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

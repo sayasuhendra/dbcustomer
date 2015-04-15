@@ -7,9 +7,7 @@
 <h2 align="center">Daftar Data Problems</h2>
 
 @if(Auth::user()->hasRole('csc'))
-    {{ link_to_route('problems.create', 'Add problems', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}
-    {{ link_to_route('problemsall', 'View All Column', null , ['class' => 'btn btn-primary pull-right', 'type' => 'button']) }}
-    <p></p>
+    <p>{{ link_to_route('problems.create', 'Add problems', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 @endif
 
 @if ($problems->count())
@@ -30,6 +28,11 @@
 				<th>Sub Problem</th>
 				<th>Vendor</th>
 				<th>Level</th>
+				<th>Customer</th>
+				<th>Rfo</th>
+				<th>Real Problem</th>
+				<th>Status</th>
+				<th>Keterangan</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -51,6 +54,11 @@
 					<td>{{{ $problem->sub_problem }}}</td>
 					<td>{{{ $problem->vendor }}}</td>
 					<td>{{{ $problem->level }}}</td>
+					<td>{{{ $problem->customer }}}</td>
+					<td>{{{ $problem->rfo }}}</td>
+					<td>{{{ $problem->real_problem }}}</td>
+					<td>{{{ $problem->status }}}</td>
+					<td>{{{ $problem->keterangan }}}</td>
                     <td class="ac"  width="100px">
                     <a href="{{ URL::route('problems.show', array($problem->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
                             <a href="{{ URL::route('problems.edit', array($problem->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
@@ -81,19 +89,19 @@
         	                {
         	                    "sExtends": "pdf",
         	                    "sPdfOrientation": "landscape",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
         	                },
         	                {
         	                    "sExtends": "xls",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
         	                },
         	                {
         	                    "sExtends": "csv",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
         	                },
         	                {
         	                    "sExtends": "copy",
-                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+                                "mColumns": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
         	                },
         	                "print"
 
