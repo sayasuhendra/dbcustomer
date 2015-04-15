@@ -4,8 +4,8 @@
 
 <h2 align="center">Detail Problem</h2>
 
-{{ link_to_route('problems.index', 'Close Tickets', [], ['class' => 'btn btn-default', 'type' => 'button']) }}
-{{ link_to_route('problemsopen', 'Open Tickets', [], ['class' => 'btn btn-default pull-right', 'type' => 'button']) }}
+{{ link_to_route('problems.index', 'Tickets Close', [], ['class' => 'btn btn-default', 'type' => 'button']) }}
+{{ link_to_route('problemsopen', 'Tickets Open', [], ['class' => 'btn btn-default pull-right', 'type' => 'button']) }}
 
 <br>
 <br>

@@ -2,13 +2,22 @@
 
 @include('pages/dtablesatas')
 
+@section('style-atas')
+	<style type="text/css">
+		body {
+		  background-color: #fff;
+		}
+	</style>
+@stop
+
 @section('main')
 
 <h2 align="center">Daftar Data Problems</h2>
 
-@if(Auth::user()->hasRole('csc'))
-    <p>{{ link_to_route('problems.create', 'Add problems', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
-@endif
+    {{ link_to_route('problems.create', 'Add problems', null , ['class' => 'btn btn-primary', 'type' => 'button']) }}
+    {{ link_to_route('problems.index', 'Tickets Close', [], ['class' => 'btn btn-default', 'type' => 'button']) }}
+    {{ link_to_route('problemsopen', 'Tickets Open', [], ['class' => 'btn btn-default', 'type' => 'button']) }}
+    <p></p>
 
 @if ($problems->count())
 	<table id="datasbp" class="table table-striped table-bordered">
