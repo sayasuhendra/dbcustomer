@@ -31,6 +31,7 @@
 				<th>Vendor</th>
 				<th>Level</th>
 				<th>Action</th>
+				<th>Option</th>
 			</tr>
 		</thead>
 
@@ -51,6 +52,7 @@
 					<td>{{{ $problem->sub_problem }}}</td>
 					<td>{{{ $problem->vendor }}}</td>
 					<td>{{{ $problem->level }}}</td>
+					<td>{{{ $problem->action }}}</td>
                     <td class="ac"  width="100px">
                     <a href="{{ URL::route('problems.show', array($problem->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
                             <a href="{{ URL::route('problems.edit', array($problem->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>

@@ -27,7 +27,7 @@
                 <div class="panel-heading">
                   <h3 class="panel-title pull-left">Data Customer {{{ $customer->nama }}}</h3>
 
-                  @if(Auth::user()->hasRole('admin'))
+                  @if(Auth::user()->hasRole(['bod', 'editcustomer']))
 
                     <div class="btn-group pull-right">
                         <a href="{{ URL::route('customers.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>    
@@ -50,7 +50,7 @@
                         <dt>Level Customer</dt>
                         <dd>{{{ $customer->level }}}</dd>
 
-                        @if (! Auth::user()->hasRole('noc'))
+                        @if(Auth::user()->hasRole(['bod', 'ar']))
                           <dt>NPWP</dt>
                           <dd>{{{ $customer->npwp }}}</dd>
                           <dt>Alamat NPWP</dt>
@@ -140,48 +140,37 @@
                   <dl class="dl-horizontal">
                   @foreach ($contacts as $contact)
 
-                    @if ( $contact->bagian === "Billing" && !Auth::user()->hasRole('noc') )
+                    {{-- Billing Kontak Hanya muncul untuk BOD dan AR --}}
+                    @if ( $contact->bagian === "Billing" && Auth::user()->hasRole(['bod', 'ar']) )
                       <dt>Bagian {{{ $contact->bagian }}}</dt>
                       <dd>
-                          <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
-
-
-                          @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
-
+                          <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
                             <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
                             {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
                               {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
                             {{ Form::close() }}
-
-                          @endif
-
                       </dd>
                     @endif
 
-                    @if ( $contact->bagian === "Teknis" && ( !Auth::user()->hasRole('ar') && !Auth::user()->hasRole('ap') ) )
+                    {{-- Kontak Teknis hanya muncul untuk BOD dan NOC --}}
+                    @if ( $contact->bagian === "Teknis" && Auth::user()->hasRole(['bod', 'noc']) )
                       <dt>Bagian {{{ $contact->bagian }}}</dt>
                       <dd>
-                          <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
-
-
-                          @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
-
+                          <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
                             <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
                             {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
                               {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?')) }}
                             {{ Form::close() }}
-
-                          @endif
-
                       </dd>
                     @endif
 
+                    {{-- Kontak selain Teknis dan Billing tampil untuk semua Tapi hanya editor customer dan bod yang bisa edit --}}
                     @if ( $contact->bagian !== "Teknis" && $contact->bagian !== "Billing")
                       <dt>Bagian {{{ $contact->bagian }}}</dt>
                       <dd>
-                          <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="right" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
+                          <a id="contactButton{{{ $contact->id }}}" data-html="true" data-toggle="tooltip" data-placement="left" title="{{{ $contact->email }}}" data-content="{{{ $contact->jabatan }}}<br>{{{ $contact->keterangan }}} ">{{{ $contact->cp }}} / {{{ $contact->telepon }}}</a>
 
-                          @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('editor'))
+                          @if(Auth::user()->hasRole(['bod', 'editcustomer']))
 
                             <a href="{{ URL::route('customercontacts.edit', array($contact->id)) }}" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
                             {{ Form::open(array('method' => 'DELETE', 'route' => array('customercontacts.destroy', $contact->id), 'style'=>'display:inline-block')) }}
@@ -220,11 +209,13 @@
             </div>
 {{---------------- Kontak  End------------------------------------------------}}
 <div class="col-md-12">
+
+  @if(Auth::user()->hasRole(['bod', 'noc', 'ar', 'sales']))
     <div class="panel panel-success">
      <div class="panel-heading">
        <h3 class="panel-title pull-left">Data Layanan SBP</h3>
 
-       @if(Auth::user()->hasRole('admin'))
+       @if(Auth::user()->hasRole(['bod', 'editcustomer']))
          <div class="btn-group pull-right">
              <a href="{{ URL::route('layanansbps.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
          </div>
@@ -234,12 +225,13 @@
      </div> <!-- panel heading end -->
         @include('customers/show/layanan')
     </div> <!-- panel success end -->
+  @endif
 
         <div class="panel panel-info">
           <div class="panel-heading">
              <h3 class="panel-title pull-left">Data Customer Circuits</h3>
 
-               @if(Auth::user()->hasRole(['editor', 'bod']))
+               @if(Auth::user()->hasRole(['editcustomer', 'bod']))
 
                  <div class="btn-group pull-right">
                      <a href="{{ URL::route('costumercircuits.create') }}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></a>

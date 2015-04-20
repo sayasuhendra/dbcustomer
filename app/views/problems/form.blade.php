@@ -27,6 +27,13 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        {{ Form::label('action', 'Action:', ['class' => 'col-sm-3']) }}
+                        <div class="col-sm-9">
+                            {{ Form::text('action', null, ['class' => 'form-control', 'id' => 'action']) }}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

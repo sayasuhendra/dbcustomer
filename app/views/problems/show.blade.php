@@ -48,6 +48,7 @@
 					<dt>Vendor</dt> <dd> {{{ $problem->vendor }}} </dd>
 					<dt>Level</dt> <dd> {{{ $problem->level }}} </dd>
 					<dt>Keterangan</dt> <dd> {{{ $problem->keterangan }}} </dd>
+					<dt>Action</dt> <dd> {{{ $problem->action }}} </dd>
             </dl>
 		</div>
 	</div>

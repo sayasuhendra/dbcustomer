@@ -82,7 +82,7 @@
 
 	    </div>
 
-		<button type="submit" class="btn btn-primary">Kirim Gambar</button>
+		
  {{ Form::close() }}
     </div>
 </div>
@@ -129,7 +129,8 @@
             // 	// $('.cropped').append('<img src="'+img+'">');
 
             // });
-            $('.cropped').append('<input type="hidden" name="foto" value="'+img+'"> <img src="'+img+'">');
+            $('.hasil').remove();
+            $('.cropped').append('<div class="hasil"> <input type="hidden" name="foto" value="'+img+'"> <img src="'+img+'"> <br> <br> <button type="submit" class="btn btn-primary">Upload Foto</button> </div>');
             console.log(img);
         })
         $('#btnZoomIn').on('click', function(){

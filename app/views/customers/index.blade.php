@@ -6,7 +6,7 @@
 
 <h2 align="center">Daftar Data Customers</h2>
 
-@if(Auth::user()->hasRole('editor') || Auth::user()->hasRole('admin'))
+@if(Auth::user()->hasRole(['editcustomer', 'bod']))
 
 	<p>{{ link_to_route('customers.create', 'Add Customer', [], ['class' => 'btn btn-primary', 'type' => 'button']) }}</p>
 
@@ -45,11 +45,12 @@
 							<span class="label label-warning">{{{ $customer->status }}}</span>
 						@endif
 					</td>
+					
                     <td class="ac" width="100px">
                     <a href="{{ URL::route('customers.show', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-sm')) }} </a>
 
-                    @if(Auth::user()->hasRole('editor') || Auth::user()->hasRole('admin'))
-
+					@if(Auth::user()->hasRole(['editcustomer', 'bod']))
+					
 	                    <a href="{{ URL::route('customers.edit', array($customer->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-sm')) }} </a>
 	                    {{ Form::open(array('method' => 'DELETE', 'route' => array('customers.destroy', $customer->id), 'style'=>'display:inline-block')) }}
 	                        	{{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'data-confirm' => 'Yakin mau dihapus?')) }}
