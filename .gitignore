@@ -3,6 +3,7 @@
 /app/config/database.php
 /app/config/local/database.php
 /app/app.zip
+/app/app.php
 /vendor
 /catatan
 /app/views/costumercircuits lama/
@@ -19,3 +20,4 @@ composer.lock
 test.html
 Thumbs.db
 .idea
+.env.local.php
