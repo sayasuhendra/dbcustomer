@@ -10,8 +10,7 @@
 		"laracasts/presenter": "0.1.*",
 		"itsgoingd/clockwork": "1.*",
 		"intervention/image": "~2.0",
-		"venturecraft/revisionable": "1.*",
-		"barryvdh/laravel-debugbar": "~1.8"
+		"venturecraft/revisionable": "1.*"		
 	},
 	"autoload": {
 		"classmap": [
@@ -45,6 +44,7 @@
 	},
 	"minimum-stability": "stable",
 	"require-dev": {
-		"way/generators": "1.1"
+		"way/generators": "1.1",
+		"barryvdh/laravel-debugbar": "~1.8"
 	}
 }

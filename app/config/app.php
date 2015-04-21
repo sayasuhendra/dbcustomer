@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => '7KWsQJsWG8riZKr1M5jvagsL11A4IxJ1',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -122,7 +122,6 @@ return array(
         'Way\Generators\GeneratorsServiceProvider',
         'Laracasts\Validation\ValidationServiceProvider',
         'Clockwork\Support\Laravel\ClockworkServiceProvider',
-        'Barryvdh\Debugbar\ServiceProvider',
 		'Intervention\Image\ImageServiceProvider'
 	),
 
@@ -192,7 +191,6 @@ return array(
 		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel',
 		'Clockwork' 	  => 'Clockwork\Support\Laravel\Facade',
 		'Image' 		  => 'Intervention\Image\Facades\Image',
-		'Debugbar' 		  => 'Barryvdh\Debugbar\Facade',
 
 	),
 
