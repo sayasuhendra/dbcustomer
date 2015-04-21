@@ -12,7 +12,7 @@
                     <th>Jenis</th>
                     <th>Pemilik</th>
 
-                    @if (! Auth::user()->hasRole('noc'))
+                    @if(Auth::user()->hasRole(['bod', 'dco', 'ap', 'ar', 'sales']))
                       <th>NRC</th>
                       <th>MRC</th>
                     @endif
@@ -37,7 +37,7 @@
                       <td>{{{ $layanansbp->jenis }}}</td>
                       <td>{{{ $layanansbp->pemilik }}}</td>
 
-                      @if (! Auth::user()->hasRole('noc'))
+                      @if(Auth::user()->hasRole(['bod', 'dco', 'ap', 'ar', 'sales']))
                         <td>{{{ $layanansbp->nrc }}} {{{ $layanansbp->currency }}}</td>
                         <td>{{{ $layanansbp->mrc }}} {{{ $layanansbp->currency }}}</td>
                       @endif
@@ -55,10 +55,15 @@
                       </td>
                       <td>{{{ $layanansbp->present()->startDate }}}</td>
                       <td width="60px" class="ac">
+
+                        @if(Auth::user()->hasRole(['bod', 'noc', 'ar', 'sales']))
+
                         <a href="{{ URL::route('layanansbps.show', array($layanansbp->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
 
-                        @if(Auth::user()->hasRole('admin'))
+                        @endif
 
+                        @if(Auth::user()->hasRole(['bod', 'editcustomer', 'editteknis']))
+                        
                           <a href="{{ URL::route('layanansbps.edit', array($layanansbp->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
                           {{ Form::open(array('method' => 'DELETE', 'route' => array('layanansbps.destroy', $layanansbp->id), 'style'=>'display:inline-block')) }}
                                 {{ Form::button('<i class="glyphicon glyphicon-trash"></i>', array('type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'data-confirm' => 'Yakin mau dihapus?', 'data-confirm' => 'Yakin mau dihapus?')) }}

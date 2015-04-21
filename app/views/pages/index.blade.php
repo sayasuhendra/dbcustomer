@@ -40,7 +40,7 @@ function drawVisualization() {
 @stop
 
 @section('main')
-@if (Auth::user()->hasRole('admin'))
+@if (Auth::user()->hasRole('bod'))
     @include('layouts/admin/content/statistics')
 @endif
 @stop

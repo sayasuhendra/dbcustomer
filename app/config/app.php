@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -122,6 +122,7 @@ return array(
         'Way\Generators\GeneratorsServiceProvider',
         'Laracasts\Validation\ValidationServiceProvider',
         'Clockwork\Support\Laravel\ClockworkServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
 		'Intervention\Image\ImageServiceProvider'
 	),
 
@@ -191,6 +192,7 @@ return array(
 		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel',
 		'Clockwork' 	  => 'Clockwork\Support\Laravel\Facade',
 		'Image' 		  => 'Intervention\Image\Facades\Image',
+		'Debugbar' 		  => 'Barryvdh\Debugbar\Facade',
 
 	),
 

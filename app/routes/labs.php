@@ -5,10 +5,12 @@
 
 Route::get('/ujicoba', function()
 {
-	$perans = Role::lists('name', 'id');
-	dd(array_diff($perans, ['bod']));
+	$costumercircuits = Costumercircuit::where('status', 'aktif')->with(['biayas','customers'])->get();
 	
-	return View::make('test');
+	foreach ($costumercircuits as $cir) {
+		
+	var_dump($cir->customers->name);
+	}
 });
 
 

@@ -21,7 +21,7 @@ class CostumercircuitsController extends BaseController {
 	 */
 	public function index()
 	{
-		$costumercircuits = $this->costumercircuit->where('status', 'aktif')->with('biayas')->get();
+		$costumercircuits = $this->costumercircuit->where('status', 'aktif')->with(['biayas','customers'])->get();
 		
 		return View::make('costumercircuits.index', ['costumercircuits' => $costumercircuits]);
 	}

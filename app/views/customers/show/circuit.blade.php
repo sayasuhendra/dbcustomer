@@ -77,7 +77,7 @@
                                 <td width="60px" class="ac">
                                 <a href="{{ URL::route('costumercircuits.show', array($costumercircuit->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-list"></i>', array('class' => 'btn btn-xs')) }} </a>
 
-                                @if(Auth::user()->hasRole('bod'))
+                                @if(Auth::user()->hasRole(['bod', 'editcustomer', 'editteknis']))
 
                                     <a href="{{ URL::route('costumercircuits.edit', array($costumercircuit->id)) }}"> {{ Form::button('<i class="glyphicon glyphicon-pencil"></i>', array('class' => 'btn btn-xs')) }} </a>
                                     {{ Form::open(array('method' => 'DELETE', 'route' => array('costumercircuits.destroy', $costumercircuit->id), 'style'=>'display:inline-block')) }}
