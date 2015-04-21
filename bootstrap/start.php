@@ -32,6 +32,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
     'local' => array('hp-notebook'),
+    'production'    => array('crm.sbp.net.id')
 
 ));
 
