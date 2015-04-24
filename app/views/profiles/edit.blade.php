@@ -54,13 +54,6 @@
 			{{ errors_for('bbm', $errors) }}
 		</div>
 
-		<!-- Email_kantor Field -->
-		<div class="form-group">
-			{{ Form::label('email_kantor', 'Email Kantor :') }}
-			{{ Form::text('email_kantor', null, ['class' => 'form-control']) }}
-			{{ errors_for('email_kantor', $errors) }}
-		</div>
-
 		<!-- Email_lain Field -->
 		<div class="form-group">
 			{{ Form::label('email_lain', 'Email Lain :') }}
@@ -83,17 +76,16 @@
 		</div>
 
 
-	</div>
-
-	<div class="col-md-4">
-
-
 		<!-- Twitter Field -->
 		<div class="form-group">
 			{{ Form::label('twitter', 'Twitter :') }}
 			{{ Form::text('twitter', null, ['class' => 'form-control']) }}
 			{{ errors_for('twitter', $errors) }}
 		</div>
+		
+		</div>
+
+		<div class="col-md-4">
 
 		<!-- Facebook Field -->
 		<div class="form-group">

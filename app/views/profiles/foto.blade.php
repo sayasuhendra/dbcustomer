@@ -71,13 +71,12 @@
         <input type="button" id="btnZoomIn" value="+" style="float: right">
         <input type="button" id="btnZoomOut" value="-" style="float: right">
     </div>
+    <input type="button" value="Cancel" onclick="history.back(-1)" class="btn btn-default"/>
 </div>
 <div class="col-md-6">
  {{ Form::open(['route'=> ['profile.simpan', $user->username], 'files' => true]) }}
 
 
- {{-- {{ Form::text('foto', null, ['id' => 'foto'])}} --}}
-		
 	    <div class="cropped">
 
 	    </div>
